@@ -1,7 +1,7 @@
 # sa-admin
 
 #### 介绍
-一个简单又强大的后台模板，演示地址：[sa-admin.yanzhi21.com](sa-admin.yanzhi21.com)
+一个简单又强大的后台模板，演示地址：[http://sa-admin.yanzhi21.com](http://sa-admin.yanzhi21.com)
 
 QQ群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
