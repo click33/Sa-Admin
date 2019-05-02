@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>用户添加</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../static/sa.css"> 
+		
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../static/kj/layer/layer.js"></script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+		
+		<div class="vue-box">
+			
+			<!-- 参数栏 -->
+			<div class="c-panel">
+				<div class="c-title">用户添加</div>
+				<el-form ref="form">
+	
+					<div class="c-item">
+						<label class="c-label">昵称：</label>
+						<el-input size="small" v-model="m.username"></el-input>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">登录密码：</label>
+						<el-input size="small" v-model="m.password"></el-input>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">手机号：</label>
+						<el-input size="small" v-model="m.phone"></el-input>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">角色：</label>
+						<el-select size="small" v-model="m.role_id">
+							<el-option label="管理员" :value="1"></el-option>
+							<el-option label="公告管理员" :value="2"></el-option>
+							<el-option label="普通用户" :value="3"></el-option>
+						</el-select>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">性别：</label>
+						<el-radio-group v-model="m.sex">
+							<el-radio :label="1">男</el-radio>
+							<el-radio :label="2">女</el-radio>
+						</el-radio-group>
+					</div>
+					
+					<br>
+					<div class="c-item" style="min-width: 0px;">
+						<label class="c-label"></label>
+						<el-button type="primary" icon="el-icon-search" size="small" @click="ok">确定</el-button>
+					</div>
+
+				</el-form>
+
+			</div>
+			
+			
+			<br><br><br><br><br><br><br><br><br>
+
+			
+		</div>
+		
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '.vue-box',
+				data: {
+					m: {	// 查询参数 
+						username: '',
+						password: '',
+						phone: '',
+						sex: 1,
+					}
+				},
+				methods: {
+					// ok
+					ok: function(pageNo) {
+						this.$message('数据添加, 参数：' + JSON.stringify(this.m));
+					},
+					
+				}
+			})
+			
+		</script>
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

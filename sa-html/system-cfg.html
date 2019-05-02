@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>用户添加</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../static/sa.css"> 
+		
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		
+		<style type="text/css">
+			.c-item .c-label{width: 10em;}
+		</style>
+		
+	</head>
+	<body>
+		
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+		
+		<div class="vue-box">
+			
+			<!-- 参数栏 -->
+			<div class="c-panel">
+				<div class="c-title">服务器所有参数</div>
+				<el-form ref="form">
+	
+					<br>
+					<div class="c-item">
+						<label class="c-label">系统名称：</label>
+						<el-input size="small" v-model="m.app_name"></el-input>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">系统当前版本号：</label>
+						<el-input size="small" v-model="m.app_version_no"></el-input>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">联系QQ群：</label>
+						<el-input size="small" v-model="m.qq_group"></el-input>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">开放用户注册：</label>
+						<el-switch v-model="m.xcx_share_btn" :active-value="1" :inactive-value="2"></el-switch>
+						<span class="ps" v-if="m.open_reg==1">开启</span>
+						<span class="ps" v-else>关闭</span>
+					</div>
+					
+					<br>
+					<div class="c-item">
+						<label class="c-label">小程序显示分享按钮：</label>
+						<el-switch v-model="m.gzhxc" :active-value="1" :inactive-value="2"></el-switch>
+						<span class="ps" v-if="m.show_share==1">开启</span>
+						<span class="ps" v-else>关闭</span>
+					</div>
+					
+					<br>
+					<br>
+					<div class="c-item" style="min-width: 100px;">
+						<label class="c-label"></label>
+						<el-button type="primary" size="small" icon="el-icon-check" @click="ok">保存修改</el-button>
+						<el-button type="primary" size="small" icon="el-icon-close" @click="f5">重置</el-button>
+					</div>
+
+
+				</el-form>
+
+			</div>
+			
+			
+			<br><br><br><br><br><br><br><br><br>
+
+			
+		</div>
+		
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '.vue-box',
+				data: {
+					m: {	// 查询参数 
+						app_name: '',
+						app_version_no: '',
+						qq_group: '',
+						open_reg: 1,
+						show_share: 1,
+					}
+				},
+				methods: {
+					// f5
+					f5: function() {
+						var value = localStorage.getItem('system-cfg');
+						if(value != null) {
+							value = JSON.parse(value);
+						} else {
+							value = {	// 查询参数 
+								app_name: 'SA-后台模板',
+								app_version_no: 'v1.0.0',
+								qq_group: '782974737',
+								open_reg: 1,
+								show_share: 1,
+							}
+						}
+						this.m = value;
+					},
+					// ok
+					ok: function(pageNo) {
+						var value = JSON.stringify(this.m);
+						localStorage.setItem('system-cfg', value);
+						this.$message('保存成功');
+					},
+				},
+				created: function() {
+					this.f5();
+				}
+			})
+			
+		</script>
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

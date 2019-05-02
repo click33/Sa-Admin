@@ -1,0 +1,45 @@
+/** 公共css */
+*{margin: 0px;padding: 0px;}
+html{font-size: 10px; height: 100%;}
+body{font-size: 1.6rem; height: 100%; background-color: #eeeeee; color: #333;} 
+a{text-decoration: none;}
+a:hover{}
+/* h1,h2,h3,h4,h5,h6{font-weight: 400;} */
+hr{background-color : #ddd; height: 1px; border: none;}
+input,select{outline: 0;}
+
+
+/* 内容-面板 */
+.c-panel{
+	margin: 1em;
+	padding: 1em;
+	background-color: #FFF;
+	color: #333;
+}
+.c-title{font-weight: bold; line-height: 2em;}
+
+/* 内容-item */
+.c-item {
+	min-width: 280px;
+	height: 32px;
+	padding-right: 20px;
+	display: inline-block;
+	margin: 0.5em 0;
+}
+/* label样式 */
+.c-item .c-label{
+	width: 5em; 
+	color: #666;
+	display: inline-block; 
+	text-align: right;
+}
+/* input宽度等样式调整 */
+.c-item .el-input{
+	display: inline-block;
+	width: 200px;
+}
+.c-item .el-input__inner {
+	border-radius: 0px;
+}
+/* 按钮去圆角 */
+.c-item .el-button{border-radius: 0px;}

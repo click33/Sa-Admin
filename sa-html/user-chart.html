@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>用户列表</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../static/sa.css"> 
+		
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		
+		<style type="text/css">
+			.echarts-div{
+				height: 430px;
+			}
+
+		</style>
+		
+	</head>
+	<body>
+		
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+		
+		<div class="vue-box">
+			
+			<!-- 参数栏 -->
+			<div class="c-panel">
+				<div class="c-title">检索参数</div>
+				<el-form ref="form">
+	
+					<div class="c-item">
+						<label class="c-label">选择年份：</label>
+						<el-select size="small" v-model="p.year" @change="f5()">
+							<el-option label="不限年份" :value="0"></el-option>
+							<el-option label="2016年" :value="2016"></el-option>
+							<el-option label="2017年" :value="2017"></el-option>
+							<el-option label="2018年" :value="2018"></el-option>
+							<el-option label="2019年" :value="2019"></el-option>
+							<el-option label="2020年" :value="2020"></el-option>
+							<el-option label="2021年" :value="2021"></el-option>
+						</el-select>
+					</div>
+					
+					<div class="c-item" style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+					</div>
+					
+				</el-form>
+
+			</div>
+			
+			<!-- 数据栏 -->
+			<div style="display: flex;">
+				<div class="c-panel" style="flex: 4; margin-right: 0;">			
+					<div class="c-title">列表</div>
+					<div class="echarts-div" id='e-type'></div>
+				</div>
+				<div class="c-panel" style="flex: 6;">			
+					<div class="c-title">列表</div>
+					<div class="echarts-div" id='e-month'></div>
+				</div>
+			</div>
+			
+			<div style="clear: both;"></div>
+
+			
+			<br><br><br><br><br><br><br><br><br>
+
+			
+		</div>
+		
+		
+		<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.js"></script> 
+		<script type="text/javascript">
+			
+			// 随机数 
+			function randomNum(minNum, maxNum) {
+				return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10)
+			}
+			
+			new Vue({
+				el: '.vue-box',
+				data: {
+					p: {	// 查询参数 
+						year: new Date().getFullYear()
+					}
+				},
+				methods: {
+					// 数据刷新
+					f5: function() {
+						this.updateEchartsType();
+						this.updateEchartsMonth();
+					},
+					// 更新Echarts, 每种方式注册量
+					updateEchartsType: function() {
+						
+						
+						// ===========================================  定义数据
+						var dataArray = [
+							{
+								name: '昵称注册',
+								value: randomNum(100, 1000)
+							},
+							{
+								name: '手机号注册',
+								value: randomNum(100, 1000)
+							},
+							{
+								name: '微信登陆',
+								value: randomNum(100, 1000)
+							},
+							{
+								name: 'QQ登陆',
+								value: randomNum(100, 1000)
+							},
+							{
+								name: '管理员添加',
+								value: randomNum(100, 1000)
+							},
+						]; // 坐标X轴数据
+
+						
+
+
+						// ===========================================  开始渲染
+
+						var myChart = echarts.init(document.getElementById('e-type'));
+						option = {
+							title: {
+								text: '账号来源',
+								left: 'center',
+								top: 40,
+								textStyle: {
+									color: '#666'
+								}
+							},
+							toolbox: {
+								show: true,
+								top: 40,
+								feature: {
+									saveAsImage: {
+										show: true
+									}
+								}
+							},
+							tooltip: {
+								trigger: 'item',
+								formatter: "{a} <br/>{b} : {c} ({d}%)"
+							},
+
+							series: [{
+								name: '账号来源',
+								type: 'pie',
+								radius : '50%',  // 半径大小
+								center: ['50%', '50%'],
+								selectedMode: 'single',
+								data: dataArray.sort(function(a, b) {
+									return a.value - b.value;
+								}),
+								//roseType: 'radius', // 半径模式还是面积模式
+								itemStyle: {
+									normal: {
+										color: function(params) {
+											// build a color map as your need.
+											var colorList = [
+												'#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B',
+												'#FE8463', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD',
+												'#D7504B', '#C6E579', '#C2232B', '#B9C334', '#F1CE10',
+												'#ED7C25', '#29727B', '#FC8463', '#91CA63', '#F6D860',
+												'#F9A43B', '#65C0DD', '#DD504B', '#C1E579', '#FDD860'
+											];
+
+											function GetRandomNum(Min, Max) {
+												var Range = Max - Min;
+												var Rand = Math.random();
+												return (Min + Math.round(Rand * Range));
+											}
+											var index = GetRandomNum(0, colorList.length - 1);
+											return colorList[index];
+											//return colorList[params.dataIndex]
+										}
+									}
+								},
+								label: {
+									normal: {
+										formatter: '{b|{b}：}{c}  {per|{d}%}  ',
+										rich: {
+										}
+									}
+								},
+							}]
+						};
+						myChart.setOption(option);
+						myChartList[0] = myChart;
+					},
+
+					// 更新Echarts, 每月注册量
+					updateEchartsMonth: function() {
+
+						
+
+						// ===========================================  定义数据
+						var x_name = this.p.year + "年"; // x轴名称
+						var y_name = "注册数量"; // y轴名称
+						var dataArray = []; // 坐标X轴数据
+						var valueArray = []; //  坐标Y轴数据
+
+						var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+						for (var i in arr) { 
+							i = parseInt(i) + 1;
+							dataArray.push(i + '月');
+							if(i < 10){
+								i = "0" + i;
+							}
+							i = i + "";
+							valueArray.push(randomNum(100, 1000) || 0);
+						}
+
+
+						// ===========================================  开始渲染
+
+						var myChart = echarts.init(document.getElementById('e-month'));
+						var option = {
+							tooltip: {
+								trigger: 'axis',
+								formatter: '{b}<br/> ' + y_name + '：{c}',
+								axisPointer: {
+									type: 'shadow'
+								}
+							},
+							toolbox: {
+								show: true,
+								top: 40,
+								feature: {
+									saveAsImage: {
+										show: true
+									}
+								}
+							},
+							xAxis: {
+								name: x_name,
+								type: 'category',
+								axisLabel: {
+									'interval': 0
+								}, //强制不缩略x轴刻度,
+								data: dataArray
+							},
+							yAxis: {
+								name: y_name,
+								type: 'value'
+							},
+							series: [{
+								name: y_name,
+								data: valueArray,
+								type: 'bar',
+								label: {
+									normal: {
+										show: true,
+										position: 'top',
+										formatter: '{c}'
+									}
+								},
+								itemStyle: {
+									normal: {
+										color: function(params) {
+											// build a color map as your need.
+											var colorList = [
+												'#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B',
+												'#FE8463', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD',
+												'#D7504B', '#C6E579', '#C2232B', '#B9C334', '#F1CE10',
+												'#ED7C25', '#29727B', '#FC8463', '#91CA63', '#F6D860',
+												'#F9A43B', '#65C0DD', '#DD504B', '#C1E579', '#FDD860'
+											];
+
+											function GetRandomNum(Min, Max) {
+												var Range = Max - Min;
+												var Rand = Math.random();
+												return (Min + Math.round(Rand * Range));
+											}
+											var index = GetRandomNum(0, colorList.length - 1);
+											return colorList[index];
+											//return colorList[params.dataIndex]
+										},
+										label: {
+											show: true,
+											textStyle: {
+												color: 'black'
+											}
+										}
+									}
+								}
+							}]
+						};
+						myChart.setOption(option);
+						myChartList[1] = myChart;
+					}
+
+
+
+				},
+				created: function() {
+					setTimeout(function() {
+						this.f5();
+					}.bind(this), 0)
+				}
+			})
+			
+			
+			var myChartList = [{}, {}];
+			window.onresize = function() {
+				myChartList.forEach(function(myChart){
+					myChart.resize();
+				})
+			};
+
+			
+		</script>
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

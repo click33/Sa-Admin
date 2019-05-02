@@ -13,42 +13,54 @@ var menuList =	[
 			{
 				id: '1-1',
 				name: '用户列表',
-				url: 'sa-html/1-1.html'
+				url: 'sa-html/user-list.html'
 			},
 			{
 				id: '1-2',
 				name: '用户添加',
-				url: 'sa-html/1-2.html'
+				url: 'sa-html/user-add.html'
 			},
 			{
 				id: '1-3',
-				name: '用户删除',
-				url: 'sa-html/1-3.html'
+				name: '用户统计',
+				url: 'sa-html/user-chart.html'
 			}
 		]
 	},
 	{
 		id: '2',
 		name: '系统设置',
-		icon: 'el-icon-s-tools',
+		icon: 'el-icon-setting',
 		childList: [
 			{
 				id: '2-1',
 				name: '服务器设置',
-				url: 'sa-html/1-1.html'
+				url: 'sa-html/system-cfg.html'
 			},
 			{
 				id: '2-2',
-				name: '全局设置',
-				url: 'sa-html/2-2.html'
+				name: '404页面',
+				url: 'sa-html/404.html'
+			},
+			{
+				id: '2-4',
+				name: '500页面',
+				url: 'sa-html/500.html'
 			}
 		]
 	},
 	{
-		id: '12',
+		id: '3',
 		name: '外部链接',
 		icon: 'el-icon-link',
 		url: 'https://www.baidu.com/',
+		is_blank: true
+	},
+	{
+		id: '4',
+		name: '外部链接2',
+		icon: 'el-icon-picture-outline',
+		url: 'http://web.yanzhi21.com/',
 		is_blank: true
 	}
 ]

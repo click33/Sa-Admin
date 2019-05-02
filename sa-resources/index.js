@@ -129,6 +129,9 @@ var sp = new Vue({
 		// 点击子菜单时的回调, 
 		// 参数: 点击菜单index标识（不是下标）, 所有已经打开的菜单 index
 		selectMenu: function(index, indexArray) {
+			if(index + '' == 0) {
+				return this.showPage(homePage);
+			}
 			var menu = this.getMenuById(index);
 			this.showPage(menu);
 		},
