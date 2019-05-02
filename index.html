@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>sa-admin后台模板</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="sa-resources/index.css">
+		<link rel="stylesheet" href="sa-resources/theme.css">
+		
+	</head>
+	<body>
+		<!-- style="display: none;" 防止 初始花屏 -->
+		<div class="app" :class="['theme-0', 'theme-' + themeV, (is_fold ? 'fold' : '')]" style="display: none;" :style="'display: block;'">
+			<!-- 左 -->
+			<div class="nav-left">
+				<!-- 左上 -->
+				<div class="nav-left-top" title="SA-后台模板" @click="nativePage = pageList[0]">
+					<img src="sa-resources/admin-logo.png" class="admin-logo">
+					<span v-if="is_fold == false" style="font-size: 1.1em;">SA-后台模板</span>
+				</div>
+
+				<!-- 左下 -->
+				<div class="nav-left-bottom">
+					<div class="menu-box-1">
+						<div class="menu-box-2">
+
+							<!-- 菜单 -->
+							<el-menu default-active="2" 
+								class="el-menu-style-1" 
+								:unique-opened="true"
+								:default-active="default_active" 
+								:collapse="is_fold"
+								@select="selectMenu"
+								>
+								
+								<div v-for="(menu, index) in menuList" :key="index">
+									
+									<!-- 1 子菜单 -->
+									<el-menu-item v-if="menu.childList == null || menu.childList.length == 0" :index="menu.id + '' ">
+										<i :class="menu.icon" :title="menu.name"></i>
+										<span v-if="is_fold == false">{{menu.name}}</span>
+									</el-menu-item>
+									
+									<!-- 1 父菜单 -->
+									<el-submenu v-else :index="menu.id + '' ">
+										<template slot="title">
+											<i :class="menu.icon" :title="menu.name"></i>
+											<span v-if="is_fold == false">{{menu.name}}</span>
+										</template>
+										<el-menu-item v-for="(menu2, index2) in menu.childList" :index="menu2.id + '' " :key="index2" >
+											<!-- <i :class="menu2.icon"></i> 二级先别用图标了 -->
+											{{menu2.name}}
+										</el-menu-item>
+									</el-submenu>
+									
+								</div>
+								
+							</el-menu>
+							
+
+
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+			
+			<!-- 右边 -->
+			<div class="nav-right">
+				<div class="nav-right-1">
+					<div class="tools-left">
+						<span title="折叠菜单" class="tool-fox" v-if="is_fold == false" @click="is_fold = true">
+							<i class="el-icon-s-fold"></i>
+						</span>
+						<span title="展开菜单" class="tool-fox" v-if="is_fold == true" @click="is_fold = false">
+							<i class="el-icon-s-unfold"></i>
+						</span>
+						<span title="刷新" class="tool-fox" @click="rightPage = nativePage; right_f5();">
+							<i class="el-icon-refresh-right" style="font-weight: bold;"></i>
+						</span>
+						<span title="当前时间" class="tool-fox">
+							<span style="font-size: 0.90em;">{{now_time}}</span>
+						</span>
+					</div>
+					<div class="tools-right">
+						<span title="点击登录" class="tool-fox" onclick="location.href='login.html'" v-if="user == null">
+							<span style="font-size: 0.8em; font-weight: bold; position: relative; top: -2px;">未登录</span>
+						</span>
+						<span title="我的信息" class="tool-fox" class="user-info" style="padding: 0;" v-if="user != null">
+							<el-dropdown @command="handleCommand" trigger="click" size="medium">
+								<span class="el-dropdown-link user-name" style="height: 100%; padding: 0 1em; display: inline-block;">
+									<img :src="user.avatar" class="user-avatar">
+									{{user.username}}
+									<i class="el-icon-arrow-down el-icon--right"></i>
+								</span>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item command="user_info">我的资料</el-dropdown-item>
+									<el-dropdown-item command="login_out">退出登录</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
+						</span>
+						<span title="主题" class="tool-fox user-info" style="padding: 0;">
+							<el-dropdown @command="toggleTheme" trigger="click" size="medium">
+								<span class="el-dropdown-link" style="height: 100%; padding: 0 1em; display: inline-block;">
+									<i class="el-icon-price-tag" style="font-weight: bold;"></i>
+								</span>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item command="1">主题 1</el-dropdown-item>
+									<el-dropdown-item command="2">主题 2</el-dropdown-item>
+									<el-dropdown-item command="3">主题 3</el-dropdown-item>
+									<el-dropdown-item command="4">主题 4</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
+						</span>
+						<span title="全屏" class="tool-fox" v-if="is_full_screen == false" @click="is_full_screen = true">
+							<i class="el-icon-rank" style="font-weight: bold; transform: rotate(45deg)"></i>
+						</span>
+						<span title="退出全屏" class="tool-fox" v-if="is_full_screen == true" @click="is_full_screen = false">
+							<i class="el-icon-bottom-left" style="font-weight: bold; "></i>
+						</span>
+					</div>
+				</div>
+				
+				<!-- 第二杠 -->
+				<div class="nav-right-2">
+					<div class="towards-left" @click="scrollToLeft" title="向左滑">
+						<i class="el-icon-arrow-left"></i>
+					</div>
+					<div class="towards-middle">
+						
+						<div class="page-title-box" :style="{left: scrollX + 'px'}">
+							<div class="page-title" :class=" (page == nativePage ? 'page-native' : '') " 
+								v-for="page in pageList" 
+								@click="showPage(page)"
+								@contextmenu.prevent="right_click(page, $event)"
+								>
+								<i class="el-icon-caret-right"></i>
+								<span>{{page.name}}</span>
+								<i class="el-icon-close" v-if="!page.hide_close" @click.stop="closePage(page)"></i> 
+							</div>
+						</div>
+						
+						
+						
+					</div>
+					<div class="towards-right" @click="scrollToRight" title="向右滑">
+						<i class="el-icon-arrow-right"></i>
+					</div>
+				</div>
+				
+				<!-- 第三杠 -->
+				<div class="nav-right-3">
+					<span v-for="page in pageList" >
+						<!-- <iframe :src="page.url" :class=" 'iframe' + page.id " v-show="page == nativePage"></iframe> 用v-show会造成每次切换卡片进度条归零的bug -->
+						<iframe :src="page.url" :class=" 'iframe' + page.id " :style="page == nativePage ? 'z-index: 101' : null"></iframe>
+					</span>
+				</div>
+				
+				<!-- 右键盒子 -->
+				<div class="right-box" :style="{left: rightZB.x + 'px', top: rightZB.y + 'px'}" v-if="rightShow">
+					<div @click="right_f5">刷新</div>
+					<div @click="right_close">关闭</div>
+					<div @click="right_close_other">关闭其它</div>
+					<div @click="right_close_all">关闭所有</div>
+					<div @click="right_window_open">新窗口打开</div>
+					<div @click="right_menu_close">取消</div>
+				</div>
+				
+			</div>
+				
+			
+
+
+		</div>
+
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="sa-resources/admin-util.js"></script>
+		<script src="sa-resources/menu-list.js"></script>
+		<script src="sa-resources/index.js"></script>
+		<script src="sa-resources/my-code.js"></script>
+
+
+
+	</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>主页</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			body {
+				background-color: #EEE;
+			}
+
+			.app {
+				font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+			}
+
+			.content-box {
+				margin: 1em;
+				padding: 1em;
+				background-color: #FFF;
+				color: #666;
+			}
+
+
+			/*800之下*/
+			@media(max-width: 800px) {
+				.kapian {
+					width: 100% !important;
+					margin-right: 0px !important;
+				}
+
+				.saoma {
+					display: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="app">
+
+			<div class="content-box">
+				<div style="padding: 1em; border-left: 5px #2D8CF0 solid; background-color: #EEE;">
+					<big><big>Welcome to SA-后台模板 </big></big>
+					<span style="display: inline-block; margin-left: 1em; color: #888;"> —— 一个简单又强大的后台模板</span>
+				</div>
+			</div>
+
+			<div class="content-box">
+
+				<div class="saoma" style="width: 20%; float: left; margin-right: 4%;">
+					<el-divider content-position="left">
+						<big><big>移动端扫码体验</big></big>
+					</el-divider>
+					<div style="text-align: center;">
+						<img src="sa-resources/saoma.png" style="width: 80%; ">
+					</div>
+				</div>
+				<div class="kapian" style="width: 35%; float: left; margin-right: 4%;">
+					<el-divider content-position="left">
+						<big><big>SA-ADMIN</big></big>
+					</el-divider>
+					<div style="font-size: 0.9em; line-height: 1.6em;">
+						<p>
+							虽然已经用过不少优秀的后台模板，但是一直都感觉不尽完美，于是在经过激烈的思想斗争后，我决定牺牲五一假期，亲自做一个尝试一下，
+							一来正好给以后自己的项目中使用，二来也算是为开源界做一点自己的贡献吧
+						</p>
+						<br>
+						<ul style="padding-left: 1em; line-height: 1.5em;">
+							<li>
+								<b>QQ群：</b>
+								<el-link type="primary" href="https://jq.qq.com/?_wv=1027&k=5DHN5Ib" target="_blank">782974737 点击加入</el-link>
+							</li>
+							<li>
+								<b>码云地址：</b>
+								<el-link type="primary" href="https://gitee.com/sz6/sa-admin" target="_blank">https://gitee.com/sz6/sa-admin</el-link>
+							</li>
+							<li>
+								<b>GitHub地址：</b>
+								<el-link type="primary" href="https://github.com/shengzhang666/sa-admin" target="_blank">https://github.com/shengzhang666/sa-admin</el-link>
+							</li>
+							<li>
+								开源不易，求鼓励，给个star吧
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="kapian" style="width: 35%; float: left;">
+					<el-divider content-position="left">
+						<big><big>技术选型</big></big>
+					</el-divider>
+					<ul style="padding-left: 1em; line-height: 1.5em;">
+						<li>
+							<el-link type="primary" href="https://cn.vuejs.org/" target="_blank">JS引擎：Vue @2.6.10</el-link>
+						</li>
+						<li>
+							<el-link type="primary" href="https://element.eleme.cn/#/zh-CN" target="_blank">UI框架：Element-UI @2.8.2</el-link>
+						</li>
+						<li>
+							<el-link @click="meile">没了</el-link>
+						</li>
+					</ul>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+
+
+			<div class="content-box">
+				<el-divider content-position="left">
+					<big><big>更新日志</big></big>
+				</el-divider>
+				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em;">
+					<ul style="padding-left: 1em; line-height: 1.5em;">
+						<li>
+							<b>当前版本 v1.0.0 </b>
+							更新于：2019-5-2
+						</li>
+						
+						<li>
+							一个基于iframe的多窗口后台模板
+						</li>
+						<li>
+							菜单树：支持一二级菜单，暂不支持更多
+						</li>
+						<li>
+							折叠：
+							点击可以折叠或收缩菜单，在窗口变化时也会自动监听根据窗口大小折叠或收缩菜单
+						</li>
+						<li>
+							刷新：
+							点击可刷新当前操作的菜单页
+						</li>
+						<li>
+							卡片：
+							可自动堆积卡片，与菜单双向关联，在卡片标签右击可以：刷新、关闭、关闭其它、关闭所有、新窗口打开
+						</li>
+						<li>
+							主题：目前保留四种主题：深蓝、墨绿、银灰、黑绿结合（切换主题时，可自动保存你的喜好，下次打开时仍然有效）
+						</li>
+						<li>
+							全屏：点击进入全屏/取消全屏
+						</li>
+						<li>
+							功能不断更新中... 你有好的想法也可以告诉我，加群一起交流吧 
+						</li>
+						<li>
+							使用说明，
+							<a href="javascript:;" @click="openDoc">见文档</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<br><br>
+
+		</div>
+
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script type="text/javascript">
+			new Vue({
+				el: '.app',
+				data: {
+
+				},
+				methods: {
+					// 没了
+					meile: function() {
+						this.$message({
+							message: '没了还点',
+							type: 'warning'
+						});
+					},
+					// 显示文档页面
+					openDoc: function() {
+						parent.sp.selectMenu(11);
+					}
+
+				}
+			})
+		</script>
+
+
+	</body>
+</html>

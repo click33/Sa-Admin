@@ -1,0 +1,154 @@
+/* 样式调整为继承父级 */
+.nav-left .el-submenu__title i,
+.nav-left .el-menu-item i,
+.nav-right-1 .el-dropdown,
+.page-title:hover .el-icon-caret-right,
+.page-title.page-native .el-icon-caret-right {
+	color: inherit;
+}
+
+.el-menu,
+.el-submenu,
+.nav-left .el-submenu__title,
+.nav-left .el-menu-item {
+	color: inherit;
+	background-color: inherit;
+}
+
+
+/* ========================== 主题 - 0 默认样式 蓝色 ==========================  */
+.theme-0 {}
+
+/* 左边栏背景色，前景色 */
+.theme-0 .nav-left {
+	background-color: #222;
+	color: #DDD;
+}
+
+/* 二级菜单背景色 */
+.theme-0 .el-submenu .el-menu-item {
+	background-color: #000;
+}
+
+/* 所有菜单悬浮样式时, 以及选中时 */
+.theme-0 .nav-left .el-submenu__title:hover,
+.theme-0 .nav-left .el-menu-item:hover,
+.theme-0 .nav-left .el-menu-item.is-active {
+	background-color: #2D8CF0;
+	color: #FFF;
+}
+
+/* 工具栏背景色颜色, 前景色 */
+.theme-0 .nav-right-1 {
+	color: #333;
+	background-color: #FFF;
+}
+
+/* 工具栏悬浮颜色 */
+.theme-0 .tool-fox:hover {
+	background-color: #EEE;
+}
+
+/* 卡片栏悬浮颜色和选中颜色 */
+.theme-0 .page-title:hover,
+.theme-0 .page-native.page-title {
+	color: #2D8CF0;
+}
+
+
+/* ========================== 主题-1 什么也不覆盖 即：全部取默认样式 ==========================  */
+.theme-1 {}
+
+/* ========================== 主题-2 绿色 ==========================  */
+.theme-2 {}
+
+/* 所有菜单悬浮样式时, 以及选中时 */
+.theme-2 .nav-left .el-submenu__title:hover,
+.theme-2 .nav-left .el-menu-item:hover,
+.theme-2 .nav-left .el-menu-item.is-active {
+	background-color: #009688;
+}
+
+/* 卡片栏悬浮颜色和选中颜色 */
+.theme-2 .page-title:hover,
+.theme-2 .page-native.page-title {
+	color: #009688;
+}
+
+/* ========================== 主题-3 白色 清爽 ==========================  */
+.theme-3 {}
+
+/* 非标准附加样式 */
+.theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC;}
+.theme-3 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+
+/* 左边栏背景色，前景色 */
+.theme-3 .nav-left {
+	background-color: #FFF;
+	color: #333;
+}
+
+/* 二级菜单背景色 */
+.theme-3 .el-submenu .el-menu-item {
+	background-color: #EEE;
+}
+
+/* 所有菜单悬浮样式时, 以及选中时 */
+.theme-3 .nav-left .el-submenu__title:hover,
+.theme-3 .nav-left .el-menu-item:hover,
+.theme-3 .nav-left .el-menu-item.is-active {
+	background-color: #ECF5FF;
+	color: #409EFF;
+}
+
+
+/* ========================== 主题-4 上黑 下白 ==========================  */
+.theme-4 {}
+
+/* 非标准附加样式 */
+.theme-4 .nav-left-top{height: 39px; line-height: 39px; text-indent: 2em; background-color: #222; color: #EEE; font-size: 0.9em;}
+.theme-4 .nav-left-top .admin-logo{display: none;}
+
+.theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-4 .nav-left .el-submenu__title,
+.theme-4 .nav-left .el-menu-item{transition: background-color 0.1s;}
+
+/* 左边栏背景色，前景色 */
+.theme-4 .nav-left {
+	background-color: #EEE;
+	color: #333;
+}
+
+/* 二级菜单背景色 */
+.theme-4 .el-submenu .el-menu-item {
+	background-color: #DDD;
+}
+
+/* 所有菜单悬浮样式时, 以及选中时 */
+.theme-4 .nav-left .el-submenu__title:hover,
+.theme-4 .nav-left .el-menu-item:hover,
+.theme-4 .nav-left .el-menu-item.is-active {
+	background-color: #009688;
+}
+
+/* 卡片栏悬浮颜色和选中颜色 */
+.theme-4 .page-title:hover,
+.theme-4 .page-native.page-title {
+	color: #009688;
+}
+
+
+
+/* 工具栏背景色颜色, 前景色 */
+.theme-4 .nav-right-1 {
+	color: #EEE;
+	background-color: #222;
+}
+
+/* 工具栏悬浮颜色 */
+.theme-4 .tool-fox:hover {
+	background-color: #444;
+}
+
+
+

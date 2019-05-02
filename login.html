@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>SA模板-后台登录</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="sa-resources/login.css">
+	</head>
+
+	<body>
+		<div class="logo">SA模板-后台登录</div>
+		<div class="menu_login">
+			<form id="login-form">
+				<div class="login_space1"></div>
+				<input type="text" id="username" name="key" autocomplete="off" value="root">
+				<div class="login_space2"></div>
+				<input type="password" id="password" name="password" value="root">
+				<div class="login_space3"></div>
+				<div class="login_button">
+					<a href="#" id="btn-login" class="button1">登录</a>
+					<a href="#" id="btn-reset" class="button2">取消</a>
+				</div>
+				<div class="login_space3"></div>
+			</form>
+		</div>
+	</body>
+	
+	<script>
+		
+		document.querySelector('#btn-login').onclick = function() {
+			var username = document.querySelector('#username').value;
+			var password = document.querySelector('#password').value;
+			
+			var curr_user = {username: username, avatar: 'sa-resources/admin-logo.png'};
+			localStorage.setItem('curr_user', JSON.stringify(curr_user));
+			location.href = "index.html";
+			
+		}
+		
+		
+		// 监控回车
+    	$("[name=password]").bind("keypress",function(e){
+		    var code = e.keyCode || e.which || e.charCode;
+		    if (code == 13) {
+		    	$("#btn-login").click();
+		    }
+		});  
+	
+	</script>
+
+</html>
