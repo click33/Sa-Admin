@@ -13,7 +13,7 @@ input,select{outline: 0;}
 .c-panel{
 	margin: 1em;
 	padding: 1em;
-	background-color: #FFF;
+	background-color: #F6F6F6;
 	color: #333;
 }
 .c-title{font-weight: bold; line-height: 2em;}
@@ -43,3 +43,8 @@ input,select{outline: 0;}
 }
 /* 按钮去圆角 */
 .c-item .el-button{border-radius: 0px;}
+
+/* 分页器的去除圆角 */
+.c-panel .el-pagination input{
+	border-radius: 0px !important;
+}

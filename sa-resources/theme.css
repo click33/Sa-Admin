@@ -10,11 +10,11 @@
 .el-menu,
 .el-submenu,
 .nav-left .el-submenu__title,
+.nav-left .el-submenu .el-submenu .el-submenu__title,
 .nav-left .el-menu-item {
 	color: inherit;
 	background-color: inherit;
 }
-
 
 /* ========================== 主题 - 0 默认样式 蓝色 ==========================  */
 .theme-0 {}
@@ -26,12 +26,14 @@
 }
 
 /* 二级菜单背景色 */
-.theme-0 .el-submenu .el-menu-item {
+.theme-0 .el-submenu .el-menu-item,
+.theme-0 .nav-left .el-submenu .el-submenu .el-submenu__title{
 	background-color: #000;
 }
 
 /* 所有菜单悬浮样式时, 以及选中时 */
 .theme-0 .nav-left .el-submenu__title:hover,
+.theme-0 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
 .theme-0 .nav-left .el-menu-item:hover,
 .theme-0 .nav-left .el-menu-item.is-active {
 	background-color: #2D8CF0;
@@ -64,6 +66,7 @@
 
 /* 所有菜单悬浮样式时, 以及选中时 */
 .theme-2 .nav-left .el-submenu__title:hover,
+.theme-2 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
 .theme-2 .nav-left .el-menu-item:hover,
 .theme-2 .nav-left .el-menu-item.is-active {
 	background-color: #009688;
@@ -89,12 +92,14 @@
 }
 
 /* 二级菜单背景色 */
-.theme-3 .el-submenu .el-menu-item {
-	background-color: #EEE;
+.theme-3 .el-submenu .el-menu-item,
+.theme-3 .nav-left .el-submenu .el-submenu .el-submenu__title{
+	background-color: #fafafa;
 }
 
 /* 所有菜单悬浮样式时, 以及选中时 */
 .theme-3 .nav-left .el-submenu__title:hover,
+.theme-3 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
 .theme-3 .nav-left .el-menu-item:hover,
 .theme-3 .nav-left .el-menu-item.is-active {
 	background-color: #ECF5FF;
@@ -120,12 +125,14 @@
 }
 
 /* 二级菜单背景色 */
-.theme-4 .el-submenu .el-menu-item {
+.theme-4 .el-submenu .el-menu-item,
+.theme-4 .nav-left .el-submenu .el-submenu .el-submenu__title{
 	background-color: #DDD;
 }
 
 /* 所有菜单悬浮样式时, 以及选中时 */
 .theme-4 .nav-left .el-submenu__title:hover,
+.theme-4 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
 .theme-4 .nav-left .el-menu-item:hover,
 .theme-4 .nav-left .el-menu-item.is-active {
 	background-color: #009688;

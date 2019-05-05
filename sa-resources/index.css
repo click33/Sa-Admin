@@ -107,4 +107,4 @@ html,body{height: 100%; background-color: #EEE;}
 .fold .nav-right{width: calc(100% - 64px); left: 64px; }
 
 /* 折叠时悬浮菜单样式，防止透明 */
-.el-menu--vertical .el-menu--popup{background-color: #FFF !important;}
+.el-menu--vertical .el-menu--popup{background-color: #FFF !important; color: red !important;}

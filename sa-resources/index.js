@@ -8,6 +8,7 @@ var homePage = {
 var sp = new Vue({
 	el: '.app',
 	data: {
+		version: 'v1.0.1',		// 当前版本
 		is_fold: false,			// 菜单是否折叠
 		default_active: '0',	// 默认的高亮菜单
 		menuList: window.menuList || [],		// 菜单集合 
@@ -19,8 +20,14 @@ var sp = new Vue({
 		rightZB: {x: 0, y: 0}	,// 右键菜单坐标
 		is_full_screen: false	,// 是否全屏
 		user: null	,// user信息
-		themeV: localStorage.getItem('themeV') || '1',	// 主题值
-		now_time: '加载中...'	// 当前时间 
+		now_time: '加载中...'	,// 当前时间 
+		themeV: localStorage.getItem('themeV') || '1',	// 当前主题值
+		themeList: [	// 主题数组
+			{name: '主题 1', value: '1'},
+			{name: '主题 2', value: '2'},
+			{name: '主题 3', value: '3'},
+			{name: '主题 4', value: '4'}
+		]
 	},
 	watch: {
 		is_full_screen: function(newValue, oldValue) {
@@ -36,6 +43,11 @@ var sp = new Vue({
 		toggleTheme: function(command) {
 			this.themeV = command + "";
 			localStorage.setItem('themeV', command);
+			for (var i = 0; i < this.themeList.length; i++) {
+				if(this.themeList[i].value + '' == command + '') {
+					this.$message('切换成功，' + this.themeList[i].name);
+				}
+			}
 		},
 		// 处理userinfo的下拉点击
 		handleCommand: function(command) {
@@ -270,6 +282,7 @@ setInterval(function() {
 	var m = da.getMinutes(); //分
 	var s = da.getSeconds(); //秒
 	var z = da.getDay(); //周几
+	z = z == 0 ? '日' : z;
 	var zong = "";
 
 	zong += Y + "-" + M + "-" + D + " " + sx + " " + h + ":" + m + ":" + s + " 周" + z;

@@ -23,7 +23,13 @@ var menuList =	[
 			{
 				id: '1-3',
 				name: '用户统计',
-				url: 'sa-html/user-chart.html'
+				childList: [
+					{
+						id: '1-3-1',
+						name: '注册量统计',
+						url: 'sa-html/user-chart.html'
+					}
+				]
 			}
 		]
 	},
