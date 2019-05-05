@@ -162,6 +162,16 @@ var sp = new Vue({
 						if(menu2.id + '' == id + '') {
 							return menu2;
 						}
+						// 如果是三级
+						if(menu2.childList) {
+							for (var k = 0; k < menu2.childList.length; k++) {
+								var menu3 = menu2.childList[k];
+								if(menu3.id + '' == id + '') {
+									return menu3;
+								}
+							}
+						}
+						
 					}
 				}
 			}
