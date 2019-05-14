@@ -15,9 +15,9 @@
 			<!-- 左 -->
 			<div class="nav-left">
 				<!-- 左上 -->
-				<div class="nav-left-top" title="SA-后台模板" @click="nativePage = pageList[0]">
+				<div class="nav-left-top" :title="title" @click="nativePage = pageList[0]">
 					<img src="sa-resources/admin-logo.png" class="admin-logo">
-					<span v-if="is_fold == false" style="font-size: 1.1em;">SA-后台模板</span>
+					<span v-if="is_fold == false" style="font-size: 1.1em;">{{title}}</span>
 				</div>
 
 				<!-- 左下 -->
@@ -114,8 +114,7 @@
 									<i class="el-icon-arrow-down el-icon--right"></i>
 								</span>
 								<el-dropdown-menu slot="dropdown">
-									<el-dropdown-item command="user_info">我的资料</el-dropdown-item>
-									<el-dropdown-item command="login_out">退出登录</el-dropdown-item>
+									<el-dropdown-item v-for="drop in dropList" :command="drop.name" :key="drop.name">{{drop.name}}</el-dropdown-item>
 								</el-dropdown-menu>
 							</el-dropdown>
 						</span>
@@ -125,7 +124,7 @@
 									<i class="el-icon-price-tag" style="font-weight: bold;"></i>
 								</span>
 								<el-dropdown-menu slot="dropdown">
-									<el-dropdown-item :command="t.value" v-for="t in themeList">
+									<el-dropdown-item :command="t.value" v-for="t in themeList" :key="t.name">
 										<span :style=" themeV == t.value ? 'color: blue' : '' ">{{t.name}} </span>
 									</el-dropdown-item>
 								</el-dropdown-menu>

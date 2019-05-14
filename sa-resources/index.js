@@ -9,15 +9,16 @@ var sp = new Vue({
 	el: '.app',
 	data: {
 		version: 'v1.0.1',		// 当前版本
-		is_fold: false,			// 菜单是否折叠
+		title: 'SA-后台模板',				// 页面标题  
 		default_active: '0',	// 默认的高亮菜单
-		menuList: window.menuList || [],		// 菜单集合 
+		menuList: [],		// 菜单集合 
 		pageList: [homePage],	// 页面集合
 		nativePage: homePage,	// 当前正显示的Page 
 		scrollX: 0		,// 滚动条位置 
 		rightPage: null,	// 右键操作的page
 		rightShow: false,	// 右键菜单是否显示 
 		rightZB: {x: 0, y: 0}	,// 右键菜单坐标
+		is_fold: false,			// 菜单是否折叠
 		is_full_screen: false	,// 是否全屏
 		user: null	,// user信息
 		now_time: '加载中...'	,// 当前时间 
@@ -27,15 +28,21 @@ var sp = new Vue({
 			{name: '主题 2', value: '2'},
 			{name: '主题 3', value: '3'},
 			{name: '主题 4', value: '4'}
-		]
+		],
+		dropList: []
 	},
 	watch: {
+		// 监听全屏动作 
 		is_full_screen: function(newValue, oldValue) {
 			if(newValue) {
 				fullScreen();
 			} else {
 				fullScreenNormal();
 			}
+		},
+		// 监听title改变时, 页面title也跟着切换 
+		title: function(newValue, oldValue) {
+			document.querySelector('title').innerHTML = newValue;
 		}
 	},
 	methods: {
@@ -51,26 +58,18 @@ var sp = new Vue({
 		},
 		// 处理userinfo的下拉点击
 		handleCommand: function(command) {
-			var fn_name = 'fn_' + command;
-			this[fn_name]();
+			this.dropList.forEach(function(drop) {
+				if(drop.name == command) {
+					drop.click();
+				}
+			})
 		},
 		// 退出登录
 		login_out: function() {
 			console.log('退出登录');
 		},
 		// ------------------- 对外预留接口 --------------------
-		// 写入菜单
-		setMenuList: function(menuList) {
-			this.menuList = menuList;
-		},
-		// 函数，我的资料 
-		fn_user_info: function() {
-			this.$message('我的资料，此函数待重写');
-		},
-		// 函数，退出登录
-		fn_login_out: function() {
-			this.$message('退出登录，此函数待重写');
-		},
+		
 		// ------------------- p-title右键菜单相关 --------------------
 		// 右键 p-title
 		right_click: function(page, event) {
@@ -105,7 +104,7 @@ var sp = new Vue({
 			this.closePage(this.rightPage);
 			this.rightShow = false;	// 隐藏右菜单
 		},
-		// 右键 - 关闭其它
+		// 右键 - 关闭其它 
 		right_close_other: function() {
 			for (var i = 0; i < this.pageList.length; i++) {
 				var page = this.pageList[i];
@@ -117,7 +116,7 @@ var sp = new Vue({
 			}
 			this.rightShow = false;	// 隐藏右菜单
 		},
-		// 右键 - 关闭所有
+		// 右键 - 关闭所有 
 		right_close_all: function() {
 			for (var i = 0; i < this.pageList.length; i++) {
 				var page = this.pageList[i];
@@ -250,15 +249,6 @@ var sp = new Vue({
 		
 	},
 	created:function(){
-		
-		// 加载用户信息
-		if(this.user == null) {
-			var curr_user = localStorage.getItem('curr_user');
-			if(curr_user != null && curr_user != '') {
-				curr_user = JSON.parse(curr_user);
-				this.user = curr_user;
-			}
-		}
 		
 		// 调整是否收拾
 		if(document.body.clientWidth < 800) {

@@ -28,13 +28,7 @@
 	<script>
 		
 		document.querySelector('#btn-login').onclick = function() {
-			var username = document.querySelector('#username').value;
-			var password = document.querySelector('#password').value;
-			
-			var curr_user = {username: username, avatar: 'sa-resources/admin-logo.png'};
-			localStorage.setItem('curr_user', JSON.stringify(curr_user));
 			location.href = "index.html";
-			
 		}
 		
 		

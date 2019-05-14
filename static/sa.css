@@ -41,6 +41,8 @@ input,select{outline: 0;}
 .c-item .el-input__inner {
 	border-radius: 0px;
 }
+/* 解释 */
+.c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
 /* 按钮去圆角 */
 .c-item .el-button{border-radius: 0px;}
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>主页</title>
+		<title>文档</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
@@ -55,14 +55,15 @@
 							</div>
 						</li>
 						<li>
-							<b>怎么自定义菜单树</b>
-							<p>方式1：在 menu-list.js 中，根据已有的样例，直接修改 </p>
-							<p>方式2：删除menu-list.js中所有代码，在 my-code.js中，调用接口：</p>
+							<b>设置模板标题</b>
+							<p class="code-p">sp.title = "SA-后台模板";</p>
+						</li>
+						<li>
+							<b>自定义菜单树</b>
 							<p class="code-p">
-								var myMenuList = [...];	// 具体格式，请参考my-code.js文件中的示例 <br>
-								sp.setMenuList(myMenuList);	// 写入菜单
+								var myMenuList = window.menuList;		// window.menuList 在 menu-list.js 中定义 <br>
+								sp.menuList = myMenuList;
 							</p>
-							<p> 如果需要获得更多操作能力，如：动态添加菜单、删除菜单等等，可直接 sp.menuList 获得菜单引用，直接操作对象</p>
 						</li>
 						
 						<li>
@@ -73,15 +74,12 @@
 						</li>
 						
 						<li>
-							<b>如何设置user信息</b>
-							<p>
-								用户登录后，右上角可直接显示用户的头像和昵称, <br>
-								默认策略为：在加载页面时读取本地存储localStorage 中 curr_user 的key，该值格式为：{username: '昵称', avatar: '头像地址'};<br>
-								所以你可以在登录时，以此为格式，写入值：
-							</p>
+							<b>如何设置登录后右上角显示的user信息</b>
 							<p class="code-p">
-								var curr_user = {username: '我的昵称', avatar: 'sa-resources/admin-logo.png'}; <br>
-								localStorage.setItem('curr_user', JSON.stringify(curr_user));
+								sp.user = { <br>
+									username: 'root', // 昵称		<br>
+									avatar: 'sa-resources/admin-logo.png' // 头像地址 <br>
+								}
 							</p>
 							<p>或者调用以下API，直接设置：</p>
 							<p class="code-p">
@@ -90,12 +88,19 @@
 						</li>
 						
 						<li>
-							<b>重写按钮事件(我的资料和退出登录)</b>
+							<b>重写按钮事件</b>
+							<p>你可以轻松自定义登录后的头像处，下拉可以出现的选项</p>
 							<p class="code-p">
-								// 重写，点击【我的资料】的事件  <br>
-								sp.fn_user_info = function() { /* ... */ } <br>
-								// 重写，点击【退出登录】的事件 <br>
-								sp.fn_login_out = function() { /* ... */ }
+								sp.dropList = [		// 头像点击处可操作的选项		<br>
+									{		<br>
+										name: '我的资料',		<br>
+										click: function() {		/* balabala... */ }		<br>
+									},		<br>
+									{		<br>
+										name: '退出登录',		<br>
+										click: function() {	/* balabala... */}		<br>
+									}		<br>
+								]		<br>
 							</p>
 						</li>
 						

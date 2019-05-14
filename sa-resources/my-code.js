@@ -3,43 +3,19 @@
 
 
 
+// ================================= 示例：一些基本信息 ================================= 
+
+// 设置模板标题 
+sp.title = "SA-后台模板";
 
 
+// ================================= 示例：自定义菜单 =================================
 
+var myMenuList = window.menuList;		// window.menuList 在 menu-list.js 中定义 
+sp.menuList = myMenuList;
 
-// ================================= 示例：自定义菜单的两种方式 =================================
-
-// 方式1：直接在 menu-list.js 文件里修改
-// 方式2：删除menu-list.js中所有代码，在本文件里调用API接口代码
-/*
-var myMenuList = [
-	{
-		id: '1',		// 唯一标识
-		name: '自定义菜单1',		// 菜单名称
-		icon: 'el-icon-document-remove',	// 菜单图标
-		url: 'sa-html/sa-doc.html'	// 菜单对应地址
-	},
-	{
-		id: '2',
-		name: '自定义菜单2', 
-		icon: 'el-icon-document-remove', 
-		childList: [
-			{
-				id: '2-1',
-				name: '用户列表',
-				url: 'main.html'
-			},
-			{
-				id: '2-2',
-				name: '用户添加',
-				url: 'main.html'
-			}
-		]
-	},
-]
-sp.setMenuList(myMenuList);
-*/
-// 如果需要获得更多操作能力，如：动态添加菜单、删除菜单等等，可直接 sp.menuList 获得菜单引用，直接操作对象
+// 如果需要获得更多操作能力，如：动态添加菜单、删除菜单等
+// 可直接 sp.menuList 获得菜单引用，直接操作对象 
 
 
 // ================================= 示例：js控制打开某个菜单 =================================
@@ -48,20 +24,27 @@ sp.setMenuList(myMenuList);
 
 // ================================= 示例：设置user信息 =================================
 // 用户登录后，右上角可直接显示用户的头像和昵称
-// 默认策略为：在加载页面时读取本地存储localStorage 中 curr_user 的key，该值格式为：{username: '昵称', avatar: '头像地址'};
-// 你可以在登录时，以此为格式，写入值：
-// var curr_user = {username: '我的昵称', avatar: 'sa-resources/admin-logo.png'};
-// localStorage.setItem('curr_user', JSON.stringify(curr_user));
-// 
-// 或者调用以下API，直接设置：
-// sp.user = {username: '张三', avatar: '头像地址'};
+sp.user = {
+	username: 'root',	// 昵称 
+	avatar: 'sa-resources/admin-logo.png'	// 头像地址  
+}
 
 
-// ================================= 示例：重写按钮事件 =================================
-// 重写，点击【我的资料】的事件
-// sp.fn_user_info = function() { /* ... */ }
-// 重写，点击【退出登录】的事件
-// sp.fn_login_out = function() { /* ... */ }
 
+// ================================= 示例：设置登录后的头像处，下拉可以出现的选项  =================================
+sp.dropList = [		// 头像点击处可操作的选项
+	{
+		name: '我的资料',
+		click: function() {
+			sp.$message('点击了我的资料，你可以参照文档重写此函数');
+		}
+	},
+	{
+		name: '退出登录',
+		click: function() {
+			sp.$message('点击了退出登录，你可以参照文档重写此函数');
+		}
+	}
+]
 
 
