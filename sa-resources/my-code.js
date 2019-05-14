@@ -12,7 +12,7 @@ sp.title = "SA-后台模板";
 // ================================= 示例：自定义菜单 =================================
 
 var myMenuList = window.menuList;		// window.menuList 在 menu-list.js 中定义 
-sp.menuList = myMenuList;
+sp.setMenuList(myMenuList);
 
 // 如果需要获得更多操作能力，如：动态添加菜单、删除菜单等
 // 可直接 sp.menuList 获得菜单引用，直接操作对象 

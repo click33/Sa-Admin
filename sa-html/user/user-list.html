@@ -7,7 +7,7 @@
 		
 		<!-- 所有的 css 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" href="../static/sa.css"> 
+		<link rel="stylesheet" href="../../static/sa.css"> 
 		
 		<!-- 所有的 js 资源 -->
 		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
@@ -87,13 +87,14 @@
 							共{{scope.row.photo_list.length}}张, 点击预览
 						</template>
 					</el-table-column>
+					<el-table-column label="性别" prop="sex"> </el-table-column>
 
 					<el-table-column label="注册方式" prop="create_type"></el-table-column>
 					<el-table-column label="注册于" prop="create_time"></el-table-column>
 					<el-table-column prop="address" label="操作">
 						<template slot-scope="scope">
-							<el-button type="text" size="small" @click="dongjie(scope.row)">冻结</el-button>
-							<el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
+							<el-button type="primary" class="c-button" icon="el-icon-edit" @click="dongjie(scope.row)">冻结</el-button>
+							<el-button type="danger" class="c-button" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -110,6 +111,12 @@
 				</el-pagination>
 			</div>
 			
+			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
+				Layer：<el-link type="primary" href="http://layer.layui.com/" target="_blank">
+					一个可以让你想到即可做到的JavaScript弹窗（层）解决方案
+				</el-link>
+			</div>
+			
 			<br><br><br><br><br><br><br><br><br>
 
 			
@@ -117,7 +124,7 @@
 		
 		
 		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
-		<script src="../static/kj/layer/layer.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
 		<script src="data-list.js"></script>
 		<script type="text/javascript">
 			
@@ -173,9 +180,11 @@
 					},
 					// 删除
 					del: function(data) {
-						var index = this.dataList.indexOf(data);
-						this.dataList.splice(index, 1);
-						this.$message({message: '删除成功', type: 'success'});
+						layer.confirm('是否删除，此操作不可撤销', {}, function() {
+							var index = this.dataList.indexOf(data);
+							this.dataList.splice(index, 1);
+							layer.msg('删除成功');
+						}.bind(this));
 					},
 					// 账号冻结
 					dongjie: function() {

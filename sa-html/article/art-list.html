@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>帖子列表</title>
+
+		<!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css">
+
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+
+	</head>
+	<body>
+
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+
+		<div class="vue-box">
+
+			<!-- 参数栏 -->
+			<div class="c-panel">
+				<div class="c-title">检索参数</div>
+				<el-form ref="form">
+
+					<div class="c-item">
+						<label class="c-label">id：</label>
+						<el-input size="small" v-model="p.id" type="number"></el-input>
+					</div>
+
+					<div class="c-item">
+						<label class="c-label">标题：</label>
+						<el-input size="small" v-model="p.title"></el-input>
+					</div>
+
+					<div class="c-item" style="min-width: 10px;">
+						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+					</div>
+
+					<br />
+					<div class="c-item">
+						<label class="c-label">排序：</label>
+						<el-radio-group v-model="p.sort_type">
+							<el-radio :label="0">发表时间</el-radio>
+							<el-radio :label="1">喜欢数</el-radio>
+							<el-radio :label="2">点击数</el-radio>
+							<el-radio :label="3">分享数</el-radio>
+						</el-radio-group>
+					</div>
+
+
+				</el-form>
+			</div>
+
+			<!-- 表格 -->
+			<div class="c-panel">
+				<h4 class="c-title">列表</h4>
+
+				<el-table class="data-table" :data="dataList" size="small" border>
+					<el-table-column label="编号" prop="id" width="70px"> </el-table-column>
+					<el-table-column label="文章标题" prop="title"></el-table-column>
+					<el-table-column label="文章内容" prop="content" width="400px"></el-table-column>
+					<el-table-column label="发表人" prop="create_username"></el-table-column>
+					<el-table-column label="发表于" prop="create_time"></el-table-column>
+					<el-table-column label="点击量" prop="see_count"></el-table-column>
+					<el-table-column label="喜欢" prop="like_count"></el-table-column>
+					<el-table-column label="分享" prop="share_count"></el-table-column>
+					<el-table-column prop="address" label="操作" width="150px">
+						<template slot-scope="scope">
+							<el-button type="primary" class="c-button" icon="el-icon-edit" @click="update(scope.row)">修改</el-button>
+							<el-button type="danger" class="c-button" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
+						</template>
+					</el-table-column>
+				</el-table>
+
+			</div>
+
+			<div class="c-panel">
+				<el-pagination background layout="total, prev, pager, next, sizes, jumper" :current-page="page.pageNo" :page-size="page.pageSize"
+				 :total="page.count" :page-sizes="[1, 10, 20, 30, 40, 50, 100]" @current-change="pageNo_f5" @size-change="pageSize_f5">
+				</el-pagination>
+			</div>
+
+			<br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br />
+
+
+		</div>
+
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="data-list.js"></script>
+		<script>
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					p: { // 查询参数
+						sort_type: 0
+					},
+					page: {	// 分页信息
+						pageNo: 1,
+						pageSize: 10,
+						count: 92
+					},
+					dataList: dataList // 数据集合
+				},
+				methods: {
+					// 数据刷新
+					f5: function(pageNo) {
+						this.$message('数据刷新, 参数：' + JSON.stringify(this.p));
+					},
+					// 分页刷新
+					pageNo_f5: function(pageNo) {
+						this.$message('切换当前页：' + pageNo);
+					},
+					pageSize_f5: function(pageSize) {
+						this.$message('切换页大小：' + pageSize);
+					},
+					// 删除
+					del: function(data) {
+						layer.confirm('是否删除，此操作不可撤销', {}, function() {
+							var index = this.dataList.indexOf(data);
+							this.dataList.splice(index, 1);
+							layer.msg('删除成功');
+						}.bind(this));
+					},
+					// 修改
+					update: function(data) {
+						this.$message({message: '修改', type: 'success'});
+					}
+
+				},
+				created: function() {
+					this.f5();
+				}
+			})
+		</script>
+
+	</body>
+</html>

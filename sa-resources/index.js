@@ -46,6 +46,26 @@ var sp = new Vue({
 		}
 	},
 	methods: {
+		// ------------------- 对外预留接口 --------------------
+		setMenuList: function(menu_list) {
+			menu_list = this.refMenuList(menu_list);
+			this.menuList = menu_list;
+		},
+		// 将 menu_list 处理一下 
+		refMenuList: function(menu_list) {
+			for (var i = 0; i < menu_list.length; i++) {
+				var menu = menu_list[i];
+				if(menu.is_show === false) {
+					arrayDelete(menu_list, menu);
+					i--;
+				}
+				if(menu.childList && menu.childList.length > 0){
+					this.refMenuList(menu.childList);	// 递归处理 
+				}
+			}
+			return menu_list;
+		},
+		// ------------------- 对外预留 end --------------------
 		// 切换主题
 		toggleTheme: function(command) {
 			this.themeV = command + "";
@@ -68,8 +88,6 @@ var sp = new Vue({
 		login_out: function() {
 			console.log('退出登录');
 		},
-		// ------------------- 对外预留接口 --------------------
-		
 		// ------------------- p-title右键菜单相关 --------------------
 		// 右键 p-title
 		right_click: function(page, event) {
@@ -143,34 +161,22 @@ var sp = new Vue({
 			if(index + '' == 0) {
 				return this.showPage(homePage);
 			}
-			var menu = this.getMenuById(index);
+			var menu = this.getMenuById(this.menuList, index);
 			this.showPage(menu);
 		},
 		// 
 		// 返回指定 index 的menu
-		getMenuById: function(id) {
-			for (var i = 0; i < this.menuList.length; i++) {
-				var menu = this.menuList[i];
+		getMenuById: function(menuList, id) {
+			for (var i = 0; i < menuList.length; i++) {
+				var menu = menuList[i];
 				if(menu.id + '' == id + '') {
 					return menu;
 				}
 				// 如果是二级 
 				if(menu.childList) {
-					for (var j = 0; j < menu.childList.length; j++) {
-						var menu2 = menu.childList[j];
-						if(menu2.id + '' == id + '') {
-							return menu2;
-						}
-						// 如果是三级
-						if(menu2.childList) {
-							for (var k = 0; k < menu2.childList.length; k++) {
-								var menu3 = menu2.childList[k];
-								if(menu3.id + '' == id + '') {
-									return menu3;
-								}
-							}
-						}
-						
+					var menu2 = this.getMenuById(menu.childList, id);
+					if(menu2 != null) {
+						return menu2;
 					}
 				}
 			}

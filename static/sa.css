@@ -8,6 +8,13 @@ a:hover{}
 hr{background-color : #ddd; height: 1px; border: none;}
 input,select{outline: 0;}
 
+/* input type=number时不显示按钮 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
+	margin: 0;
+}
+
 
 /* 内容-面板 */
 .c-panel{
@@ -45,6 +52,15 @@ input,select{outline: 0;}
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
 /* 按钮去圆角 */
 .c-item .el-button{border-radius: 0px;}
+
+/* 按钮样式调整 */
+.c-button{zoom: 0.4; padding: 10px 15px;}
+.c-button *{position: relative; top: 1px;}
+.c-button.el-button--primary{background-color: #3296FA;}
+.c-button.el-button--primary:hover{background-color: #067CF3;}
+.c-button.el-button--danger{background-color: #CA4242;}
+.c-button.el-button--danger:hover{background-color: #A00C0C;}
+
 
 /* 分页器的去除圆角 */
 .c-panel .el-pagination input{

@@ -4,7 +4,7 @@ var dataList = [{
 		"username": "省长",
 		"avatar": "https://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/default_head/2.png?x-oss-process=style/yasuo",
 		"tell": '这人懒，啥也没有留下',
-		"sex": "女",
+		"sex": "男",
 		"photo_list": [
 			"http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2019/02/02/1549112799839261454077.jpeg?x-oss-process=style/yasuo",
 			"http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2019/02/02/15491128027001242326540.jpeg?x-oss-process=style/yasuo",

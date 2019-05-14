@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>文章发表</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css"> 
+
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+		<style>
+
+			.c-item .c-label{width: 7em;}
+
+			/* wang富文本编辑器 */
+			.editor-item{width: 100%; height: auto;}
+			.editor-item .c-label{float: left;}
+			.editor-item .editor-box{float: left; width: 80%; margin-top: 0px; margin-left: 5px;} 
+            .editor-item #editor{min-height: 300px; background-color: #FFF;}
+            .editor-item .w-e-toolbar{padding-top: 5px !important;}
+			
+			/* 尽量小点 */
+			.editor-item .editor-box{float: left; width: 700px;} 
+			.editor-item .editor-box img{max-width: 200px !important;}
+
+        </style>
+
+	</head>
+	<body>
+
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+
+		<div class="vue-box">
+
+			<!-- 参数栏 -->
+			<div class="c-panel">
+				<div class="c-title">文章添加</div>
+				<el-form ref="form" id="form">
+
+					<br />
+					<div class="c-item" style="width: 100%;">
+						<label class="c-label">文章标题：</label>
+						<el-input size="small" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
+					</div>
+
+					<br />
+					<div class="c-item editor-item">
+						<label class="c-label">文章内容：</label>
+						<div class="editor-box">
+							<div id="editor">
+								<p>爱是淡淡的忧伤</p>
+								<p>回味初识的那一段深情爱恋，清晰的面容，熟悉的身影，悦耳的声音，在某个深夜恍然想起。那是一个深秋的夜晚，我们相拥而坐， 依着凉亭相互取暖，静静的看着，挂满露珠的秋。是否回忆总是定格在那座深秋的城，也许你曾经爱过我，就不从忘记，也许我爱过你，也不会忘记，只是那深秋的夜，终就散落在磋跎的岁月之中。</p>
+								
+							</div>
+						</div>
+					</div>
+
+					<br />
+					<div class="c-item">
+						<label class="c-label">公开：</label>
+						<el-switch v-model="m.is_public" :active-value="1" :inactive-value="2"></el-switch>
+						<span class="c-remark">关闭后，别人将不能看到你的发表</span>
+					</div>
+					
+					<div style="margin-top: 10px;"></div>
+					<div class="c-item">
+						<label class="c-label"></label>
+						<el-button type="primary" icon="el-icon-plus" size="small" @click="ok">确定</el-button>
+					</div>
+
+
+				</el-form>
+			</div>
+
+			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
+				wangEditor：<el-link type="primary" href="http://www.wangeditor.com/" target="_blank">
+					基于javascript和css开发的 Web富文本编辑器， 轻量、简洁、易用、开源免费
+				</el-link>
+			</div>
+
+			<br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br />
+
+
+
+		</div>
+
+		<script>
+			
+			
+			
+			// 创建一个空的 m 
+			function create_m() {
+				return {
+					title: '爱是淡淡的忧伤',
+					content: '',
+					is_public: 1
+				}
+			}
+			
+			// 创建编辑器
+			function create_editor() {
+				var E = window.wangEditor
+				window.editor = new E('#editor');
+
+				editor.customConfig.menus = [
+					'head', 'fontSize', 'fontName', 'italic', 'underline', 'strikeThrough', 'foreColor', 'backColor', 'link', 'list',
+					'justify', 'quote', 'emoticon', 'image', 'table', 'code', 'undo', 'redo' // 重复
+				]
+				editor.customConfig.debug = true; // debug模式
+				//editor.customConfig.uploadImgServer = urls.fileUrl + '/upload/img';	// 上传图片接口
+				editor.customConfig.uploadFileName = 'file'; // 图片流name
+				editor.customConfig.withCredentials = true; // 跨域携带cookie
+				editor.customConfig.uploadImgShowBase64 = true   	// 使用 base64 保存图片
+				editor.create(); // 创建
+			}
+			
+
+
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					m: create_m(),
+				},
+				methods: {
+					// 提交 
+					ok: function() {
+						this.$message('发表成功');
+					}
+				},
+				mounted: function() {
+					create_editor();
+				}
+			})
+
+
+		</script>
+
+	</body>
+</html>
