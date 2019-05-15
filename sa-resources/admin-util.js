@@ -6,6 +6,31 @@ function arrayDelete(arr, item){
 	}
 }
 
+// 想url后面追加一个参数字符串，处理各种情况 
+function urlAppendArg(url, arg_str) {
+	if(arg_str == null || arg_str.length == 0) {
+		return url;
+	}
+	var index = url.indexOf('?');
+	// ? 不存在
+	if(index == -1) {
+		return url + '?' + arg_str;
+	}
+	// ? 是最后一位
+	if(index == url.length - 1) {
+		return url + arg_str;
+	}
+	// ? 是其中一位
+	if(index > -1 && index < url.length - 1) {
+		// 如果最后一位是 不是&, 且 arg_str 第一位不是 &, 就增送一个 &
+		if(url.lastIndexOf('&') != url.length - 1 && arg_str.indexOf('&') != 0) {
+			return url + '&' + arg_str;
+		} else {
+			return url + arg_str;
+		}
+	}
+}
+
 // 全屏 
 function fullScreen(){
 	if(document.documentElement.RequestFullScreen){

@@ -1,5 +1,5 @@
 var homePage = {
-	id: '0',	// 唯一标识 
+	id: '-1',	// 唯一标识 
 	name: '首页',
 	url: 'main.html',	// 页面地址 
 	hide_close: true	// 隐藏关闭键 
@@ -10,7 +10,7 @@ var sp = new Vue({
 	data: {
 		version: 'v1.0.1',		// 当前版本
 		title: 'SA-后台模板',				// 页面标题  
-		default_active: '0',	// 默认的高亮菜单
+		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 
 		pageList: [homePage],	// 页面集合
 		nativePage: homePage,	// 当前正显示的Page 
@@ -47,23 +47,56 @@ var sp = new Vue({
 	},
 	methods: {
 		// ------------------- 对外预留接口 --------------------
+		// 写入菜单，可以是一个一维数组(指定好parent_id)，也可以是一个已经渲染好的tree数组
 		setMenuList: function(menu_list) {
+			menu_list = this.arrayToTree(menu_list);
 			menu_list = this.refMenuList(menu_list);
 			this.menuList = menu_list;
+		},
+		// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
+		arrayToTree: function(menu_list) {
+			for (var i = 0; i < menu_list.length; i++) {
+				var menu = menu_list[i];
+				// 添加到其指定的父菜单的childList
+				if(menu.parent_id) {
+					var parent_menu = this.getMenuById(menu_list, menu.parent_id);
+					if(parent_menu) {
+						parent_menu.childList = parent_menu.childList || [];
+						parent_menu.childList.push(menu);
+						menu_list.splice(i, 1);	// 从一维中删除 
+						i--;
+					}
+				}
+			}
+			return menu_list;
 		},
 		// 将 menu_list 处理一下 
 		refMenuList: function(menu_list) {
 			for (var i = 0; i < menu_list.length; i++) {
 				var menu = menu_list[i];
+				// 隐藏的给去掉 
 				if(menu.is_show === false) {
 					arrayDelete(menu_list, menu);
 					i--;
 				}
+				// 有子项的递归处理 
 				if(menu.childList && menu.childList.length > 0){
 					this.refMenuList(menu.childList);	// 递归处理 
 				}
 			}
 			return menu_list;
+		},
+		// js显示某个菜单
+		showMenuById: function(id) {
+			var menu = this.getMenuById(this.menuList, id);
+			if(menu) {
+				this.showPage(menu); 
+			}
+		},
+		// js关闭某个page, 根据id
+		closePageById: function(id) {
+			var page = this.getPageById(id);
+			this.closePage(page);
 		},
 		// ------------------- 对外预留 end --------------------
 		// 切换主题
@@ -100,7 +133,7 @@ var sp = new Vue({
 		},
 		// 右键菜单消失
 		right_menu_close: function() {
-			this.rightShow = false;	// 显示
+			this.rightShow = false;	// 关闭 
 		},
 		// 右键 刷新
 		right_f5: function() {
@@ -112,7 +145,7 @@ var sp = new Vue({
 		},
 		// 右键 - 关闭
 		right_close: function() {
-			if(this.rightPage.id == '0'){
+			if(this.rightPage.id == homePage.id + ''){
 				this.$message({
 					message: '这个不能关闭哦',
 					type: 'warning'
@@ -126,7 +159,7 @@ var sp = new Vue({
 		right_close_other: function() {
 			for (var i = 0; i < this.pageList.length; i++) {
 				var page = this.pageList[i];
-				if(page.id + '' == '0' || page.id + '' == this.rightPage.id){
+				if(page.id + '' == homePage.id + '' || page.id + '' == this.rightPage.id){
 					continue;
 				}
 				this.closePage(page);
@@ -138,7 +171,7 @@ var sp = new Vue({
 		right_close_all: function() {
 			for (var i = 0; i < this.pageList.length; i++) {
 				var page = this.pageList[i];
-				if(page.id + '' == '0'){
+				if(page.id + '' == homePage.id + ''){
 					continue;
 				}
 				this.closePage(page);
@@ -158,11 +191,11 @@ var sp = new Vue({
 		// 点击子菜单时的回调, 
 		// 参数: 点击菜单index标识（不是下标）, 所有已经打开的菜单 index
 		selectMenu: function(index, indexArray) {
-			if(index + '' == 0) {
-				return this.showPage(homePage);
-			}
+			// if(index + '' == homePage.id + '') {
+			// 	return this.showPage(homePage);
+			// }
 			var menu = this.getMenuById(this.menuList, index);
-			this.showPage(menu);
+			this.showPage(menu); 
 		},
 		// 
 		// 返回指定 index 的menu
@@ -197,22 +230,32 @@ var sp = new Vue({
 		addPage: function(page) {
 			this.pageList.push(page);
 		},
-		// 显示某个页面
+		// 显示某个页面, 
+		// page对象，是否强制刷新 
 		showPage: function(page) {
 			// 如果是外部链接
 			if(page.is_blank) {
 				return open(page.url); 
 			}
 			// 如果没有先添加
-			if(this.pageList.indexOf(page) == -1){
+			if(this.getPageById(page.id) == null){
 				this.addPage(page);
 			}
 			this.nativePage = page;
-			this.default_active = page.id + '';	// 左边自动关联
+			this.default_active = page.id + '';	// 左边自动关联, 如果左边没有，则无效果 
 			// 归位一下
 			this.$nextTick(function() {
 				this.scrollToAuto();	
 			}.bind(this))
+		},
+		// 获取 Page 根据 id
+		getPageById: function(id) {
+			for (var i = 0; i < this.pageList.length; i++) {
+				if(this.pageList[i].id + '' == id + '') {
+					return this.pageList[i];
+				}
+			}
+			return null;
 		},
 		// 视角向左滑动一段距离 
 		scrollToLeft: function() {
