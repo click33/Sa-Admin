@@ -4,11 +4,11 @@
 
 一个基于iframe的多窗口后台模板，演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
 
-![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-admin-img.png)
+![截图](https://images.gitee.com/uploads/images/2019/0515/155507_a1589a57_1766140.png)
 
 #### 功能
 
-架构：前后台分离模式，但并不是SPA(单页应用)，而是基于iframe，so —— 
+架构：无后台代码，纯html模板，可以方便的适配任何后端语言
 
 菜单树：支持一、二、三级菜单
 
