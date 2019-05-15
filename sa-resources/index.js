@@ -8,7 +8,7 @@ var homePage = {
 var sp = new Vue({
 	el: '.app',
 	data: {
-		version: 'v1.0.1',		// 当前版本
+		version: 'v1.0.4',		// 当前版本
 		title: 'SA-后台模板',				// 页面标题  
 		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 
@@ -48,9 +48,16 @@ var sp = new Vue({
 	methods: {
 		// ------------------- 对外预留接口 --------------------
 		// 写入菜单，可以是一个一维数组(指定好parent_id)，也可以是一个已经渲染好的tree数组
-		setMenuList: function(menu_list) {
+		// show_list 为指定显示的id集合(注意是id的集合)，为空时代表显示所有
+		setMenuList: function(menu_list, show_list) {
+			// 转化为string 便于比较
+			if(show_list) {
+				for (var i = 0; i < show_list.length; i++) {
+					show_list[i] = show_list[i] + '';
+				} 
+			}
 			menu_list = this.arrayToTree(menu_list);
-			menu_list = this.refMenuList(menu_list);
+			menu_list = this.refMenuList(menu_list, show_list);
 			this.menuList = menu_list;
 		},
 		// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
@@ -71,17 +78,24 @@ var sp = new Vue({
 			return menu_list;
 		},
 		// 将 menu_list 处理一下 
-		refMenuList: function(menu_list) {
+		refMenuList: function(menu_list, show_list) {
 			for (var i = 0; i < menu_list.length; i++) {
 				var menu = menu_list[i];
 				// 隐藏的给去掉 
 				if(menu.is_show === false) {
 					arrayDelete(menu_list, menu);
 					i--;
+					continue;
+				}
+				// 如果指定了 show_list，并且 menu.id 不在 show_list 里，划掉
+				if(show_list && show_list.indexOf(menu.id) == -1) {
+					arrayDelete(menu_list, menu);
+					i--;
+					continue;
 				}
 				// 有子项的递归处理 
 				if(menu.childList && menu.childList.length > 0){
-					this.refMenuList(menu.childList);	// 递归处理 
+					this.refMenuList(menu.childList, show_list);	// 递归处理 
 				}
 			}
 			return menu_list;

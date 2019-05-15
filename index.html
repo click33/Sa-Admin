@@ -17,7 +17,7 @@
 				<!-- 左上 -->
 				<div class="nav-left-top" :title="title" @click="nativePage = pageList[0]">
 					<img src="sa-resources/admin-logo.png" class="admin-logo">
-					<span v-if="is_fold == false" style="font-size: 1.1em;">{{title}}</span>
+					<span class="nav-title" style="font-size: 1.1em;">{{title}}</span>
 				</div>
 
 				<!-- 左下 -->
@@ -37,22 +37,22 @@
 								<div v-for="(menu, index) in menuList" :key="index">
 									
 									<!-- 1 子菜单 -->
-									<el-menu-item v-if="menu.childList == null || menu.childList.length == 0" :index="menu.id + '' ">
+									<el-menu-item v-if="menu.childList == null" :index="menu.id + '' ">
 										<i :class="menu.icon" :title="menu.name"></i>
-										<span v-if="is_fold == false">{{menu.name}}</span>
+										<span class="menu-name">{{menu.name}}</span>
 									</el-menu-item>
 									
 									<!-- 1 父菜单 -->
 									<el-submenu v-else :index="menu.id + '' ">
 										<template slot="title">
 											<i :class="menu.icon" :title="menu.name"></i>
-											<span v-if="is_fold == false">{{menu.name}}</span>
+											<span class="menu-name">{{menu.name}}</span>
 										</template>
 										
 										<!-- 遍历其子项 -->
 										<div v-for="(menu2, index) in menu.childList" :key="index">
 											<!-- 2 如果是子菜单 -->
-											<el-menu-item v-if="menu2.childList == null || menu2.childList.length == 0" :index="menu2.id + '' ">
+											<el-menu-item v-if="menu2.childList == null" :index="menu2.id + '' ">
 												{{menu2.name}}
 											</el-menu-item>
 											

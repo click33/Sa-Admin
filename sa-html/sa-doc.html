@@ -62,7 +62,8 @@
 							<b>自定义菜单树</b>
 							<p class="code-p">
 								var myMenuList = window.menuList;		// window.menuList 在 menu-list.js 中定义 <br>
-								sp.setMenuList(myMenuList);
+								sp.setMenuList(myMenuList);		// 写入菜单 <br>
+								// sp.setMenuList(myMenuList, [11, 1, '1-1']);	// 写入菜单，并设置应该显示哪些id的菜单（第二个参数为空时，代表默认显示所有） 
 							</p>
 						</li>
 						
