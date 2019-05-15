@@ -93,6 +93,10 @@ var sp = new Vue({
 				this.showPage(menu); 
 			}
 		},
+		// 显示homePage
+		showHome: function(id) {
+			this.showPage(homePage); 
+		},
 		// js关闭某个page, 根据id
 		closePageById: function(id) {
 			var page = this.getPageById(id);
