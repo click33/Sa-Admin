@@ -297,12 +297,16 @@ var sp = new Vue({
 				if(this.scrollX < rightLimit){
 					this.scrollX = rightLimit;
 				}
+				// 同时防止左边越界 
+				if(this.scrollX > 0){
+					this.scrollX = 0;
+				}
 			}.bind(this), 200);
 		},
 		// 自动归位
 		scrollToAuto: function() {
 			// 最后一个不用归位了 
-			if(this.nativePage == this.pageList[this.pageList.length]){
+			if(this.nativePage == this.pageList[this.pageList.length - 1]){
 				return;
 			}
 			var width = document.querySelector('.nav-right-2').clientWidth;	// 视角宽度
