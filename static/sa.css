@@ -15,6 +15,10 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
+/* ajax2加载时的转圈圈样式 */
+.ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
+
+
 
 /* 内容-面板 */
 .c-panel{
@@ -48,6 +52,7 @@ input::-webkit-inner-spin-button {
 .c-item .el-input__inner {
 	border-radius: 0px;
 }
+
 /* 解释 */
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
 /* 按钮去圆角 */
@@ -60,6 +65,9 @@ input::-webkit-inner-spin-button {
 .c-button.el-button--primary:hover{background-color: #067CF3;}
 .c-button.el-button--danger{background-color: #CA4242;}
 .c-button.el-button--danger:hover{background-color: #A00C0C;}
+
+/* 表格里的input */
+.c-table input,.c-add-table input{border-radius: 0px; border: 0px;}
 
 
 /* 分页器的去除圆角 */

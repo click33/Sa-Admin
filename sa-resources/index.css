@@ -25,9 +25,12 @@ html,body{height: 100%; background-color: #EEE;}
 .menu-box-1{width: 220px; height: 100%; overflow-y: auto;}
 .menu-box-2{width: 201px;}
 
-/* 尺寸调整 */
+/* 尺寸调整, 二级和三级的左内边距向右扩大 */
 .el-submenu__title,.el-menu-item{height: 45px !important; line-height: 45px !important;}
-.el-submenu .el-menu-item{height: 40px !important; line-height: 40px !important;}
+.el-submenu .el-menu-item,.el-submenu .el-submenu  .el-submenu__title{height: 40px !important; line-height: 40px !important; padding-left: 4em !important;}
+
+.el-submenu .el-submenu .el-menu-item{padding-left: 5em !important;}
+
 
 /* 隐藏右边框 */
 .el-menu{border: 0px;}

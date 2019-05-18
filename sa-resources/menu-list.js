@@ -35,30 +35,43 @@ var menuList =	[
 	},
 	{
 		id: '2',
+		name: '权限控制',
+		icon: 'el-icon-unlock',
+		childList: [
+			{
+				id: '2-1',
+				name: '角色列表',
+				url: 'sa-html/role/role-list.html'
+			}
+		]
+	},
+	{
+		id: '3',
 		name: '文章管理',
 		icon: 'el-icon-document-copy',
 		childList: [
 			{
-				id: '2-1',
+				id: '3-1',
 				name: '文章列表',
 				url: 'sa-html/article/art-list.html'
 			},
 			{
-				id: '2-2',
+				id: '3-2',
 				name: '文章发表', 
 				url: 'sa-html/article/art-add.html' 
 			}
 		]
 	},
 	{
-		id: '3',
+		id: '4',
 		name: '系统设置',
 		icon: 'el-icon-setting',
 		childList: [
 			{
-				id: '3-1',
+				id: '4-1',
 				name: '服务器设置',
-				url: 'sa-html/cfg/system-cfg.html'
+				url: 'sa-html/cfg/system-cfg.html',
+				info: '对服务器参数的设置'	// 菜单的介绍，在设置角色分配权限时将会用到此字段
 			},
 			
 		]
@@ -84,19 +97,19 @@ var menuList =	[
 		name: '一个隐藏菜单',
 		url: 'https://www.baidu.com/',
 		is_blank: true,
-		is_show: false	// 隐藏
+		is_show: false// 隐藏
 	},
 	//  ========= 示例 指定parent_id，将被添加到其指定的父菜单childList里 ================
 	{
-		id: '3-2',
+		id: '4-3',
 		name: '404页面',
 		url: 'sa-html/cfg/404.html',
-		parent_id: 3	// 父菜单id 
+		parent_id: 4	// 父菜单id 
 	},
 	{
-		id: '3-4',
+		id: '4-4',
 		name: '500页面',
 		url: 'sa-html/cfg/500.html',
-		parent_id: 3	// 父菜单id 
+		parent_id: 4	// 父菜单id 
 	}
 ]

@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <title>角色列表</title>
+
+      
+		<!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css"> 
+
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="../../static/sa.js"></script>
+		
+	
+	</head>
+	<body>
+		<div class="vue-box">
+			
+			<!-- 参数栏 -->
+			<div class="c-panel">
+				<div class="c-title">检索参数</div>
+				<el-form ref="form">
+					<div class="c-item">
+						<label class="c-label">用户昵称：</label>
+						<el-input size="small" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+					</div>
+				</el-form>
+			</div>
+			
+			<!-- 数据栏 -->
+			<div class="c-panel c-table">
+				<div class="c-title">列表</div>
+	
+				<el-table :data="dataList" size="small" border style="width: 100%">
+					
+					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
+					
+					<el-table-column label="角色名称">
+						<template slot-scope="scope">
+							<el-input size="small" v-model="scope.row.role_name"></el-input>
+						</template>
+					</el-table-column>
+					
+					<el-table-column label="责任描述">
+						<template slot-scope="scope">
+							<el-input size="small" v-model="scope.row.role_info"></el-input>
+						</template>
+					</el-table-column>
+					
+					<el-table-column label="是否锁定" title="锁定的角色为系统维持正常运行的重要角色，不可删除">
+						<template slot-scope="scope">
+							{{scope.row.is_lock == 1 ? '是' : '否'}}
+						</template>
+					</el-table-column>
+					
+					<el-table-column label="创建日期">
+						<template slot-scope="scope">
+							{{sa.$top.forDate(scope.row.create_time)}}
+						</template>
+					</el-table-column>
+					
+					<el-table-column prop="address" label="操作" width="220px">
+						<template slot-scope="scope">
+							<el-button type="text" size="small" @click="update(scope.row)">
+								<span :style="scope.row.is_update ? 'color: red;' : ''">修改</span>
+							</el-button>
+							<el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
+							<el-button type="text" size="small" @click="menu_setup(scope.row)">分配权限</el-button>
+						</template>
+					</el-table-column>
+					
+				</el-table>
+	
+			</div>
+			
+			
+			
+			<!-- 添加 -->
+			<div class="c-panel">
+				<h4 class="c-title">添加</h4>
+	
+				<el-table class="c-add-table" :data="[{}]" size="small" border style="width: 100%">
+					
+					<el-table-column prop="id" label="编号" width="90px" >
+						<template slot-scope="scope">
+							<el-input size="small" v-model="addData.id"></el-input>
+						</template>
+					</el-table-column>
+					
+					<el-table-column label="名称">
+						<template slot-scope="scope">
+							<el-input size="small" v-model="addData.role_name"></el-input>
+						</template>
+					</el-table-column>
+					
+					<el-table-column label="责任描述">
+						<template slot-scope="scope">
+							<el-input size="small" v-model="addData.role_info"></el-input>
+						</template>
+					</el-table-column>
+					
+					<el-table-column label="是否锁定" title="锁定的角色为系统维持正常运行的重要角色，不可删除">
+						<template slot-scope="scope">
+							{{scope.row.is_lock == 1 ? '是' : '否'}}
+						</template>
+					</el-table-column>
+					
+					<el-table-column prop="address" label="操作">
+						<template slot-scope="scope">
+							<el-button type="text" size="small" @click="add">添加</el-button>
+						</template>
+					</el-table-column>
+				</el-table>
+				<br>
+			</div>
+			
+			
+			
+			
+			<br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br />
+			
+			
+			
+			
+			
+			
+			
+	
+			
+		</div>
+		
+		<script type="text/javascript">
+			// 模拟数据
+			var dataList = [{
+				"id": 1,
+				"role_name": "普通用户",
+				"role_info": "普通用户",
+				"is_lock": 1,
+				"create_time": "2018-08-17T02:33:14.000+0000"
+			}, {
+				"id": 11,
+				"role_name": "顶级管理员",
+				"role_info": "最高权限",
+				"is_lock": 1,
+				"create_time": "2018-08-17T02:33:14.000+0000"
+			}, {
+				"id": 101,
+				"role_name": "超级管理员",
+				"role_info": "最高权限",
+				"is_lock": 2,
+				"create_time": "2018-08-17T03:24:01.000+0000"
+			}]
+			
+			
+		</script>
+
+        <script>
+
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					sa: sa, 	// 超级对象
+					p: {	// 查询参数 
+						name: '',
+					},
+					dataList: [],	// 数据集合
+					addData: {		// 添加信息
+						id: 0, 
+						role_name: '角色名称',
+						role_info: '责任描述',
+						is_lock: 2,
+						create_time: new Date(),
+						is_update: false,
+					}
+				},
+				methods: {
+					// 刷新
+					f5: function(){
+						sa.ajax2('/role/getList', {}, function(res){
+							this.dataList = sa.$top.listAU(dataList);	// 数据
+						}.bind(this));
+					},
+					// 修改
+					update: function (data) {
+						var data2 = sa.$top.copyJSON(data);
+						data2.create_time = undefined;
+						sa.ajax2('/role/update', data2, function(res){
+							layer.msg('修改成功');
+							data.is_update = false;
+						})
+					},
+					// 删除
+					del: function (data) {
+						if(data.is_lock == 1){
+							return layer.alert('此角色是维持系统正常运行的重要角色，已被锁定，不可删除');
+						}
+						layer.confirm('是否删除，此操作不可撤销',{},function(){
+							sa.ajax2('/role/delete',{id: data.id},function(res){
+								sa.$top.arrayDelete(app.dataList, data);
+								layer.msg('删除成功');
+							})
+						})
+					},
+					// 添加
+					add: function () {
+						var data = sa.$top.copyJSON(this.addData);
+						sa.ajax2('/role/add', data, function(res){
+							layer.alert('添加成功', {}, function(){
+								layer.closeAll();
+								app.dataList.push(data);
+							});
+						})
+					}, 
+					// 修改菜单
+					menu_setup: function(data){
+						layer.open({
+							type: 2,
+							title: '为 ['+data.role_name+'] 分配权限',
+							shadeClose: true,
+							shade: 0.8,
+							area: ['70%', '100%'],
+							content: 'menu-setup.html?role_id=' + data.id
+						}); 
+					}
+				},
+				created: function(){
+					this.f5();
+				}
+			})
+			
+			
+			// 监控.bxd input，改变值时有些变化
+			$('.c-table').bind('input', function(){
+				var i = $(document.activeElement).parents('tr').index();
+	        	app.dataList[i].is_update = true;
+			})
+
+			
+		
+		</script>
+	
+	</body>
+</html>

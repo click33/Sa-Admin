@@ -13,6 +13,11 @@
 		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		<script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="../../static/sa.js"></script>
+		<script src="data-list.js"></script>
 		<style>
 
 			.c-item .c-label{width: 7em;}
@@ -54,8 +59,6 @@
 						<label class="c-label">文章内容：</label>
 						<div class="editor-box">
 							<div id="editor">
-								<p>爱是淡淡的忧伤</p>
-								<p>回味初识的那一段深情爱恋，清晰的面容，熟悉的身影，悦耳的声音，在某个深夜恍然想起。那是一个深秋的夜晚，我们相拥而坐， 依着凉亭相互取暖，静静的看着，挂满露珠的秋。是否回忆总是定格在那座深秋的城，也许你曾经爱过我，就不从忘记，也许我爱过你，也不会忘记，只是那深秋的夜，终就散落在磋跎的岁月之中。</p>
 								
 							</div>
 						</div>
@@ -98,14 +101,14 @@
 			// 创建一个空的 m 
 			function create_m() {
 				return {
-					title: '爱是淡淡的忧伤',
-					content: '',
+					title: '江雪',
+					content: '<p>千山鸟飞绝，万径人踪灭。</p><p>孤舟蓑笠翁，独钓寒江雪。</p>',
 					is_public: 1
 				}
 			}
 			
 			// 创建编辑器
-			function create_editor() {
+			function create_editor(content) {
 				var E = window.wangEditor
 				window.editor = new E('#editor');
 
@@ -114,30 +117,79 @@
 					'justify', 'quote', 'emoticon', 'image', 'table', 'code', 'undo', 'redo' // 重复
 				]
 				editor.customConfig.debug = true; // debug模式
-				//editor.customConfig.uploadImgServer = urls.fileUrl + '/upload/img';	// 上传图片接口
 				editor.customConfig.uploadFileName = 'file'; // 图片流name
 				editor.customConfig.withCredentials = true; // 跨域携带cookie
 				editor.customConfig.uploadImgShowBase64 = true   	// 使用 base64 保存图片
 				editor.create(); // 创建
+				editor.txt.html(content);	// 为编辑器赋值
 			}
 			
-
 
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
+					id: sa.$top.getUrlArgs('id', 0),	// 从url中获取传值 
 					m: create_m(),
 				},
 				methods: {
 					// 提交 
 					ok: function() {
-						this.$message('发表成功');
-					}
+						// 开始增加或修改
+						if(this.id == 0) {
+							sa.ajax2('/url/api', this.m, function(res) {
+								layer.alert('增加成功'); 
+								this.m = create_m();
+								editor.txt.html("");	// 图文介绍
+							}.bind(this));
+						} else {
+							sa.ajax2('/url/api', this.m, function(res){
+								layer.alert('修改成功', {}, function(){
+									parent.app.f5();
+									parent.layer.closeAll('iframe');
+								}.bind(this)); 
+							}.bind(this));
+						}
+
+					},
 				},
 				mounted: function() {
-					create_editor();
+					
+					// 如果是添加
+					if(this.id == 0){
+						create_editor(this.m.content);		// 创建富文本编辑器
+					} else {
+						// id 非 0 代表 是要修改 
+						dataList.forEach(function(item) {
+							if(item.id == this.id) {
+								this.m = item;
+							}
+						}.bind(this));
+						create_editor(this.m.content);		// 创建富文本编辑器
+					}
+
 				}
 			})
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 
 		</script>

@@ -7,6 +7,7 @@ var dataList = [
 		"like_count": 55,
 		"share_count": 13,
 		"create_username": '省长',
+		"is_public": 1,
 		"create_time": "2019-05-12"
 	}, 
 	{
@@ -17,6 +18,7 @@ var dataList = [
 		"like_count": 12,
 		"share_count": 6,
 		"create_username": '小言',
+		"is_public": 1,
 		"create_time": "2019-05-12"
 	}, 
 	{
@@ -27,6 +29,7 @@ var dataList = [
 		"like_count": 22,
 		"share_count": 15,
 		"create_username": 'fan哈',
+		"is_public": 2,
 		"create_time": "2019-05-10"
 	},
 	{
@@ -37,6 +40,7 @@ var dataList = [
 		"like_count": 122,
 		"share_count": 95,
 		"create_username": '小丸子',
+		"is_public": 2,
 		"create_time": "2019-05-5"
 	},
 	{
@@ -47,6 +51,7 @@ var dataList = [
 		"like_count": 12,
 		"share_count": 5,
 		"create_username": '不值一提',
+		"is_public": 1,
 		"create_time": "2019-05-1"
 	}
 ]

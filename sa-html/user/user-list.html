@@ -13,6 +13,12 @@
 		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="../../static/kj/laydate/laydate.js"></script>
+		<script src="../../static/sa.js"></script>
+		<script src="data-list.js"></script>
+		
 		<style type="text/css">
 			
 		</style>
@@ -23,7 +29,7 @@
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
 		
-		<div class="vue-box">
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			
 			<!-- 参数栏 -->
 			<div class="c-panel">
@@ -31,7 +37,7 @@
 				<el-form ref="form">
 	
 					<div class="c-item">
-						<label class="c-label">昵称：</label>
+						<label class="c-label">用户昵称：</label>
 						<el-input size="small" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
 					</div>
 					
@@ -51,14 +57,21 @@
 					
 					<br />
 					<div class="c-item">
-						<label class="c-label">排序：</label>
+						<label class="c-label">注册日期：</label>
+						<el-input size="small" v-model="p.start_time" class="start_time"></el-input>
+						至
+						<el-input size="small" v-model="p.end_time" class="end_time"></el-input>
+					</div>
+					
+					<br />
+					<div class="c-item">
+						<label class="c-label">排序方式：</label>
 						<el-radio-group v-model="p.sort_type">
 							<el-radio :label="1">注册时间</el-radio>
 							<el-radio :label="2">最近登录</el-radio>
 							<el-radio :label="3">登陆次数</el-radio>
 							<el-radio :label="4">最近签到</el-radio>
 							<el-radio :label="5">签到次数</el-radio>
-							<el-radio :label="6">魅力值</el-radio>
 						</el-radio-group>
 					</div>
 
@@ -91,9 +104,17 @@
 
 					<el-table-column label="注册方式" prop="create_type"></el-table-column>
 					<el-table-column label="注册于" prop="create_time"></el-table-column>
+					<el-table-column label="状态">
+						<template slot-scope="scope">
+							<span style="color: green;" v-if="scope.row.status == 1">正常</span>
+							<span style="color: red;" v-if="scope.row.status == 2">禁用</span>
+						</template>
+					</el-table-column>
+
 					<el-table-column prop="address" label="操作">
 						<template slot-scope="scope">
-							<el-button type="primary" class="c-button" icon="el-icon-edit" @click="dongjie(scope.row)">冻结</el-button>
+							<el-button type="primary" class="c-button" icon="el-icon-edit" @click="dongjie(scope.row)" v-if="scope.row.status == 1">禁用</el-button>
+							<el-button type="primary" class="c-button" icon="el-icon-edit" @click="jiejin(scope.row)" v-if="scope.row.status == 2">解禁</el-button>
 							<el-button type="danger" class="c-button" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
 						</template>
 					</el-table-column>
@@ -112,9 +133,13 @@
 			</div>
 			
 			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
-				Layer：<el-link type="primary" href="http://layer.layui.com/" target="_blank">
+				layer：<el-link type="primary" href="http://layer.layui.com/" target="_blank">
 					一个可以让你想到即可做到的JavaScript弹窗（层）解决方案
-				</el-link>
+				</el-link> <br>
+				laydate：<el-link type="primary" href="https://www.layui.com/laydate/" target="_blank">
+					世界上最好用的日期选择插件 
+				</el-link> <br>
+				
 			</div>
 			
 			<br><br><br><br><br><br><br><br><br>
@@ -122,19 +147,40 @@
 			
 		</div>
 		
-		
-		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
-		<script src="data-list.js"></script>
 		<script type="text/javascript">
 			
-			new Vue({
+			
+			// 渲染日期选择插件 
+			function init_laydate() {
+				// 开始日期
+				laydate.render({
+					elem: '.start_time input',
+					type: 'date',
+					done: function(value, date){
+						app.p.start_time = value;
+					}
+				});
+				// 结束日期
+				laydate.render({
+					elem: '.end_time input',
+					type: 'date',
+					done: function(value, date){
+						app.p.end_time = value;
+					}
+				});
+			}
+			
+			
+			
+			var app = new Vue({
 				el: '.vue-box',
 				data: {
 					p: {	// 查询参数 
 						username: '',
 						create_type: 0,
 						sort_type: 1,
+						start_time: sa.$top.forDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), 	// 本月一号 
+						end_time: sa.$top.forDate(new Date()),
 					},
 					page: {	// 分页信息
 						pageNo: 1,
@@ -145,15 +191,21 @@
 				},
 				methods: {
 					// 数据刷新
-					f5: function(pageNo) {
-						this.$message('数据刷新, 参数：' + JSON.stringify(this.p));
+					f5: function() {
+						sa.ajax2('/user/getList', this.p, function(res){
+							// this.dataList = res.data;	// 数据
+							// this.page = res.page;		// 分页 
+							this.$message('查询：' + JSON.stringify(this.p));
+						}.bind(this));
 					},
 					// 分页刷新
 					pageNo_f5: function(pageNo) {
 						this.$message('切换当前页：' + pageNo);
+						this.f5();
 					},
 					pageSize_f5: function(pageSize) {
 						this.$message('切换页大小：' + pageSize);
+						this.f5();
 					},
 					// 预览图片
 					pre_img: function(data) {
@@ -181,15 +233,33 @@
 					// 删除
 					del: function(data) {
 						layer.confirm('是否删除，此操作不可撤销', {}, function() {
-							var index = this.dataList.indexOf(data);
-							this.dataList.splice(index, 1);
-							layer.msg('删除成功');
+							sa.ajax2('url', {}, function(res) {
+								sa.$top.arrayDelete(this.dataList, data);
+								layer.msg('删除成功');
+							}.bind(this))
 						}.bind(this));
 					},
 					// 账号冻结
-					dongjie: function() {
-						this.$message({message: '冻结成功', type: 'success'});
+					dongjie: function(data) {
+						layer.confirm('冻结此用户？', {}, function() {
+							sa.ajax2('url', {}, function(res) {
+								data.status = 2;
+								layer.msg('冻结成功');
+							}.bind(this))
+						}.bind(this));
+					},
+					// 解禁 
+					jiejin: function(data) {
+						layer.confirm('解禁此用户？', {}, function() {
+							sa.ajax2('url', {}, function(res) {
+								data.status = 1;
+								layer.msg('解禁成功');
+							}.bind(this))
+						}.bind(this));
 					}
+				},
+				mounted:function(){
+					init_laydate();
 				}
 			})
 			

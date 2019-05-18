@@ -11,6 +11,11 @@
 		<!-- 所有的 js 资源 -->
 		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="../../static/sa.js"></script>
+		<script src="data-list.js"></script>
 
 	</head>
 	<body>
@@ -89,9 +94,6 @@
 
 		</div>
 
-		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
-		<script src="data-list.js"></script>
 		<script>
 			var app = new Vue({
 				el: '.vue-box',
@@ -108,27 +110,41 @@
 				},
 				methods: {
 					// 数据刷新
-					f5: function(pageNo) {
-						this.$message('数据刷新, 参数：' + JSON.stringify(this.p));
+					f5: function() {
+						sa.ajax2('/VocArticle/getList', this.p, function(res){
+							// this.dataList = res.data;	// 数据
+							// this.page = res.page;		// 分页 
+						}.bind(this));
 					},
 					// 分页刷新
 					pageNo_f5: function(pageNo) {
 						this.$message('切换当前页：' + pageNo);
+						this.f5();
 					},
 					pageSize_f5: function(pageSize) {
 						this.$message('切换页大小：' + pageSize);
+						this.f5();
 					},
 					// 删除
 					del: function(data) {
 						layer.confirm('是否删除，此操作不可撤销', {}, function() {
-							var index = this.dataList.indexOf(data);
-							this.dataList.splice(index, 1);
-							layer.msg('删除成功');
+							sa.ajax2('url', {}, function(res) {
+								sa.$top.arrayDelete(this.dataList, data);
+								layer.msg('删除成功');
+							}.bind(this))
 						}.bind(this));
 					},
 					// 修改
 					update: function(data) {
-						this.$message({message: '修改', type: 'success'});
+						// 弹出面板 
+						layer.open({
+							type: 2,	
+							title: '文章修改',	// 标题 
+							shadeClose: true,	// 是否点击遮罩关闭
+						  	shade: 0.8,		// 遮罩透明度 
+						  	area: ['80%', '100%'],	// 大小
+						  	content: 'art-add.html?id=' + data.id	// 传值 
+						}); 
 					}
 
 				},

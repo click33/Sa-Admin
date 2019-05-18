@@ -14,6 +14,7 @@ var dataList = [{
 		],
 		"create_type": "账号注册",
 		"create_time": "2019-02-09",
+		"status": 1
 
 	},
 	{
@@ -32,6 +33,7 @@ var dataList = [{
 		],
 		"create_type": "账号注册",
 		"create_time": "2019-02-11",
+		"status": 1
 
 	},
 	{
@@ -51,6 +53,7 @@ var dataList = [{
 		],
 		"create_type": "账号注册",
 		"create_time": "2019-02-11",
+		"status": 2
 
 	},
 	{
@@ -69,6 +72,7 @@ var dataList = [{
 		],
 		"create_type": "账号注册",
 		"create_time": "2019-02-13",
+		"status": 2
 
 	},
 	{
@@ -86,6 +90,7 @@ var dataList = [{
 		],
 		"create_type": "邮箱注册",
 		"create_time": "2019-02-13",
+		"status": 1
 
 	},
 	{
@@ -106,6 +111,7 @@ var dataList = [{
 		],
 		"create_type": "邮箱注册",
 		"create_time": "2019-03-13",
+		"status": 1
 	},
 	{
 		"id": 12007,
@@ -122,6 +128,7 @@ var dataList = [{
 		],
 		"create_type": "邮箱注册",
 		"create_time": "2019-03-16",
+		"status": 1
 	},
 	{
 		"id": 12008,
@@ -140,6 +147,7 @@ var dataList = [{
 		],
 		"create_type": "邮箱注册",
 		"create_time": "2019-03-18",
+		"status": 1
 	},
 	{
 		"id": 12009,
@@ -156,6 +164,7 @@ var dataList = [{
 		],
 		"create_type": "邮箱注册",
 		"create_time": "2019-03-22",
+		"status": 1
 	},
 	{
 		"id": 12010,
@@ -168,5 +177,6 @@ var dataList = [{
 		],
 		"create_type": "手机号呢注册",
 		"create_time": "2019-03-22",
+		"status": 1
 	},
 ]

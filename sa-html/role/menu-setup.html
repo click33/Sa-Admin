@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <title>菜单分配</title>
+
+         <!-- 所有的 css 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> 
+		<link rel="stylesheet" href="../../static/sa.css"> 
+		
+		<!-- 所有的 js 资源 -->
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="../../static/sa.js"></script>
+
+        <style>
+			body,.el-tree{
+				background-color: #F5F5F5;
+			}
+			.el-tree-node{margin: 0.15em 0 !important;}
+		    
+        </style>
+	
+	</head>
+	<body>
+		
+		
+		<div class="vue-box">
+			
+			
+			<!-- 表格 -->
+			<div class="c-panel">
+				<div class="c-title">所有权限</div>
+		        <!-- 此扩展能递归渲染一个权限树，点击深层次节点，父级节点中没有被选中的节点会被自动选中，单独点击父节点，子节点会全部 选中/去选中 -->
+				<el-tree
+					ref="tree"
+					:data="dataList"
+					show-checkbox 
+					node-key="id"
+					:default-expand-all="true"
+					:default-checked-keys="select_list" 
+					:expand-on-click-node="false"
+					:check-on-click-node="true"
+					:check-strictly="true"
+					@node-click="node_click"
+					>
+					<span class="custom-tree-node" slot-scope="{ node, data }">
+						<span>{{ data.name }}</span>
+						<span style="color: #999;" v-if="data.is_show == false">(隐藏)</span>
+						<span style="color: #999;" v-if="data.info">&emsp;———— {{data.info}} </span>
+					</span>
+				</el-tree>
+
+				<!-- 
+					default-expand-all  展开所有
+					default-checked-keys  默认选中
+				 -->
+
+				<br>
+				<div class="in-fox">
+					<label class="if-label" style="width: 1em;"></label>
+					<el-button type="primary" icon="el-icon-search" size="small" @click="ok">确定</el-button>
+				</div>
+				
+	
+			</div>
+			
+			
+			
+			
+			
+			<br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br />
+			
+			
+			
+			
+		</div>
+		
+		<!-- 模拟数据 -->
+		<script src="../../sa-resources/menu-list.js"></script>
+		<script type="text/javascript">
+			
+		</script>
+
+        <script>
+		
+			var role_id = sa.$top.getUrlArgs('role_id');
+			
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					dataList: [],	// 数据集合 
+					select_list: [],	// 默认选中
+				},
+				methods: {
+					// 保存
+					ok: function(){
+						var str = '';
+						this.$refs.tree.getCheckedKeys().forEach(function(ts){
+							str += '&ids=' + ts;
+						})
+						
+						var url = '/MRM/updateRoleMenu?role_id=' + role_id + str;
+						sa.ajax2(url,{},function (res) {
+							layer.alert('成功', {}, function(){
+								if(parent != window){
+									parent.layer.closeAll('iframe');
+								}
+								layer.closeAll();
+							});
+						})
+					},
+					// 点击回调, 处理其子节点跟随父节点的选中
+					node_click: function(node) {
+						var is_select = this.$refs.tree.getCheckedKeys().indexOf(node.id) != -1;	// 此节点现在是否被选中 
+						if(node.children){
+							node.children.forEach(function(item) {
+								this.$refs.tree.setChecked(item.id, is_select);
+								// 递归
+								if(item.children) {
+									this.node_click(item);
+								}
+							}.bind(this))
+						}
+					}
+				},
+				created: function(){
+					
+					// 全部
+					sa.ajax2('/SysMenu/getList', this.p, function(res){
+						menuList = arrayToTree(menuList);	// 一维转tree 
+						menuList = refMenuList(menuList);	// 属性处理 
+						this.dataList = menuList;	// 数据  
+						this.select_list = ['11','1', '1-1', '1-2', '1-3', '1-3-1', '2', '2-1', '3', '3-1', '3-2'];	// 选中的列表 
+					}.bind(this));
+					
+					
+				}
+			})
+			
+			
+			
+			
+			// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
+			function arrayToTree(menu_list) {
+				for (var i = 0; i < menu_list.length; i++) {
+					var menu = menu_list[i];
+					// 添加到其指定的父菜单的childList
+					if(menu.parent_id) {
+						var parent_menu = getMenuById(menu_list, menu.parent_id);
+						if(parent_menu) {
+							parent_menu.childList = parent_menu.childList || [];
+							parent_menu.childList.push(menu);
+							menu_list.splice(i, 1);	// 从一维中删除 
+							i--;
+						}
+					}
+				}
+				return menu_list;
+			}
+			
+			
+			// 将 menu_list 处理一下 
+			function refMenuList(menu_list) {
+				for (var i = 0; i < menu_list.length; i++) {
+					var menu = menu_list[i];
+					// 有子项的递归处理 
+					if(menu.childList){
+						menu.children = menu.childList;
+						refMenuList(menu.childList);
+					}
+				}
+				return menu_list;
+			}
+			
+			
+			
+			// 返回指定 index 的menu
+			function getMenuById(menuList, id) {
+				for (var i = 0; i < menuList.length; i++) {
+					var menu = menuList[i];
+					if(menu.id + '' == id + '') {
+						return menu;
+					}
+					// 如果是二级或多级 
+					if(menu.childList) {
+						var menu2 = getMenuById(menu.childList, id);
+						if(menu2 != null) {
+							return menu2;
+						}
+					}
+				}
+				return null;
+			}
+			
+			
+			
+		
+		
+		</script>
+	
+	</body>
+</html>

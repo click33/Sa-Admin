@@ -13,9 +13,13 @@
 		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="../../static/sa.js"></script>
+		
 		<style type="text/css">
 			.echarts-div{
-				height: 430px;
+				height: 450px;
 			}
 
 		</style>
@@ -55,7 +59,7 @@
 			</div>
 			
 			<!-- 数据栏 -->
-			<div style="display: flex;">
+			<div style="display: flex; margin-top: -1em;">
 				<div class="c-panel" style="flex: 4; margin-right: 0;">			
 					<div class="c-title">列表</div>
 					<div class="echarts-div" id='e-type'></div>
@@ -98,8 +102,10 @@
 				methods: {
 					// 数据刷新
 					f5: function() {
-						this.updateEchartsType();
-						this.updateEchartsMonth();
+						sa.ajax2('/url', this.p, function(res){
+							this.updateEchartsType();
+							this.updateEchartsMonth();
+						}.bind(this));
 					},
 					// 更新Echarts, 每种方式注册量
 					updateEchartsType: function() {
