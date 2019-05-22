@@ -9,6 +9,7 @@ var menuList =	[
 		id: '1',
 		name: '用户管理',
 		icon: 'el-icon-user',
+		info: '对用户列表、添加、统计等等...',
 		childList: [
 			{
 				id: '1-1',
@@ -37,11 +38,17 @@ var menuList =	[
 		id: '2',
 		name: '权限控制',
 		icon: 'el-icon-unlock',
+		info: '对系统角色权限的分配等设计，敏感度较高，请谨慎授权',
 		childList: [
 			{
 				id: '2-1',
 				name: '角色列表',
 				url: 'sa-html/role/role-list.html'
+			},
+			{
+				id: '2-2',
+				name: '菜单列表',
+				url: 'sa-html/role/menu-list.html'
 			}
 		]
 	},
@@ -49,6 +56,7 @@ var menuList =	[
 		id: '3',
 		name: '文章管理',
 		icon: 'el-icon-document-copy',
+		info: '对文章的增删改查、维护',
 		childList: [
 			{
 				id: '3-1',
@@ -66,6 +74,7 @@ var menuList =	[
 		id: '4',
 		name: '系统设置',
 		icon: 'el-icon-setting',
+		info: '对系统运行时的一些参数的设置',
 		childList: [
 			{
 				id: '4-1',

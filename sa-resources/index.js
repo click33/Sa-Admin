@@ -8,7 +8,7 @@ var homePage = {
 var sp = new Vue({
 	el: '.app',
 	data: {
-		version: 'v1.0.5',		// 当前版本
+		version: 'v1.0.6',		// 当前版本
 		title: 'SA-后台模板',				// 页面标题  
 		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 

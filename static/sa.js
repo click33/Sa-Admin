@@ -133,7 +133,7 @@ sa.ajax2 = function(url, data, success200, cfg){
 			
 			// 如果相应的处理函数存在
 			if(cfg['success' + res.code] != undefined) {
-				return  cfg['success' + res.code]();
+				return  cfg['success' + res.code](res);
 			}
 			
 			layer.alert('未知状态码：' + JSON.stringify(res));
