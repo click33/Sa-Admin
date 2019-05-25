@@ -12,7 +12,7 @@ var dataList = [{
 }, {
 	"id": 2,
 	"title": "壁纸2",
-	"img_src": "http://imgsrc.baidu.com/forum/pic/item/5a2b2df5e0fe99255ff7151a3aa85edf8cb17187.jpg", 
+	"img_src": "https://color-test.oss-cn-qingdao.aliyuncs.com/sa-admin/46.png", 
 	"type": 1,
 	"link": "",
 	"click_count": 54,
