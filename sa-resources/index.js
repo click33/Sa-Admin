@@ -8,7 +8,7 @@ var homePage = {
 var sp = new Vue({
 	el: '.app',
 	data: {
-		version: 'v1.0.6',		// 当前版本
+		version: 'v1.0.7',		// 当前版本
 		title: 'SA-后台模板',				// 页面标题  
 		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 
@@ -156,7 +156,7 @@ var sp = new Vue({
 		// 右键 刷新
 		right_f5: function() {
 			this.showPage(this.rightPage);	// 先转到
-			var cs = '.iframe' + this.rightPage.id;
+			var cs = '#iframe' + this.rightPage.id;
 			var iframe = document.querySelector(cs);
 			iframe.setAttribute('src', iframe.getAttribute('src')); 
 			this.rightShow = false;		// 隐藏右菜单
@@ -199,9 +199,7 @@ var sp = new Vue({
 		},
 		// 右键 - 新窗口打开
 		right_window_open: function() {
-			var cs = '.iframe' + this.rightPage.id;
-			var iframe = document.querySelector(cs);
-			open(iframe.src); 
+			open(this.rightPage.url); 
 			this.rightShow = false;		// 隐藏右菜单
 		},
 		

@@ -53,7 +53,8 @@ sp.dropList = [		// 头像点击处可操作的选项
 	{
 		name: '退出登录',
 		click: function() {
-			sp.$message('点击了退出登录，你可以参照文档重写此函数');
+			//sp.$message('点击了退出登录，你可以参照文档重写此函数');
+			location="login.html";
 		}
 	}
 ]

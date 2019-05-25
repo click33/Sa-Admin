@@ -6,6 +6,20 @@ var menuList =	[
 		url: 'sa-html/sa-doc.html'
 	},
 	{
+		id: '400',
+		name: '首页设置',
+		icon: 'el-icon-table-lamp',
+		info: '首页的一些设置',
+		childList: [
+			{
+				id: '4-2',
+				name: '轮播图设置',
+				url: 'sa-html/home/swiper.html'
+			},
+			
+		]
+	},
+	{
 		id: '1',
 		name: '用户管理',
 		icon: 'el-icon-user',
@@ -81,7 +95,7 @@ var menuList =	[
 				name: '服务器设置',
 				url: 'sa-html/cfg/system-cfg.html',
 				info: '对服务器参数的设置'	// 菜单的介绍，在设置角色分配权限时将会用到此字段
-			},
+			}
 			
 		]
 	},

@@ -169,7 +169,7 @@
 				<div class="nav-right-3">
 					<span v-for="page in pageList" :key="page.id">
 						<!-- <iframe :src="page.url" :class=" 'iframe' + page.id " v-show="page == nativePage"></iframe> 用v-show会造成每次切换卡片进度条归零的bug -->
-						<iframe :src="page.url" :class=" 'iframe' + page.id " :style="page == nativePage ? 'z-index: 101' : null"></iframe>
+						<iframe :src="page.url" :id=" 'iframe' + page.id " class="iframe" :class="page == nativePage ? 'iframe-native' : null"></iframe>
 					</span>
 				</div>
 				

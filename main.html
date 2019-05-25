@@ -56,7 +56,7 @@
 
 				<div class="saoma" style="width: 20%; float: left; margin-right: 4%;">
 					<el-divider content-position="left">
-						<big><big>移动端扫码体验</big></big>
+						<big><big>扫码加入QQ群交流</big></big>
 					</el-divider>
 					<div style="text-align: center;">
 						<img src="sa-resources/saoma.png" style="width: 80%; ">
@@ -104,10 +104,16 @@
 							<el-link type="primary" href="https://element.eleme.cn/#/zh-CN" target="_blank">UI框架：Element-UI @2.8.2</el-link>
 						</li>
 						<li>
-							<el-link type="primary" href="http://layer.layui.com/" target="_blank">web弹层框架：layer @3.1.1</el-link>
+							<el-link type="primary" href="http://layer.layui.com/" target="_blank">web弹层：layer @3.1.1</el-link>
 						</li>
 						<li>
-							<el-link @click="meile">没了</el-link>
+							<el-link type="primary" href="https://echarts.baidu.com/" target="_blank">图表引擎：ECharts @4.2.1</el-link>
+						</li>
+						<li>
+							<el-link type="primary" href="http://www.wangeditor.com/" target="_blank">富文本编辑器：wangEditor @3.1.1</el-link>
+						</li>
+						<li>
+							<el-link @click="meile">没了：占空</el-link>
 						</li>
 						<li>
 							以上几个框架即使你都没接触过，只要你阅读以下文档，也可以快速上手
@@ -119,25 +125,23 @@
 
 
 			<div class="content-box">
-				<el-divider content-position="left">
-					<big><big>功能介绍</big></big>
-				</el-divider>
-				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em;">
+				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em; width: 40%; float: left; margin-right: 5%;">
+					<el-divider content-position="left">
+						<big><big>功能介绍</big></big>
+					</el-divider> 
 					<ul style="padding-left: 1em; line-height: 1.5em;">
 						
 						<li>
-							架构：无后台代码，纯html模板，可以方便的适配任何后端语言 
+							架构：基于iframe，无后台代码，纯html模板，可以方便的适配任何后端语言
 						</li>
 						<li>
-							菜单树：支持一、二、三级菜单
+							菜单：支持一、二、三级菜单
 						</li>
 						<li>
-							折叠：
-							可以折叠或收缩菜单，在窗口变化时也会自动监听根据窗口大小折叠或收缩菜单，自动响应式
+							折叠： 可以折叠或收缩菜单，在窗口大小变化时也会自动监听根据窗口大小折叠或收缩菜单，自动响应式
 						</li>
 						<li>
-							卡片：
-							可自动堆积卡片，与菜单双向关联，在卡片标签右击可以：刷新、关闭、关闭其它、关闭所有、新窗口打开
+							卡片： 可自动堆积卡片，与菜单双向关联，在卡片标签右击可以：刷新、关闭、关闭其它、关闭所有、新窗口打开。切换卡片时，可自动保留上个卡片的滚动条高度（目前没有见到其它任何一个模板做到这一点，或者说没有任何一个模板注意到这个细节功能点）
 						</li>
 						<li>
 							主题：目前保留四种主题：深蓝、墨绿、银灰、黑绿结合（切换主题时，可自动保存你的喜好，下次打开时仍然有效）
@@ -154,6 +158,31 @@
 						</li>
 					</ul>
 				</div>
+				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em; width: 45%; float: left;">
+					<el-divider content-position="left">
+						<big><big>疑问：</big></big>
+					</el-divider> 
+					
+					<h4>vue、element-ui、layer我都没用过，可以用这个模板吗？</h4>
+					<p style="margin-top: 5px;">
+						可以，sa-admin提供完整彻底的封装，如果你只是使用index.html框架部分，使用时甚至你都不用改动源码，
+						只重写几个属性函数就可以集成到你的项目中，如果你要使用框架内的模板页，则需要对vue等框架有一定的了解
+					</p>
+					
+					<br>
+					<h4>为什么是iframe，而不是SPA？</h4>
+					<p style="margin-top: 5px;">
+						提起iframe，好像就是一个过时的产物，如同上世纪的table布局一样，被div+css毫无保留的替代，
+						我之前也是这么认为的，但是当我真正的了解了iframe后，我逐渐放下了对它的偏见，还有什么技术可以做到：
+						不必借助后端语言才具有的@include指令，不用像webpack、gulp费尽心机搭建一个构建环境，就一个简单的标签，
+						就可以轻松而完美的实现页面模块化编程 
+						<br>
+						基于iframe的模块化页面，一个纯html的前后台分离模式，不必使用任何前端构架工具，
+						一个html编辑器就可以强Lu所有代码，尝试一下，相信我，你会爱上这种开发模式的
+					</p>
+					
+				</div>
+				<div style="clear: both;"></div>
 			</div>
 			
 			<div class="content-box">
@@ -163,6 +192,15 @@
 				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em;">
 					<ul style="padding-left: 1em; line-height: 1.5em;">
 						
+						<div><br></div>
+						
+						<li>
+							<b> <el-tag size="mini">版本 v1.0.7</el-tag></b>
+							&nbsp;&nbsp;2019-5-25
+						</li>
+						<li>优化一些动画效果</li>
+						<li>增加模板页：轮播图管理</li>
+						<li>一些样式优化</li>
 						<div><br></div>
 						
 						<li>

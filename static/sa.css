@@ -15,6 +15,9 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
+/* 居中形式的img */
+.cover-img{object-fit: cover; object-position: 50% 30%;}
+
 /* ajax2加载时的转圈圈样式 */
 .ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
 
@@ -28,6 +31,7 @@ input::-webkit-inner-spin-button {
 	color: #333;
 }
 .c-title{font-weight: bold; line-height: 2em;}
+.c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
 /* 内容-item */
 .c-item {
@@ -65,6 +69,7 @@ input::-webkit-inner-spin-button {
 .c-button.el-button--primary:hover{background-color: #067CF3;}
 .c-button.el-button--danger{background-color: #CA4242;}
 .c-button.el-button--danger:hover{background-color: #A00C0C;}
+.c-button.el-button--success:hover{background-color: #2B9939;}
 
 /* 表格里的input */
 .c-table input,.c-add-table input{border-radius: 0px; border: 0px;}
@@ -74,3 +79,5 @@ input::-webkit-inner-spin-button {
 .c-panel .el-pagination input{
 	border-radius: 0px !important;
 }
+
+

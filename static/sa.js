@@ -336,6 +336,24 @@ sa.ajax2 = function(url, data, success200, cfg){
 		
 		
 		
+		// 封装layer的放大预览img
+		me.bigImg = function(src, w, h) {
+			w = w || '80%';
+			h = h || '80%';
+			var content = '<div style="height: 100%; overflow: hidden !important;">' + 
+				'<img src="' + src + ' " style="width: 100%; height: 100%;" />' + 
+			 '</div>';
+			layer.open({
+			    type: 1,
+			    title: false,
+			    shadeClose: true,
+				closeBtn: 0,
+			    area: [w, h], //宽高
+			    content: content
+			});
+		}
+		
+		
 		
 		
 		// == if 结束
