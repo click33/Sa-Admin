@@ -1,7 +1,7 @@
 /** 公共css */
 *{margin: 0px;padding: 0px;}
 html{font-size: 10px; height: 100%;}
-body{font-size: 1.6rem; height: 100%; background-color: #eeeeee; color: #333;} 
+body{font-size: 1.6rem; height: 100%; background-color: #eeeeee; /* background-color: #FFF; */  color: #333;} 
 a{text-decoration: none;}
 a:hover{}
 /* h1,h2,h3,h4,h5,h6{font-weight: 400;} */
@@ -23,14 +23,19 @@ input::-webkit-inner-spin-button {
 
 
 
+/* vue盒子 */
+.vue-box{padding-bottom: 20px; font-size: 14px;}
+
 /* 内容-面板 */
 .c-panel{
 	margin: 1em;
 	padding: 1em;
 	background-color: #F6F6F6;
+	/* border: 1px #000 solid; */
+	box-shadow: 0 0 1px #ddd;
 	color: #333;
 }
-.c-title{font-weight: bold; line-height: 2em;}
+.c-title{font-weight: bold; line-height: 2em; margin-bottom: 3px;}
 .c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
 /* 内容-item */

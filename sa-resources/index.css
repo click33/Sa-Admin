@@ -56,6 +56,12 @@ html,body{height: 100%; background-color: #EEE;}
 .user-avatar{width: 30px; height: 30px; border-radius: 50%; vertical-align: middle;}
 .user-info .user-name{font-size: 0.9em;} 
 
+
+/*800之下*/
+@media(max-width: 800px) {
+	.tools-right{display: none;}
+}
+
 /* 第二行建筑物 */
 .nav-right-2{height: 35px; position: relative; z-index: 110; box-shadow: 0 2px 2px #CCC;}
 .nav-right-2>div{height: 100%; position: absolute;}
@@ -118,7 +124,8 @@ html,body{height: 100%; background-color: #EEE;}
 
 /* 菜单折叠时 部分元素隐藏 */
 .fold .nav-title,
-.fold .menu-name
+.fold .menu-name,
+.fold .el-submenu__icon-arrow
 {display: none;}
 
 /* 折叠时悬浮菜单样式，防止透明 */
