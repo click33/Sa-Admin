@@ -31,6 +31,12 @@
 			location.href = "index.html";
 		}
 		
+		document.querySelector('.button2').onclick = function() {
+			if(parent != window) {
+				parent.layer.closeAll();
+			}
+		}
+		
 		
 		// 监控回车
     	$("[name=password]").bind("keypress",function(e){
@@ -39,6 +45,10 @@
 		    	$("#btn-login").click();
 		    }
 		});  
+		
+		
+		
+		
 	
 	</script>
 

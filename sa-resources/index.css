@@ -119,7 +119,7 @@ html,body{height: 100%; background-color: #EEE;}
 
 /* 减少一些不必要的动画过渡，提高流畅性，(造成缺点：折叠展开时，右侧会有一些width闪烁的现象) */
 .nav-left,.nav-right iframe{transform: none;}
-.nav-right{transition: left 0.2s;}
+/* .nav-right{transition: left 0.2s;} */
 .nav-right iframe{transform: none;}
 
 /* 菜单折叠时 部分元素隐藏 */
