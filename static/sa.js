@@ -97,7 +97,7 @@ sa.ajax2 = function(url, data, success200, cfg){
 	}
 	
 	// 加载用户配置
-	cfg = sa.$top.extendJson(cfg, defaultCfg);
+	cfg = sa.$util.extendJson(cfg, defaultCfg);
 	
 	
 	// 日志
@@ -159,6 +159,13 @@ sa.ajax2 = function(url, data, success200, cfg){
  */
 sa.ajax2 = function(url, data, success200, cfg){
 	
+	// 如果是简写模式
+	if(typeof data === 'function'){
+		cfg = success200;
+		success200 = data;
+		data = {};
+	}
+	
 	// 爱的魔力转圈圈
 	var load = layer.msg('正在努力加载...', {icon: 16, shade: 0.01, time: 1000 * 20, skin: 'ajax-layer-load' });
 	
@@ -185,14 +192,14 @@ sa.ajax2 = function(url, data, success200, cfg){
 })();
 
 
-// ===========================  $top 常用util函数封装   ======================================= 
+// ===========================  $util 常用util函数封装   ======================================= 
 
 // 共用js代码库
 (function () {
 	
 	// 超级对象
     var me={};
-    sa.$top = me;
+    sa.$util = me;
 	
 	
 	// ===========================  常用util函数封装   ======================================= 
@@ -335,23 +342,6 @@ sa.ajax2 = function(url, data, success200, cfg){
 		}
 		
 		
-		
-		// 封装layer的放大预览img
-		me.bigImg = function(src, w, h) {
-			w = w || '80%';
-			h = h || '80%';
-			var content = '<div style="height: 100%; overflow: hidden !important;">' + 
-				'<img src="' + src + ' " style="width: 100%; height: 100%;" />' + 
-			 '</div>';
-			layer.open({
-			    type: 1,
-			    title: false,
-			    shadeClose: true,
-				closeBtn: 0,
-			    area: [w, h], //宽高
-			    content: content
-			});
-		}
 		
 		
 		
@@ -576,6 +566,136 @@ sa.ajax2 = function(url, data, success200, cfg){
     
 })();
 
+
+
+// ===========================  $fast 对layer框架，以及一些快速crud的一些常用操作的封装  ======================================= 
+(function(){
+	
+	// 超级对象
+    var me={};
+    sa.$fast = me;
+	
+	if(true) {
+		
+		// 封装layer的放大预览img
+		me.showImage = function(src, w, h) {
+			w = w || '80%';
+			h = h || '80%';
+			var content = '<div style="height: 100%; overflow: hidden !important;">' + 
+				'<img src="' + src + ' " style="width: 100%; height: 100%;" />' + 
+			 '</div>';
+			layer.open({
+			    type: 1,
+			    title: false,
+			    shadeClose: true,
+				closeBtn: 0,
+			    area: [w, h], //宽高
+			    content: content
+			});
+		}
+		
+		// 封装 layer的 弹出式iframe窗口 
+		// 标题，地址，宽，高 
+		me.showIframe = function(title, url, w, h) {
+			// 参数修正
+			w = w || '95%'; 
+			h = h || '95%'; 
+			// 弹出面板 
+			layer.open({
+				type: 2,	
+				title: title,	// 标题 
+				// shadeClose: true,	// 是否点击遮罩关闭
+				maxmin: true, // 显示最大化按钮
+			  	shade: 0.8,		// 遮罩透明度 
+				scrollbar: false,	// 屏蔽掉外层的滚动条
+				moveOut: true,		// 是否可拖动到外面
+			  	area: ['95%', '95%'],	// 大小
+			  	content: url	// 传值 
+			}); 
+		}
+		
+		
+		// 返回一个 初始化的 Page 对象
+		me.getPage = function() {
+			return {	
+				pageNo: 1,	// 当前页 
+				pageSize: 10,	// 页大小 
+				count: 10			// 数据总数 
+			}
+		}
+		
+		// 封装的f5函数，接受一个符合sa-admin标准的curd型 Vue对象
+		// vue对象，拉取数据的接口地址 , 是否初始化pageNo
+		me.fast_f5 = function(app, api_url, isPage) { 
+			// 参数去空、拼接分页 
+			var p = sa.$util.removeNull(app.p);		
+			if(app.page) {
+				if(isPage == true){
+					p.pageNo = app.page.pageNo;
+				}
+				p.pageSize = app.page.pageSize;
+			}
+			// 开始请求，并赋值 
+			sa.ajax2(api_url, p, function(res){
+				app.dataList = sa.$util.listAU(res.data);	// 数据
+				app.page = res.page;		// 分页 
+			}, {msg: '正在刷新...'});
+		}
+		
+		// 封装数据表格中，标准流程的数据删除（先询问，再删除）
+		// 接口地址，要删除的集合，要删除的元素
+		me.fastDelete = function(api_url, dataList, data) {
+			layer.confirm('是否删除，此操作不可撤销', {}, function() {
+				sa.ajax2(api_url, function(res) {
+					sa.$util.arrayDelete(dataList, data);
+					layer.msg('删除成功');
+				});
+			});
+		}
+		
+		// 封装数据表格中，标准流程数据修改
+		// 接口地址，要提交的数据，需要剔除的属性数组（一般剔除create_time）
+		me.fastUpdate = function(api_url, data, delFieldList) {
+			// 复制一份，以免影响到原来的属性 
+			var data2 = sa.$util.copyJSON(data);
+			if(delFieldList) {
+				delFieldList.forEach(function(field) {
+					data2[field] = undefined;
+				})
+			}
+			// 开始提交 
+			sa.ajax2(api_url, data2, function(res){
+				layer.msg('修改成功');
+				data.is_update = false;
+			})
+		}
+		
+		// 封装数据表格中，标准流程数据添加 
+		// 接口地址，要提交的数据，添加完成的回调函数 
+		me.fastAdd = function(api_url, data, callFn) {
+			sa.ajax2(api_url, data, function(res){
+			    layer.alert('添加成功', {}, function(){
+			       if(callFn) {
+						callFn();
+				   }
+			    });
+			})
+		}
+		
+		
+		
+		
+	}
+	
+    
+	
+	
+	
+	
+	
+	
+	
+})();
 
 
 

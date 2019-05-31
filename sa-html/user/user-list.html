@@ -179,8 +179,8 @@
 						username: '',
 						create_type: 0,
 						sort_type: 1,
-						start_time: sa.$top.forDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), 	// 本月一号 
-						end_time: sa.$top.forDate(new Date()),
+						start_time: sa.$util.forDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), 	// 本月一号 
+						end_time: sa.$util.forDate(new Date()),
 					},
 					page: {	// 分页信息
 						pageNo: 1,
@@ -234,7 +234,7 @@
 					del: function(data) {
 						layer.confirm('是否删除，此操作不可撤销', {}, function() {
 							sa.ajax2('url', {}, function(res) {
-								sa.$top.arrayDelete(this.dataList, data);
+								sa.$util.arrayDelete(this.dataList, data);
 								layer.msg('删除成功');
 							}.bind(this))
 						}.bind(this));

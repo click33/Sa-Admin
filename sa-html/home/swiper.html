@@ -65,7 +65,7 @@
 					<el-table-column prop="id" label="编号" width="70px" > </el-table-column>
 					<el-table-column label="图片" width="300px">
 						<template slot-scope="scope">
-							<img :src="scope.row.img_src" class="td-img" title="点击预览" @click="sa.$top.bigImg(scope.row.img_src, '70%', '80%')">
+							<img :src="scope.row.img_src" class="td-img" title="点击预览" @click="sa.$fast.showImage(scope.row.img_src)">
 							<span style="color: #666; padding-left: 0.5em;"> 点击图片预览</span>
 						</template>
 					</el-table-column>
@@ -88,7 +88,7 @@
 						</template>
 					</el-table-column>
 					<el-table-column label="创建时间" width="150px">
-						<template slot-scope="scope">{{sa.$top.forDate(scope.row.create_time, 2)}}</template>
+						<template slot-scope="scope">{{sa.$util.forDate(scope.row.create_time, 2)}}</template>
 					</el-table-column>
 					
 					<el-table-column prop="address" label="操作">
@@ -104,10 +104,14 @@
 			</div>
 			
 			<div class="c-panel">
-				<el-pagination background layout="total, prev, pager, next, sizes, jumper" 
-					:current-page="page.pageNo" :page-size="page.pageSize" :total="page.count" 
-					:page-sizes="[1, 10, 20, 30, 40, 50, 100]"
-					@current-change="pageNo_f5" @size-change="pageSize_f5">
+				<el-pagination background 
+					layout="total, prev, pager, next, sizes, jumper" 
+					:current-page.sync="page.pageNo" 
+					:page-size.sync="page.pageSize" 
+					:total="page.count" 
+					:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+					@current-change="f5(true)" 
+					@size-change="f5(true)">
 				</el-pagination>
 			</div>
 			
@@ -123,7 +127,7 @@
 					</el-table-column>
 					<el-table-column label="图片" width="300px">
 						<template slot-scope="scope">
-							<img :src="addData.img_src" class="td-img" title="点击预览" @click="sa.$top.bigImg(addData.img_src, '70%', '80%')" >
+							<img :src="addData.img_src" class="td-img" title="点击预览" @click="sa.$fast.showImage(addData.img_src, '70%', '80%')" >
 							<span style="color: #666; padding-left: 0.5em;"> 点击图片预览</span>
 						</template>
 					</el-table-column>
@@ -197,32 +201,23 @@
 					f5: function(){
 						var pageStr = (this.page.pageNo == undefined ? '' : '?pageNo=' + this.page.pageNo + '&pageSize=' + this.page.pageSize);	// 拼接分页 
 						sa.ajax2('/SysSwiper/getList' + pageStr, this.p, function(res){
-							// this.dataList = sa.$top.listAU(res.data);	// 数据
+							// this.dataList = sa.$util.listAU(res.data);	// 数据
 							// this.page = res.page;		// 分页 
 							this.dataList = dataList;
 						}.bind(this));
-					},
-					// 分页刷新 
-					pageNo_f5: function(pageNo){
-						this.page.pageNo = pageNo;
-						this.f5();
-					},
-					pageSize_f5: function(pageSize){
-						this.page.pageSize = pageSize;
-						this.f5();
 					},
 					// 保存
 					add: function(){
 		                sa.ajax2('/SysSwiper/add',this.addData,function(res){
 		                    layer.alert('添加成功',{},function(){
-		                        app.dataList.push(sa.$top.copyJSON(app.addData));
+		                        app.dataList.push(sa.$util.copyJSON(app.addData));
 								layer.closeAll();
 		                    });
 		                })
 					},
 					// 修改
 					update: function(data){
-						var data2 = sa.$top.copyJSON(data);
+						var data2 = sa.$util.copyJSON(data);
 						data2.create_time = undefined;
 						sa.ajax2('/SysSwiper/update', data2, function(res){
 							layer.msg('修改成功');
@@ -234,7 +229,7 @@
 						layer.confirm('是否删除，此操作不可撤销',{},function(){
 							sa.ajax2('/SysSwiper/delete',{id: data.id},function(res){
 								layer.msg('删除成功');
-								sa.$top.arrayDelete(this.dataList, data);
+								sa.$util.arrayDelete(this.dataList, data);
 							}.bind(this))
 						}.bind(this))
 					}

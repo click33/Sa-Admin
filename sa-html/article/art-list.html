@@ -74,8 +74,12 @@
 					<el-table-column label="分享" prop="share_count"></el-table-column>
 					<el-table-column prop="address" label="操作" width="150px">
 						<template slot-scope="scope">
-							<el-button type="primary" class="c-button" icon="el-icon-edit" @click="update(scope.row)">修改</el-button>
-							<el-button type="danger" class="c-button" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
+							<span @click="sa.$fast.showIframe('文章修改', 'art-add.html?id=' + scope.row.id)">
+								<el-button type="primary" class="c-button" icon="el-icon-edit">修改</el-button>
+							</span>
+							<span @click="sa.$fast.fastDelete('/SerArticle/delete?id=' + scope.row.id, dataList, scope.row)">
+								<el-button type="danger" class="c-button" icon="el-icon-delete">删除</el-button>
+							</span>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -83,13 +87,16 @@
 			</div>
 
 			<div class="c-panel">
-				<el-pagination background layout="total, prev, pager, next, sizes, jumper" :current-page="page.pageNo" :page-size="page.pageSize"
-				 :total="page.count" :page-sizes="[1, 10, 20, 30, 40, 50, 100]" @current-change="pageNo_f5" @size-change="pageSize_f5">
+				<el-pagination background 
+					layout="total, prev, pager, next, sizes, jumper" 
+					:current-page.sync="page.pageNo" 
+					:page-size.sync="page.pageSize" 
+					:total="page.count" 
+					:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+					@current-change="f5(true)" 
+					@size-change="f5(true)">
 				</el-pagination>
 			</div>
-
-			<br /><br /><br /><br />
-			<br /><br /><br /><br /><br /><br /><br /><br />
 
 
 		</div>
@@ -98,14 +105,11 @@
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
+					sa: sa,
 					p: { // 查询参数
 						sort_type: 0
 					},
-					page: {	// 分页信息
-						pageNo: 1,
-						pageSize: 10,
-						count: 92
-					},
+					page: sa.$fast.getPage(),// 分页信息
 					dataList: dataList // 数据集合
 				},
 				methods: {
@@ -115,36 +119,6 @@
 							// this.dataList = res.data;	// 数据
 							// this.page = res.page;		// 分页 
 						}.bind(this));
-					},
-					// 分页刷新
-					pageNo_f5: function(pageNo) {
-						this.$message('切换当前页：' + pageNo);
-						this.f5();
-					},
-					pageSize_f5: function(pageSize) {
-						this.$message('切换页大小：' + pageSize);
-						this.f5();
-					},
-					// 删除
-					del: function(data) {
-						layer.confirm('是否删除，此操作不可撤销', {}, function() {
-							sa.ajax2('url', {}, function(res) {
-								sa.$top.arrayDelete(this.dataList, data);
-								layer.msg('删除成功');
-							}.bind(this))
-						}.bind(this));
-					},
-					// 修改
-					update: function(data) {
-						// 弹出面板 
-						layer.open({
-							type: 2,	
-							title: '文章修改',	// 标题 
-							shadeClose: true,	// 是否点击遮罩关闭
-						  	shade: 0.8,		// 遮罩透明度 
-						  	area: ['80%', '100%'],	// 大小
-						  	content: 'art-add.html?id=' + data.id	// 传值 
-						}); 
 					}
 
 				},

@@ -87,9 +87,6 @@
 				</el-link>
 			</div>
 
-			<br /><br /><br /><br />
-			<br /><br /><br /><br /><br /><br /><br /><br />
-
 
 
 		</div>
@@ -128,7 +125,7 @@
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
-					id: sa.$top.getUrlArgs('id', 0),	// 从url中获取传值 
+					id: sa.$util.getUrlArgs('id', 0),	// 从url中获取传值 
 					m: create_m(),
 				},
 				methods: {

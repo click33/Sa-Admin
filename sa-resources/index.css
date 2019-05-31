@@ -21,6 +21,8 @@ html,body{height: 100%; background-color: #EEE;}
 	height: calc(100% - 75px);
 	overflow: hidden;
 }
+.nav-left-bottom i[class^=el-icon-]{font-size: 14px;}
+
 /* 1 2 配合，把滚动条隐藏 */
 .menu-box-1{width: 220px; height: 100%; overflow-y: auto;}
 .menu-box-2{width: 201px;}
