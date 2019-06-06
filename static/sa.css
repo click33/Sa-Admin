@@ -1,7 +1,7 @@
 /** 公共css */
 *{margin: 0px;padding: 0px;}
 html{font-size: 10px; height: 100%;}
-body{font-size: 1.6rem; height: 100%; background-color: #eeeeee; background-color: #FFF;  color: #333;} 
+body{font-size: 1.6rem; height: 100%; background-color: #eeeeee;  color: #333;} 
 a{text-decoration: none;}
 a:hover{}
 /* h1,h2,h3,h4,h5,h6{font-weight: 400;} */
@@ -28,9 +28,9 @@ input::-webkit-inner-spin-button {
 
 /* 内容-面板 */
 .c-panel{
-	margin: 1em;
+	margin: 0.7em 1em;
 	padding: 1em;
-	background-color: #F6F6F6;
+	background-color: #f6f6f6;
 	border: 1px #e5e5e5 solid;
 	/* box-shadow: 0 0 2px #ccc; */
 	color: #333;
@@ -57,11 +57,14 @@ input::-webkit-inner-spin-button {
 /* input宽度等样式调整 */
 .c-item .el-input{
 	display: inline-block;
-	width: 250px;
+	width: 200px;
 }
-.c-item .el-input__inner {
+.c-item .el-input__inner,
+.el-textarea__inner{
 	border-radius: 0px;
 }
+/* 链接 行高设置 */
+.c-item .el-link{line-height: 1.6em;}
 
 /* 解释 */
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
@@ -69,8 +72,11 @@ input::-webkit-inner-spin-button {
 .c-item .el-button{border-radius: 0px;}
 
 /* 按钮样式调整 */
-.c-button{zoom: 0.4; padding: 10px 15px;}
-.c-button *{position: relative; top: 1px;}
+.el-button.c-button{ padding: 4px 5px; font-size: 0.4em; border-radius: 0px;}
+@-moz-document url-prefix() { 
+	.el-button.c-button {font-size: 0.8em;}
+}
+:root .el-button.c-button {font-size: 1em;}
 .c-button.el-button--primary{background-color: #3296FA;}
 .c-button.el-button--primary:hover{background-color: #067CF3;}
 .c-button.el-button--danger{background-color: #CA4242;}
