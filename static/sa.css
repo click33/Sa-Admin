@@ -72,11 +72,7 @@ input::-webkit-inner-spin-button {
 .c-item .el-button{border-radius: 0px;}
 
 /* 按钮样式调整 */
-.el-button.c-button{ padding: 4px 5px; font-size: 0.4em; border-radius: 0px;}
-@-moz-document url-prefix() { 
-	.el-button.c-button {font-size: 0.8em;}
-}
-:root .el-button.c-button {font-size: 1em;}
+.el-button.c-button{ padding: 4px 5px; font-size: 0.8em !important; border-radius: 0px;}
 .c-button.el-button--primary{background-color: #3296FA;}
 .c-button.el-button--primary:hover{background-color: #067CF3;}
 .c-button.el-button--danger{background-color: #CA4242;}
