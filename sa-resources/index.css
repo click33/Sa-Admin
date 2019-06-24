@@ -9,9 +9,11 @@ html,body{height: 100%; background-color: #EEE;}
 	height: 100%;
 	position: fixed;
 	left: 0px;
+	z-index: 110;
+	overflow: hidden;
 }
 /* 左上 logo部分 */
-.nav-left-top{width: 200px; height: 75px; line-height: 75px; cursor: pointer;}
+.nav-left-top{width: 100%; height: 75px; overflow: hidden; line-height: 75px; cursor: pointer; transform: none;}
 .admin-logo{width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin: 0.5em; margin-left: 1em;}
 /* ==== .nav-left-top:hover{color: #FFF;} */
 
@@ -79,25 +81,31 @@ html,body{height: 100%; background-color: #EEE;}
 	margin: 0 3px;
 	margin-top: 1px;
 	height: 30px;
-	line-height: 30px;
 	background-color: #FFF;
 	font-size: 0.8em;
 	border: 1px #DDD solid;
 	border-radius: 2px;
 	cursor: pointer;
-	display: inline-block;
+	/* display: inline-block; */
+	float: left;
+	transition: all 0.1s;
 }
+.page-title span{transition: all 0.0s;}
 .page-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
 .page-title .el-icon-close{display: inline-block; border-radius: 50%; padding: 1px; color: #999; margin-left: -0.3em;}
 .page-title .el-icon-close:hover{background-color: red; color: #FFF;}
 .page-title span{display: inline-block; margin-right: 1em;}
 .page-title:hover span,.page-native span{font-weight: bold;}
-.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 0 10px; margin: 0 1px;}
+.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 0 10px; margin: 0 1px; height: 31px;line-height: 35px;}
 
 /* 第三杠 */
-.nav-right-3{width: 100%; height: calc(100% - 75px); position: relative;}
-.nav-right-3 .iframe{width: 100%; height: 100%; border: 0px; position: absolute; z-index: 100; background-color: #FFF; transition: all 0s; }
-.nav-right-3 .iframe-native{z-index: 101; }
+.nav-right-3{width: 100%; height: calc(100% - 75px); position: relative; overflow: hidden;}
+.nav-right-3 .iframe{width: 100%; height: 100%; border: 0px; position: absolute; z-index: 100; background-color: #FFF; }
+.nav-right-3 .iframe-no-scroll{width: calc(100% + 22px); }
+
+.swiper-container,.swiper-wrapper,.swiper-slide{width: 100%; height: 100%;}
+.swiper-slide{overflow: hidden;}
+
 
 /* 右键菜单 样式 */
 .right-box{
@@ -108,21 +116,24 @@ html,body{height: 100%; background-color: #EEE;}
 	background-color: #FFF;
 	padding: 0.5em 0;
 	position: fixed;
-	z-index: 99999999999;
+	z-index: 2147483647;
 }
 .right-box>div{line-height: 2.2em; text-indent: 1em; cursor: pointer;}
 .right-box>div:hover{background-color: #EEE;}
 
 
 /* 菜单折叠时候样式调整 */
-.fold .nav-left{/* width: 64px; */}
+.fold .nav-left{width: 64px;}
 .fold .admin-logo{width: 40px; height: 40px;}
 .fold .nav-right{width: calc(100% - 64px); left: 64px; }
+/* .app .is_fold_right.nav-right{width: calc(100% - 64px); left: 64px; } */
 
-/* 减少一些不必要的动画过渡，提高流畅性，(造成缺点：折叠展开时，右侧会有一些width闪烁的现象) */
-.nav-left,.nav-right iframe{transform: none;}
-/* .nav-right{transition: left 0.2s;} */
-.nav-right iframe{transform: none;}
+/* .nav-right-3 包裹了太多iframe，不能让它参与动画，因为实在太TM卡了 */
+.nav-right-3{transition: none;}
+.nav-right-3{ /* 修改为fixed布局 */ width: calc(100% - 200px); left: 200px; position: fixed;} 
+.is_fold_right .nav-right-3{width: calc(100% - 64px); left: 64px;}
+
+
 
 /* 菜单折叠时 部分元素隐藏 */
 .fold .nav-title,

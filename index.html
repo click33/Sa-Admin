@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
 		<link rel="stylesheet" href="sa-resources/index.css">
 		<link rel="stylesheet" href="sa-resources/theme.css">
 		
@@ -16,8 +17,8 @@
 			<div class="nav-left">
 				<!-- 左上 -->
 				<div class="nav-left-top" :title="title" @click="nativePage = pageList[0]">
-					<img src="sa-resources/admin-logo.png" class="admin-logo">
-					<span class="nav-title" style="font-size: 1.1em;">{{title}}</span>
+					<img :src="logo_url" class="admin-logo">
+					<span class="nav-title" style="font-size: 1.1em;">{{title}}</span> 
 				</div>
 
 				<!-- 左下 -->
@@ -85,13 +86,15 @@
 			</div>
 			
 			<!-- 右边 -->
-			<div class="nav-right">
+			<div class="nav-right" :class="(is_fold_right ? 'is_fold_right' : '')">
+				
+				<!-- 右边，第一行 -->
 				<div class="nav-right-1">
 					<div class="tools-left">
-						<span title="折叠菜单" class="tool-fox" v-if="is_fold == false" @click="is_fold = true">
+						<span title="折叠菜单" class="tool-fox" v-if="is_fold == false" @click="fold_start()">
 							<i class="el-icon-s-fold"></i>
 						</span>
-						<span title="展开菜单" class="tool-fox" v-if="is_fold == true" @click="is_fold = false">
+						<span title="展开菜单" class="tool-fox" v-if="is_fold == true" @click="fold_end()">
 							<i class="el-icon-s-unfold"></i>
 						</span>
 						<span title="刷新" class="tool-fox" @click="rightPage = nativePage; right_f5();">
@@ -117,10 +120,24 @@
 								</el-dropdown-menu>
 							</el-dropdown>
 						</span>
-						<span title="主题" class="tool-fox user-info" style="padding: 0;">
+						<span title="切换效果" class="tool-fox" style="padding: 0;">
+							<el-dropdown @command="toggleSwitch" trigger="click" size="medium">
+								<span class="el-dropdown-link" style="height: 100%; padding: 0 1em; display: inline-block;">
+									<i class="el-icon-sort" style="font-weight: bold; transform: rotate(90deg)"></i> 
+									<span style="font-size: 0.9em;">切换</span>
+								</span>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item :command="s.value" v-for="s in switchList" :key="s.name">
+										<span :style=" switchV == s.value ? 'color: blue' : '' ">{{s.name}} </span>
+									</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
+						</span>
+						<span title="主题" class="tool-fox" style="padding: 0;">
 							<el-dropdown @command="toggleTheme" trigger="click" size="medium">
 								<span class="el-dropdown-link" style="height: 100%; padding: 0 1em; display: inline-block;">
 									<i class="el-icon-price-tag" style="font-weight: bold;"></i>
+									<span style="font-size: 0.9em;">主题</span>
 								</span>
 								<el-dropdown-menu slot="dropdown">
 									<el-dropdown-item :command="t.value" v-for="t in themeList" :key="t.name">
@@ -138,7 +155,7 @@
 					</div>
 				</div>
 				
-				<!-- 第二杠 -->
+				<!-- 右边，第二行 -->
 				<div class="nav-right-2">
 					<div class="towards-left" @click="scrollToLeft" title="向左滑">
 						<i class="el-icon-arrow-left"></i>
@@ -165,33 +182,45 @@
 					</div>
 				</div>
 				
-				<!-- 第三杠 -->
-				<div class="nav-right-3">
+				<!-- 右边，第三行 -->
+				<!-- <div class="nav-right-3">
 					<span v-for="page in pageList" :key="page.id">
-						<!-- <iframe :src="page.url" :class=" 'iframe' + page.id " v-show="page == nativePage"></iframe> 用v-show会造成每次切换卡片进度条归零的bug -->
 						<iframe :src="page.url" :id=" 'iframe' + page.id " class="iframe" :class="page == nativePage ? 'iframe-native' : null"></iframe>
 					</span>
+				</div> -->
+				
+				<!-- 右边，第三行 -->
+				<!-- swiper滑动 用v-for卡一半 -->
+				<div class="nav-right-3">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<iframe src="main.html" id="iframe-1" class="iframe"></iframe>
+							</div>
+						</div>
+					</div>
 				</div>
 				
-				<!-- 右键盒子 -->
-				<div class="right-box" :style="{left: rightZB.x + 'px', top: rightZB.y + 'px'}" v-if="rightShow">
-					<div @click="right_f5">刷新</div>
-					<div @click="right_close">关闭</div>
-					<div @click="right_close_other">关闭其它</div>
-					<div @click="right_close_all">关闭所有</div>
-					<div @click="right_window_open">新窗口打开</div>
-					<div @click="right_menu_close">取消</div>
-				</div>
 				
 			</div>
 				
 			
+			<!-- 鼠标右键弹出的盒子 -->
+			<div class="right-box" :style="{left: rightZB.x + 'px', top: rightZB.y + 'px'}" v-if="rightShow">
+				<div @click="right_f5">刷新</div>
+				<div @click="right_close">关闭</div>
+				<div @click="right_close_other">关闭其它</div>
+				<div @click="right_close_all">关闭所有</div>
+				<div @click="right_window_open">新窗口打开</div>
+				<div @click="right_menu_close">取消</div>
+			</div>
 
 
 		</div>
 
 		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.js"></script>
 		<script src="sa-resources/admin-util.js"></script>
 		<script src="sa-resources/menu-list.js"></script>
 		<script src="sa-resources/index.js"></script>

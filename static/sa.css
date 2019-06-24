@@ -61,8 +61,12 @@ input::-webkit-inner-spin-button {
 }
 .c-item .el-input__inner,
 .el-textarea__inner{
+	color: #333;
 	border-radius: 0px;
 }
+/* 禁用input的样式 */
+.c-item .el-input.is-disabled .el-input__inner{color: #999;}
+
 /* 链接 行高设置 */
 .c-item .el-link{line-height: 1.6em;}
 
@@ -87,5 +91,6 @@ input::-webkit-inner-spin-button {
 .c-panel .el-pagination input{
 	border-radius: 0px !important;
 }
+
 
 
