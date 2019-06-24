@@ -15,6 +15,7 @@ var sp = new Vue({
 		logo_url: 'sa-resources/admin-logo.png',	// logo地址 
 		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 
+		homePage: homePage,		// 主页page
 		nativePage: homePage,	// 当前正显示的Page 
 		pageList: [homePage],	// 页面集合
 		scrollX: 0		,// 滚动条位置 

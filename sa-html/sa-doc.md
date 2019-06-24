@@ -18,6 +18,7 @@
 #### 3、设置模板标题
 ``` js
 sp.title = "SA-后台模板";
+// sp.logo_url='url';	// 设置logo图标地址   默认值：sa-resources/admin-logo.png
 ```
 
 #### 4、自定义菜单树
