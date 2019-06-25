@@ -51,7 +51,7 @@ QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
 ## 截图
 
-![截图](https://images.gitee.com/uploads/images/2019/0625/125144_cbbb1062_1766140.gif)
+![截图](http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2019/06/25/15614387992091189584865.gif?x-oss-process=style/gif)
 ![截图](https://images.gitee.com/uploads/images/2019/0515/155507_a1589a57_1766140.png)
 ![截图](https://images.gitee.com/uploads/images/2019/0525/161705_14945683_1766140.png)
 ![截图](https://images.gitee.com/uploads/images/2019/0525/161700_a61c10c5_1766140.png)
