@@ -1,55 +1,136 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
-		<title>SA模板-后台登录</title>
+		<title></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="sa-resources/login.css">
 	</head>
-
 	<body>
-		<div class="logo">SA模板-后台登录</div>
-		<div class="menu_login">
-			<form id="login-form">
-				<div class="login_space1"></div>
-				<input type="text" id="username" name="key" autocomplete="off" value="root">
-				<div class="login_space2"></div>
-				<input type="password" id="password" name="password" value="root">
-				<div class="login_space3"></div>
-				<div class="login_button">
-					<a href="#" id="btn-login" class="button1">登录</a>
-					<a href="#" id="btn-reset" class="button2">取消</a>
+		<div style="height: 80px;"></div>
+		<h1 class="page-title"></h1>
+		<div style="height: 50px;"></div>
+		<div class="login">
+			<div class="header">
+				<div class="switch" id="switch"><a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">账号登录</a>
+					<a class="switch_btn two-title" id="switch_login" href="javascript:void(0);" tabindex="8"></a>
+					<div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
 				</div>
-				<div class="login_space3"></div>
-			</form>
-		</div>
-	</body>
-	
-	<script>
-		
-		document.querySelector('#btn-login').onclick = function() {
-			location.href = "index.html";
-		}
-		
-		document.querySelector('.button2').onclick = function() {
-			if(parent != window) {
-				parent.layer.closeAll();
-			}
-		}
-		
-		
-		// 监控回车
-    	$("[name=password]").bind("keypress",function(e){
-		    var code = e.keyCode || e.which || e.charCode;
-		    if (code == 13) {
-		    	$("#btn-login").click();
-		    }
-		});  
-		
-		
-		
-		
-	
-	</script>
+			</div>
+			<div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">
 
+				<div class="web_login" id="web_login">
+					<div class="login-box">
+						<div class="login_form">
+							<form name="loginform" accept-charset="utf-8" id="login_form" class="loginForm"  method="post">
+								<input type="hidden" name="did" value="0" />
+								<input type="hidden" name="to" value="log" />
+								<div class="uinArea" id="uinArea">
+									<label class="input-tips" for="u">帐号：</label>
+									<div class="inputOuter" id="uArea">
+										<input type="text" id="u" name="key" class="inputstyle" />
+									</div>
+								</div>
+								<div class="pwdArea" id="pwdArea">
+									<label class="input-tips" for="p">密码：</label>
+									<div class="inputOuter" id="pArea">
+										<input type="password" id="p" name="password" class="inputstyle" />
+									</div>
+								</div>
+								<div style="padding-left:50px;margin-top:20px;">
+								<input type="button" value="登 录" style="width:150px;" class="button_blue login-btn" /></div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="qlogin" id="qlogin" style="display: none; height: 235px;">
+				<div class="web_login tow-content" id="guanyu" style="padding: 2em 2em; color: #666; font-size: 14px; line-height: 24px;">
+					
+				</div>
+			</div>
+
+		</div>
+		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+		<script src="static/kj/layer/layer.js"></script>
+		<script type="text/javascript">
+			
+			// 你所有要改的代码全在这里   ↓↓↓↓↓ 
+			
+			var page_title = 'SA-后台模板-登录';		// 页面标题
+			var two_title = '操作帮助';			// 第二个卡片的标题(最好四个字)
+			var key = 'admin';	// 默认的key
+			var password = 'admin';	// 默认的password 
+			// 第二个模板的内容
+			// var tow_content = '输入账号和密码，点击按钮登录即可';
+			var tow_content = '本页面参考于此模板：<br/> <a href="http://www.jq22.com/demo/jQuery-dl20160111/" target="_blank">http://www.jq22.com/yanshi5518</a>';	
+			
+			$('.login-btn').click(function() {
+				var p = {
+					key: $('[name=key]').val(),
+					password: $('[name=password]').val()
+				}
+				
+				if(p.key == '' || p.password == ''){
+					return layer.msg('请输入任意内容即可');
+				}
+				
+				layer.msg("欢迎你，" + p.key); 
+				layer.msg("欢迎你，" + p.key); 
+				setTimeout(function () {
+					if(parent == window){
+						location.href = "index.html";
+					}else{
+						parent.layer.closeAll('iframe');
+						parent.location.reload();
+					}
+				},500);
+				
+			})
+			
+			// 你所有要改的代码全在这里   ↑↑↑↑↑	
+			
+			
+			
+			
+			// 替换属性
+			$('.page-title').html(page_title);
+			$('title').html(page_title);
+			$('[name=key]').val(key);
+			$('[name=password]').val(password);
+			$('.two-title').html(two_title);
+			$('.tow-content').html(tow_content);
+			
+			
+			
+			
+		</script>
+		<!-- 卡片切换特效 -->
+		<script type="text/javascript">
+			$(function () {
+			    $('#switch_qlogin').click(function () {
+			        $('#switch_login').removeClass("switch_btn_focus").addClass('switch_btn');
+			        $('#switch_qlogin').removeClass("switch_btn").addClass('switch_btn_focus');
+			        $('#switch_bottom').animate({
+			            left: '0px',
+			            width: '70px'
+			        });
+			        $('#qlogin').css('display', 'none');
+			        $('#web_qr_login').css('display', 'block');
+			    });
+			    $('#switch_login').click(function () {
+			        $('#switch_login').removeClass("switch_btn").addClass('switch_btn_focus');
+			        $('#switch_qlogin').removeClass("switch_btn_focus").addClass('switch_btn');
+			        $('#switch_bottom').animate({
+			            left: '154px',
+			            width: '70px'
+			        });
+			        $('#qlogin').css('display', 'block');
+			        $('#web_qr_login').css('display', 'none');
+			    });
+			});
+			
+		</script>
+	</body>
 </html>

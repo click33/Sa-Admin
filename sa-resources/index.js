@@ -9,8 +9,8 @@ var homePage = {
 var sp = new Vue({
 	el: '.app',
 	data: {
-		version: 'v1.1.0',		// 当前版本
-		update_time: '2019-6-24',		// 更新日期 
+		version: 'v1.1.1',		// 当前版本
+		update_time: '2019-6-26',		// 更新日期 
 		title: 'SA-后台模板',				// 页面标题  
 		logo_url: 'sa-resources/admin-logo.png',	// logo地址 
 		default_active: '0',	// 默认的高亮菜单id
@@ -213,6 +213,55 @@ var sp = new Vue({
 			iframe.setAttribute('src', iframe.getAttribute('src')); 
 			this.rightShow = false;		// 隐藏右菜单
 		},
+		// 右键 悬浮 
+		right_xf: function() {
+			if(this.rightPage.id == homePage.id + ''){
+				this.$message({
+					message: '这个不能悬浮哦，换个卡片试试吧',
+					type: 'warning'
+				});
+				return this.rightShow = false;	// 隐藏右菜单
+			}
+			// 先关闭
+			this.closePage(this.rightPage);   
+			this.rightShow = false;	// 隐藏右菜单  
+			// 再打开  
+			layer.open({
+				type: 2,
+				title: this.rightPage.name,
+				moveOut: true, // 是否可拖动到外面
+				maxmin: true, // 显示最大化按钮
+				shadeClose: false,
+				shade: 0,
+				area: ['80%', '80%'],
+				content: this.rightPage.url,
+				// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
+                resizing: function (layero) {
+                    //console.log($('.layui-layer.layui-layer-iframe').length);
+                    $('.layui-layer-iframe').each(function () {
+                        var height = $(this).height();
+                        var title_height = $(this).find('.layui-layer-title').height();
+                        $(this).find('iframe').css('height', (height - title_height) + 'px');
+                    })
+                }
+            });
+			// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
+            if (window.is_set_12345 == true) {
+                return;
+            }
+            window.is_set_12345 = true;
+            $('body').on('click', '.layui-layer-iframe .layui-layer-max', function () {
+                console.log('调整');
+                setTimeout(function () {
+                    $('.layui-layer-iframe').each(function () {
+                        var height = $(this).height();
+                        var title_height = $(this).find('.layui-layer-title').height();
+                        $(this).find('iframe').css('height', (height - title_height) +
+                            'px');
+                    })
+                }.bind(this), 200)
+            });
+		},
 		// 右键 - 关闭
 		right_close: function() {
 			if(this.rightPage.id == homePage.id + ''){
@@ -300,10 +349,7 @@ var sp = new Vue({
 		// 添加一个Page
 		addPage: function(page) {
 			this.pageList.push(page);
-			var slide = '<div class="swiper-slide">' + 
-						'	<iframe src="' + page.url + '" id="iframe' + page.id + '" class="iframe"></iframe>' + 
-						'</div>';
-			sw.mySwiper.appendSlide(slide);
+			sw.addSlide(page);
 		},
 		// 显示某个页面, 
 		// page对象，是否强制刷新 
@@ -315,13 +361,22 @@ var sp = new Vue({
 			// 如果没有先添加
 			if(this.getPageById(page.id) == null){
 				this.addPage(page);
+				setTimeout(function() {
+					// 没有的情况先，先等它反映好，再swiper切换
+					var index = this.pageList.indexOf(page);
+					sw.slideTo(index);
+				}.bind(this), 50);
+			} else {
+				// 如果有，立即swiper切换
+				var index = this.pageList.indexOf(page);
+				sw.slideTo(index);
 			}
+			
+			
 			this.nativePage = page;
 			this.default_active = page.id + '';	// 左边自动关联, 如果左边没有，则无效果 
 			
-			// swiper切换
-			var index = this.pageList.indexOf(page);
-			sw.slideTo(index);
+			
 			
 			// 归位一下
 			this.$nextTick(function() {
@@ -423,6 +478,14 @@ var sw = {
 		// 	})
 		// }, 200);
 	},
+	// 根据page追加一个slide
+	addSlide: function(page) {
+		var onloadFn = "onload_iframe('" + page.id + "')";	// iframe在onload后调用的函数
+		var slide = '<div class="swiper-slide" id="slide-' + page.id + '">' + 
+					'	<iframe src="' + page.url + '" id="iframe' + page.id + '" class="iframe" onload="' + onloadFn + '"></iframe>' + 
+					'</div>';
+		sw.mySwiper.appendSlide(slide);
+	},
 	// 更正slide大小 ms = 延时毫秒数
 	updateSlideSize: function(ms) {
 		ms = ms || 1;
@@ -433,7 +496,8 @@ var sw = {
 		// document.querySelectorAll('.swiper-slide').forEach(function(item) {
 		// 	item.style.width = width;
 		// });
-	}
+	},
+	
 }
 
 
@@ -441,6 +505,14 @@ var sw = {
 
 
 
+// iframe加载完毕后清除其背景loading图标 
+window.onload_iframe = function(iframe_id) {
+	// console.log(iframe_id);
+	var iframe = document.querySelector('#iframe' + iframe_id);
+	if(iframe != null) {
+		iframe.style.backgroundImage='none';
+	}
+}
 
 
 

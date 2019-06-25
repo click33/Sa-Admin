@@ -52,6 +52,20 @@ sp.dropList = [		// 头像点击处可操作的选项
 		}
 	},
 	{
+		name: '切换账号',
+		click: function() {
+			layer.open({
+				type: 2,
+				title: '登录',
+				shadeClose: true,
+				shade: 0.8,
+				area: ['70%', '80%'],
+				resize: false,
+				content: 'login.html'
+			});
+		}
+	},
+	{
 		name: '退出登录',
 		click: function() {
 			//sp.$message('点击了退出登录，你可以参照文档重写此函数');
