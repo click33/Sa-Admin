@@ -27,10 +27,10 @@ var sp = new Vue({
 		is_full_screen: false	,// 是否全屏   
 		user: null	,// user信息
 		now_time: '加载中...'	,// 当前时间 
-		switchV: localStorage.getItem('switchV') || 'slide',	// 切换效果 
+		switchV: localStorage.getItem('switchV') || 'fade',	// 切换效果 
 		switchList: [	// 切换动画数组 
-			{name: '滑动', value: 'slide'},
 			{name: '淡入', value: 'fade'},
+			{name: '滑动', value: 'slide'},
 			{name: '方块', value: 'cube'},
 			{name: '3D流', value: 'coverflow'},
 			{name: '3D翻转', value: 'flip'}
