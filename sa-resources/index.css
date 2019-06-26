@@ -88,7 +88,7 @@ html,body{height: 100%; background-color: #EEE;}
 	cursor: pointer;
 	/* display: inline-block; */
 	float: left;
-	transition: all 0s;
+	transition: all 0.1s;
 }
 .page-title span{transition: all 0.0s;}
 .page-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
@@ -96,12 +96,12 @@ html,body{height: 100%; background-color: #EEE;}
 .page-title .el-icon-close:hover{background-color: red; color: #FFF;}
 .page-title span{display: inline-block; margin-right: 1em;}
 .page-title:hover span,.page-native span{font-weight: bold;}
-.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 1px 10px; margin: 0 1px;}
+.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 0 10px; margin: 0 1px; height: 31px;line-height: 35px;}
 
 /* 第三杠 */
 .nav-right-3{width: 100%; height: calc(100% - 75px); position: relative; overflow: hidden;}
-.iframe{width: 100%; height: 100%; border: 0px; background-color: #EEE; }
 .iframe{background: url(loading-1.gif) no-repeat center 50%;}
+.iframe{width: 100%; height: 100%; border: 0px; background-color: #EEE; }
 .iframe-no-scroll{width: calc(100% + 22px); }
 
 .swiper-container,.swiper-wrapper,.swiper-slide{width: 100%; height: 100%;}
