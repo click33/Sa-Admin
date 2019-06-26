@@ -88,7 +88,7 @@ html,body{height: 100%; background-color: #EEE;}
 	cursor: pointer;
 	/* display: inline-block; */
 	float: left;
-	transition: all 0.1s;
+	transition: all 0.0s;
 }
 .page-title span{transition: all 0.0s;}
 .page-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
@@ -96,7 +96,7 @@ html,body{height: 100%; background-color: #EEE;}
 .page-title .el-icon-close:hover{background-color: red; color: #FFF;}
 .page-title span{display: inline-block; margin-right: 1em;}
 .page-title:hover span,.page-native span{font-weight: bold;}
-.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 0 10px; margin: 0 1px; height: 31px;line-height: 35px;}
+.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 1px 10px; margin: 0 1px; }
 
 /* 第三杠 */
 .nav-right-3{width: 100%; height: calc(100% - 75px); position: relative; overflow: hidden;}
