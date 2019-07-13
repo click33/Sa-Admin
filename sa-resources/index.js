@@ -42,7 +42,9 @@ var sp = new Vue({
 			{name: '主题 3', value: '3'},
 			{name: '主题 4', value: '4'}
 		],
-		dropList: []	// 头像处下拉列表菜单 
+		dropList: [],	// 头像处下拉列表菜单 
+		is_log: true,				// 是否打印日志 
+		github_url: 'https://github.com/click33/sa-admin',	// github地址 
 	},
 	watch: {
 		// 监听全屏动作 
@@ -439,7 +441,10 @@ var sp = new Vue({
 	created:function(){
 		
 		setTimeout(function() {
-			console.log('欢迎使用sa-admin，当前版本：' + this.version + '，如在使用中发现任何bug或者疑问，请加群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
+			if(this.is_log) {
+				console.log('欢迎使用sa-admin，当前版本：' + this.version + "，GitHub地址：" + this.github_url);
+				console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
+			}
 		}.bind(this), 2000)
 		
 		// 调整是否
