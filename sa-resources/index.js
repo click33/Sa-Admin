@@ -11,7 +11,7 @@ var sp = new Vue({
 	data: {
 		version: 'v1.1.1',		// 当前版本
 		update_time: '2019-6-26',		// 更新日期 
-		title: 'SA-后台模板',				// 页面标题  
+		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: 'sa-resources/admin-logo.png',	// logo地址 
 		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 

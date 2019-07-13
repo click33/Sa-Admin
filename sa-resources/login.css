@@ -298,3 +298,7 @@ a.zcxy {
 .header .switch {
     left:70px
 }
+
+
+/* ajax2加载时的转圈圈样式 */
+.ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}

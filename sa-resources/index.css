@@ -149,3 +149,6 @@ html,body{height: 100%; background-color: #EEE;}
 .z-index-max{
 	z-index: 2147483647;
 }
+
+/* ajax2加载时的转圈圈样式 */
+.ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
