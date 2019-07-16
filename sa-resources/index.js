@@ -9,10 +9,12 @@ var homePage = {
 var sp = new Vue({
 	el: '.app',
 	data: {
-		version: 'v1.1.1',		// 当前版本
-		update_time: '2019-6-26',		// 更新日期 
+		version: 'v1.1.2',		// 当前版本
+		update_time: '2019-7-16',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: 'sa-resources/admin-logo.png',	// logo地址 
+		is_log: true,				// 是否打印日志 
+		github_url: 'https://github.com/click33/sa-admin',	// github地址 
 		default_active: '0',	// 默认的高亮菜单id
 		menuList: [],		// 菜单集合 
 		homePage: homePage,		// 主页page
@@ -37,14 +39,12 @@ var sp = new Vue({
 		],
 		themeV: localStorage.getItem('themeV') || '1',	// 当前主题值
 		themeList: [	// 主题数组
-			{name: '主题 1', value: '1'},
-			{name: '主题 2', value: '2'},
-			{name: '主题 3', value: '3'},
-			{name: '主题 4', value: '4'}
+			{name: '蓝色', value: '1'},
+			{name: '绿色', value: '2'},
+			{name: '白色', value: '3'},
+			{name: '灰色', value: '4'}
 		],
 		dropList: [],	// 头像处下拉列表菜单 
-		is_log: true,				// 是否打印日志 
-		github_url: 'https://github.com/click33/sa-admin',	// github地址 
 	},
 	watch: {
 		// 监听全屏动作 
@@ -202,10 +202,9 @@ var sp = new Vue({
 			this.rightZB.y = e.clientY;	// 
 			this.rightPage = page;	// 绑定操作page
 			this.rightShow = true;	// 显示
-		},
-		// 右键菜单消失
-		right_menu_close: function() {
-			this.rightShow = false;	// 关闭 
+			this.$nextTick(function() {
+				document.querySelector('.right-box').focus();
+			})
 		},
 		// 右键 刷新
 		right_f5: function() {
@@ -213,7 +212,6 @@ var sp = new Vue({
 			var cs = '#iframe' + this.rightPage.id;
 			var iframe = document.querySelector(cs);
 			iframe.setAttribute('src', iframe.getAttribute('src')); 
-			this.rightShow = false;		// 隐藏右菜单
 		},
 		// 右键 悬浮 
 		right_xf: function() {
@@ -222,11 +220,10 @@ var sp = new Vue({
 					message: '这个不能悬浮哦，换个卡片试试吧',
 					type: 'warning'
 				});
-				return this.rightShow = false;	// 隐藏右菜单
+				return;	
 			}
 			// 先关闭
 			this.closePage(this.rightPage);   
-			this.rightShow = false;	// 隐藏右菜单  
 			// 再打开  
 			layer.open({
 				type: 2,
@@ -271,10 +268,9 @@ var sp = new Vue({
 					message: '这个不能关闭哦',
 					type: 'warning'
 				});
-				return this.rightShow = false;	// 隐藏右菜单
+				return;	// 隐藏右菜单
 			}
 			this.closePage(this.rightPage);
-			this.rightShow = false;	// 隐藏右菜单
 		},
 		// 右键 - 关闭其它 
 		right_close_other: function() {
@@ -286,7 +282,6 @@ var sp = new Vue({
 				this.closePage(page);
 				i--;
 			}
-			this.rightShow = false;	// 隐藏右菜单
 		},
 		// 右键 - 关闭所有 
 		right_close_all: function() {
@@ -298,21 +293,16 @@ var sp = new Vue({
 				this.closePage(page);
 				i--;
 			}
-			this.rightShow = false;	// 隐藏右菜单
 		},
 		// 右键 - 新窗口打开
 		right_window_open: function() {
 			open(this.rightPage.url); 
-			this.rightShow = false;		// 隐藏右菜单
 		},
 		
 		// ------------------- menu 相关 --------------------
 		// 点击子菜单时的回调, 
-		// 参数: 点击菜单index标识（不是下标）, 所有已经打开的菜单 index
+		// 参数: 点击菜单index标识（不是下标）, 所有已经打开的菜单 index 
 		selectMenu: function(index, indexArray) {
-			// if(index + '' == homePage.id + '') {
-			// 	return this.showPage(homePage);
-			// }
 			var menu = this.getMenuById(this.menuList, index);
 			this.showPage(menu); 
 		},

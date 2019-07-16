@@ -22,7 +22,7 @@
 /* 左边栏背景色，前景色 */
 .theme-0 .nav-left {
 	background-color: #222;
-	color: #EEE;
+	color: #FFF;
 }
 
 /* 二级菜单背景色 */
@@ -84,6 +84,7 @@
 /* 非标准附加样式 */
 .theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC;}
 .theme-3 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-3 .nav-right-1,.theme-3 .nav-right-2{border-left: 1px #eee solid;}
 
 /* 左边栏背景色，前景色 */
 .theme-3 .nav-left {
@@ -143,8 +144,6 @@
 .theme-4 .page-native.page-title {
 	color: #009688;
 }
-
-
 
 /* 工具栏背景色颜色, 前景色 */
 .theme-4 .nav-right-1 {

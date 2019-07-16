@@ -109,18 +109,26 @@ html,body{height: 100%; background-color: #EEE;}
 
 
 /* 右键菜单 样式 */
-.right-box{
-	width: 100px;
+.right-box {
 	font-size: 0.8em;
-	border: 1px #CCC solid;
+	border: 1px #aaa solid;
 	border-radius: 1px;
 	background-color: #FFF;
 	padding: 0.5em 0;
 	position: fixed;
 	z-index: 2147483647;
+	transition: all 0.2s;
+	outline:none;
 }
-.right-box>div{line-height: 2.2em; text-indent: 1em; cursor: pointer;}
-.right-box>div:hover{background-color: #EEE;}
+.right-box>div {
+	line-height: 2.2em;
+	padding-left: 1em;
+	padding-right: 2em;
+	cursor: pointer;
+}
+.right-box>div:hover {
+	background-color: #ddd;
+}
 
 
 /* 菜单折叠时候样式调整 */

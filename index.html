@@ -18,7 +18,7 @@
 				<!-- 左上 -->
 				<div class="nav-left-top" :title="title" @click="showPage(homePage)">
 					<img :src="logo_url" class="admin-logo">
-					<span class="nav-title" style="font-size: 1.1em;">{{title}}</span> 
+					<span class="nav-title" style="font-size: 1.05em;">{{title}}</span> 
 				</div>
 
 				<!-- 左下 -->
@@ -206,14 +206,14 @@
 				
 			
 			<!-- 鼠标右键弹出的盒子 -->
-			<div class="right-box" :style="{left: rightZB.x + 'px', top: rightZB.y + 'px'}" v-if="rightShow">
-				<div @click="right_f5">刷新</div>
-				<div @click="right_close">关闭</div>
-				<div @click="right_close_other">关闭其它</div>
-				<div @click="right_close_all">关闭所有</div>
-				<div @click="right_xf">悬浮打开</div>
-				<div @click="right_window_open">新窗口打开</div>
-				<div @click="right_menu_close">取消</div>
+			<div class="right-box" :style="{left: rightZB.x + 'px', top: rightZB.y + 'px'}" v-if="rightShow" tabindex="-1" @blur="rightShow = false">
+				<div @click="rightShow = false; right_f5()">刷新</div>
+				<div @click="rightShow = false; right_close()">关闭</div>
+				<div @click="rightShow = false; right_close_other()">关闭其它</div>
+				<div @click="rightShow = false; right_close_all()">关闭所有</div>
+				<div @click="rightShow = false; right_xf()">悬浮打开</div>
+				<div @click="rightShow = false; right_window_open()">新窗口打开</div>
+				<div @click="rightShow = false">取消</div>
 			</div>
 
 
