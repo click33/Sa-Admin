@@ -360,6 +360,7 @@ var sp = new Vue({
 				}.bind(this), 50);
 			} else {
 				// 如果有，立即swiper切换
+				page = this.getPageById(page.id);	// 切换成原本的page，使之内存地址相等 
 				var index = this.pageList.indexOf(page);
 				sw.slideTo(index);
 			}
@@ -414,15 +415,19 @@ var sp = new Vue({
 		},
 		// 自动归位
 		scrollToAuto: function() {
-			// 最后一个不用归位了 
-			if(this.nativePage == this.pageList[this.pageList.length - 1]){
-				return;
-			}
-			var width = document.querySelector('.nav-right-2').clientWidth;	// 视角宽度
-			var left = document.querySelector('.page-native').lastChild.offsetLeft;	// 当前native-tilte下一个距离左边的距离
-			// 如果在视图右边越界
-			if(left + this.scrollX > (width - 100)){
-				this.scrollToRight();
+			try{
+				// 最后一个不用归位了 
+				if(this.nativePage == this.pageList[this.pageList.length - 1]){
+					return;
+				}
+				var width = document.querySelector('.nav-right-2').clientWidth;	// 视角宽度
+				var left = document.querySelector('.page-native').lastChild.offsetLeft;	// 当前native-tilte下一个距离左边的距离
+				// 如果在视图右边越界
+				if(left + this.scrollX > (width - 100)){
+					this.scrollToRight();
+				}
+			}catch(e){
+				//TODO handle the exception
 			}
 			
 		}
