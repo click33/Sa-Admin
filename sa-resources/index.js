@@ -12,7 +12,7 @@ var sp = new Vue({
 		version: 'v1.1.2',		// 当前版本
 		update_time: '2019-7-16',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
-		logo_url: 'sa-resources/admin-logo.png',	// logo地址 
+		logo_url: '',	// logo地址 
 		is_log: true,				// 是否打印日志 
 		github_url: 'https://github.com/click33/sa-admin',	// github地址 
 		default_active: '0',	// 默认的高亮菜单id

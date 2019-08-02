@@ -17,7 +17,8 @@
 			<div class="nav-left">
 				<!-- 左上 -->
 				<div class="nav-left-top" :title="title" @click="showPage(homePage)">
-					<img :src="logo_url" class="admin-logo">
+					<img :src="logo_url" class="admin-logo" v-if="logo_url != null && logo_url != ''">
+					<span v-else style="margin-right: 25px;" title="无logo时的占位">&emsp;</span>
 					<span class="nav-title" style="font-size: 1.05em;">{{title}}</span> 
 				</div>
 
