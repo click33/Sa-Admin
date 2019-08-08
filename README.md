@@ -1,7 +1,7 @@
 
 # sa-admin  
 
-一个基于iframe的多窗口后台模板   ，演示地址：[https://sa-admin.dev33.cn](https://sa-admin.dev33.cn)
+一个基于iframe的多窗口后台模板   ，演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
 
 
 
