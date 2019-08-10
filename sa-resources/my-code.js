@@ -10,6 +10,7 @@
 // 设置模板标题 
 sp.title = "SA-后台模板";
 sp.logo_url = 'sa-resources/admin-logo.png';    // 设置logo图标地址   默认值：sa-resources/admin-logo.png
+sp.icon_url = 'sa-resources/admin-logo.png';    // 设置icon图标地址   默认值：sa-resources/admin-logo.png
 
 
 // ================================= 示例：自定义菜单 =================================

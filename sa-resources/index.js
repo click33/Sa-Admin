@@ -13,6 +13,7 @@ var sp = new Vue({
 		update_time: '2019-7-16',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
+		icon_url: '',	// icon地址 
 		is_log: true,				// 是否打印日志 
 		github_url: 'https://github.com/click33/sa-admin',	// github地址 
 		default_active: '0',	// 默认的高亮菜单id
@@ -58,6 +59,14 @@ var sp = new Vue({
 		// 监听title改变时, 页面title也跟着切换 
 		title: function(newValue, oldValue) {
 			document.querySelector('title').innerHTML = newValue;
+		},
+		// 监听 icon_url
+		icon_url: function(newValue, oldValue) {
+			var icon_url = newValue;
+			var icon_target = document.querySelector('.admin-icon');
+			if(icon_target) {
+				icon_target.setAttribute('href', icon_url);
+			}
 		}
 	},
 	methods: {
