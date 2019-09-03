@@ -103,7 +103,11 @@
 			$('.two-title').html(two_title);
 			$('.tow-content').html(tow_content);
 			
-			
+			$('#p').bind('keypress',function(event){
+				if(event.keyCode == "13") {
+					$('.login-btn').click();
+				}
+			});
 			
 			
 		</script>
