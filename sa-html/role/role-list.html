@@ -15,12 +15,15 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
 		
 	
 	</head>
 	<body>
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+		
 		<div class="vue-box">
 			
 			<!-- 参数栏 -->
@@ -28,11 +31,11 @@
 				<div class="c-title">检索参数</div>
 				<el-form ref="form">
 					<div class="c-item">
-						<label class="c-label">用户昵称：</label>
-						<el-input size="small" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
+						<label class="c-label">名称：</label>
+						<el-input size="mini" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
 					</div>
 					<div class="c-item" style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
 					</div>
 				</el-form>
 			</div>
@@ -41,19 +44,19 @@
 			<div class="c-panel c-table">
 				<div class="c-title">列表</div>
 	
-				<el-table :data="dataList" size="small" border style="width: 100%">
+				<el-table :data="dataList" class="data-table" size="mini"  style="width: 100%">
 					
 					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
 					
 					<el-table-column label="角色名称">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="scope.row.role_name"></el-input>
+							<el-input size="mini" v-model="scope.row.role_name"></el-input>
 						</template>
 					</el-table-column>
 					
 					<el-table-column label="责任描述">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="scope.row.role_info"></el-input>
+							<el-input size="mini" v-model="scope.row.role_info"></el-input>
 						</template>
 					</el-table-column>
 					
@@ -71,11 +74,11 @@
 					
 					<el-table-column prop="address" label="操作" width="220px">
 						<template slot-scope="scope">
-							<el-button type="text" size="small" @click="update(scope.row)">
+							<el-button type="text" size="mini" @click="update(scope.row)">
 								<span :style="scope.row.is_update ? 'color: red;' : ''">修改</span>
 							</el-button>
-							<el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
-							<el-button type="text" size="small" @click="menu_setup(scope.row)">分配权限</el-button>
+							<el-button type="text" size="mini" @click="del(scope.row)">删除</el-button>
+							<el-button type="text" size="mini" @click="menu_setup(scope.row)">分配权限</el-button>
 						</template>
 					</el-table-column>
 					
@@ -89,23 +92,23 @@
 			<div class="c-panel">
 				<h4 class="c-title">添加</h4>
 	
-				<el-table class="c-add-table" :data="[{}]" size="small" border style="width: 100%">
+				<el-table class="data-table" :data="[{}]" size="mini"  style="width: 100%">
 					
 					<el-table-column prop="id" label="编号" width="90px" >
 						<template slot-scope="scope">
-							<el-input size="small" v-model="addData.id"></el-input>
+							<el-input size="mini" v-model="addData.id"></el-input>
 						</template>
 					</el-table-column>
 					
 					<el-table-column label="名称">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="addData.role_name"></el-input>
+							<el-input size="mini" v-model="addData.role_name"></el-input>
 						</template>
 					</el-table-column>
 					
 					<el-table-column label="责任描述">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="addData.role_info"></el-input>
+							<el-input size="mini" v-model="addData.role_info"></el-input>
 						</template>
 					</el-table-column>
 					
@@ -117,28 +120,13 @@
 					
 					<el-table-column prop="address" label="操作">
 						<template slot-scope="scope">
-							<el-button type="text" size="small" @click="add">添加</el-button>
+							<el-button type="text" size="mini" @click="add">添加</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
-				<br>
-			</div>
-			<!-- 提示 -->
-			<div class="c-panel" style="background-color: rgba(0,0,0,0); color: #888;">
-				注：鼠标悬即可出现输入框，修改完成后点击【修改】按钮进行保存
 			</div>
 			
-			
-			
-			<br /><br /><br /><br />
-			<br /><br /><br /><br /><br /><br /><br /><br />
-			
-			
-			
-			
-			
-			
-			
+		
 	
 			
 		</div>

@@ -15,7 +15,7 @@
 		<script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
 		
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
 		<script src="data-list.js"></script>
 		<style>
@@ -51,7 +51,7 @@
 					<br />
 					<div class="c-item" style="width: 100%;">
 						<label class="c-label">文章标题：</label>
-						<el-input size="small" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
+						<el-input size="mini" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
 					</div>
 
 					<br />
@@ -74,7 +74,7 @@
 					<div style="margin-top: 10px;"></div>
 					<div class="c-item">
 						<label class="c-label"></label>
-						<el-button type="primary" icon="el-icon-plus" size="small" @click="ok">确定</el-button>
+						<el-button type="primary" icon="el-icon-plus" size="mini" @click="ok">确定</el-button>
 					</div>
 
 

@@ -13,7 +13,7 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
 		<script src="data-list.js"></script>
 
@@ -32,16 +32,16 @@
 
 					<div class="c-item">
 						<label class="c-label">id：</label>
-						<el-input size="small" v-model="p.id" type="number"></el-input>
+						<el-input size="mini" v-model="p.id" type="number"></el-input>
 					</div>
 
 					<div class="c-item">
 						<label class="c-label">标题：</label>
-						<el-input size="small" v-model="p.title"></el-input>
+						<el-input size="mini" v-model="p.title"></el-input>
 					</div>
 
 					<div class="c-item" style="min-width: 10px;">
-						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
 					</div>
 
 					<br />
@@ -63,7 +63,7 @@
 			<div class="c-panel">
 				<h4 class="c-title">列表</h4>
 
-				<el-table class="data-table" :data="dataList" size="small" border>
+				<el-table class="data-table" :data="dataList" size="mini">
 					<el-table-column label="编号" prop="id" width="70px"> </el-table-column>
 					<el-table-column label="文章标题" prop="title"></el-table-column>
 					<el-table-column label="文章内容" prop="content" width="400px"></el-table-column>
@@ -84,18 +84,20 @@
 					</el-table-column>
 				</el-table>
 
-			</div>
 
-			<div class="c-panel">
-				<el-pagination background 
-					layout="total, prev, pager, next, sizes, jumper" 
-					:current-page.sync="page.pageNo" 
-					:page-size.sync="page.pageSize" 
-					:total="page.count" 
-					:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
-					@current-change="f5(true)" 
-					@size-change="f5(true)">
-				</el-pagination>
+				<!-- 分页 -->
+				<div class="page-box">
+					<el-pagination background
+						layout="total, prev, pager, next, sizes, jumper" 
+						:current-page.sync="page.pageNo" 
+						:page-size.sync="page.pageSize" 
+						:total="page.count" 
+						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+						@current-change="f5(true)" 
+						@size-change="f5(true)">
+					</el-pagination>
+				</div>
+
 			</div>
 
 

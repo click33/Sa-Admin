@@ -14,7 +14,7 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
 		
         <style>
@@ -35,11 +35,11 @@
 	
 					<div class="c-item">
 						<label class="c-label">标题：</label>
-						<el-input size="small" v-model="p.title" @keyup.enter="f5"></el-input>
+						<el-input size="mini" v-model="p.title" @keyup.enter="f5"></el-input>
 					</div>
 					
 					<div class="c-item">
-						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
 					</div>
 
 					<br />
@@ -61,7 +61,7 @@
 			<div class="c-panel c-table">
 				<h4 class="c-title">列表<span>（鼠标悬即可出现输入框，修改完成后点击【修改】按钮进行保存）</span></h4>
 	
-				<el-table class="data-table" :data="dataList" size="small" border style="width: 100%">
+				<el-table class="data-table" :data="dataList" size="mini">
 					<el-table-column prop="id" label="编号" width="70px" > </el-table-column>
 					<el-table-column label="图片" width="300px">
 						<template slot-scope="scope">
@@ -71,12 +71,12 @@
 					</el-table-column>
 					<el-table-column label="标题">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="scope.row.title"></el-input>
+							<el-input size="mini" v-model="scope.row.title"></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column label="排序">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="scope.row.sort"></el-input>
+							<el-input size="mini" v-model="scope.row.sort"></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column prop="click_count" label="点击量" width="100px"> </el-table-column>
@@ -101,18 +101,18 @@
 					</el-table-column>
 				</el-table>
 	
-			</div>
-			
-			<div class="c-panel">
-				<el-pagination background 
-					layout="total, prev, pager, next, sizes, jumper" 
-					:current-page.sync="page.pageNo" 
-					:page-size.sync="page.pageSize" 
-					:total="page.count" 
-					:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
-					@current-change="f5(true)" 
-					@size-change="f5(true)">
-				</el-pagination>
+				<!-- 分页 -->
+				<div class="page-box">
+					<el-pagination background
+						layout="total, prev, pager, next, sizes, jumper" 
+						:current-page.sync="page.pageNo" 
+						:page-size.sync="page.pageSize" 
+						:total="page.count" 
+						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+						@current-change="f5(true)" 
+						@size-change="f5(true)">
+					</el-pagination>
+				</div>
 			</div>
 			
 			<br /><br /><br /><br />
@@ -121,7 +121,7 @@
 			<!-- 添加一个 -->
 			<div class="c-panel c-add-table">
 				<h4 class="c-title">添加一个<span>（手机端按照排序值的大小从小到大进行前后排列）</span></h4>	
-				<el-table class="data-table" :data="[{}]" size="small" border style="width: 100%">
+				<el-table class="data-table" :data="[{}]" size="mini" style="width: 100%">
 					<el-table-column prop="id" label="编号" width="70px" >
 						<template slot-scope="scope">{{addData.id}}</template>
 					</el-table-column>
@@ -133,17 +133,17 @@
 					</el-table-column>
 					<el-table-column label="标题">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="addData.title"></el-input>
+							<el-input size="mini" v-model="addData.title"></el-input>
 						</template>
 					</el-table-column>
 					<!-- <el-table-column label="跳转连接">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="addData.index"></el-input>
+							<el-input size="mini" v-model="addData.index"></el-input>
 						</template>
 					</el-table-column> -->
 					<el-table-column label="排序">
 						<template slot-scope="scope">
-							<el-input size="small" v-model="addData.sort"></el-input>
+							<el-input size="mini" v-model="addData.sort"></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column label="状态">
@@ -162,7 +162,6 @@
 				</el-table>
 				
 			</div>
-			<br /><br /><br /><br /><br /><br /><br /><br />
 	
 
 			

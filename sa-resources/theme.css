@@ -16,6 +16,11 @@
 	background-color: inherit;
 }
 
+/* 切换主题时，停止动画 */
+.themeToggling .nav-left,.themeToggling .nav-left *{transition: none !important;}
+.themeToggling .nav-left-top,.themeToggling .nav-left-top *{transition: all 0.2s !important;}
+
+
 /* ========================== 主题 - 0 默认样式 蓝色 ==========================  */
 .theme-0 {}
 
@@ -112,7 +117,7 @@
 .theme-4 {}
 
 /* 非标准附加样式 */
-.theme-4 .nav-left-top{height: 39px; line-height: 39px; text-indent: 2em; background-color: #222; color: #EEE; font-size: 0.9em;}
+.theme-4 .nav-left-top{height: 39px; line-height: 39px; text-indent: 2em; background-color: #222; color: #EEE;}
 .theme-4 .nav-left-top .admin-logo{display: none;}
 
 .theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
@@ -157,4 +162,41 @@
 }
 
 
+
+/* ========================== 主题-5 仿微信公众平台 ==========================  */
+
+.theme-5 {}
+
+.theme-5 .nav-left-top,
+.theme-5 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-5 .el-submenu__icon-arrow.el-icon-arrow-down{display: none;}
+.theme-5 .nav-left-bottom .menu-box-2{padding-bottom: 200px;}
+
+/* 左边栏背景色，前景色 */
+.theme-5 .nav-left {
+	background-color: #EEE;
+	color: #000;
+}
+
+/* 二级菜单背景色 */
+.theme-5 .el-submenu .el-menu-item,
+.theme-5 .nav-left .el-submenu .el-submenu .el-submenu__title{
+	background-color: #EEE;
+}
+
+/* 所有菜单悬浮样式时, 以及选中时 */
+.theme-5 .nav-left .el-submenu__title:hover,
+.theme-5 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
+.theme-5 .nav-left .el-menu-item:hover,
+.theme-5 .nav-left .el-menu-item.is-active:hover {
+	background-color: #ddd;
+	color: #1AAD5E;
+}
+.theme-5 .nav-left .el-menu-item.is-active {background-color: #eee; color: #1AAD5E;}
+
+/* 卡片栏悬浮颜色和选中颜色 */
+.theme-5 .page-title:hover,
+.theme-5 .page-native.page-title {
+	color: #1AAD5E;
+}
 

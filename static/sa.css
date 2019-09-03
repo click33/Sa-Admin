@@ -1,7 +1,8 @@
 /** 公共css */
 *{margin: 0px;padding: 0px;}
 html{font-size: 10px; height: 100%;}
-body{font-size: 1.6rem; height: 100%; background-color: #eeeeee;  color: #333;} 
+body{font-size: 1.4rem; height: 100%; background-color: #eeeeee;  color: #333;} 
+body{font-family: "Helvetica Neue", Helvetica, "PingFang SC", Tahoma, Arial, sans-serif;}
 a{text-decoration: none;}
 a:hover{}
 /* h1,h2,h3,h4,h5,h6{font-weight: 400;} */
@@ -27,43 +28,21 @@ input::-webkit-inner-spin-button {
 .vue-box{padding-bottom: 20px; font-size: 14px;}
 
 /* 内容-面板 */
-.c-panel{
-	margin: 0.7em 1em;
-	padding: 1em;
-	background-color: #f6f6f6;
-	border: 1px #e5e5e5 solid;
-	/* box-shadow: 0 0 2px #ccc; */
-	color: #333;
-}
+.c-panel{margin: 0.7em 1em; padding: 1em 1.5em; background-color: #fff; color: #333; box-shadow: 0 0 5px #eee;}
 .c-title{font-weight: bold; line-height: 2em; margin-bottom: 3px;}
 .c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
 /* 内容-item */
-.c-item {
-	min-width: 280px;
-	min-height: 32px;
-	line-height: 32px;
-	padding-right: 20px;
-	display: inline-block;
-	margin: 0.5em 0;
-}
+.c-item {min-width: 280px;min-height: 32px; line-height: 32px; padding-right: 20px; display: inline-block; margin: 0.5em 0;}
+
 /* label样式 */
-.c-item .c-label{
-	width: 5em; 
-	color: #333;
-	display: inline-block; 
-	text-align: right;
-}
+.c-item .c-label{width: 5em; color: #333; display: inline-block; text-align: right;}
+
 /* input宽度等样式调整 */
-.c-item .el-input{
-	display: inline-block;
-	width: 200px;
-}
+.c-item .el-input{width: 200px;}
 .c-item .el-input__inner,
-.el-textarea__inner{
-	color: #333;
-	border-radius: 0px;
-}
+.el-textarea__inner{border-radius: 2px;}
+
 /* 禁用input的样式 */
 .c-item .el-input.is-disabled .el-input__inner{color: #999;}
 
@@ -73,23 +52,27 @@ input::-webkit-inner-spin-button {
 /* 解释 */
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
 /* 按钮去圆角 */
-.c-item .el-button{border-radius: 0px;}
+.c-item .el-button{border-radius: 2px;}
 
 /* 按钮样式调整 */
-.el-button.c-button{ padding: 4px 5px; font-size: 0.8em !important; border-radius: 0px;}
+.el-button.c-button{ padding: 4px 5px; font-size: 0.8em !important; border-radius: 1px;}
 .c-button.el-button--primary{background-color: #3296FA;}
 .c-button.el-button--primary:hover{background-color: #067CF3;}
 .c-button.el-button--danger{background-color: #CA4242;}
 .c-button.el-button--danger:hover{background-color: #A00C0C;}
 .c-button.el-button--success:hover{background-color: #2B9939;}
 
-/* 表格里的input */
-.c-table input,.c-add-table input{border-radius: 0px; border: 0px;}
+/* 表格里 */
+.el-table__header tr th{background-color: #F5F5F5;}
+.data-table input{border-radius: 2px;}
 
-
+/* 分页 */
+.page-box{
+	padding: 1.5em 0 1em 0; 
+}
 /* 分页器的去除圆角 */
 .c-panel .el-pagination input{
-	border-radius: 0px !important;
+	border-radius: 2px !important;
 }
 
 

@@ -1,3 +1,5 @@
+// ======================== 一些工具方法 ======================== 
+
 // 删除数组某个元素
 function arrayDelete(arr, item){
 	var index = arr.indexOf(item);
@@ -68,4 +70,61 @@ function fullScreenNormal() {
 		document.msExitFullscreen()
 	}
 }
+
+
+
+// ======================== 菜单集合相关 ======================== 
+
+// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
+function arrayToTree(menu_list) {
+	for (var i = 0; i < menu_list.length; i++) {
+		var menu = menu_list[i];
+		// 添加到其指定的父菜单的childList
+		if(menu.parent_id) {
+			var parent_menu = getMenuById(menu_list, menu.parent_id);
+			if(parent_menu) {
+				parent_menu.childList = parent_menu.childList || [];
+				parent_menu.childList.push(menu);
+				menu_list.splice(i, 1);	// 从一维中删除 
+				i--;
+			}
+		}
+	}
+	return menu_list;
+}
+
+
+// 将 menu_list 处理一下 
+function refMenuList(menu_list) {
+	for (var i = 0; i < menu_list.length; i++) {
+		var menu = menu_list[i];
+		// 有子项的递归处理 
+		if(menu.childList){
+			menu.children = menu.childList;
+			refMenuList(menu.childList);
+		}
+	}
+	return menu_list;
+}
+
+
+
+// 返回指定 index 的menu   
+function getMenuById(menuList, id) {
+	for (var i = 0; i < menuList.length; i++) {
+		var menu = menuList[i];
+		if(menu.id + '' == id + '') {
+			return menu;
+		}
+		// 如果是二级或多级 
+		if(menu.childList) {
+			var menu2 = getMenuById(menu.childList, id);
+			if(menu2 != null) {
+				return menu2;
+			}
+		}
+	}
+	return null;
+}
+
 

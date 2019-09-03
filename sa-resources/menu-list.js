@@ -104,15 +104,21 @@ var menuList =	[
 		id: '8',
 		name: '外部链接',
 		icon: 'el-icon-link',
-		url: 'https://www.baidu.com/',
-		is_blank: true
-	},
-	{
-		id: '9',
-		name: '外部链接2',
-		icon: 'el-icon-link',
-		url: 'http://web.yanzhi21.com/',
-		is_blank: true
+		info: '示例：外部链接',
+		childList: [
+			{
+				id: '8-1',
+				name: '外部链接1',
+				url: 'https://www.baidu.com/',
+				is_blank: true
+			},
+			{
+				id: '8-2',
+				name: '外部链接2',
+				url: 'http://yanzhi21.com/',
+				is_blank: true
+			},
+		]
 	},
 	//  ========= 示例 隐藏的菜单，最终将不会显示在菜单栏里 ================
 	{

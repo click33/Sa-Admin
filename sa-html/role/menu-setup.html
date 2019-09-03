@@ -14,7 +14,7 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
 
         <style>
@@ -35,7 +35,7 @@
 		<div class="vue-box">
 			
 			<!-- 表格 -->
-			<div class="c-panel">
+			<div style="padding: 2em;">
 				<div class="c-title">所有权限</div>
 		        <!-- 此扩展能递归渲染一个权限树，点击深层次节点，父级节点中没有被选中的节点会被自动选中，单独点击父节点，子节点会全部 选中/去选中 -->
 				<el-tree
@@ -64,9 +64,9 @@
 				 -->
 
 				<br>
-				<div class="in-fox">
-					<label class="if-label" style="width: 1em;"></label>
-					<el-button type="primary" icon="el-icon-search" size="small" @click="ok">确定</el-button>
+				<div class="c-item">
+					<label class="c-label" style="width: 1em;"></label>
+					<el-button type="primary" icon="el-icon-search" size="mini" @click="ok">确定</el-button>
 				</div>
 				
 	
@@ -75,20 +75,10 @@
 			
 			
 			
-			
-			<br /><br /><br /><br />
-			<br /><br /><br /><br /><br /><br /><br /><br />
-			
-			
-			
-			
 		</div>
 		
-		<!-- 模拟数据 -->
-		<script src="../../sa-resources/menu-list.js"></script>
-		<script type="text/javascript">
-			
-		</script>
+		<script src="../../sa-resources/menu-list.js"></script> 
+		<script src="../../sa-resources/admin-util.js"></script>
 
         <script>
 		
@@ -148,58 +138,6 @@
 			
 			
 			
-			
-			// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
-			function arrayToTree(menu_list) {
-				for (var i = 0; i < menu_list.length; i++) {
-					var menu = menu_list[i];
-					// 添加到其指定的父菜单的childList
-					if(menu.parent_id) {
-						var parent_menu = getMenuById(menu_list, menu.parent_id);
-						if(parent_menu) {
-							parent_menu.childList = parent_menu.childList || [];
-							parent_menu.childList.push(menu);
-							menu_list.splice(i, 1);	// 从一维中删除 
-							i--;
-						}
-					}
-				}
-				return menu_list;
-			}
-			
-			
-			// 将 menu_list 处理一下 
-			function refMenuList(menu_list) {
-				for (var i = 0; i < menu_list.length; i++) {
-					var menu = menu_list[i];
-					// 有子项的递归处理 
-					if(menu.childList){
-						menu.children = menu.childList;
-						refMenuList(menu.childList);
-					}
-				}
-				return menu_list;
-			}
-			
-			
-			
-			// 返回指定 index 的menu
-			function getMenuById(menuList, id) {
-				for (var i = 0; i < menuList.length; i++) {
-					var menu = menuList[i];
-					if(menu.id + '' == id + '') {
-						return menu;
-					}
-					// 如果是二级或多级 
-					if(menu.childList) {
-						var menu2 = getMenuById(menu.childList, id);
-						if(menu2 != null) {
-							return menu2;
-						}
-					}
-				}
-				return null;
-			}
 			
 			
 			

@@ -1,6 +1,6 @@
-# sa-admin 使用步骤
+# sa-admin 使用步骤 <span style="font-size: 14px;">五分钟快速上手</span>
 
-&emsp; 五分钟快速上手
+
 
 #### 1、获取 源码
 > - 你有两种方式获取源码
@@ -13,32 +13,31 @@
 > - 具体可以操作哪些接口？接着往下看
 
 
-
-
 #### 3、设置模板标题
 ``` js
-sp.title = "SA-后台模板";
-// sp.logo_url='url';	// 设置logo图标地址   默认值：sa-resources/admin-logo.png
+sa_admin.title = "SA-后台模板";
+// sa_admin.logo_url='url';	// 设置logo图标地址   默认值：sa-resources/admin-logo.png
+// sa_admin.icon_url = 'sa-resources/admin-logo.png';    // 设置icon图标地址   默认值：sa-resources/admin-logo.png
 ```
 
 #### 4、自定义菜单树
 ``` js 
 var myMenuList = window.menuList;	// window.menuList 在 menu-list.js 中定义 
-sp.setMenuList(myMenuList);	// 写入菜单 
-// sp.setMenuList(myMenuList, [11, 1, '1-1']);	// 写入菜单，并设置应该显示哪些id的菜单（第二个参数为空时，代表默认显示所有）
+sa_admin.setMenuList(myMenuList);	// 写入菜单 
+// sa_admin.setMenuList(myMenuList, [11, 1, '1-1']);	// 写入菜单，并设置应该显示哪些id的菜单（第二个参数为空时，代表默认显示所有）
 ```
 
 #### 5、js控制打开某个菜单
 ```js
-sp.showMenuById('1-1');	// 打开一个 菜单，根据 id 
-sp.closePageById('1-1');	// 关闭一个 页面，根据 id 
+sa_admin.showMenuById('1-1');	// 打开一个 菜单，根据 id 
+sa_admin.closePageById('1-1');	// 关闭一个 页面，根据 id 
 // 打开一个自定义 页面 
-// sp.showPage({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id尽量不要和已有的菜单id冲突，其它属性均可参照菜单项
+// sa_admin.showPage({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id尽量不要和已有的菜单id冲突，其它属性均可参照菜单项
 ```
 
 #### 6、如何设置登录后右上角显示的user信息
 ``` js
-sp.user = { 
+sa_admin.user = { 
     username: 'root', // 昵称	
     avatar: 'sa-resources/admin-logo.png' // 头像地址 
 }
@@ -47,7 +46,7 @@ sp.user = {
 #### 7、重写按钮事件
 你可以轻松自定义登录后的头像处，下拉可以出现的选项
 ``` js
-sp.dropList = [	// 头像点击处可操作的选项	
+sa_admin.dropList = [	// 头像点击处可操作的选项	
     {	
     	name: '我的资料',	
     	click: function() {	
@@ -63,7 +62,21 @@ sp.dropList = [	// 头像点击处可操作的选项
 ]	
 ``` 
 
-#### 8、以上示例在 my-code.js中 都有相应的注释说明，如何还有不懂的地方，可以加群问我（群链接在首页）
+
+#### 8、初始化模板（必须调用）
+``` js
+sa_admin.init();
+```
+或者以下方式，增加配置项
+``` js
+sa_admin.init({
+	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4
+	switchDefault: '1',	// 默认的切换动画，可选值：fade、slide、cube、coverflow、flip
+});
+```
+
+
+#### 9、以上示例在 my-code.js中 都有相应的注释说明，如何还有不懂的地方，可以加群问我（群链接在首页）
 
 
 

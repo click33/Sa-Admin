@@ -14,7 +14,7 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
 		
 		<style type="text/css">
@@ -33,13 +33,13 @@
 		<div class="vue-box">
 			
 			<!-- 参数栏 -->
-			<div class="c-panel">
+			<div style="padding: 2em;">
 				<div class="c-title">检索参数</div>
 				<el-form ref="form">
 	
 					<div class="c-item">
 						<label class="c-label">选择年份：</label>
-						<el-select size="small" v-model="p.year" @change="f5()">
+						<el-select size="mini" v-model="p.year" @change="f5()">
 							<el-option label="不限年份" :value="0"></el-option>
 							<el-option label="2016年" :value="2016"></el-option>
 							<el-option label="2017年" :value="2017"></el-option>
@@ -51,7 +51,7 @@
 					</div>
 					
 					<div class="c-item" style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
 					</div>
 					
 				</el-form>
@@ -60,19 +60,19 @@
 			
 			<!-- 数据栏 -->
 			<div style="display: flex; margin-top: -1em;">
-				<div class="c-panel" style="flex: 4; margin-right: 0;">			
-					<div class="c-title">列表</div>
+				<div style="padding: 2em; flex: 4; margin-right: 0;">			
+					<div class="c-title" style="margin-bottom: 50px;">饼图</div>
 					<div class="echarts-div" id='e-type'></div>
 				</div>
-				<div class="c-panel" style="flex: 6;">			
-					<div class="c-title">列表</div>
+				<div style="padding: 2em; flex: 6;">			
+					<div class="c-title">折线图</div>
 					<div class="echarts-div" id='e-month'></div>
 				</div>
 			</div>
 			
 			<div style="clear: both;"></div>
 
-			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
+			<div style="padding: 2em;">
 				ECharts：<el-link type="primary" href="https://echarts.baidu.com/" target="_blank">
 					一个使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器
 				</el-link>

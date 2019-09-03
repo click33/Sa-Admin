@@ -1,43 +1,30 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	    <title>菜单分配</title>
-
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <!-- 所有的 css 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> 
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		
 		<!-- 所有的 js 资源 -->
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
-
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
-
         <style>
 			body,.el-tree{
 				background-color: #F5F5F5;
 			}
 			.el-tree-node{margin: 0.15em 0 !important;}
-			
-		    
 			/* 悬浮时颜色更深一点 */
 			.el-tree-node__content:hover{background-color: #CFE8FC !important;}
-			
         </style>
-	
 	</head>
 	<body>
-		
-		
 		<div class="vue-box">
-			
-			
 			<!-- 表格 -->
-			<div class="c-panel" style="border: 0px;">
+			<div style="padding: 2em;">
 				<div class="c-title">菜单预览</div>
 		        <!-- 树插件 -->
 				<el-tree
@@ -52,114 +39,26 @@
 						<span style="color: #999;" v-if="data.info">&emsp;———— {{data.info}} </span>
 					</span>
 				</el-tree>
-
-				
-	
 			</div>
-			
-			
-			
-			
-			
-			<br /><br /><br /><br />
-			<br /><br /><br /><br /><br /><br /><br /><br />
-			
-			
-			
-			
 		</div>
-		
-		<!-- 模拟数据 -->
 		<script src="../../sa-resources/menu-list.js"></script>
-		<script type="text/javascript">
-			
-		</script>
-
+		<script src="../../sa-resources/admin-util.js"></script>
         <script>
-		
 			var role_id = sa.$util.getUrlArgs('role_id');
-			
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
 					dataList: [],	// 数据集合 
 				},
-				methods: {
-					
-				},
 				created: function(){
-					
 					// 全部
 					sa.ajax2('/SysMenu/getList', this.p, function(res){
 						menuList = arrayToTree(menuList);	// 一维转tree 
 						menuList = refMenuList(menuList);	// 属性处理 
 						this.dataList = menuList;	// 数据  
 					}.bind(this));
-					
-					
 				}
 			})
-			
-			
-			
-			
-			// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
-			function arrayToTree(menu_list) {
-				for (var i = 0; i < menu_list.length; i++) {
-					var menu = menu_list[i];
-					// 添加到其指定的父菜单的childList
-					if(menu.parent_id) {
-						var parent_menu = getMenuById(menu_list, menu.parent_id);
-						if(parent_menu) {
-							parent_menu.childList = parent_menu.childList || [];
-							parent_menu.childList.push(menu);
-							menu_list.splice(i, 1);	// 从一维中删除 
-							i--;
-						}
-					}
-				}
-				return menu_list;
-			}
-			
-			
-			// 将 menu_list 处理一下 
-			function refMenuList(menu_list) {
-				for (var i = 0; i < menu_list.length; i++) {
-					var menu = menu_list[i];
-					// 有子项的递归处理 
-					if(menu.childList){
-						menu.children = menu.childList;
-						refMenuList(menu.childList);
-					}
-				}
-				return menu_list;
-			}
-			
-			
-			
-			// 返回指定 index 的menu
-			function getMenuById(menuList, id) {
-				for (var i = 0; i < menuList.length; i++) {
-					var menu = menuList[i];
-					if(menu.id + '' == id + '') {
-						return menu;
-					}
-					// 如果是二级或多级 
-					if(menu.childList) {
-						var menu2 = getMenuById(menu.childList, id);
-						if(menu2 != null) {
-							return menu2;
-						}
-					}
-				}
-				return null;
-			}
-			
-			
-			
-		
-		
 		</script>
-	
 	</body>
 </html>

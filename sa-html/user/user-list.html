@@ -14,7 +14,7 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="../../static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/kj/laydate/laydate.js"></script>
 		<script src="../../static/sa.js"></script>
 		<script src="data-list.js"></script>
@@ -37,35 +37,35 @@
 				<el-form ref="form">
 	
 					<div class="c-item">
-						<label class="c-label">用户昵称：</label>
-						<el-input size="small" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
+						<label class="c-label">昵称：</label>
+						<el-input size="mini" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
 					</div>
 					
 					<div class="c-item">
+						<label class="c-label">注册日期：</label>
+						<el-input size="mini" v-model="p.start_time" class="start_time"></el-input>
+						&nbsp;至&nbsp;
+						<el-input size="mini" v-model="p.end_time" class="end_time"></el-input>
+					</div>
+					
+					<div class="c-item" style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
+					</div>
+					
+					<!-- <br />
+					<div class="c-item">
 						<label class="c-label">注册方式：</label>
-						<el-select size="small" v-model="p.create_type">
+						<el-select size="mini" v-model="p.create_type">
 							<el-option label="全部" :value="0"></el-option>
 							<el-option label="账号注册" :value="1"></el-option>
 							<el-option label="手机号注册" :value="2"></el-option>
 							<el-option label="邮箱注册" :value="3"></el-option>
 						</el-select>
 					</div>
-					
-					<div class="c-item" style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" size="small" @click="f5">查询</el-button>
-					</div>
-					
+					 -->
 					<br />
 					<div class="c-item">
-						<label class="c-label">注册日期：</label>
-						<el-input size="small" v-model="p.start_time" class="start_time"></el-input>
-						至
-						<el-input size="small" v-model="p.end_time" class="end_time"></el-input>
-					</div>
-					
-					<br />
-					<div class="c-item">
-						<label class="c-label">排序方式：</label>
+						<label class="c-label">排序：</label>
 						<el-radio-group v-model="p.sort_type">
 							<el-radio :label="1">注册时间</el-radio>
 							<el-radio :label="2">最近登录</el-radio>
@@ -82,7 +82,7 @@
 			<!-- 数据栏 -->
 			<div class="c-panel">			
 				<div class="c-title">列表</div>
-				<el-table class="data-table" :data="dataList" size="small" border style="width: 100%">
+				<el-table class="data-table" :data="dataList" size="mini"  style="width: 100%">
 					
 					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
 					<el-table-column label="昵称" prop="username" width="200px">
@@ -120,17 +120,21 @@
 					</el-table-column>
 				</el-table>
 		
+				<!-- 分页 -->
+				<div class="page-box">
+					<el-pagination background
+						layout="total, prev, pager, next, sizes, jumper" 
+						:current-page.sync="page.pageNo" 
+						:page-size.sync="page.pageSize" 
+						:total="page.count" 
+						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+						@current-change="f5(true)" 
+						@size-change="f5(true)">
+					</el-pagination>
+				</div>
 
 			</div>
 			
-			<!-- 分页栏 -->
-			<div class="c-panel">	
-				<el-pagination background layout="total, prev, pager, next, sizes, jumper" 
-					:current-page="page.pageNo" :page-size="page.pageSize" :total="page.count" 
-					:page-sizes="[1, 10, 20, 30, 40, 50, 100]"
-					@current-change="pageNo_f5" @size-change="pageSize_f5">
-				</el-pagination>
-			</div>
 			
 			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
 				layer：<el-link type="primary" href="http://layer.layui.com/" target="_blank">

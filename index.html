@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<!-- style="display: none;" 防止 初始花屏 -->
-		<div class="app" :class="['theme-0', 'theme-' + themeV, (is_fold ? 'fold' : '')]" style="display: none;" :style="'display: block;'">
+		<div class="app" :class="['theme-0', 'theme-' + themeV, (is_fold ? 'fold' : ''), (themeToggling ? 'themeToggling' : '')]" style="display: none;" :style="'display: block;'">
 			<!-- 左 -->
 			<div class="nav-left">
 				<!-- 左上 -->
@@ -31,10 +31,11 @@
 							<!-- 菜单 -->
 							<el-menu default-active="2" 
 								class="el-menu-style-1" 
-								:unique-opened="true"
+								:unique-opened="unique_opened"
 								:default-active="default_active" 
+								:default-openeds="default_openeds"
 								:collapse="is_fold"
-								@select="selectMenu"
+								@select="selectMenu" 
 								>
 								
 								<div v-for="(menu, index) in menuList" :key="index">
@@ -130,7 +131,7 @@
 								</span>
 								<el-dropdown-menu slot="dropdown">
 									<el-dropdown-item :command="s.value" v-for="s in switchList" :key="s.name">
-										<span :style=" switchV == s.value ? 'color: blue' : '' ">{{s.name}} </span>
+										<span :style=" switchV == s.value ? 'color: #44f' : '' ">{{s.name}} </span>
 									</el-dropdown-item>
 								</el-dropdown-menu>
 							</el-dropdown>
@@ -143,7 +144,7 @@
 								</span>
 								<el-dropdown-menu slot="dropdown">
 									<el-dropdown-item :command="t.value" v-for="t in themeList" :key="t.name">
-										<span :style=" themeV == t.value ? 'color: blue' : '' ">{{t.name}} </span>
+										<span :style=" themeV == t.value ? 'color: #44f' : '' ">{{t.name}} </span>
 									</el-dropdown-item>
 								</el-dropdown-menu>
 							</el-dropdown>
@@ -228,7 +229,7 @@
 		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-		<script src="static/kj/layer/layer.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		
 		<script src="sa-resources/admin-util.js"></script>
 		<script src="sa-resources/menu-list.js"></script>
