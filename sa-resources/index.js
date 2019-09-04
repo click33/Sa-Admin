@@ -88,6 +88,8 @@ var sa_admin = new Vue({
 			// 初始化 swiper
 			var switchV = localStorage.getItem('switchV') || option.switchDefault || 'fade';  
 			this.initSwiper(switchV); 
+			
+			window.onresize();
 		},
 		// ------------------- 对外预留接口 --------------------
 		// 写入菜单，可以是一个一维数组(指定好parent_id)，也可以是一个已经渲染好的tree数组	
@@ -528,10 +530,7 @@ var sa_admin = new Vue({
 			}
 		}.bind(this), 2000)
 		
-		// 调整是否
-		setTimeout(function() {
-			window.onresize();
-		}, 0);
+		
 
 	}
 });
