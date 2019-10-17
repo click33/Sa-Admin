@@ -89,6 +89,7 @@
 /* 非标准附加样式 */
 .theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC;}
 .theme-3 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-3.fold .nav-left-bottom{width: 63px;}
 .theme-3 .nav-right-1,.theme-3 .nav-right-2{border-left: 1px #eee solid;}
 
 /* 左边栏背景色，前景色 */
@@ -121,6 +122,7 @@
 .theme-4 .nav-left-top .admin-logo{display: none;}
 
 .theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-4.fold .nav-left-bottom{width: 63px;}
 .theme-4 .nav-left .el-submenu__title,
 .theme-4 .nav-left .el-menu-item{transition: background-color 0.1s;}
 
@@ -167,8 +169,10 @@
 
 .theme-5 {}
 
+.theme-5 .nav-left-top{box-shadow: 0 2px 2px #CCC;}
 .theme-5 .nav-left-top,
 .theme-5 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-5.fold .nav-left-bottom{width: 63px;}
 .theme-5 .el-submenu__icon-arrow.el-icon-arrow-down{display: none;}
 .theme-5 .nav-left-bottom .menu-box-2{padding-bottom: 200px;}
 
