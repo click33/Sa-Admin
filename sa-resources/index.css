@@ -13,14 +13,14 @@ html,body{height: 100%; background-color: #EEE;}
 	overflow: hidden;
 }
 /* 左上 logo部分 */
-.nav-left-top{width: 100%; height: 75px; overflow: hidden; line-height: 75px; cursor: pointer; transform: none;}
+.nav-left-top{width: 100%; height: 80px; overflow: hidden; line-height: 75px; cursor: pointer; transform: none;}
 .admin-logo{width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin: 0.5em; margin-left: 1em;}
 /* ==== .nav-left-top:hover{color: #FFF;} */
 
 /* 左下 */
 .nav-left-bottom{
 	width: 100%;
-	height: calc(100% - 75px);
+	height: calc(100% - 80px);
 	overflow: hidden;
 }
 .nav-left-bottom i[class^=el-icon-]{font-size: 16px;}
@@ -49,7 +49,7 @@ html,body{height: 100%; background-color: #EEE;}
 }
 
 /* 第一行建筑物 */
-.nav-right-1{height: 39px; line-height: 39px; border-bottom: 1px #DDD solid; }
+.nav-right-1{position: relative; height: 44px; line-height: 44px; border-bottom: 1px #DDD solid; }
 
 .tools-left{border: 0px #000 solid; float: left;}
 .tools-right{float: right;}
@@ -67,67 +67,82 @@ html,body{height: 100%; background-color: #EEE;}
 }
 
 /* 第二行建筑物 */
-.nav-right-2{height: 35px; position: relative; z-index: 110; box-shadow: 0 2px 2px #CCC;}
+.nav-right-2,.nav-right-bre{height: 35px; position: relative; z-index: 110; box-shadow: 0 2px 2px #CCC;}
 .nav-right-2>div{height: 100%; position: absolute;}
+
+.nav-right-bre{line-height: 35px; padding-left: 1em; background-color: #FFF; cursor: pointer; display: none;}
+.nav-right-bre .el-breadcrumb__item{line-height: 35px; font-size: 13px; }
+/* .nav-right-bre .el-breadcrumb__item:hover{cursor: pointer; text-decoration: underline;} */
 
 .towards-left,.towards-right{width: 25px; text-align: center; background-color: #FFF; cursor: pointer; line-height: 35px;} 
 .towards-right{right: 0px;}
 .towards-left:hover i,.towards-right:hover i{font-size: 1.1em;font-weight: bold;}
 
 .towards-middle{width: 10000px; overflow: auto;/* calc(100% - 50px) */ left: 25px;background-color: #EEE;}
-.page-title-box{display: inline-block; position: absolute; left: 0px;}
-.page-title{
-	padding: 0 8px;
-	margin: 0 3px;
-	margin-top: 1px;
-	height: 30px;
-	background-color: #FFF;
+.tab-title-box{display: inline-block; position: absolute; left: 0px;}
+.tab-title{
 	font-size: 0.8em;
-	border: 1px #DDD solid;
 	border-radius: 2px;
 	cursor: pointer;
 	/* display: inline-block; */
 	float: left;
-	transition: all 0.0s;
+	transition: all 0.15s;
+	/* word-break:keep-all; */
+	white-space: nowrap;
+	overflow: hidden;
+	border: 0px blue solid;
+	text-decoration: none;
+	color: inherit;
+	/* border-right-width: 1px; */
 }
-.page-title span{transition: all 0.0s;}
-.page-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
-.page-title .el-icon-close{display: inline-block; border-radius: 50%; padding: 1px; color: #999; margin-left: -0.3em;}
-.page-title .el-icon-close:hover{background-color: red; color: #FFF;}
-.page-title span{display: inline-block; margin-right: 1em;}
-.page-title:hover span,.page-native span{font-weight: bold;}
-.page-title:hover,.page-title.page-native{border: 1px #FFF solid; border-radius: 0px;  padding: 1px 10px; margin: 0 1px; }
+.tab-title-2{padding: 0 8px; border: 1px #DDD solid; height: 30px; margin: 0 3px; margin-top: 1px; background-color: #FFF; }
+.tab-title-2{transition: padding 0.1s, margin 0.1s;}
+.tab-title-2 *{transition: all 0.0s;}
+.tab-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
+.tab-title .el-icon-close{display: inline-block; border-radius: 50%; padding: 1px; color: #999; margin-left: -0.3em;}
+.tab-title .el-icon-close:hover{background-color: red; color: #FFF;}
+.tab-title span{display: inline-block; margin-right: 1em;}
+.tab-title:hover span,.tab-native span{font-weight: bold;}
+.tab-title:hover .tab-title-2,.tab-title.tab-native .tab-title-2{border: 1px #FFF solid; border-radius: 0px;  padding: 1px 10px; margin: 0 1px;}
 
 /* 第三杠 */
-.nav-right-3{width: 100%; height: calc(100% - 75px); position: relative; overflow: hidden;}
+.nav-right-3{width: 100%; height: calc(100% - 80px); position: relative; overflow: hidden;}
 .iframe{background: url(admin-loading.gif) no-repeat center 50%;}
-.iframe{width: 100%; height: 100%; border: 0px; background-color: #EEE; }
+.iframe{width: 100%; height: 100%; border: 0px; background-color: #EEE;}
 .iframe-no-scroll{width: calc(100% + 22px); }
 
 .swiper-container,.swiper-wrapper,.swiper-slide{width: 100%; height: 100%;}
 .swiper-slide{overflow: hidden;}
 
+/* .fas{transition: all 0s;} */
+.at-form-fox,
+.at-form-fox *{transition: all 0s;}
 
 /* 右键菜单 样式 */
 .right-box {
+	position: fixed;
+	z-index: 2147483647;
+	transition: max-height 0.2s;
+	outline:none;
+	max-height: 0px;
+	overflow: hidden;
+}
+.right-box-2{
 	font-size: 0.8em;
+	padding: 0.5em 0;
 	border: 1px #aaa solid;
 	border-radius: 1px;
 	background-color: #FFF;
-	padding: 0.5em 0;
-	position: fixed;
-	z-index: 2147483647;
-	transition: all 0.2s;
-	outline:none;
 }
-.right-box>div {
+.right-box-2>div {
 	line-height: 2.2em;
 	padding-left: 1em;
 	padding-right: 2em;
 	cursor: pointer;
 }
-.right-box>div:hover {
+.right-box-2>div:hover {
 	background-color: #ddd;
+	color: #2D8CF0;
 }
 
 
@@ -160,3 +175,18 @@ html,body{height: 100%; background-color: #EEE;}
 
 /* ajax2加载时的转圈圈样式 */
 .ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
+
+/* 遮罩样式 */
+.shade-fox{position: absolute; z-index: 1000000; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: #FFF; top: 0px;}
+.shade-fox{display: flex; justify-content: center; align-items: center}
+.shade-text{}
+
+
+/* 如果是隐藏tabbar模式 */
+.hide-tabbar .nav-right-2{display: none;}
+.hide-tabbar .nav-right-bre{display: block;}
+.hide-tabbar .nav-right-1{border-bottom: 1px #eeeeee solid;}
+
+
+/* 去除掉便签的大边框 */
+.layui-layer-input{outline: 0;}

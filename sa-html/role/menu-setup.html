@@ -6,7 +6,7 @@
 	    <title>菜单分配</title>
 
          <!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> 
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
 		
 		<!-- 所有的 js 资源 -->
@@ -51,10 +51,10 @@
 					@node-click="node_click"
 					@check="node_click"
 					>
-					<span class="custom-tree-node" slot-scope="{ node, data }">
-						<span style="color: #2D8CF0;" v-if="data.is_show == undefined || data.is_show == true">{{ data.name }}</span>
-						<span style="color: #999;" v-if="data.is_show == false">{{ data.name }} (隐藏)</span>
-						<span style="color: #999;" v-if="data.info">&emsp;———— {{data.info}} </span>
+					<span class="custom-tree-node" slot-scope="s">
+						<span style="color: #2D8CF0;" v-if="s.data.is_show == undefined || s.data.is_show == true">{{ s.data.name }}</span>
+						<span style="color: #999;" v-if="s.data.is_show == false">{{ s.data.name }} (隐藏)</span>
+						<span style="color: #999;" v-if="s.data.info">&emsp;———— {{s.data.info}} </span>
 					</span>
 				</el-tree>
 

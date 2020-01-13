@@ -2,8 +2,8 @@
 .nav-left .el-submenu__title i,
 .nav-left .el-menu-item i,
 .nav-right-1 .el-dropdown,
-.page-title:hover .el-icon-caret-right,
-.page-title.page-native .el-icon-caret-right {
+.tab-title:hover .el-icon-caret-right,
+.tab-title.tab-native .el-icon-caret-right {
 	color: inherit;
 }
 
@@ -57,8 +57,8 @@
 }
 
 /* 卡片栏悬浮颜色和选中颜色 */
-.theme-0 .page-title:hover,
-.theme-0 .page-native.page-title {
+.theme-0 .tab-title:hover,
+.theme-0 .tab-native.tab-title {
 	color: #2D8CF0;
 }
 
@@ -78,8 +78,8 @@
 }
 
 /* 卡片栏悬浮颜色和选中颜色 */
-.theme-2 .page-title:hover,
-.theme-2 .page-native.page-title {
+.theme-2 .tab-title:hover,
+.theme-2 .tab-native.tab-title {
 	color: #009688;
 }
 
@@ -87,10 +87,10 @@
 .theme-3 {}
 
 /* 非标准附加样式 */
-.theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC;}
+.theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC; width: 199px; border-right: 1px #DDD solid;}
 .theme-3 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
 .theme-3.fold .nav-left-bottom{width: 63px;}
-.theme-3 .nav-right-1,.theme-3 .nav-right-2{border-left: 1px #eee solid;}
+/* .theme-3 .nav-right-1,.theme-3 .nav-right-2{border-left: 1px #eee solid;} */
 
 /* 左边栏背景色，前景色 */
 .theme-3 .nav-left {
@@ -118,7 +118,7 @@
 .theme-4 {}
 
 /* 非标准附加样式 */
-.theme-4 .nav-left-top{height: 39px; line-height: 39px; text-indent: 2em; background-color: #222; color: #EEE;}
+.theme-4 .nav-left-top{height: 44px; line-height: 44px; text-indent: 2em; background-color: #222; color: #EEE;}
 .theme-4 .nav-left-top .admin-logo{display: none;}
 
 .theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
@@ -147,8 +147,8 @@
 }
 
 /* 卡片栏悬浮颜色和选中颜色 */
-.theme-4 .page-title:hover,
-.theme-4 .page-native.page-title {
+.theme-4 .tab-title:hover,
+.theme-4 .tab-native.tab-title {
 	color: #009688;
 }
 
@@ -199,8 +199,8 @@
 .theme-5 .nav-left .el-menu-item.is-active {background-color: #eee; color: #1AAD5E;}
 
 /* 卡片栏悬浮颜色和选中颜色 */
-.theme-5 .page-title:hover,
-.theme-5 .page-native.page-title {
+.theme-5 .tab-title:hover,
+.theme-5 .tab-native.tab-title {
 	color: #1AAD5E;
 }
 

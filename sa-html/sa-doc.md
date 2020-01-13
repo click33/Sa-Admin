@@ -9,7 +9,7 @@
 
 #### 2、使用说明
 > - 在使用时，不建议你直接魔改模板的代码，以免在运行时出现意外bug，而是用扩展的方法，来适应你的业务逻辑
-> - 如何扩展？在sa-resourecs文件下，有个 my-code.js ，这是专门为了方便你接入你的业务逻辑而预留的一个文件 你可以在此文件中根据模板提供的API来操作模板
+> - 如何扩展？在 `sa-resourecs` 文件下，有个 `my-code.js` ，这是专门为了方便你接入你的业务逻辑而预留的一个文件 你可以在此文件中根据模板提供的API来操作模板
 > - 具体可以操作哪些接口？接着往下看
 
 
@@ -29,10 +29,12 @@ sa_admin.setMenuList(myMenuList);	// 写入菜单
 
 #### 5、js控制打开某个菜单
 ```js
-sa_admin.showMenuById('1-1');	// 打开一个 菜单，根据 id 
-sa_admin.closePageById('1-1');	// 关闭一个 页面，根据 id 
+sa_admin.showHome();			// 显示主页选项卡 
+sa_admin.showTabById('1-1');	// 显示一个选项卡, 根据id
+sa_admin.closeTabById('1-1');	// 关闭一个选项卡，根据 id 
+sa_admin.showMenuById('1-1');	// 打开一个 菜单，根据 id
 // 打开一个自定义 页面 
-// sa_admin.showPage({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id尽量不要和已有的菜单id冲突，其它属性均可参照菜单项
+// sa_admin.showPage({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
 ```
 
 #### 6、如何设置登录后右上角显示的user信息
@@ -70,8 +72,10 @@ sa_admin.init();
 或者以下方式，增加配置项
 ``` js
 sa_admin.init({
-	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4
-	switchDefault: '1',	// 默认的切换动画，可选值：fade、slide、cube、coverflow、flip
+	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4、5
+	switchDefault: 'fade',	// 默认的切换动画，可选值：fade、slide、cube、coverflow、flip
+	is_show_tabbar: true,	// 是否显示tabbar栏, 默认为true, 配置为false后将不再是一个多窗口tab, 取之显示的是一个面包屑导航栏
+	is_reme_open: true,		// 是否记住上一次最后打开的窗口, 默认为true, 配置为false后, 每次刷新不再自动打开上一次最后打开的窗口(也不再有锚链接智能tab调准)
 });
 ```
 
