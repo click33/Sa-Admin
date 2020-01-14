@@ -239,7 +239,7 @@
 							<i class="el-icon-menu" @click="showHome()"></i>
 						</el-breadcrumb-item>
 						<!-- <el-breadcrumb-item v-if="bre_is_show_title">{{title}}</el-breadcrumb-item> -->
-						<el-breadcrumb-item v-for="(menu, index) in breMenuList">{{menu.name}}</el-breadcrumb-item>
+						<el-breadcrumb-item v-for="(menu, index) in breMenuList" :key="menu.id">{{menu.name}}</el-breadcrumb-item>
 					</el-breadcrumb>
 				</div>
 				

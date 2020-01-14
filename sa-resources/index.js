@@ -9,8 +9,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.0.0',		// 当前版本
-		update_time: '2020-1-13',		// 更新日期 
+		version: 'v2.0.1',		// 当前版本
+		update_time: '2020-1-14',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -305,7 +305,7 @@ var sa_admin = new Vue({
 			this.showTab(this.rightTab);	// 先转到
 			var cs = '#iframe-' + this.rightTab.id;
 			var iframe = document.querySelector(cs);
-			iframe.setAttribute('src', iframe.getAttribute('src')); 
+			iframe.setAttribute('src', this.getTabUrl(this.rightTab));
 		},
 		// 右键 悬浮 
 		right_xf: function() {
@@ -329,7 +329,7 @@ var sa_admin = new Vue({
 				shadeClose: false,
 				shade: 0,
 				area: ['80%', '80%'],
-				content: this.rightTab.url,
+				content: this.getTabUrl(this.rightTab),
 				// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
                 resizing: function (layero) {
                     //console.log($('.layui-layer.layui-layer-iframe').length);
@@ -418,7 +418,17 @@ var sa_admin = new Vue({
 		},
 		// 右键 - 新窗口打开
 		right_window_open: function() {
-			open(this.rightTab.url); 
+			open(this.getTabUrl(this.rightTab)); 
+		},
+		// 获取指定tab所代表iframe的url地址 (同域下可获取最新地址, 跨域时只能获取初始化时的地址)
+		getTabUrl: function(tab) {
+			var cs = '#iframe-' + tab.id;
+			var iframe = document.querySelector(cs);
+			try{
+				return iframe.contentWindow.location.href;
+			}catch(e){
+				return iframe.getAttribute('src');
+			}
 		},
 		
 		// ------------------- menu 相关 --------------------
@@ -709,9 +719,9 @@ var sa_admin = new Vue({
 		getSlideIndexById: function(id) {
 			var iframe = document.querySelector('#iframe-' + id);
 			if(iframe != null)  {
-				// 获取其所在slide的索引并删除 
+				// 获取其所在slide的索引
 				var slide = iframe.parentNode;
-				var slideIndex = [].indexOf.call(slide.parentNode.querySelectorAll(slide.tagName), slide);
+				var slideIndex = [].indexOf.call(slide.parentNode.querySelectorAll('.swiper-slide'), slide);
 				return slideIndex;
 			}
 			return -1;
