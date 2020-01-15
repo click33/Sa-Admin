@@ -95,7 +95,7 @@ html,body{height: 100%; background-color: #EEE;}
 	color: inherit;
 	/* border-right-width: 1px; */
 }
-.tab-title-2{padding: 0 8px; border: 1px #DDD solid; height: 30px; margin: 0 3px; margin-top: 1px; background-color: #FFF; }
+.tab-title-2{padding: 0 8px; border: 1px #DDD solid; height: 30px; margin: 0 3px; margin-top: 1px; background-color: #FFF; line-height: 30px;}
 .tab-title-2{transition: padding 0.1s, margin 0.1s;}
 .tab-title-2 *{transition: all 0.0s;}
 .tab-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
