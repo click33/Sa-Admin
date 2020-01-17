@@ -73,12 +73,12 @@
 					<el-table-column label="喜欢" prop="like_count"></el-table-column>
 					<el-table-column label="分享" prop="share_count"></el-table-column>
 					<el-table-column prop="address" label="操作" width="150px">
-						<template slot-scope="scope">
-							<span @click="sa.$fast.showIframe('文章修改', 'art-add.html?id=' + scope.row.id)">
-								<el-button type="primary" class="c-button" icon="el-icon-edit">修改</el-button>
+						<template slot-scope="s">
+							<span @click="update(s.row)">
+								<el-button type="primary" class="c-btn" icon="el-icon-edit">修改</el-button>
 							</span>
-							<span @click="sa.$fast.fastDelete('/SerArticle/delete?id=' + scope.row.id, dataList, scope.row)">
-								<el-button type="danger" class="c-button" icon="el-icon-delete">删除</el-button>
+							<span @click="del(s.row)">
+								<el-button type="danger" class="c-btn" icon="el-icon-delete">删除</el-button>
 							</span>
 						</template>
 					</el-table-column>
@@ -111,7 +111,11 @@
 					p: { // 查询参数
 						sort_type: 0
 					},
-					page: sa.$fast.getPage(),// 分页信息
+					page: {		// 分页信息
+						pageNo: 1,
+						pageSize: 10,
+						count: 1000,
+					},
 					dataList: dataList // 数据集合
 				},
 				methods: {
@@ -120,6 +124,19 @@
 						sa.ajax2('/VocArticle/getList', this.p, function(res){
 							// this.dataList = res.data;	// 数据
 							// this.page = res.page;		// 分页 
+						}.bind(this));
+					},
+					// 修改
+					update: function(data) {
+						sa.showIframe('文章修改', 'art-add.html?id=' + data.id);
+					},
+					// 删除
+					del: function(data) {
+						sa.confirm('是否删除，此操作不可撤销', function() {
+							sa.ajax2('url', {}, function(res) {
+								sa.arrayDelete(this.dataList, data);
+								sa.ok('删除成功');
+							}.bind(this))
 						}.bind(this));
 					}
 

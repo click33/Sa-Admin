@@ -118,7 +118,7 @@
 .theme-4 {}
 
 /* 非标准附加样式 */
-.theme-4 .nav-left-top{height: 44px; line-height: 44px; text-indent: 2em; background-color: #222; color: #EEE;}
+.theme-4 .nav-left-top{height: 49px; line-height: 49px; text-indent: 2em; background-color: #222; color: #EEE;}
 .theme-4 .nav-left-top .admin-logo{display: none;}
 
 .theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
@@ -165,7 +165,7 @@
 
 
 
-/* ========================== 主题-5 仿微信公众平台 ==========================  */
+/* ========================== 主题-5 灰色站看 (仿微信公众平台)0分 ==========================  */
 
 .theme-5 {}
 
@@ -204,3 +204,33 @@
 	color: #1AAD5E;
 }
 
+
+/* ========================== 主题-6 钛合金 (仿 iview admin pro) ==========================  */
+.theme-6 {}
+
+/* 所有菜单悬浮样式时, 以及选中时 */
+.theme-6 .nav-left .el-submenu__title:hover,
+.theme-6 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
+.theme-6 .nav-left .el-menu-item:hover,
+.theme-6 .nav-left .el-menu-item.is-active {
+	background-color: #805322;
+	color: #FFF;
+}
+
+/* 卡片栏悬浮颜色和选中颜色 */
+.theme-6 .tab-title:hover,
+.theme-6 .tab-native.tab-title {color: #805322;}
+
+/* 工具栏背景色颜色, 前景色 */
+.theme-6 .nav-right-1 {color: #EEE;background-color: #222;}
+
+/* 工具栏悬浮颜色 */
+.theme-6 .tool-fox:hover {background-color: #444;}
+
+
+/* ========================== 主题-7 黑蓝 ==========================  */
+.theme-7 {}
+/* 工具栏背景色颜色, 前景色 */
+.theme-7 .nav-right-1 {color: #EEE;background-color: #222;}
+/* 工具栏悬浮颜色 */
+.theme-7 .tool-fox:hover {background-color: #444;}

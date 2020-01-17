@@ -69,7 +69,7 @@
 					
 					<el-table-column label="创建日期">
 						<template slot-scope="scope">
-							{{sa.$util.forDate(scope.row.create_time)}}
+							{{sa.forDate(scope.row.create_time)}}
 						</template>
 					</el-table-column>
 					
@@ -180,12 +180,12 @@
 					// 刷新
 					f5: function(){
 						sa.ajax2('/role/getList', {}, function(res){
-							this.dataList = sa.$util.listAU(dataList);	// 数据
+							this.dataList = sa.listAU(dataList);	// 数据
 						}.bind(this));
 					},
 					// 修改
 					update: function (data) {
-						var data2 = sa.$util.copyJSON(data);
+						var data2 = sa.copyJSON(data);
 						data2.create_time = undefined;
 						sa.ajax2('/role/update', data2, function(res){
 							layer.msg('修改成功');
@@ -199,14 +199,14 @@
 						}
 						layer.confirm('是否删除，此操作不可撤销',{},function(){
 							sa.ajax2('/role/delete',{id: data.id},function(res){
-								sa.$util.arrayDelete(app.dataList, data);
+								sa.arrayDelete(app.dataList, data);
 								layer.msg('删除成功');
 							})
 						})
 					},
 					// 添加
 					add: function () {
-						var data = sa.$util.copyJSON(this.addData);
+						var data = sa.copyJSON(this.addData);
 						sa.ajax2('/role/add', data, function(res){
 							layer.alert('添加成功', {}, function(){
 								layer.closeAll();

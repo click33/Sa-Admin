@@ -21,27 +21,32 @@ input::-webkit-inner-spin-button {
 
 /* ajax2加载时的转圈圈样式 */
 .ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
+/* layer图片预览时, 左右键永远显示 */
+.layui-layer-imgbar, .layui-layer-imguide{display: block !important;}
+.layui-layer-iconext.layui-layer-imgprev{position: fixed; left: 50;}
+.layui-layer-iconext.layui-layer-imgnext{position: fixed; right: 50;}
 
 
-
+/* ===================== 整体面板 ===================== */
 /* vue盒子 */
 .vue-box{padding-bottom: 20px; font-size: 14px;}
 
 /* 内容-面板 */
 .c-panel{margin: 0.7em 1em; padding: 1em 1.5em; background-color: #fff; color: #333; box-shadow: 0 0 5px #eee;}
-.c-title{font-weight: bold; line-height: 2em; margin-bottom: 3px;}
+.c-title{font-size: 14px; font-weight: bold; line-height: 2em; margin-bottom: 3px;}
 .c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
+/* ===================== 表单相关 ===================== */
+.c-panel .el-form{padding-bottom: 20px;}
+
 /* 内容-item */
-.c-item {min-width: 280px;min-height: 32px; line-height: 32px; padding-right: 20px; display: inline-block; margin: 0.5em 0;}
+.c-item {min-width: 280px; min-height: 32px; line-height: 32px; padding-right: 20px; display: inline-block; margin: 0.5em 0;}
 
 /* label样式 */
 .c-item .c-label{width: 5em; color: #333; display: inline-block; text-align: right;}
 
 /* input宽度等样式调整 */
 .c-item .el-input{width: 200px;}
-.c-item .el-input__inner,
-.el-textarea__inner{border-radius: 2px;}
 
 /* 禁用input的样式 */
 .c-item .el-input.is-disabled .el-input__inner{color: #999;}
@@ -51,29 +56,33 @@ input::-webkit-inner-spin-button {
 
 /* 解释 */
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
-/* 按钮去圆角 */
-.c-item .el-button{border-radius: 2px;}
 
-/* 按钮样式调整 */
-.el-button.c-button{ padding: 4px 5px; font-size: 0.8em !important; border-radius: 1px;}
-.c-button.el-button--primary{background-color: #3296FA;}
-.c-button.el-button--primary:hover{background-color: #067CF3;}
-.c-button.el-button--danger{background-color: #CA4242;}
-.c-button.el-button--danger:hover{background-color: #A00C0C;}
-.c-button.el-button--success:hover{background-color: #2B9939;}
 
-/* 表格里 */
+/* ===================== 表格相关 ===================== */
+
+/* 表格的表头颜色深一点 */
 .el-table__header tr th{background-color: #F5F5F5;}
-.data-table input{border-radius: 2px;}
 
-/* 分页 */
-.page-box{
-	padding: 1.5em 0 1em 0; 
+/* 调整圆角大小: 输入框、文本域、按钮、 */
+.vue-box .el-input__inner,
+.vue-box .el-textarea__inner,
+.vue-box .el-button{border-radius: 2px;}
+
+/* input发光 */
+.vue-box .el-input__inner:focus,
+.vue-box .el-textarea__inner:focus{
+	/* transition: all 0.2s; */
+	/* box-shadow: 0px 0px 2px 0px #409EFF; */
 }
-/* 分页器的去除圆角 */
-.c-panel .el-pagination input{
-	border-radius: 2px !important;
-}
 
+/* 表格里操作按钮的样式调整 */
+.c-btn{padding: 4px 5px; font-size: 0.8em !important; border-radius: 1px;}
+.c-btn.el-button--primary{background-color: #3296FA;}
+.c-btn.el-button--primary:hover{background-color: #067CF3;}
+.c-btn.el-button--danger{background-color: #CA4242;}
+.c-btn.el-button--danger:hover{background-color: #A00C0C;}
+.c-btn.el-button--success:hover{background-color: #2B9939;}
 
+/* 分页盒子调整一下间距 */
+.page-box{padding: 2em 0 1em 0; }
 

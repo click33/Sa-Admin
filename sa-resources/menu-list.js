@@ -1,3 +1,5 @@
+// 图标参考地址: https://element.eleme.cn/#/zh-CN/component/icon
+
 var menuList =	[
 	{
 		id: '11',

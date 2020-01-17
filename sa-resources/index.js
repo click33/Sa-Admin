@@ -6,15 +6,15 @@ var homeTab = {
 	hide_close: true	// 隐藏关闭键 
 }
 
+// sa_admin对象 
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.0.2',		// 当前版本
-		update_time: '2020-1-15',		// 更新日期 
+		version: 'v2.1',		// 当前版本
+		update_time: '2020-1-17',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
-		is_log: true,				// 是否打印日志 
 		github_url: 'https://github.com/click33/sa-admin',	// github地址 
 		default_active: '0',	// 默认的高亮菜单id
 		default_openeds: [],	// 默认的打开数组 
@@ -56,7 +56,9 @@ var sa_admin = new Vue({
 			{name: '绿色', value: '2', show_all: false},
 			{name: '白色', value: '3', show_all: false},
 			{name: '灰色', value: '4', show_all: false},
-			{name: '灰色-展开', value: '5', show_all: true}
+			{name: '灰色-展开', value: '5', show_all: true},
+			{name: 'pro钛合金', value: '6', show_all: false},
+			{name: '沉淀式黑蓝', value: '7', show_all: false},
 		],
 		themeToggling: false,	// 主题是否正在切换 
 		dropList: [],	// 头像处下拉列表菜单 
@@ -105,6 +107,11 @@ var sa_admin = new Vue({
 			// 一些属性
 			this.is_show_tabbar = (option.is_show_tabbar === undefined ? this.is_show_tabbar : option.is_show_tabbar);	// 是否显示tabbar栏 
 			this.is_reme_open = (option.is_reme_open === undefined ? this.is_reme_open : option.is_reme_open);	// 是否记住上一次最后打开的窗口 
+			
+			// 打印版本等信息
+			if(option.printVesion !== false) {
+				this.printVesion();
+			}
 			
 			// 开始一些初始化动作
 			this.showTabByHash();	// 打开上次最后的一个窗口 
@@ -281,7 +288,7 @@ var sa_admin = new Vue({
 				this.breMenuList = breMenuList;
 			}
 		},
-		// ------------------- p-title右键菜单相关 --------------------
+		// ------------------- tab 右键菜单相关 --------------------
 		// 显示右键菜单
 		right_showMenu: function(tab, event) {
 			this.rightTab = tab;	// 绑定操作tab  
@@ -295,10 +302,15 @@ var sa_admin = new Vue({
 				document.querySelector('.right-box').focus();		// 获得焦点,以被捕获失去焦点事件
 			});
 		},
-		// 关闭右键菜单
+		// 关闭右键菜单 - 立即关闭
 		right_closeMenu: function() {
 			this.rightStyle.maxHeight = '0px';	
 			this.rightShow = false;
+		},
+		// 关闭右键菜单 - 带动画折叠关闭 (失去焦点和点击取消时调用, 为什么不全部调用这个? 因为其它时候调用这个都太卡了) 
+		right_closeMenu2: function() {
+			this.rightStyle.maxHeight = '0px';	
+			// this.rightShow = false;
 		},
 		// 右键 刷新
 		right_f5: function() {
@@ -306,6 +318,10 @@ var sa_admin = new Vue({
 			var cs = '#iframe-' + this.rightTab.id;
 			var iframe = document.querySelector(cs);
 			iframe.setAttribute('src', this.getTabUrl(this.rightTab));
+		},
+		// 右键 复制
+		right_copy: function() {
+			this.showTab({id: new Date().getTime(), name: this.rightTab.name, url: this.getTabUrl(this.rightTab)});
 		},
 		// 右键 悬浮 
 		right_xf: function() {
@@ -505,10 +521,10 @@ var sa_admin = new Vue({
 			}.bind(this), 150);
 		},
 		// js关闭某个tab, 根据id
-		closeTabById: function(id) {
+		closeTabById: function(id, callFn) {
 			var tab = this.getTabById(id);
 			if(tab) {
-				this.closeTab(tab);
+				this.closeTab(tab, callFn);
 			}
 		},
 		// 添加一个Tab
@@ -566,6 +582,29 @@ var sa_admin = new Vue({
 			}
 			return null;
 		},
+		// 双击tab栏空白处
+		dblclickNr2: function(e) {
+			window.r_layer_12345 = layer.open({
+				type: 1,
+				shade: 0.5,
+				title: "添加新窗口", //不显示标题
+				content: $('.at-form-dom'), //捕获的元素
+				cancel: function(){
+					
+				}
+			});
+		},
+		// 根据表单添加新窗口 
+		atOk: function() {
+			if(this.atTitle == '' || this.atUrl == '') {
+				return;
+			}
+			this.showTab({id: new Date().getTime(), name: this.atTitle, url: this.atUrl});
+			layer.close(window.r_layer_12345);
+			this.atTitle = '';
+			this.atUrl = '';
+		},
+		// ------------------- tab左右滑动  -------------------- 
 		// 视角向左滑动一段距离 
 		scrollToLeft: function() {
 			var width = document.querySelector('.nav-right-2').clientWidth;	// 视角宽度
@@ -596,42 +635,26 @@ var sa_admin = new Vue({
 		},
 		// 自动归位
 		scrollToAuto: function() {
+			// console.log('自动归位=========');
 			try{
 				// 最后一个不用归位了 
-				if(this.nativeTab == this.tabList[this.tabList.length - 1]){
-					return;
-				}
+				// if(this.nativeTab == this.tabList[this.tabList.length - 1]){
+				// 	return;
+				// }
 				var width = document.querySelector('.nav-right-2').clientWidth;	// 视角宽度
 				var left = document.querySelector('.tab-native').lastChild.offsetLeft;	// 当前native-tilte下一个距离左边的距离
+				// console.log(width, left, this.scrollX);
 				// 如果在视图右边越界
 				if(left + this.scrollX > (width - 100)){
-					this.scrollToRight();
+					return this.scrollToRight();
+				}
+				// 如果在视图左边越界 
+				if(left + this.scrollX < 0) {
+					return this.scrollToLeft();
 				}
 			}catch(e){
-				
+				// throw e;
 			}
-		},
-		// 双击tab栏空白处
-		dblclickNr2: function(e) {
-			window.r_layer_12345 = layer.open({
-				type: 1,
-				shade: 0.5,
-				title: "添加新窗口", //不显示标题
-				content: $('.at-form-dom'), //捕获的元素
-				cancel: function(){
-					
-				}
-			});
-		},
-		// 根据表单添加新窗口 
-		atOk: function() {
-			if(this.atTitle == '' || this.atUrl == '') {
-				return;
-			}
-			this.showTab({id: new Date().getTime(), name: this.atTitle, url: this.atUrl});
-			layer.close(window.r_layer_12345);
-			this.atTitle = '';
-			this.atUrl = '';
 		},
 		// ------------------- tab拖拽相关 -------------------- 
 		// 在 某个tab上被松开  -->  重新排序   ( 函数未完成 )   
@@ -747,7 +770,7 @@ var sa_admin = new Vue({
 				this.mySwiper.update();	// swipre重新计算大小  
 			}.bind(this), ms);
 		},
-		// ------------------- 便签 -------------------- 
+		// ------------------- 杂七杂八 -------------------- 
 		// 打开便签 
 		openNote: function() {
 			var w = (document.body.clientWidth * 0.4) + 'px';
@@ -776,19 +799,15 @@ var sa_admin = new Vue({
 		// 弹窗
 		msg: function(msg) {
 			layer.msg(msg)
+		},
+		// 打印日志
+		printVesion: function() {
+			console.log('欢迎使用sa-admin，当前版本：' + this.version + "，GitHub地址：" + this.github_url);
+			console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
 		}
 	},
 	created:function(){
 		
-		// 打印日志 
-		setTimeout(function() {
-			if(this.is_log) {
-				console.log('欢迎使用sa-admin，当前版本：' + this.version + "，GitHub地址：" + this.github_url);
-				console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
-			}
-		}.bind(this), 2000)
-		
-
 	}
 });
 var sp = sa_admin;	// 兼容原有方案 

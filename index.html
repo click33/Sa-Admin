@@ -269,23 +269,20 @@
 			
 			<!-- 鼠标右键弹出的盒子 -->
 			<!-- 【向下展开动画，坐标平移动画】二者只可得其一 -->
-			<div class="right-box" :style="rightStyle" v-show="rightShow" tabindex="-1" @blur="right_closeMenu()">
+			<div class="right-box" :style="rightStyle" v-show="rightShow" tabindex="-1" @blur="right_closeMenu2()">
 				<div class="right-box-2">
-					<div @click="right_closeMenu(); right_f5()">刷新</div>
-					<div @click="right_closeMenu(); right_close()">关闭</div>
-					<div @click="right_closeMenu(); right_close_other()">关闭其它</div>
-					<div @click="right_closeMenu(); right_close_all()">关闭所有</div>
-					<div @click="right_closeMenu(); right_xf()">悬浮打开</div>
-					<div @click="right_closeMenu(); right_window_open()">新窗口打开</div>
-					<div @click="right_closeMenu()">取消</div>
+					<div @click="right_closeMenu(); right_f5()"><i class="el-icon-caret-right"></i>刷新</div>
+					<div @click="right_closeMenu(); right_copy()"><i class="el-icon-caret-right"></i>复制</div>
+					<div @click="right_closeMenu(); right_close()"><i class="el-icon-caret-right"></i>关闭</div>
+					<div @click="right_closeMenu(); right_close_other()"><i class="el-icon-caret-right"></i>关闭其它</div>
+					<div @click="right_closeMenu(); right_close_all()"><i class="el-icon-caret-right"></i>关闭所有</div>
+					<div @click="right_closeMenu(); right_xf()"><i class="el-icon-caret-right"></i>悬浮打开</div>
+					<div @click="right_closeMenu(); right_window_open()"><i class="el-icon-caret-right"></i>新窗口打开</div>
+					<div @click="right_closeMenu2();"><i class="el-icon-caret-right"></i>取消</div>
 				</div>
 			</div>
 			
 			
-			
-			
-			
-
 
 		</div>
 
@@ -302,6 +299,7 @@
 		<script src="sa-resources/menu-list.js"></script>
 		<script src="sa-resources/index.js"></script>
 		<script src="sa-resources/my-code.js"></script>
+		<script src="static/sa.js"></script>
 
 
 

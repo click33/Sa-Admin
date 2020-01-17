@@ -13,7 +13,7 @@ html,body{height: 100%; background-color: #EEE;}
 	overflow: hidden;
 }
 /* 左上 logo部分 */
-.nav-left-top{width: 100%; height: 80px; overflow: hidden; line-height: 75px; cursor: pointer; transform: none;}
+.nav-left-top{width: 100%; height: 85px; overflow: hidden; line-height: 85px; cursor: pointer; transform: none;}
 .admin-logo{width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin: 0.5em; margin-left: 1em;}
 /* ==== .nav-left-top:hover{color: #FFF;} */
 
@@ -49,12 +49,11 @@ html,body{height: 100%; background-color: #EEE;}
 }
 
 /* 第一行建筑物 */
-.nav-right-1{position: relative; height: 44px; line-height: 44px; border-bottom: 1px #DDD solid; }
+.nav-right-1{position: relative; height: 49px; line-height: 49px; border-bottom: 1px #DDD solid; }
 
 .tools-left{border: 0px #000 solid; float: left;}
 .tools-right{float: right;}
 .tool-fox{padding: 0 1em; display: inline-block; cursor: pointer;}
-
 
 .user-info{position: relative; top: -2px;}
 .user-avatar{width: 30px; height: 30px; border-radius: 50%; vertical-align: middle;}
@@ -81,7 +80,8 @@ html,body{height: 100%; background-color: #EEE;}
 .towards-middle{width: 10000px; overflow: auto;/* calc(100% - 50px) */ left: 25px;background-color: #EEE;}
 .tab-title-box{display: inline-block; position: absolute; left: 0px;}
 .tab-title{
-	font-size: 0.8em;
+	/* font-size: 0.8em; */
+	font-size: 13px;
 	border-radius: 2px;
 	cursor: pointer;
 	/* display: inline-block; */
@@ -95,7 +95,7 @@ html,body{height: 100%; background-color: #EEE;}
 	color: inherit;
 	/* border-right-width: 1px; */
 }
-.tab-title-2{padding: 0 8px; border: 1px #DDD solid; height: 30px; margin: 0 3px; margin-top: 1px; background-color: #FFF; line-height: 30px;}
+.tab-title-2{padding: 0 8px; border: 1px #ddd solid; height: 30px; margin: 0 3px; margin-top: 1px; background-color: #FFF; line-height: 30px;}
 .tab-title-2{transition: padding 0.1s, margin 0.1s;}
 .tab-title-2 *{transition: all 0.0s;}
 .tab-title .el-icon-caret-right{color: #EEE; font-size: 1.7em; position: relative; top: 4px;}
@@ -103,10 +103,10 @@ html,body{height: 100%; background-color: #EEE;}
 .tab-title .el-icon-close:hover{background-color: red; color: #FFF;}
 .tab-title span{display: inline-block; margin-right: 1em;}
 .tab-title:hover span,.tab-native span{font-weight: bold;}
-.tab-title:hover .tab-title-2,.tab-title.tab-native .tab-title-2{border: 1px #FFF solid; border-radius: 0px;  padding: 1px 10px; margin: 0 1px;}
+.tab-title:hover .tab-title-2,.tab-title.tab-native .tab-title-2{border: 1px #fff solid; border-radius: 0px;  padding: 1px 10px; margin: 0 1px;}
 
 /* 第三杠 */
-.nav-right-3{width: 100%; height: calc(100% - 80px); position: relative; overflow: hidden;}
+.nav-right-3{width: 100%; height: calc(100% - 85px); position: relative; overflow: hidden;}
 .iframe{background: url(admin-loading.gif) no-repeat center 50%;}
 .iframe{width: 100%; height: 100%; border: 0px; background-color: #EEE;}
 .iframe-no-scroll{width: calc(100% + 22px); }
@@ -126,6 +126,7 @@ html,body{height: 100%; background-color: #EEE;}
 	outline:none;
 	max-height: 0px;
 	overflow: hidden;
+	box-shadow: 2px 2px 6px #999;
 }
 .right-box-2{
 	font-size: 0.8em;
@@ -136,14 +137,15 @@ html,body{height: 100%; background-color: #EEE;}
 }
 .right-box-2>div {
 	line-height: 2.2em;
-	padding-left: 1em;
-	padding-right: 2em;
+	padding-left: 0.7em;
+	padding-right: 1.8em;
 	cursor: pointer;
 }
 .right-box-2>div:hover {
 	background-color: #ddd;
 	color: #2D8CF0;
 }
+.right-box-2>div i{ margin-right: 8px;}
 
 
 /* 菜单折叠时候样式调整 */

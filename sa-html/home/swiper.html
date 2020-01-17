@@ -17,7 +17,7 @@
         </style>
 	</head>
 	<body>
-		<div class="vue-box">
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 表单部分 -->
 			<div class="c-panel">
 				<h4 class="c-title">检索参数</h4>
@@ -78,15 +78,15 @@
 						</template>
 					</el-table-column>
 					<el-table-column label="创建时间" width="150px">
-						<template slot-scope="scope">{{sa.$util.forDate(scope.row.create_time, 2)}}</template>
+						<template slot-scope="scope">{{sa.forDate(scope.row.create_time, 2)}}</template>
 					</el-table-column>
 					
 					<el-table-column prop="address" label="操作">
 						<template slot-scope="scope">
 							<el-badge is-dot class="item" :is-dot="scope.row.is_update" style="margin: 5px 0;">
-								<el-button type="primary" class="c-button" icon="el-icon-edit" @click="update(scope.row)">修改</el-button>
+								<el-button type="primary" class="c-btn" icon="el-icon-edit" @click="update(scope.row)">修改</el-button>
 							</el-badge>
-							<el-button type="danger" class="c-button" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
+							<el-button type="danger" class="c-btn" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -146,7 +146,7 @@
 					
 					<el-table-column prop="address" label="操作">
 						<template slot-scope="scope">
-							<el-button type="primary" size="mini" style="border-radius: 0px;" icon="el-icon-plus" @click="add" >添加</el-button>
+							<el-button type="primary" size="mini" icon="el-icon-plus" @click="add" >添加</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -190,7 +190,7 @@
 					f5: function(){
 						var pageStr = (this.page.pageNo == undefined ? '' : '?pageNo=' + this.page.pageNo + '&pageSize=' + this.page.pageSize);	// 拼接分页 
 						sa.ajax2('/SysSwiper/getList' + pageStr, this.p, function(res){
-							// this.dataList = sa.$util.listAU(res.data);	// 数据
+							// this.dataList = sa.listAU(res.data);	// 数据
 							// this.page = res.page;		// 分页 
 							this.dataList = dataList;
 						}.bind(this));
@@ -199,14 +199,14 @@
 					add: function(){
 		                sa.ajax2('/SysSwiper/add',this.addData,function(res){
 		                    layer.alert('添加成功',{},function(){
-		                        app.dataList.push(sa.$util.copyJSON(app.addData));
+		                        app.dataList.push(sa.copyJSON(app.addData));
 								layer.closeAll();
 		                    });
 		                })
 					},
 					// 修改
 					update: function(data){
-						var data2 = sa.$util.copyJSON(data);
+						var data2 = sa.copyJSON(data);
 						data2.create_time = undefined;
 						sa.ajax2('/SysSwiper/update', data2, function(res){
 							layer.msg('修改成功');
@@ -218,7 +218,7 @@
 						layer.confirm('是否删除，此操作不可撤销',{},function(){
 							sa.ajax2('/SysSwiper/delete',{id: data.id},function(res){
 								layer.msg('删除成功');
-								sa.$util.arrayDelete(this.dataList, data);
+								sa.arrayDelete(this.dataList, data);
 							}.bind(this))
 						}.bind(this))
 					}
