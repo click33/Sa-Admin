@@ -17,13 +17,15 @@
 			.ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
 			
 			/* 样式调整 */
-			.login-box{display: flex; justify-content: center; align-items: center; position: fixed; width: inherit; height: 100%;}
-			.login{height: auto; padding: 50px 30px; position: static; margin: 0 auto !important;}
+			.login-box{display: flex; justify-content: center; align-items: center; position: fixed; width: inherit; height: 100%; pointer-events: none;}
+			.login{height: auto; padding: 50px 30px; position: static; margin: 0 auto !important; pointer-events: all;}
 			.login-top{margin-top: 0px; margin-bottom: 30px;}
 			.logo-img{width: 50px; height: 50px; vertical-align: middle; position: relative; top: -3px; border-radius: 50%; margin-left: -10px; margin-right: 10px;}
 			.logo-img{display: none;}
 			.login-button{width: 270px;}
 			/* .page-title{line-height: 50px;} */
+			
+			.sk-rotating-plane{}
 			
 		</style>
 	</head>
@@ -117,46 +119,6 @@
 			});
 			// 
 			console.log('本页面参考于jq22，原作者：http://www.jq22.com/jquery-info20074');
-		</script>
-		<script type="text/javascript">
-			// function hasClass(elem, cls) {
-			// 	cls = cls || '';
-			// 	if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
-			// 	return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
-			// }
-
-			// function addClass(ele, cls) {
-			// 	if (!hasClass(ele, cls)) {
-			// 		ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
-			// 	}
-			// }
-
-			// function removeClass(ele, cls) {
-			// 	if (hasClass(ele, cls)) {
-			// 		var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
-			// 		while (newClass.indexOf(' ' + cls + ' ') >= 0) {
-			// 			newClass = newClass.replace(' ' + cls + ' ', ' ');
-			// 		}
-			// 		ele.className = newClass.replace(/^\s+|\s+$/g, '');
-			// 	}
-			// }
-			// document.querySelector(".login-button").onclick = function() {
-				
-				
-				
-				// addClass(document.querySelector(".login"), "active")
-				// setTimeout(function() {
-				// 	addClass(document.querySelector(".sk-rotating-plane"), "active")
-				// 	document.querySelector(".login").style.display = "none"
-				// }, 800)
-				// setTimeout(function() {
-				// 	removeClass(document.querySelector(".login"), "active")
-				// 	removeClass(document.querySelector(".sk-rotating-plane"), "active")
-				// 	document.querySelector(".login").style.display = "block"
-				// 	alert("登录成功")
-
-				// }, 5000)
-			// }
 		</script>
 	</body>
 </html>

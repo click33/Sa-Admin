@@ -140,6 +140,7 @@ html,body{height: 100%; background-color: #EEE;}
 	padding-left: 0.7em;
 	padding-right: 1.8em;
 	cursor: pointer;
+	white-space: nowrap;
 }
 .right-box-2>div:hover {
 	background-color: #ddd;

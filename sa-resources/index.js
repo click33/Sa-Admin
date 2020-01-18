@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.1',		// 当前版本
-		update_time: '2020-1-17',		// 更新日期 
+		version: 'v2.1.2',		// 当前版本
+		update_time: '2020-1-18',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -389,6 +389,8 @@ var sa_admin = new Vue({
 		},
 		// 右键 - 关闭其它 
 		right_close_other: function() {
+			// 先滑到最左边 
+			this.scrollX = 0;	
 			// 递归删除
 			var i = 0;
 			var deleteFn = function() {
@@ -411,6 +413,8 @@ var sa_admin = new Vue({
 		},
 		// 右键 - 关闭所有 
 		right_close_all: function() {
+			// 先滑到最左边 
+			this.scrollX = 0;	
 			// 递归删除 
 			var i = 0;
 			var deleteFn = function() {
