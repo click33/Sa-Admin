@@ -32,8 +32,11 @@ sa_admin.setMenuList(myMenuList);	// 写入菜单
 // 关闭一个选项卡，根据 id 
 // sa_admin.closeTabById('1-1');
 
-// 打开一个自定义选项卡
-// sa_admin.showTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});		// id不要和已有的菜单id冲突，其它属性均可参照菜单项
+// 新增一个选项卡
+// sa_admin.addTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+
+// 新增一个选项卡、并立即显示  
+// sa_admin.showTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// 参数同上 
 
 // 打开一个 菜单，根据 id
 // sa_admin.showMenuById('1-1');	

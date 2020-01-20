@@ -1,68 +1,47 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>帖子列表</title>
-
-		<!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" href="../../static/sa.css">
-
-		<!-- 所有的 js 资源 -->
+	    <title>帖子列表</title>
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css"> 
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
-		
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
-		<script src="data-list.js"></script>
-
 	</head>
 	<body>
-
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
-
-		<div class="vue-box">
-
-			<!-- 参数栏 -->
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
+				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
-				<el-form ref="form">
-
-					<div class="c-item">
-						<label class="c-label">id：</label>
-						<el-input size="mini" v-model="p.id" type="number"></el-input>
-					</div>
-
-					<div class="c-item">
-						<label class="c-label">标题：</label>
-						<el-input size="mini" v-model="p.title"></el-input>
-					</div>
-
-					<div class="c-item" style="min-width: 10px;">
-						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
-					</div>
-
-					<br />
-					<div class="c-item">
-						<label class="c-label">排序：</label>
+				<el-form :inline="true" size="mini">
+					<el-form-item label="文章编号：">
+						<el-input v-model="p.id" type="number"></el-input>
+					</el-form-item>
+					<el-form-item label="标题：">
+						<el-input v-model="p.title" placeholder="模糊查询"></el-input>
+					</el-form-item>
+					<el-form-item style="min-width: 10px;">
+						<el-button type="primary" icon="el-icon-search" @click="f5">查询</el-button>
+					</el-form-item>
+					<br>
+					<el-form-item label="综合排序：">
 						<el-radio-group v-model="p.sort_type">
 							<el-radio :label="0">发表时间</el-radio>
 							<el-radio :label="1">喜欢数</el-radio>
 							<el-radio :label="2">点击数</el-radio>
 							<el-radio :label="3">分享数</el-radio>
 						</el-radio-group>
-					</div>
-
-
+					</el-form-item>
 				</el-form>
-			</div>
-
-			<!-- 表格 -->
-			<div class="c-panel">
-				<h4 class="c-title">列表</h4>
-
+				<!-- 数据列表 -->
+				<!-- <h4 class="c-title">列表</h4> -->
 				<el-table class="data-table" :data="dataList" size="mini">
 					<el-table-column label="编号" prop="id" width="70px"> </el-table-column>
 					<el-table-column label="文章标题" prop="title"></el-table-column>
@@ -74,57 +53,48 @@
 					<el-table-column label="分享" prop="share_count"></el-table-column>
 					<el-table-column prop="address" label="操作" width="150px">
 						<template slot-scope="s">
-							<span @click="update(s.row)">
-								<el-button type="primary" class="c-btn" icon="el-icon-edit">修改</el-button>
-							</span>
-							<span @click="del(s.row)">
-								<el-button type="danger" class="c-btn" icon="el-icon-delete">删除</el-button>
-							</span>
+							<el-button class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改</el-button>
+							<el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
-
-
 				<!-- 分页 -->
 				<div class="page-box">
 					<el-pagination background
 						layout="total, prev, pager, next, sizes, jumper" 
-						:current-page.sync="page.pageNo" 
-						:page-size.sync="page.pageSize" 
-						:total="page.count" 
+						:current-page.sync="p.pageNo" 
+						:page-size.sync="p.pageSize" 
+						:total="dataCount" 
 						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
 						@current-change="f5(true)" 
 						@size-change="f5(true)">
 					</el-pagination>
 				</div>
-
 			</div>
-
-
 		</div>
-
+		<script src="data-list.js"></script>
 		<script>
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
 					sa: sa,
 					p: { // 查询参数
-						sort_type: 0
-					},
-					page: {		// 分页信息
+						id: '',
+						title: '',
+						sort_type: 0,
 						pageNo: 1,
 						pageSize: 10,
-						count: 1000,
 					},
-					dataList: dataList // 数据集合
+					dataCount: 0,	// 数据总数 
+					dataList: [] // 数据集合
 				},
 				methods: {
 					// 数据刷新
 					f5: function() {
 						sa.ajax2('/VocArticle/getList', this.p, function(res){
-							// this.dataList = res.data;	// 数据
-							// this.page = res.page;		// 分页 
-						}.bind(this));
+							this.dataList = res.data;	// 数据
+							this.dataCount = res.dataCount;		// 分页 
+						}.bind(this), {res: mockData});
 					},
 					// 修改
 					update: function(data) {
@@ -133,13 +103,12 @@
 					// 删除
 					del: function(data) {
 						sa.confirm('是否删除，此操作不可撤销', function() {
-							sa.ajax2('url', {}, function(res) {
+							sa.ajax2('/acticle/delete?id=' + data.id, function(res) {
 								sa.arrayDelete(this.dataList, data);
 								sa.ok('删除成功');
 							}.bind(this))
 						}.bind(this));
 					}
-
 				},
 				created: function() {
 					this.f5();

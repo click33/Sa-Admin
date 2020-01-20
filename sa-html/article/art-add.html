@@ -1,100 +1,68 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>文章发表</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-		<!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+	    <title>帖子发包</title>
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-
-		<!-- 所有的 js 资源 -->
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
-		<script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
-		
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+		<script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
 		<script src="../../static/sa.js"></script>
-		<script src="data-list.js"></script>
+		<script src=""></script>
 		<style>
-
 			.c-item .c-label{width: 7em;}
-
 			/* wang富文本编辑器 */
 			.editor-item{width: 100%; height: auto;}
 			.editor-item .c-label{float: left;}
-			.editor-item .editor-box{float: left; width: 80%; margin-top: 0px; margin-left: 5px;} 
+			.editor-item .editor-box{float: left; width: 80%; margin-top: 0px; margin-left: 0px;} 
             .editor-item #editor{min-height: 300px; background-color: #FFF;}
             .editor-item .w-e-toolbar{padding-top: 5px !important;}
-			
 			/* 尽量小点 */
 			.editor-item .editor-box{float: left; width: 700px;} 
 			.editor-item .editor-box img{max-width: 200px !important;}
-
         </style>
-
 	</head>
 	<body>
-
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
-
-		<div class="vue-box">
-
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 参数栏 -->
 			<div class="c-panel">
-				<div class="c-title">文章添加</div>
-				<el-form ref="form" id="form">
-
-					<br />
-					<div class="c-item" style="width: 100%;">
-						<label class="c-label">文章标题：</label>
+				<div class="c-title">文章编辑</div>
+				<el-form size="mini" v-if="m">
+					<el-form-item label="文章标题：">
 						<el-input size="mini" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
-					</div>
-
-					<br />
-					<div class="c-item editor-item">
-						<label class="c-label">文章内容：</label>
+					</el-form-item>
+					<el-form-item label="文章标题：" class="editor-item">
 						<div class="editor-box">
-							<div id="editor">
-								
-							</div>
+							<div id="editor"></div>
 						</div>
-					</div>
-
-					<br />
-					<div class="c-item">
-						<label class="c-label">公开：</label>
+					</el-form-item>
+					<el-form-item label="是否公开：">
 						<el-switch v-model="m.is_public" :active-value="1" :inactive-value="2"></el-switch>
 						<span class="c-remark">关闭后，别人将不能看到你的发表</span>
-					</div>
-					
-					<div style="margin-top: 10px;"></div>
-					<div class="c-item">
-						<label class="c-label"></label>
+					</el-form-item>
+					<el-form-item label="&emsp;">
 						<el-button type="primary" icon="el-icon-plus" size="mini" @click="ok">确定</el-button>
-					</div>
-
-
+					</el-form-item>
+					<div style="margin-top: 10px;"></div>
 				</el-form>
 			</div>
 
+			<!-- 给wangEditor打一波广告 -->
 			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
 				wangEditor：<el-link type="primary" href="http://www.wangeditor.com/" target="_blank">
 					基于javascript和css开发的 Web富文本编辑器， 轻量、简洁、易用、开源免费
 				</el-link>
 			</div>
-
-
-
 		</div>
-
-		<script>
-			
-			
-			
+		<script src="data-list.js"></script>
+		<script type="text/javascript">
 			// 创建一个空的 m 
 			function create_m() {
 				return {
@@ -103,7 +71,6 @@
 					is_public: 1
 				}
 			}
-			
 			// 创建编辑器
 			function create_editor(content) {
 				var E = window.wangEditor
@@ -120,8 +87,8 @@
 				editor.create(); // 创建
 				editor.txt.html(content);	// 为编辑器赋值
 			}
-			
-
+		</script>
+		<script>
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
@@ -134,15 +101,16 @@
 						// 开始增加或修改
 						if(this.id == 0) {
 							sa.ajax2('/url/api', this.m, function(res) {
-								layer.alert('增加成功'); 
-								this.m = create_m();
-								editor.txt.html("");	// 图文介绍
+								sa.alert('增加成功', function() {
+									this.m = create_m();
+									editor.txt.html("");	// 图文介绍  
+								}.bind(this)); 
 							}.bind(this));
 						} else {
 							sa.ajax2('/url/api', this.m, function(res){
-								layer.alert('修改成功', {}, function(){
+								sa.alert('修改成功', function(){
 									parent.app.f5();
-									parent.layer.closeAll('iframe');
+									sa.closeCurrIframe();
 								}.bind(this)); 
 							}.bind(this));
 						}
@@ -150,46 +118,21 @@
 					},
 				},
 				mounted: function() {
-					
 					// 如果是添加
 					if(this.id == 0){
 						create_editor(this.m.content);		// 创建富文本编辑器
 					} else {
 						// id 非 0 代表 是要修改 
-						dataList.forEach(function(item) {
+						mockData.data.forEach(function(item) {
 							if(item.id == this.id) {
 								this.m = item;
 							}
 						}.bind(this));
 						create_editor(this.m.content);		// 创建富文本编辑器
 					}
-
 				}
 			})
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-
 		</script>
-
 	</body>
 </html>

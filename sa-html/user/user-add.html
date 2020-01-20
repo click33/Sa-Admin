@@ -4,89 +4,52 @@
 		<title>用户添加</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		
-		<!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		
-		<!-- 所有的 js 资源 -->
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
-		
-		<style type="text/css">
-			
-		</style>
-		
+		<script src="../../static/sa.js"></script>
 	</head>
 	<body>
-		
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
-		
-		<div class="vue-box">
-			
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 参数栏 -->
 			<div class="c-panel">
 				<div class="c-title">用户添加</div>
-				<el-form ref="form">
-	
-					<div class="c-item">
-						<label class="c-label">昵称：</label>
-						<el-input size="mini" v-model="m.username"></el-input>
-					</div>
-					
-					<br>
-					<div class="c-item">
-						<label class="c-label">密码：</label>
-						<el-input size="mini" v-model="m.password"></el-input>
-					</div>
-					
-					<br>
-					<div class="c-item">
-						<label class="c-label">手机：</label>
-						<el-input size="mini" v-model="m.phone"></el-input>
-					</div>
-					
-					<br>
-					<div class="c-item">
-						<label class="c-label">角色：</label>
-						<el-select size="mini" v-model="m.role_id">
+				<el-form size="mini" v-if="m">
+					<el-form-item label="昵称：">
+						<el-input v-model="m.username"></el-input>
+					</el-form-item>
+					<el-form-item label="密码：">
+						<el-input v-model="m.password"></el-input>
+					</el-form-item>
+					<el-form-item label="手机：">
+						<el-input v-model="m.phone"></el-input>
+					</el-form-item>
+					<el-form-item label="角色：">
+						<el-select v-model="m.role_id">
 							<el-option label="管理员" :value="1"></el-option>
 							<el-option label="公告管理员" :value="2"></el-option>
 							<el-option label="普通用户" :value="3"></el-option>
 						</el-select>
-					</div>
-					
-					<br>
-					<div class="c-item">
-						<label class="c-label">性别：</label>
+					</el-form-item>
+					<el-form-item label="性别：">
 						<el-radio-group v-model="m.sex" size="mini">
 							<el-radio :label="1">男</el-radio>
 							<el-radio :label="2">女</el-radio>
 						</el-radio-group>
-					</div>
-					
-					<br>
-					<div class="c-item" style="min-width: 0px;">
-						<label class="c-label"></label>
+					</el-form-item>
+					<el-form-item label="&emsp;">
 						<el-button type="primary" icon="el-icon-plus" size="mini" @click="ok">确定</el-button>
-					</div>
-
+					</el-form-item>
 				</el-form>
-
 			</div>
-			
-			
-			<br><br><br><br><br><br><br><br><br>
-
-			
 		</div>
-		
-		
 		<script type="text/javascript">
-			
 			new Vue({
 				el: '.vue-box',
 				data: {
@@ -99,19 +62,13 @@
 				},
 				methods: {
 					// ok
-					ok: function(pageNo) {
-						this.$message('数据添加, 参数：' + JSON.stringify(this.m));
-					},
-					
+					ok: function() {
+						sa.ajax2('/user/add', function(res) {
+							sa.alert('数据添加, 参数为：' + JSON.stringify(this.m));
+						}.bind(this))
+					}
 				}
 			})
-			
 		</script>
-		
-		
-		
-		
-		
-		
 	</body>
 </html>

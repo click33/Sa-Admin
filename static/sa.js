@@ -29,19 +29,21 @@ var sa = {
 // ===========================  ajax的封装  ======================================= 
 (function(){
 	
-	/** 对ajax的再封装, 改ajax假设你的接口会返回以下格式的内容 
+	/** 对ajax的再封装, 这个ajax假设你的接口会返回以下格式的内容 
 		{
 			"code": 200,
 			"msg": "ok",
 			"data": []
 		}
+		如果返回的不是这个格式, 你可能需要改动一下源码, 要么改动服务端适应此ajax, 要么改动这个ajax适应你的服务端 
 	 * @param {Object} url 请求地址
 	 * @param {Object} data 请求参数
 	 * @param {Object} success200 当返回的code码==200时的回调函数  
 	 * @param {Object} 其它配置，可配置项有：
 		{
-			msg: '',		// 默认的提示文字 
-			baseUrl: '',	// ajax请求拼接的父路径 
+			msg: '',		// 默认的提示文字 填null为不提示 
+			type: 'get',	// 设定请求类型 默认post
+			baseUrl: '',	// ajax请求拼接的父路径 默认取 sa.cfg.apu_url 
 			sleep: 0,		// ajax模拟的延时毫秒数, 默认0 
 			success500: fn,	// code码等于500时的回调函数 (一般代表服务器错误)
 			success403: fn,	// code码等于403时的回调函数 (一般代表无权限)
@@ -64,6 +66,7 @@ var sa = {
 			msg: '努力加载中...',	// 提示语
 			baseUrl: (url.indexOf('http') === 0 ? '' : sa.cfg.api_url),// 父url，拼接在url前面
 			sleep: 0,	// 休眠n毫秒处理回调函数 
+			type: 'post',	// 默认请求类型 
 			success200: success200,			// code=200, 代表成功 
 			success500: function(res){		// code=500, 代表失败 
 				return layer.alert('失败：' + res.msg);
@@ -104,7 +107,7 @@ var sa = {
 		// 开始请求ajax 
 		return $.ajax({
 			url: cfg.baseUrl + url,
-			type:"post",
+			type: cfg.type, 
 			data: data,
 			dataType: 'json',
 			xhrFields: {
@@ -150,15 +153,22 @@ var sa = {
 		if(cfg.msg == undefined || cfg.msg == null || cfg.msg == '') {
 			cfg.msg = '正在努力加载...';
 		}
+		// 默认延时函数 
 		if(cfg.sleep == undefined || cfg.sleep == null || cfg.sleep == '' || cfg.sleep == 0) {
 			cfg.sleep = 500;
+		}
+		// 默认的模拟数据
+		cfg.res = cfg.res || {
+			code: 200,
+			msg: 'ok',
+			data: []
 		}
 		// 开始loding 
 		var load = layer.msg(cfg.msg, {icon: 16, shade: 0.01, time: 1000 * 20, skin: 'ajax-layer-load' });
 		// 模拟ajax的延时 
 		setTimeout(function() {
 			layer.close(load);	// 隐藏掉转圈圈 
-			success200();
+			success200(cfg.res);
 		}, cfg.sleep)
 	};
 	
@@ -765,8 +775,7 @@ var sa = {
 	if (true) {
 		
 		// 获取指定key的list
-		// KL_art_zan=文章赞，KL_art_ct=文章评论，KL_ct_zan=评论赞
-		me.keyListGet = function(key,a){
+		me.keyListGet = function(key){
 			try{
 				var str = localStorage.getItem('LIST_' + key);
 				if(str == undefined || str == null || str =='' || str == 'undefined' || typeof(JSON.parse(str)) == 'string'){
@@ -783,20 +792,20 @@ var sa = {
 			localStorage.setItem('LIST_' + key, JSON.stringify(list));
 		},
 		
-		me.keyListHas = function(key, id){
+		me.keyListHas = function(key, item){
 			var arr2 = me.keyListGet(key);
-			return arr2.indexOf(parseInt(id)) != -1;
+			return arr2.indexOf(item) != -1;
 		},
 		
-		me.keyListAdd = function(key, id){
+		me.keyListAdd = function(key, item){
 			var arr = me.keyListGet(key);
-			arr.push(parseInt(id));
+			arr.push(item);
 			me.keyListSet(key,arr);
 		},
 		
-		me.keyListRemove = function(key,id){
+		me.keyListRemove = function(key, item){
 			var arr = me.keyListGet(key);
-			var index = arr.indexOf(parseInt(id));
+			var index = arr.indexOf(item);
 			if (index > -1) {
 			    arr.splice(index, 1);
 			}
@@ -813,8 +822,58 @@ var sa = {
 (function(){
 	
 	// 超级对象
-    var me={};
+    var me = {};
     sa.$sys = me;
+	
+	// 定义key
+	var pcode_key = 'permission_code';
+	
+	// 写入当前会话的权限码集合
+	sa.setPcode = function(codeList) {
+		sa.keyListSet(pcode_key, codeList);	
+	}
+	
+	// 清除当前会话的权限码集合 
+	sa.clearAllPcode = function() {
+		sa.keyListSet(pcode_key, []);	
+	}
+	
+	// 检查当前会话是否拥有一个权限码, 返回true和false 
+	sa.hasPcode = function(pcode) {
+		return sa.keyListHas(pcode_key, pcode);
+	}
+	
+	// 检查当前会话是否拥有一个权限码, 如果没有, 则跳转到无权限页面 
+	// 注意: 非二级目录页面请注意调整路径问题 
+	sa.checkPcode = function(pcode, not_pcode_url) {
+		var is_have = sa.keyListHas(pcode_key, pcode);	
+		if(is_have == false) {
+			location.href= not_pcode_url || '../../sa-html/error-page/403.html';
+			throw '暂无权限: ' + pcode;
+		}
+	}
+	// 同上, 只不过是以弹窗的形式显示出来无权限来 
+	sa.checkPcodeTs = function(pcode, not_pcode_url) {
+		var is_have = sa.keyListHas(pcode_key, pcode);	
+		if(is_have == false) {
+			var url = not_pcode_url || '../../sa-html/error-page/403.html';
+			layer.open({
+				type: 2,	
+				title: false,	// 标题 
+				shadeClose: true,	// 是否点击遮罩关闭
+				shade: 0.8,		// 遮罩透明度 
+				scrollbar: false,	// 屏蔽掉外层的滚动条 
+				closeBtn: false,
+				area: ['700px', '600px'],	// 大小  
+				content: url	// 传值 
+			}); 
+			throw '暂无权限: ' + pcode;
+		}
+	}
+	
+	
+	
+	
 	
 })();
 
@@ -838,8 +897,14 @@ var sa = {
 		}); 
 	}
 	
+	
 })();
 
+
+// 如果当前是Vue环境, 则挂在到Vue示例
+if(window.Vue) {
+	Vue.prototype.sa = sa;
+}
 
 // 对外开放, 在模块化时解开此注释 
 // export default sa;

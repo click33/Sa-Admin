@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <title>菜单分配</title>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<title>菜单预览</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<!-- 所有的 js 资源 -->
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
         <style>
-			body,.el-tree{
-				background-color: #F5F5F5;
-			}
+			body,.el-tree{background-color: #F5F5F5;}
 			.el-tree-node{margin: 0.15em 0 !important;}
 			/* 悬浮时颜色更深一点 */
 			.el-tree-node__content:hover{background-color: #CFE8FC !important;}
         </style>
 	</head>
 	<body>
-		<div class="vue-box">
+		<div style="margin-top: -1em;" title="防止margin向下击穿"><br></div>
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 表格 -->
 			<div style="padding: 2em;">
 				<div class="c-title">菜单预览</div>
@@ -44,7 +43,6 @@
 		<script src="../../sa-resources/menu-list.js"></script>
 		<script src="../../sa-resources/admin-util.js"></script>
         <script>
-			//var role_id = sa.p('role_id');
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
@@ -52,7 +50,7 @@
 				},
 				created: function(){
 					// 全部
-					sa.ajax2('/SysMenu/getList', this.p, function(res){
+					sa.ajax2('/SysMenu/getList', function(res){
 						menuList = arrayToTree(menuList);	// 一维转tree 
 						menuList = refMenuList(menuList);	// 属性处理 
 						this.dataList = menuList;	// 数据  

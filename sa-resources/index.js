@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.1.2',		// 当前版本
-		update_time: '2020-1-18',		// 更新日期 
+		version: 'v2.2.0',		// 当前版本
+		update_time: '2020-1-20',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -531,8 +531,9 @@ var sa_admin = new Vue({
 				this.closeTab(tab, callFn);
 			}
 		},
-		// 添加一个Tab
+		// 添加一个Tab  {id,name,url}
 		addTab: function(tab) {
+			tab.is_have_en = this.is_have_en(tab.name);	// 有英文字母的不能加字体加粗动画, 因为会影响tab选项卡的width尺寸, 造成动画混乱 
 			this.tabList.push(tab);
 			this.addSlide(tab);
 		},
@@ -586,8 +587,8 @@ var sa_admin = new Vue({
 			}
 			return null;
 		},
-		// 双击tab栏空白处
-		dblclickNr2: function(e) {
+		// 双击tab栏空白处, 打开弹窗添加窗口 
+		atOpen: function(e) {
 			window.r_layer_12345 = layer.open({
 				type: 1,
 				shade: 0.5,
@@ -607,6 +608,11 @@ var sa_admin = new Vue({
 			layer.close(window.r_layer_12345);
 			this.atTitle = '';
 			this.atUrl = '';
+		},
+		// 返回一个字符串中是否有英文字母
+		is_have_en: function(str) {
+			var reg = /[a-z]/i;
+			return reg.test(str);//true,说明有英文字母
 		},
 		// ------------------- tab左右滑动  -------------------- 
 		// 视角向左滑动一段距离 
@@ -804,10 +810,12 @@ var sa_admin = new Vue({
 		msg: function(msg) {
 			layer.msg(msg)
 		},
-		// 打印日志
+		// 打印版本
 		printVesion: function() {
-			console.log('欢迎使用sa-admin，当前版本：' + this.version + "，GitHub地址：" + this.github_url);
-			console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
+			setTimeout(function() {
+				console.log('欢迎使用sa-admin，当前版本：' + this.version + "，GitHub地址：" + this.github_url);
+				console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
+			}.bind(this), 1000)
 		}
 	},
 	created:function(){

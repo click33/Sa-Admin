@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>各种表格显示示例</title>
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css"> 
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+		<script src="../../static/sa.js"></script>
+	</head>
+	<body>
+		<div style="margin-top: -1em;" title="防止margin向下击穿"><br></div>
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
+			<div class="c-panel">
+				<!-- 参数栏 -->
+				<div class="c-title">检索参数</div>
+				<el-form size="mini" :inline="true" @submit.native.prevent >
+					<el-form-item label="名称查询：">
+						<el-input v-model="p.name" placeholder="模糊查询"></el-input>
+					</el-form-item>
+					<el-form-item style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+					</el-form-item>
+				</el-form>
+				<!-- 数据列表 -->
+				<div class="c-title">数据列表</div>
+				<el-table :data="dataList" size="mini">
+					<el-table-column label="id" prop="id"></el-table-column>
+					<el-table-column label="显示文本" prop="name"></el-table-column>
+					<el-table-column label="显示图标">
+						<template slot-scope="s">
+							<img :src="s.row.icon" style="width: 3em; height: 3em; border-radius: 4px; cursor: pointer;" 
+								@click="sa.showImage(s.row.icon, '400px', '400px')" />
+						</template>
+					</el-table-column>
+					<el-table-column label="显示价格" >
+						<template slot-scope="s">
+							<b style="color: red;">￥{{s.row.money / 100}}</b>
+						</template>
+					</el-table-column>
+					<el-table-column label="显示状态">
+						<template slot-scope="s">
+							<b style="color: green;" v-if="s.row.status==1">正常</b>
+							<b style="color: red;" v-if="s.row.status==2">禁用</b>
+						</template>
+					</el-table-column>
+					<!-- <el-table-column label="显示状态">
+						<template slot-scope="s">
+							<el-tag class="c-tag" effect="dark" size="mini" color="#282" v-if="s.row.status==1">正常</el-tag>
+							<el-tag class="c-tag" effect="dark" size="mini" color="#f22" v-if="s.row.status==2">禁用</el-tag>
+						</template>
+					</el-table-column> -->
+					<el-table-column label="显示开关">
+						<template slot-scope="s">
+							<el-switch v-model="s.row.status" :active-value="1" :inactive-value="2" inactive-color="#ff4949"></el-switch>
+							<span style="color: #999;" v-if="s.row.status==1">正常</span>
+							<span style="color: #999;" v-else>禁用</span>
+						</template>
+					</el-table-column>
+					<el-table-column label="显示日期" width="180px">
+						<template slot-scope="s">{{sa.forDate(s.row.create_time, 2)}}</span></template>
+					</el-table-column>
+					<el-table-column label="文字按钮" width="200px">
+						<template slot-scope="s">
+							<el-button type="text" size="mini" @click="get(s.row)">查看</el-button>
+							<el-button type="text" size="mini" @click="update(s.row)">修改</el-button>
+							<el-button type="text" size="mini" @click="del(s.row)">删除</el-button>
+						</template>
+					</el-table-column>
+					<el-table-column label="正常按钮" width="240px">
+						<template slot-scope="s">
+							<el-button class="c-btn" type="success"  icon="el-icon-view" @click="get(s.row)">查看</el-button>
+							<el-button class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改</el-button>
+							<el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
+						</template>
+					</el-table-column>
+				</el-table>
+				<!-- 分页 -->
+				<div class="page-box">
+					<el-pagination background
+						layout="total, prev, pager, next, sizes, jumper" 
+						:current-page.sync="p.pageNo" 
+						:page-size.sync="p.pageSize" 
+						:total="dataCount" 
+						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+						@current-change="f5()" 
+						@size-change="f5()">
+					</el-pagination>
+				</div>
+			</div>
+		</div>
+		<script src="mock-data-list.js"></script>
+        <script>
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					p: {		// 查询参数  
+						name: '',
+						pageNo: 1,
+						pageSize: 10,
+					},
+					dataCount: 0,
+					dataList: [],		// 数据集合
+				},
+				methods: {
+					// 刷新
+					f5: function(){
+						sa.ajax2('/goods/getList', {}, function(res){
+							this.dataList = res.data;	// 数据
+							this.dataCount = res.dataCount;	// 分页
+						}.bind(this), {res: mockDataList});
+					},
+					// 查看
+					get: function(data) {
+						var str = '<div>';
+						str += '<p>编号：' + data.id + '</p>';
+						str += '<p>名称：' + data.name + '</p>';
+						str += '<p>状态：' + (data.status == 1 ? '正常' : '禁用') + '</p>';
+						str += '<p>价格：' + (data.money / 100) + ' 元</p>';
+						str += '<p>日期：' + (sa.forDate(data.create_time, 2)) + '</p>';
+						str += '</div>';
+						sa.alert(str);
+					},
+					// 修改
+					update: function (data) {
+						sa.msg('你点击了id=' + data.id + '的修改按钮');
+					},
+					// 删除
+					del: function (data) {
+						sa.confirm('是否删除，此操作不可撤销', function() {
+							sa.ajax2('/goods/delete?id=' + data.id, function(res) {
+								sa.arrayDelete(this.dataList, data);
+								sa.ok('删除成功');
+							}.bind(this))
+						}.bind(this));
+					},
+				},
+				created: function(){
+					this.f5();
+					this.$notify.info({
+						title: '消息',
+						message: '本页面展示表格的常见显示方式'
+					});
+				}
+			})
+			
+		</script>
+	</body>
+</html>

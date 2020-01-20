@@ -1,7 +1,5 @@
 # sa-admin 使用步骤 <span style="font-size: 14px;">五分钟快速上手</span>
 
-
-
 #### 1、获取 源码
 > - 你有两种方式获取源码
 > - 通过gitee、或github获取源码
@@ -12,13 +10,15 @@
 > - 如何扩展？在 `sa-resourecs` 文件下，有个 `my-code.js` ，这是专门为了方便你接入你的业务逻辑而预留的一个文件 你可以在此文件中根据模板提供的API来操作模板
 > - 具体可以操作哪些接口？接着往下看
 
-
 #### 3、设置模板标题
-``` js
+``` js 
 sa_admin.title = "SA-后台模板";
 // sa_admin.logo_url='url';	// 设置logo图标地址   默认值：sa-resources/admin-logo.png
 // sa_admin.icon_url = 'sa-resources/admin-logo.png';    // 设置icon图标地址   默认值：sa-resources/admin-logo.png
 ```
+测试：
+<input id="title-input" value="SA-后台模板">
+<button onclick="top.sa_admin.title = document.getElementById('title-input').value;">更新标题</button>
 
 #### 4、自定义菜单树
 ``` js 
@@ -28,14 +28,21 @@ sa_admin.setMenuList(myMenuList);	// 写入菜单
 ```
 
 #### 5、js控制打开某个菜单
-```js
+```js 
 sa_admin.showHome();			// 显示主页选项卡 
 sa_admin.showTabById('1-1');	// 显示一个选项卡, 根据id
 sa_admin.closeTabById('1-1');	// 关闭一个选项卡，根据 id 
 sa_admin.showMenuById('1-1');	// 打开一个 菜单，根据 id
-// 打开一个自定义 页面 
-// sa_admin.showPage({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+// 新增一个选项卡
+// sa_admin.addTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+// 新增一个选项卡、并立即显示  
+// sa_admin.showTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// 参数同上 
 ```
+测试：
+<button onclick="top.sa_admin.showHome()">显示首页</button>
+<button onclick="top.sa_admin.addTab({id: Math.round(Math.random()*9999999999999), name: '新窗口', url: 'http://web.yanzhi21.com'})">新增选项卡</button>
+<button onclick="top.sa_admin.showTab({id: Math.round(Math.random()*9999999999999), name: '新窗口', url: 'https://sqlfly.dev33.cn/'})">新增选项卡并显示</button>
+<button onclick="top.sa_admin.atOpen()">打开弹窗添加</button>
 
 #### 6、如何设置登录后右上角显示的user信息
 ``` js
@@ -78,7 +85,7 @@ sa_admin.init({
 	is_reme_open: true,		// 是否记住上一次最后打开的窗口, 默认为true, 配置为false后, 每次刷新不再自动打开上一次最后打开的窗口(也不再有锚链接智能tab调准)
 });
 ```
-
+想获得更多操作能力？其实在`sa_admin`对象上的所有属性和函数都可以直接调用 
 
 #### 9、以上示例在 my-code.js中 都有相应的注释说明，如何还有不懂的地方，可以加群问我（群链接在首页）
 

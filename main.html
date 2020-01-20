@@ -4,69 +4,54 @@
 		<title>主页</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<style type="text/css">
-			* {
-				padding: 0;
-				margin: 0;
-			}
-
-			body {
-				background-color: #EEE;
-			}
-
+			* {padding: 0;margin: 0;}
+			body {background-color: #EEE;font-size: 14px;}
 			.app {
 				font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 			}
-
-			.content-box {
-				margin: 1em;
-				padding: 1em;
-				background-color: #FFF;
-				color: #666;
-			}
-
+			.content-box {margin: 1em;padding: 1em;background-color: #FFF;color: #666;}
 			.el-tag{border-radius: 1px;}
-
 			/*800之下*/
 			@media(max-width: 800px) {
 				.kapian {
 					width: 100% !important;
 					margin-right: 0px !important;
 				}
-
 				.saoma {
 					display: none;
 				}
 			}
+			/* markdown格式 */
+			.md-contetn{padding-left: 1.5em; line-height: 26px;}
+			/* 多个ul时，切换那个啥 */
+			.md-contetn h4{margin-left: -0.5em;}
+			.md-contetn ul,.md-contetn ol{padding-left: 1em;}
 		</style>
 	</head>
 	<body>
-
 		<div class="app">
-
 			<div class="content-box">
 				<div style="padding: 1em; border-left: 5px #2D8CF0 solid; background-color: #EEE;">
 					<big><big>Welcome to SA-后台模板 </big></big>
 					<span style="display: inline-block; margin-left: 1em; color: #888;"> —— 一个基于iframe的多窗口后台模板</span>
 				</div>
 			</div>
-
 			<div class="content-box">
-
 				<div class="saoma" style="width: 20%; float: left; margin-right: 4%;">
 					<el-divider content-position="left">
 						<big><big>扫码加入QQ群交流</big></big>
 					</el-divider>
-					<div style="text-align: center;">
-						<img src="http://dev33-yxzj.oss-cn-beijing.aliyuncs.com/dyc/img/2020/01/17/157924554064970545739.png" style="width: 80%; ">
+					<div style="text-align: left;">
+						<img src="http://dev33-yxzj.oss-cn-beijing.aliyuncs.com/dyc/img/2020/01/17/157924554064970545739.png" style="width: 60%; margin-left: 10%;">
 					</div>
 				</div>
 				<div class="kapian" style="width: 35%; float: left; margin-right: 4%;">
 					<el-divider content-position="left">
 						<big><big>SA-ADMIN</big></big>
 					</el-divider>
-					<div style="font-size: 0.9em; line-height: 1.6em;">
+					<div>
 						<p>
 							虽然已经用过不少优秀的后台模板，但是一直都感觉不尽完美，于是在经过激烈的思想斗争后，我决定牺牲五一假期，亲自做一个尝试一下，
 							一来正好给以后自己的项目中使用，二来也算是为开源界做一点自己的贡献吧
@@ -86,7 +71,7 @@
 								<el-link type="primary" href="https://github.com/click33/sa-admin" target="_blank">https://github.com/click33/sa-admin</el-link>
 							</li>
 							<li>
-								开源不易，求鼓励，给个star吧
+								<b>开源不易，求鼓励，给个star吧</b>
 							</li>
 						</ul>
 					</div>
@@ -97,121 +82,99 @@
 						<big><big>技术选型</big></big>
 					</el-divider>
 					<ul style="padding-left: 1em; line-height: 1.5em;">
-						<li>
-							<el-link type="primary" href="https://cn.vuejs.org/" target="_blank">JS引擎：Vue @2.6.10</el-link>
-						</li>
-						<li>
-							<el-link type="primary" href="https://element.eleme.cn/#/zh-CN" target="_blank">UI框架：Element-UI @2.8.2</el-link>
-						</li>
-						<li>
-							<el-link type="primary" href="http://layer.layui.com/" target="_blank">web弹层：layer @3.1.1</el-link>
-						</li>
-						<li>
-							<el-link type="primary" href="https://www.swiper.com.cn/" target="_blank">切页动画：Swiper @4.5.0</el-link>
-						</li>
-						<li>
-							<el-link type="primary" href="https://echarts.baidu.com/" target="_blank">图表引擎：ECharts @4.2.1</el-link>
-						</li>
-						<li>
-							<el-link type="primary" href="http://www.wangeditor.com/" target="_blank">富文本编辑器：wangEditor @3.1.1</el-link>
-						</li>
-						<li>
-							<el-link @click="meile">没了：占空</el-link>
-						</li>
-						<li>
-							以上几个框架即使你都没接触过，只要你阅读以下文档，也可以快速上手
-						</li>
+						<li><el-link type="primary" href="https://cn.vuejs.org/" target="_blank">JS引擎：Vue @2.6.10</el-link></li>
+						<li><el-link type="primary" href="https://element.eleme.cn/#/zh-CN" target="_blank">UI框架：Element-UI @2.13.0</el-link></li>
+						<li><el-link type="primary" href="http://layer.layui.com/" target="_blank">web弹层：layer @3.1.1</el-link></li>
+						<li><el-link type="primary" href="https://www.swiper.com.cn/" target="_blank">切页动画：Swiper @4.5.0</el-link></li>
+						<li><el-link type="primary" href="https://echarts.baidu.com/" target="_blank">图表引擎：ECharts @4.2.1</el-link></li>
+						<li><el-link type="primary" href="http://www.wangeditor.com/" target="_blank">富文本编辑器：wangEditor @3.1.1</el-link></li>
+						<li><el-link @click="meile">没了：占空</el-link></li>
+						<li>以上几个框架即使你都没接触过，只要你阅读以下文档，也可以快速上手</li>
 					</ul>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
 
-
+			<!-- 功能介绍 -->
 			<div class="content-box">
-				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em; width: 30%; float: left; margin-right: 5%;">
-					<el-divider content-position="left">
-						<big><big>功能介绍</big></big>
-					</el-divider> 
-					<ul style="padding-left: 1em; line-height: 1.5em;">
-						
-						<li>
-							架构：基于iframe，无后台代码，纯html模板，可以方便的适配任何后端语言
-						</li>
-						<li>
-							菜单：支持一、二、三级菜单
-						</li>
-						<li>
-							折叠： 折叠或收缩菜单，并且监听窗口大小变化，在拉伸窗口时自动折叠或收缩菜单，自动响应式
-						</li>
-						<li>
-							卡片： 多卡片堆积，与菜单双向关联，在卡片标签右击可以：刷新、关闭、关闭其它、关闭所有、悬浮打开、新窗口打开。
-						</li>
-						<li>
-							切换： 滑动、淡入、方块、3D流、3D翻转、、五种高大上切换动画，任你选择！
-						</li>
-						<li>
-							主题：目前保留五种主题：深蓝、墨绿、银灰、黑绿结合、银色展开（切换主题时，可自动保存你的喜好，下次打开时仍然有效）
-						</li>
-						<li>
-							保留： 切换卡片时，可自动保留上个卡片的滚动条高度（目前没有见到其它任何一个模板做到这一点，或者说没有任何一个模板注意到这个细节功能点）
-						</li>
-						<li>锚链：hash链接跳转功能，可灵活的用鼠标前后键切换tab窗口</li>
-						<li>窗口：可在初始化时，设置是否显示tabbar栏，来控制它是多窗口还是单窗口，具体见使用文档</li>
-						<li>
-							窗口模式测试：
-							<a href="javascript:top.sa_admin.is_show_tabbar = true;">多窗口模式</a>
-							<a href="javascript:top.sa_admin.is_show_tabbar = false;">单窗口模式</a>
-						</li>
-						<li>功能不断更新中... 你有好的想法也可以告诉我，加群一起交流吧 </li>
-						<li>
-							使用说明，
-							<a href="javascript:;" @click="openDoc">见文档</a>
-						</li>
-					</ul>
+				<el-divider content-position="left">
+					<big><big>功能介绍</big></big>
+				</el-divider>
+				<div class="kapian">
+					<div class="md-contetn">
+- 架构：基于iframe，无后台代码，纯html模板，可方便的适配任何后端语言
+- 菜单：支持一、二、三级菜单，并开放一系列接口方便的使用js操作菜单
+- 主题：目前保留五种主题：蓝色、绿色、白色、灰色、灰色-展开、pro钛合金、沉淀式黑蓝（切换主题时，可自动保存你的喜好，下次打开时仍然有效）
+- 折叠：折叠或收缩菜单，并且监听窗口大小变化，在拉伸窗口时自动折叠或收缩菜单，自动响应式
+- tabbar栏：
+	- 卡片堆积：多卡片自动堆积，与菜单双向关联，切换tab卡时自动显示左侧菜单
+	- 拖动手势：tab卡支持拖拽手势，上拖新窗口打开、下拽悬浮打开、左拽快速关闭
+	- 右键菜单：在tab上右击，可以：刷新、复制、关闭、关闭其它、关闭所有、悬浮打开、新窗口打开、取消
+	- 双击菜单：双击tabbar空白处，可以显示添加新tab窗口
+	- 切换动画：集成swiper，滑动、淡入、方块、3D流、3D翻转，五种高大上切换动画，任你选择！
+	- 开放接口：开放一系列api，助你方便的使用js操作tabbar栏，具体请查看集成文档
+- 保留： 切换卡片时，可自动保留上个卡片的滚动条高度（目前没有见到其它任何一个模板做到这一点，或者说没有任何一个模板注意到这个细节功能点）
+- 锚链：tab切换自动更改hash锚链，同时监听锚链改变tab，可灵活的用鼠标前后键切换tab窗口 （如不需要此功能可在初始化时关闭）
+- 窗口：可在初始化时，设置是否显示tabbar栏，来控制它是多窗口还是单窗口，具体见使用文档
+- 更新：功能不断更新中... 你有好的想法也可以告诉我，加群一起交流吧
+- 文档：使用说明，见文档
+					</div>
+					<li style="margin-left: 1.5em;">
+						窗口模式测试：
+						<a href="javascript:top.sa_admin.is_show_tabbar = true;">多窗口模式</a>
+						<a href="javascript:top.sa_admin.is_show_tabbar = false;">单窗口模式</a>
+					</li>
 				</div>
-				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em; width: 60%; float: left;">
-					<el-divider content-position="left">
-						<big><big>疑问：</big></big>
-					</el-divider> 
-					
-					<h4>vue、element-ui、layer我都没用过，可以用这个模板吗？</h4>
-					<p style="margin-top: 5px;">
-						首先你要明白，模板分为两部分（index.html框架与框架内的模板页）<br>
-						如果你只使用index.html框架部分，可以不必掌握vue等技术，使用时甚至你都不用改动源码，
-						只重写几个属性函数就可以集成到你的项目中，<br>
-						如果你要使用框架内的模板页，则需要对vue等框架有一定的了解
-					</p>
-					
-					<br>
-					<h4>为什么是iframe，而不是SPA？</h4>
-					<p style="margin-top: 5px;">
-						现在前端开发比较主流的三种方式：服务器渲染、前后端分离、SPA<br>
-						+ 服务器渲染：类似于jsp、asp、php等所有借助后端语言渲染视图的技术，这也是比较传统的一种方式 <br>
-						+ 前后端分离：脱离后端语言，只写html，就像是在写一个静态站，与服务器的交互全部走ajax<br>
-						+ SPA：在前后端分离的基础上更进一步，借助gulp、webpack等构件工具将项目打包成单页应用的一种方式 <br>
-						<b>本模板</b> 正是采用的第2种方式（so：本模板可能无法满足重度SPA患者）<br>
-						1、前后端分离，让我们脱离了后端语言的@include指令，不用为了代码的模块化再到处搜索xx技术如何热更新代码 <br>
-						2、不使用webpack、gulp等构建工具也可以写代码，不必再费尽心机搭建一个代码编译环境 <br>
-						3、网站头部底部等公共部分代码的复用是我们使用构建工具的主要目的，但是我们借助iframe标签，轻松巧妙的化解了这个难题，借助iframe，
-						让网站成为一个真正意义上的多窗口应用
-						（大多数服务器渲染方式每次切换窗口会造成窗口刷新，SPA将代码都塞到了一个页面中的方式使得我们写代码时变得瞻前顾后） <br>
-						4、返璞归真，像写静态站一样来写后台，一个html编辑器就可以强Lu所有代码，尝试一下，相信我，你会爱上这种开发模式的
-						<br>
-					</p>
-					
-				</div>
-				<div style="clear: both;"></div>
+				<br>
 			</div>
 			
+			<!-- 疑问 -->
+			<div class="content-box">
+				<el-divider content-position="left">
+					<big><big>疑问</big></big>
+				</el-divider>
+				<div class="kapian">
+					<div class="md-contetn">
+#### vue、element-ui、layer我都没用过，可以用这个模板吗
+- 首先你要明白，模板分为两部分（index.html框架与框架内的模板页）
+- 如果你只使用index.html框架部分，可以不必掌握vue等技术，使用时甚至你都不用改动源码， 只重写几个属性函数就可以集成到你的项目中，
+- 如果你要使用框架内的模板页，则需要对vue等框架有一定的了解
+	
+#### 为什么是iframe，而不是SPA 
+- 现在前端开发比较主流的三种方式：服务器渲染、前后端分离、SPA
+	+ 服务器渲染：类似于jsp、asp、php等所有借助后端语言渲染视图的技术，这也是比较传统的一种方式
+	+ 前后端分离：脱离后端语言，只写html，就像是在写一个静态站，与服务器的交互全部走ajax
+	+ SPA：在前后端分离的基础上更进一步，借助gulp、webpack等构件工具将项目打包成单页应用的一种方式
+
+**本模板** 正是采用的第2种方式（so：本模板可能无法满足重度SPA患者）
+1. 前后端分离，让我们脱离了后端语言的@include指令，不用为了代码的模块化再到处搜索xx技术如何热更新代码
+2. 不使用webpack、gulp等构建工具也可以写代码，不必再费尽心机搭建一个代码编译环境
+3. 网站头部底部等公共部分代码的复用是我们使用构建工具的主要目的，但是我们借助iframe标签，轻松巧妙的化解了这个难题，借助iframe， 让网站成为一个真正意义上的多窗口应用 （大多数服务器渲染方式每次切换窗口会造成窗口刷新，SPA将代码都塞到了一个页面中的方式使得我们写代码时变得瞻前顾后）
+4. 返璞归真，像写静态站一样来写后台，一个html编辑器就可以强Lu所有代码，尝试一下，相信我，你会爱上这种开发模式的
+					</div>
+					<br>
+				</div>
+			</div>
+			
+			<!-- 更新日志 -->
 			<div class="content-box">
 				<el-divider content-position="left">
 					<big><big>更新日志</big></big>
 				</el-divider>
-				<div class="kapian" style="font-size: 0.9em; line-height: 1.6em;">
-					<ul style="padding-left: 1em; line-height: 1.5em;">
+				<div class="kapian">
+					<ul style="padding-left: 2em; padding-top: 1em; line-height: 1.5em;">
 						
+						<!-- ====================== 一个版本 ===================== -->
+						<li>
+							<b> <el-tag size="mini">版本 v2.2.0</el-tag></b>
+							&nbsp;&nbsp;2020-1-20  
+						</li>
+						<li>集成：集成鉴权功能，详细请查看文档 </li>
+						<li>新增：新增大量模板示例，可帮助你快速增删改查 </li>
+						<li>修复：在边缘处右键菜单文字变形的bug </li>
+						<li>重构：改了一下首页样式 </li>
+						<li>优化：将element-ui版本更换至了 2.13.0 </li>
 						<div><br></div>
-						
 						
 						<!-- ====================== 一个版本 ===================== -->
 						<li>
@@ -279,7 +242,6 @@
 						</li>
 						<div><br></div>
 						
-						
 						<li>
 							<b> <el-tag size="mini">版本 v1.1.4</el-tag></b>
 							&nbsp;&nbsp;2019-10-17
@@ -287,7 +249,6 @@
 						<li>重写了一下简介</li>
 						<li>优化主题样式</li>
 						<div><br></div>
-						
 						
 						<li>
 							<b> <el-tag size="mini">版本 v1.1.3</el-tag></b>
@@ -407,17 +368,17 @@
 
 		</div>
 
+
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		
-		<script type="text/javascript">
-			Vue.config.productionTip = false;
-		</script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script type="text/javascript">Vue.config.productionTip = false;</script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script type="text/javascript">
 			new Vue({
 				el: '.app',
 				data: {
-
+					
 				},
 				methods: {
 					// 没了
@@ -434,8 +395,13 @@
 
 				}
 			})
+			
+			// 
+			$('.md-contetn').each(function() {
+				var html = marked($(this).html());
+				$(this).html(html);
+			})
+			
 		</script>
-
-
 	</body>
 </html>

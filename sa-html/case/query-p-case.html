@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>各种查询参数示例</title>
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css"> 
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+		<script src="../../static/sa.js"></script>
+	</head>
+	<body>
+		<!-- 防止margin向下击穿 -->
+		<div style="margin-top: -1em;"><br></div>
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
+			<div class="c-panel">
+				<!-- 参数栏 -->
+				<div class="c-title">检索参数</div>
+				<el-form size="mini" :inline="true">
+					<el-form-item label="普通参数：">
+					    <el-input v-model="p.name"></el-input>
+					</el-form-item>
+					<el-form-item label="数值参数：">
+					    <el-input v-model="p.count" type="number"></el-input>
+					</el-form-item>
+					<el-form-item label="下拉参数：">
+						<el-select size="mini" v-model="p.type_id">
+							<el-option label="不限" :value="0"></el-option>
+							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
+						</el-select>
+					</el-form-item>
+					<el-form-item style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+					</el-form-item>
+					<br>
+					<el-form-item label="日期参数：">
+						<el-date-picker v-model="p.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
+					</el-form-item>
+					<el-form-item label="时间区间：">
+						<el-date-picker v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
+						<el-date-picker v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
+					</el-form-item>
+					<br>
+					<el-form-item label="单选参数：">
+						<el-radio-group v-model="p.single">
+							<el-radio :label="1">参数1</el-radio>
+							<el-radio :label="2">参数2</el-radio>
+						</el-radio-group>
+					</el-form-item>
+					<el-form-item label="单选按钮：">
+						<el-radio-group v-model="p.single2">
+							<el-radio-button :label="1">参数1</el-radio-button>
+							<el-radio-button :label="2">参数2</el-radio-button>
+							<el-radio-button :label="3">参数3</el-radio-button>
+							<el-radio-button :label="4">参数4</el-radio-button>
+						</el-radio-group>
+					</el-form-item>
+					<br>
+					<el-form-item label="单选文字：" class="s-radio-text">
+						<el-radio-group v-model="p.status">
+							<el-radio :label="0">全部</el-radio>
+							<el-radio :label="1">新下单</el-radio>
+							<el-radio :label="2">已支付</el-radio>
+							<el-radio :label="3">已发货</el-radio>
+							<el-radio :label="4">已收货</el-radio>
+							<el-radio :label="5">已评价</el-radio>
+							<el-radio :label="11">取消中</el-radio>
+							<el-radio :label="21">退款中</el-radio>
+						</el-radio-group>
+					</el-form-item>
+					<br>
+					<el-form-item label="多选参数：">
+						<el-checkbox v-model="p.checkbox_1">已上架</el-checkbox>
+						<el-checkbox v-model="p.checkbox_2">已推荐</el-checkbox>
+						<el-checkbox v-model="p.checkbox_3">热卖中</el-checkbox>
+						<el-checkbox v-model="p.checkbox_4">高点击</el-checkbox>
+						<el-checkbox v-model="p.checkbox_5">高转化</el-checkbox>
+						<el-checkbox v-model="p.checkbox_6">高复买</el-checkbox>
+					</el-form-item>
+				</el-form>
+				<!-- 数据列表 -->
+				<div class="c-title">数据列表</div>
+				<el-table :data="dataList" size="mini">
+					<el-table-column label="编号" prop="id"></el-table-column>
+					<el-table-column label="名称" prop="name"></el-table-column>
+					<el-table-column label="库存" prop="count"></el-table-column>
+					<el-table-column label="操作" width="220px">
+						<template slot-scope="s">
+							<el-button type="text" size="mini" @click="get(s.row)">查看</el-button>
+							<el-button type="text" size="mini" @click="update(s.row)">修改</el-button>
+							<el-button type="text" size="mini" @click="del(s.row)">删除</el-button>
+						</template>
+					</el-table-column>
+				</el-table>
+			</div>
+		</div>
+        <script>
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					p: {		// 查询参数  
+						name: '',
+						count: '',
+						type_id: 0, 
+						create_time: '',
+						start_time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-1',	// 本月一号 
+						end_time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),	// 本月当日 
+						single: 1,
+						single2: 1,
+						status: 0,
+						checkbox_1: true,
+						checkbox_2: true,
+						checkbox_3: false,
+						checkbox_4: false,
+						checkbox_5: false,
+						checkbox_6: false,
+					},
+					typeList: [		// 类型数组  
+						{id: 1, name: '类型1'},
+						{id: 2, name: '类型2'},
+						{id: 3, name: '类型3'},
+						{id: 4, name: '类型4'},
+					],
+					dataList: [		// 数据集合
+						{id: 101, name: '苹果', count: 3223},
+						{id: 102, name: '鸭梨', count: 3231},
+						{id: 103, name: '香蕉', count: 4321},
+						{id: 104, name: '西瓜', count: 34223},
+						{id: 105, name: '菠萝', count: 53272},
+						{id: 106, name: '辣椒', count: 20000},
+						{id: 107, name: '冬瓜', count: 100000},
+						{id: 108, name: '西红柿', count: 99999},
+						{id: 109, name: '火龙果', count: 58989},
+						{id: 110, name: '红烧鸡脖子', count: 12345},
+					],	
+				},
+				methods: {
+					// 刷新
+					f5: function(){
+						//this.$message(JSON.stringify(this.p))
+						sa.ajax2('/goods/getList', {}, function(res){
+							// this.dataList = res.data;	// 数据
+						}.bind(this));
+					},
+					// 查看
+					get: function(data) {
+						var str = '<div>';
+						str += '<p>编号：' + data.id + '</p>';
+						str += '<p>名称：' + data.name + '</p>';
+						str += '<p>库存：' + data.count + '</p>';
+						str += '</div>';
+						sa.alert(str);
+					},
+					// 修改
+					update: function (data) {
+						sa.msg('你点击了id=' + data.id + '的修改按钮');
+					},
+					// 删除
+					del: function (data) {
+						sa.confirm('是否删除，此操作不可撤销', function() {
+							sa.ajax2('/goods/delete?id=' + data.id, function(res) {
+								sa.arrayDelete(this.dataList, data);
+								sa.ok('删除成功');
+							}.bind(this))
+						}.bind(this));
+					},
+				},
+				created: function(){
+					this.f5();
+					this.$notify.info({
+						title: '消息',
+						message: '本页面展示各种检索参数，以便完成强大的列表查询'
+					});
+				}
+			})
+			
+		</script>
+	</body>
+</html>

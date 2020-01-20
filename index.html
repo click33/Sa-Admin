@@ -5,11 +5,10 @@
 		<meta charset="utf-8">
 		<link rel="shortcut icon" type="image/x-icon" class="admin-icon">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="https://unpkg.com/swiper@4.5.0/dist/css/swiper.min.css">
 		<link rel="stylesheet" href="sa-resources/index.css">
 		<link rel="stylesheet" href="sa-resources/theme.css">
-		
 	</head>
 	<body>
 		<!-- style="display: none;" 防止 初始花屏 -->
@@ -195,7 +194,7 @@
 					<div class="towards-left" @click="scrollToLeft" title="向左滑">
 						<i class="el-icon-arrow-left"></i>
 					</div>
-					<div class="towards-middle" @dblclick="dblclickNr2($event)">
+					<div class="towards-middle" @dblclick="atOpen($event)">
 						
 						<div class="tab-title-box" :style="{left: scrollX + 'px'}" @dblclick.stop="">
 							<div 
@@ -213,7 +212,7 @@
 								>
 								<div class="tab-title-2">
 									<i class="el-icon-caret-right"></i>
-									<span>{{tab.name}}</span>
+									<span :style=" tab.is_have_en ? 'font-weight: 400;' : '' ">{{tab.name}}</span>
 									<i class="el-icon-close" v-if="!tab.hide_close" @click.stop="closeTab(tab)"></i> 
 								</div>
 							</div>
@@ -228,7 +227,7 @@
 				<!-- 面包屑导航栏 -->
 				<div 
 					class="nav-right-bre" 
-					@dblclick="dblclickNr2($event)" 
+					@dblclick="atOpen($event)" 
 					@contextmenu.prevent="right_showMenu(nativeTab, $event);"
 					draggable="true"
 					@dragstart="is_drag = true; dragTab = nativeTab"
@@ -290,7 +289,7 @@
 		<script type="text/javascript">
 			Vue.config.productionTip = false;
 		</script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/swiper@4.5.0/dist/js/swiper.min.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>

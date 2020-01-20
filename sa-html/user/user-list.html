@@ -4,67 +4,35 @@
 		<title>用户列表</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		
-		<!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		
-		<!-- 所有的 js 资源 -->
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
-		
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
-		<script src="../../static/kj/laydate/laydate.js"></script>
 		<script src="../../static/sa.js"></script>
-		<script src="data-list.js"></script>
-		
-		<style type="text/css">
-			
-		</style>
-		
 	</head>
 	<body>
-		
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
-		
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
-			
-			<!-- 参数栏 -->
 			<div class="c-panel">
+				<!-- 参数栏 -->
 				<div class="c-title">用户列表</div>
-				<el-form ref="form">
-					<div class="c-item">
-						<label class="c-label">昵称：</label>
-						<el-input size="mini" v-model="p.username" placeholder="模糊搜索" @keyup.enter="f5"></el-input>
-					</div>
-					
-					<div class="c-item">
-						<label class="c-label">注册日期：</label>
-						<el-input size="mini" v-model="p.start_time" class="start_time"></el-input>
-						&nbsp;至&nbsp;
-						<el-input size="mini" v-model="p.end_time" class="end_time"></el-input>
-					</div>
-					
-					<div class="c-item" style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
-					</div>
-					
-					<!-- <br />
-					<div class="c-item">
-						<label class="c-label">注册方式：</label>
-						<el-select size="mini" v-model="p.create_type">
-							<el-option label="全部" :value="0"></el-option>
-							<el-option label="账号注册" :value="1"></el-option>
-							<el-option label="手机号注册" :value="2"></el-option>
-							<el-option label="邮箱注册" :value="3"></el-option>
-						</el-select>
-					</div>
-					 -->
+				<el-form :inline="true" size="mini">
+					<el-form-item label="用户昵称：">
+						<el-input v-model="p.username" placeholder="模糊查询"></el-input>
+					</el-form-item>
+					<el-form-item label="注册日期：">
+						<el-date-picker v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
+						<el-date-picker v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
+					</el-form-item>
+					<el-form-item style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+					</el-form-item>
 					<br />
-					<div class="c-item">
-						<label class="c-label">排序：</label>
+					<el-form-item label="综合排序：" class="s-radio-text">
 						<el-radio-group v-model="p.sort_type">
 							<el-radio :label="1">注册时间</el-radio>
 							<el-radio :label="2">最近登录</el-radio>
@@ -72,105 +40,66 @@
 							<el-radio :label="4">最近签到</el-radio>
 							<el-radio :label="5">签到次数</el-radio>
 						</el-radio-group>
-					</div>
-
+					</el-form-item>
 				</el-form>
-	
 				<!-- <div class="c-title">数据列表</div> -->
-				<el-table class="data-table" :data="dataList" size="mini"  style="width: 100%">
-					
+				<el-table :data="dataList" size="mini">
 					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
 					<el-table-column label="昵称" prop="username" width="200px">
-						<template slot-scope="scope">
-							<img :src="scope.row.avatar" style="width: 3em; height: 3em; float: left; margin-right: 1em; border-radius: 50%;" >
+						<template slot-scope="s">
+							<img :src="s.row.avatar" @click="sa.showImage(s.row.avatar, '400px', '400px')"
+								style="width: 3em; height: 3em; float: left; margin-right: 1em; border-radius: 50%; cursor: pointer;" >
 							<div style="float: left; width: 130px; line-height: 20px;">
-								<b>{{scope.row.username}}</b>
-								<p>{{scope.row.tell}}</p>
+								<b>{{s.row.username}}</b>
+								<p>{{s.row.tell}}</p>
 							</div>
 						</template>
 					</el-table-column>
 					<el-table-column label="个人相册">
-						<template slot-scope="scope">
-							<img :src="scope.row.photo_list[0]" style="width: 40px; height: 40px; cursor: pointer;" @click="pre_img(scope.row)" >
-							共{{scope.row.photo_list.length}}张, 点击预览
+						<template slot-scope="s">
+							<img :src="s.row.photo_list[0]" style="width: 40px; height: 40px; cursor: pointer;" @click="sa.showImageList(s.row.photo_list)" >
+							共{{s.row.photo_list.length}}张, 点击预览
 						</template>
 					</el-table-column>
 					<el-table-column label="性别" prop="sex"> </el-table-column>
-
 					<el-table-column label="注册方式" prop="create_type"></el-table-column>
 					<el-table-column label="注册于" prop="create_time"></el-table-column>
 					<el-table-column label="状态">
-						<template slot-scope="scope">
-							<span style="color: green;" v-if="scope.row.status == 1">正常</span>
-							<span style="color: red;" v-if="scope.row.status == 2">禁用</span>
+						<template slot-scope="s">
+							<el-switch v-model="s.row.status" :active-value="1" :inactive-value="2" inactive-color="#ff4949"></el-switch>
+							<b style="color: green;" v-if="s.row.status == 1">正常</b>
+							<b style="color: red;" v-if="s.row.status == 2">禁用</b>
 						</template>
 					</el-table-column>
-
 					<el-table-column prop="address" label="操作">
-						<template slot-scope="scope">
-							<el-button type="primary" class="c-btn" icon="el-icon-edit" @click="dongjie(scope.row)" v-if="scope.row.status == 1">禁用</el-button>
-							<el-button type="primary" class="c-btn" icon="el-icon-edit" @click="jiejin(scope.row)" v-if="scope.row.status == 2">解禁</el-button>
-							<el-button type="danger" class="c-btn" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
+						<template slot-scope="s">
+							<el-button class="c-btn" type="success"  icon="el-icon-view" @click="get(s.row)">详情</el-button>
+							<el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
-		
 				<!-- 分页 -->
 				<div class="page-box">
 					<el-pagination background
 						layout="total, prev, pager, next, sizes, jumper" 
-						:current-page.sync="page.pageNo" 
-						:page-size.sync="page.pageSize" 
-						:total="page.count" 
+						:current-page.sync="p.pageNo" 
+						:page-size.sync="p.pageSize" 
+						:total="dataCount" 
 						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
 						@current-change="f5(true)" 
 						@size-change="f5(true)">
 					</el-pagination>
 				</div>
-
 			</div>
-			
-			
+			<!-- 给layer打一波广告 -->
 			<div class="c-panel" style="background-color: rgba(0,0,0,0);">
 				layer：<el-link type="primary" href="http://layer.layui.com/" target="_blank">
 					一个可以让你想到即可做到的JavaScript弹窗（层）解决方案
-				</el-link> <br>
-				laydate：<el-link type="primary" href="https://www.layui.com/laydate/" target="_blank">
-					世界上最好用的日期选择插件 
-				</el-link> <br>
-				
+				</el-link>
 			</div>
-			
-			<br><br><br><br><br><br><br><br><br>
-
-			
 		</div>
-		
+		<script src="data-list.js"></script>
 		<script type="text/javascript">
-			
-			
-			// 渲染日期选择插件 
-			function init_laydate() {
-				// 开始日期
-				laydate.render({
-					elem: '.start_time input',
-					type: 'date',
-					done: function(value, date){
-						app.p.start_time = value;
-					}
-				});
-				// 结束日期
-				laydate.render({
-					elem: '.end_time input',
-					type: 'date',
-					done: function(value, date){
-						app.p.end_time = value;
-					}
-				});
-			}
-			
-			
-			
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
@@ -178,87 +107,46 @@
 						username: '',
 						create_type: 0,
 						sort_type: 1,
-						start_time: sa.forDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), 	// 本月一号 
-						end_time: sa.forDate(new Date()),
-					},
-					page: {	// 分页信息
+						start_time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-1',	// 本月一号 
+						end_time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),	// 本月当日 
 						pageNo: 1,
 						pageSize: 10,
-						count: 1422
 					},
-					dataList: dataList
+					dataCount: 1422,
+					dataList: []
 				},
 				methods: {
 					// 数据刷新
 					f5: function() {
 						sa.ajax2('/user/getList', this.p, function(res){
-							// this.dataList = res.data;	// 数据
-							// this.page = res.page;		// 分页 
-							this.$message('查询：' + JSON.stringify(this.p));
-						}.bind(this));
-					},
-					// 分页刷新
-					pageNo_f5: function(pageNo) {
-						this.$message('切换当前页：' + pageNo);
-						this.f5();
-					},
-					pageSize_f5: function(pageSize) {
-						this.$message('切换页大小：' + pageSize);
-						this.f5();
-					},
-					// 预览图片
-					pre_img: function(data) {
-						var list = data.photo_list;
-						var arr_list = [];
-						list.forEach(function(item) {
-							arr_list.push({
-								alt: '左右键切换',
-								pid: 1,
-								src: item,
-								thumb: item
-							})
-						})
-						layer.photos({
-							photos: {
-								title: data.username + '的个人相册',
-								id: data.id,
-								start: 0,
-								data: arr_list
-							}
-							,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-						});
-
+							this.dataList = res.data;	// 数据  
+							this.dataCount = res.dataCount;		// 分页  
+						}.bind(this), {res: mockData});
 					},
 					// 删除
 					del: function(data) {
-						layer.confirm('是否删除，此操作不可撤销', {}, function() {
-							sa.ajax2('url', {}, function(res) {
+						sa.confirm('是否删除，此操作不可撤销', function() {
+							sa.ajax2('/user/delete?id=' + data.id, function(res) {
 								sa.arrayDelete(this.dataList, data);
-								layer.msg('删除成功');
+								sa.ok('删除成功');
 							}.bind(this))
 						}.bind(this));
 					},
-					// 账号冻结
-					dongjie: function(data) {
-						layer.confirm('冻结此用户？', {}, function() {
-							sa.ajax2('url', {}, function(res) {
-								data.status = 2;
-								layer.msg('冻结成功');
-							}.bind(this))
-						}.bind(this));
-					},
-					// 解禁 
-					jiejin: function(data) {
-						layer.confirm('解禁此用户？', {}, function() {
-							sa.ajax2('url', {}, function(res) {
-								data.status = 1;
-								layer.msg('解禁成功');
-							}.bind(this))
-						}.bind(this));
+					// 查看
+					get: function(data) {
+						var str = '<div>';
+						str += '<p>编号：' + data.id + '</p>';
+						str += '<p>昵称：' + data.username + '</p>';
+						str += '<p>性别：' + data.sex + '</p>';
+						str += '<p>当前状态：<b>' + (data.status == 1 ? '正常' : '禁用') + '</b></p>';
+						str += '<p>注册方式：' + data.create_type + '</p>';
+						str += '<p>注册时间：' + data.create_time + '</p>';
+						str += '</div>';
+						sa.alert(str);
 					}
 				},
-				mounted:function(){
-					init_laydate();
+				created: function(){
+					this.f5()
 				}
 			})
 			

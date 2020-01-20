@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>404</title>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{margin: 0; padding: 0;}
+			html,body,.content-box{height: 100%;}
+			.content-box{
+				display: flex; 
+				justify-content: center; 
+				align-items: center;
+				background-color: #EEE;
+			}
+			.tips-box{text-align: center; margin-top: -100px;}
+			.xian{width: 600px; height: 2px; margin: 40px auto  30px auto; background-color: #515151;}
+			.error-icon{width: 250px; height: 250px;}
+			.error-tips{font-size: 22px; font-weight: 700; color: #515151;}
+			.go-index{display: none;}
+		</style>
+	</head>
+	<body>
+		<div class="content-box">
+			<div class="tips-box">
+				<p>
+					<img class="error-icon" src="../../static/img/kulian.png" >
+				</p>
+				<div class="xian"></div>
+				<p class="error-tips">
+					<span>404 - 没有找到你想要的页面</span>
+					<span class="go-index">, 你可以：<a href="../../index.html">回到首页</a></span>
+				</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 是否显示回到首页
+			if(parent == window) {
+				document.querySelector('.go-index').style.display = 'inline';
+			}
+		</script>
+	</body>
+</html>

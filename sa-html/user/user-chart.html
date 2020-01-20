@@ -1,44 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>用户列表</title>
+		<title>用户注册统计</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		
-		<!-- 所有的 css 资源 -->
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" href="../../static/sa.css"> 
-		
-		<!-- 所有的 js 资源 -->
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css">
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-		<script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
-		
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
 		<script src="../../static/sa.js"></script>
-		
 		<style type="text/css">
-			.echarts-div{
-				height: 450px;
-			}
-
+			.echarts-div {height: 60vh;}
 		</style>
-		
 	</head>
 	<body>
-		
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
-		
-		<div class="vue-box">
-			
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 参数栏 -->
 			<div style="padding: 2em;">
 				<div class="c-title">检索参数</div>
-				<el-form ref="form">
-	
-					<div class="c-item">
-						<label class="c-label">选择年份：</label>
+				<el-form size="mini" :inline="true">
+					<el-form-item label="选择年份：">
 						<el-select size="mini" v-model="p.year" @change="f5()">
 							<el-option label="不限年份" :value="0"></el-option>
 							<el-option label="2016年" :value="2016"></el-option>
@@ -48,72 +34,57 @@
 							<el-option label="2020年" :value="2020"></el-option>
 							<el-option label="2021年" :value="2021"></el-option>
 						</el-select>
-					</div>
-					
-					<div class="c-item" style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" size="mini" @click="f5">查询</el-button>
-					</div>
-					
+					</el-form-item>
+					<el-form-item style="min-width: 0px;">
+						<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+					</el-form-item>
 				</el-form>
-
 			</div>
-			
 			<!-- 数据栏 -->
 			<div style="display: flex; margin-top: -1em;">
-				<div style="padding: 2em; flex: 4; margin-right: 0;">			
+				<div style="padding: 2em; flex: 4; margin-right: 0;">
 					<div class="c-title" style="margin-bottom: 50px;">饼图</div>
 					<div class="echarts-div" id='e-type'></div>
 				</div>
-				<div style="padding: 2em; flex: 6;">			
+				<div style="padding: 2em; flex: 6;">
 					<div class="c-title">折线图</div>
 					<div class="echarts-div" id='e-month'></div>
 				</div>
 			</div>
-			
 			<div style="clear: both;"></div>
-
 			<div style="padding: 2em;">
 				ECharts：<el-link type="primary" href="https://echarts.baidu.com/" target="_blank">
 					一个使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器
 				</el-link>
 			</div>
-			
-			<br><br><br><br><br><br><br><br><br>
-
-			
 		</div>
-		
-		
 		<script src="https://cdn.bootcss.com/echarts/4.3.0-rc.2/echarts-en.js"></script>
 		<script type="text/javascript">
-			
 			// 随机数 
 			function randomNum(minNum, maxNum) {
-				return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10)
+				return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10)
 			}
-			
+
 			new Vue({
 				el: '.vue-box',
 				data: {
-					p: {	// 查询参数 
+					p: { // 查询参数 
 						year: new Date().getFullYear()
 					}
 				},
 				methods: {
 					// 数据刷新
 					f5: function() {
-						sa.ajax2('/url', this.p, function(res){
+						sa.ajax2('/url', this.p, function(res) {
 							this.updateEchartsType();
 							this.updateEchartsMonth();
 						}.bind(this));
 					},
 					// 更新Echarts, 每种方式注册量
 					updateEchartsType: function() {
-						
-						
+
 						// ===========================================  定义数据
-						var dataArray = [
-							{
+						var dataArray = [{
 								name: '昵称注册',
 								value: randomNum(100, 1000)
 							},
@@ -134,9 +105,6 @@
 								value: randomNum(100, 1000)
 							},
 						]; // 坐标X轴数据
-
-						
-
 
 						// ===========================================  开始渲染
 
@@ -167,7 +135,7 @@
 							series: [{
 								name: '账号来源',
 								type: 'pie',
-								radius : '50%',  // 半径大小
+								radius: '50%', // 半径大小
 								center: ['50%', '50%'],
 								selectedMode: 'single',
 								data: dataArray.sort(function(a, b) {
@@ -200,8 +168,7 @@
 								label: {
 									normal: {
 										formatter: '{b|{b}：}{c}  {per|{d}%}  ',
-										rich: {
-										}
+										rich: {}
 									}
 								},
 							}]
@@ -209,11 +176,8 @@
 						myChart.setOption(option);
 						myChartList[0] = myChart;
 					},
-
 					// 更新Echarts, 每月注册量
 					updateEchartsMonth: function() {
-
-						
 
 						// ===========================================  定义数据
 						var x_name = this.p.year + "年"; // x轴名称
@@ -222,10 +186,10 @@
 						var valueArray = []; //  坐标Y轴数据
 
 						var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-						for (var i in arr) { 
+						for (var i in arr) {
 							i = parseInt(i) + 1;
 							dataArray.push(i + '月');
-							if(i < 10){
+							if (i < 10) {
 								i = "0" + i;
 							}
 							i = i + "";
@@ -310,9 +274,6 @@
 						myChart.setOption(option);
 						myChartList[1] = myChart;
 					}
-
-
-
 				},
 				created: function() {
 					setTimeout(function() {
@@ -320,22 +281,13 @@
 					}.bind(this), 0)
 				}
 			})
-			
-			
+			// 监听窗口变动 
 			var myChartList = [{}, {}];
 			window.onresize = function() {
-				myChartList.forEach(function(myChart){
+				myChartList.forEach(function(myChart) {
 					myChart.resize();
 				})
 			};
-
-			
 		</script>
-		
-		
-		
-		
-		
-		
 	</body>
 </html>
