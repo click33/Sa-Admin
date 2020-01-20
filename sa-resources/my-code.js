@@ -95,7 +95,7 @@ sa_admin.dropList = [		// 头像点击处可操作的选项
 sa_admin.init();
 // 或者以下方式，增加配置项
 // sa_admin.init({
-// 	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4、5
+// 	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4、5、6、7 
 // 	switchDefault: 'fade',	// 默认的切换动画，可选值：fade、slide、cube、coverflow、flip
 // 	is_show_tabbar: true,	// 是否显示tabbar栏, 默认为true, 配置为false后将不再是一个多窗口tab, 取之显示的是一个面包屑导航栏
 // 	is_reme_open: true,		// 是否记住上一次最后打开的窗口, 默认为true, 配置为false后, 每次刷新不再自动打开上一次最后打开的窗口(也不再有锚链接智能tab调准)
