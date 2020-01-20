@@ -192,4 +192,4 @@ html,body{height: 100%; background-color: #EEE;}
 
 
 /* 去除掉便签的大边框 */
-.layui-layer-input{outline: 0;}
+.layui-layer-input{outline: 0; box-shadow: none !important; padding: 0.5em !important;}
