@@ -229,7 +229,7 @@ var sa = {
 		}, function(pass, index){
 			layer.close(index);
 			if(okFn) {
-				okFn();
+				okFn(pass);
 			}
 		});
 	}
