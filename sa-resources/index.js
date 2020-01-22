@@ -572,7 +572,7 @@ var sa_admin = new Vue({
 			}.bind(this))
 		},
 		// 显示一个选项卡, 根据 id , 不存在则不显示 
-		showTabById: function() {
+		showTabById: function(id) {
 			var tab = this.getTabById(id);
 			if(tab) {
 				this.showTab(tab);
