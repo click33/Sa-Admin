@@ -5,7 +5,8 @@ var mockDataList = {
 		{
 			id: 101, 
 			name: '苹果', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-apple',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 1999,
 			status: 1,
 			create_time: new Date()
@@ -13,7 +14,8 @@ var mockDataList = {
 		{
 			id: 102, 
 			name: '香蕉', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-apple',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 2555,
 			status: 1,
 			create_time: new Date()
@@ -21,7 +23,8 @@ var mockDataList = {
 		{
 			id: 103, 
 			name: '茄子', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-cherry',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 4999,
 			status: 1,
 			create_time: new Date()
@@ -29,7 +32,8 @@ var mockDataList = {
 		{
 			id: 104, 
 			name: '芸豆', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-cherry',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 5555,
 			status: 1,
 			create_time: new Date()
@@ -37,7 +41,8 @@ var mockDataList = {
 		{
 			id: 105, 
 			name: '木须肉', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-umbrella',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 10000,
 			status: 1,
 			create_time: new Date()
@@ -45,7 +50,8 @@ var mockDataList = {
 		{
 			id: 106, 
 			name: '回锅肉', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-umbrella',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 10000,
 			status: 1,
 			create_time: new Date()
@@ -53,7 +59,8 @@ var mockDataList = {
 		{
 			id: 107, 
 			name: '辣子鸡', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-user',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 99999,
 			status: 2,
 			create_time: new Date()
@@ -61,7 +68,8 @@ var mockDataList = {
 		{
 			id: 108, 
 			name: '大萝贝', 
-			icon: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+			icon: 'el-icon-user',
+			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 23333,
 			status: 2,
 			create_time: new Date()

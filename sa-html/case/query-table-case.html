@@ -25,6 +25,7 @@
 					</el-form-item>
 					<el-form-item style="min-width: 0px;">
 						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+						<el-button type="primary" icon="el-icon-plus" @click="add()">添加</el-button>
 					</el-form-item>
 				</el-form>
 				<!-- 数据列表 -->
@@ -32,15 +33,20 @@
 				<el-table :data="dataList" size="mini">
 					<el-table-column label="id" prop="id"></el-table-column>
 					<el-table-column label="显示文本" prop="name"></el-table-column>
+					<el-table-column label="显示头像">
+						<template slot-scope="s">
+							<img :src="s.row.avatar" style="width: 3em; height: 3em; border-radius: 4px; cursor: pointer;" 
+								@click="sa.showImage(s.row.avatar, '400px', '400px')" />
+						</template>
+					</el-table-column>
 					<el-table-column label="显示图标">
 						<template slot-scope="s">
-							<img :src="s.row.icon" style="width: 3em; height: 3em; border-radius: 4px; cursor: pointer;" 
-								@click="sa.showImage(s.row.icon, '400px', '400px')" />
+							<i :class="s.row.icon" style="font-size: 1.3em;"></i>
 						</template>
 					</el-table-column>
 					<el-table-column label="显示价格" >
 						<template slot-scope="s">
-							<b style="color: red;">￥{{s.row.money / 100}}</b>
+							<b style="color: red; ">￥{{s.row.money / 100}}</b>
 						</template>
 					</el-table-column>
 					<el-table-column label="显示状态">
@@ -126,9 +132,14 @@
 						str += '</div>';
 						sa.alert(str);
 					},
+					// 添加
+					add: function () {
+						sa.showIframe('添加一个', 'query-table-case-add.html', '500px', '400px');
+					},
 					// 修改
 					update: function (data) {
-						sa.msg('你点击了id=' + data.id + '的修改按钮');
+						// sa.msg('你点击了id=' + data.id + '的修改按钮');
+						sa.showIframe('修改数据', 'query-table-case-add.html?id=' + data.id, '500px', '400px');
 					},
 					// 删除
 					del: function (data) {

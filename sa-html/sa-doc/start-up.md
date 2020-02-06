@@ -13,6 +13,7 @@
 #### 3、设置模板标题
 ``` js 
 sa_admin.title = "SA-后台模板";
+
 // sa_admin.logo_url='url';	// 设置logo图标地址   默认值：sa-resources/admin-logo.png
 // sa_admin.icon_url = 'sa-resources/admin-logo.png';    // 设置icon图标地址   默认值：sa-resources/admin-logo.png
 ```
@@ -24,6 +25,7 @@ sa_admin.title = "SA-后台模板";
 ``` js 
 var myMenuList = window.menuList;	// window.menuList 在 menu-list.js 中定义 
 sa_admin.setMenuList(myMenuList);	// 写入菜单 
+
 // sa_admin.setMenuList(myMenuList, [11, 1, '1-1']);	// 写入菜单，并设置应该显示哪些id的菜单（第二个参数为空时，代表默认显示所有）
 ```
 
@@ -31,10 +33,12 @@ sa_admin.setMenuList(myMenuList);	// 写入菜单
 ```js 
 sa_admin.showHome();			// 显示主页选项卡 
 sa_admin.showTabById('1-1');	// 显示一个选项卡, 根据id
-sa_admin.closeTabById('1-1');	// 关闭一个选项卡，根据 id 
+sa_admin.closeTabById('1-1');	// 关闭一个选项卡，根据 id （ 第二个参数可填关闭后的回调函数 ）
 sa_admin.showMenuById('1-1');	// 打开一个 菜单，根据 id
+
 // 新增一个选项卡
 // sa_admin.addTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+
 // 新增一个选项卡、并立即显示  
 // sa_admin.showTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// 参数同上 
 ```
@@ -71,13 +75,24 @@ sa_admin.dropList = [	// 头像点击处可操作的选项
 ]	
 ``` 
 
+#### 8、怎么在一个选项卡页面调用另一个页面的代码 
+``` js
+var win = sa_admin.getTabWindow('2-1');		// 根据id获取其页面的window对象   （如果此页面未打开，则返回空）（跨域模式下无法获取其window对象）
+win.app.f5();								// 然后调用这个对象上的方法 
 
-#### 8、初始化模板（必须调用）
-``` js
-sa_admin.init();
 ```
-或者以下方式，增加配置项
+
+#### 9、子父窗口通信操作注意点
+根据`iframe`的子父通信原则，在子页面中调用父页面的方法，需要加上parent前缀，例如：
+```
+parent.sa_admin.msg('啦啦啦');		// 调用父页面的弹窗方法 
+```
+
+#### 10、初始化模板（必须调用）
 ``` js
+sa_admin.init();	// 初始化模板 
+
+// 或者以下方式，增加配置项
 sa_admin.init({
 	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4、5、6、7 
 	switchDefault: 'fade',	// 默认的切换动画，可选值：fade、slide、cube、coverflow、flip
@@ -87,7 +102,8 @@ sa_admin.init({
 ```
 想获得更多操作能力？其实在`sa_admin`对象上的所有属性和函数都可以直接调用 
 
-#### 9、以上示例在 my-code.js中 都有相应的注释说明，如何还有不懂的地方，可以加群问我（群链接在首页）
+
+#### 11、以上示例在 my-code.js中 都有相应的注释说明，如何还有不懂的地方，可以加群问我（群链接在首页）
 
 
 

@@ -34,8 +34,8 @@
 		<div class="app">
 			<div class="content-box">
 				<div style="padding: 1em; border-left: 5px #2D8CF0 solid; background-color: #EEE;">
-					<big><big>Welcome to SA-后台模板 </big></big>
-					<span style="display: inline-block; margin-left: 1em; color: #888;"> —— 一个基于iframe的多窗口后台模板</span>
+					<big><big>Welcome to sa-admin </big></big>
+					<span style="display: inline-block; margin-left: 1em; color: #888;"> —— 一个多窗口后台模板，流畅、易上手、提高生产力</span>
 				</div>
 			</div>
 			<div class="content-box">
@@ -51,6 +51,10 @@
 					<el-divider content-position="left">
 						<big><big>SA-ADMIN</big></big>
 					</el-divider>
+					<!-- <ul style="margin-bottom: 1em;">
+						<li>上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成</li>
+						<li>示例全面：提供大量常见增删改查示例，提高你的生产力</li>
+					</ul> -->
 					<div>
 						<p>
 							虽然已经用过不少优秀的后台模板，但是一直都感觉不尽完美，于是在经过激烈的思想斗争后，我决定牺牲五一假期，亲自做一个尝试一下，
@@ -74,6 +78,7 @@
 								<b>开源不易，求鼓励，给个star吧</b>
 							</li>
 						</ul>
+						<br>
 					</div>
 
 				</div>
@@ -94,6 +99,8 @@
 				</div>
 				<div style="clear: both;"></div>
 			</div>
+			
+			
 
 			<!-- 功能介绍 -->
 			<div class="content-box">
@@ -135,12 +142,18 @@
 				</el-divider>
 				<div class="kapian">
 					<div class="md-contetn">
-#### vue、element-ui、layer我都没用过，可以用这个模板吗
+#### 1、sa-admin的优点？
+- 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
+- 示例全面：提供大量常见增删改查示例，提高你的生产力
+<br>
+
+#### 2、vue、element-ui、layer我都没用过，可以用这个模板吗
 - 首先你要明白，模板分为两部分（index.html框架与框架内的模板页）
 - 如果你只使用index.html框架部分，可以不必掌握vue等技术，使用时甚至你都不用改动源码， 只重写几个属性函数就可以集成到你的项目中，
 - 如果你要使用框架内的模板页，则需要对vue等框架有一定的了解
+<br>
 	
-#### 为什么是iframe，而不是SPA 
+#### 3、为什么是iframe，而不是SPA 
 - 现在前端开发比较主流的三种方式：服务器渲染、前后端分离、SPA
 	+ 服务器渲染：类似于jsp、asp、php等所有借助后端语言渲染视图的技术，这也是比较传统的一种方式
 	+ 前后端分离：脱离后端语言，只写html，就像是在写一个静态站，与服务器的交互全部走ajax
@@ -156,6 +169,31 @@
 				</div>
 			</div>
 			
+			
+			<!-- 疑问 -->
+			<div class="content-box">
+				<el-divider content-position="left">
+					<big><big>添砖加瓦</big></big>
+				</el-divider>
+				<div class="kapian">
+					<div class="md-contetn">
+#### 1、我有好的想法，如何为项目贡献代码？
+1. 在github上fork一份到自己的仓库
+2. clone自己的仓库到本地电脑
+3. 在本地电脑修改、commit、push
+4. 提交pr（点击：New Pull Request）（提交pr前请保证自己fork的仓库是最新版本，如若不是先强制更新一下）
+5. 等待合并
+
+#### 2、建议贡献的地方
+- 修复源码现有bug，或增加新的实用功能（比如：流畅的tab左右拖拽排序）
+- 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
+- 如果更新实用功能，可在文档友情链接处留下自己的推广链接
+					</div>
+					<br>
+				</div>
+			</div>
+			
+			
 			<!-- 更新日志 -->
 			<div class="content-box">
 				<el-divider content-position="left">
@@ -163,6 +201,16 @@
 				</el-divider>
 				<div class="kapian">
 					<ul style="padding-left: 2em; padding-top: 1em; line-height: 1.5em;">
+						
+						<!-- ====================== 一个版本 ===================== -->
+						<li>
+							<b> <el-tag size="mini">版本 v2.2.2</el-tag></b>
+							&nbsp;&nbsp;2020-2-7
+						</li>
+						<li>增加：增加弹出式修改的示例</li>
+						<li>增加：增加窗口之间通信的方法，详细请查看集成文档</li>
+						<li>完善：完善readme.md</li>
+						<div><br></div>
 						
 						<!-- ====================== 一个版本 ===================== -->
 						<li>

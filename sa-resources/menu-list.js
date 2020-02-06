@@ -61,16 +61,8 @@ var menuList =	[
 		icon: 'el-icon-user',
 		info: '对用户列表、添加、统计等等...',
 		childList: [
-			{
-				id: '5-1',
-				name: '用户列表',
-				url: 'sa-html/user/user-list.html'
-			},
-			{
-				id: '5-2',
-				name: '用户添加',
-				url: 'sa-html/user/user-add.html'
-			},
+			{id: '5-1', name: '用户列表', url: 'sa-html/user/user-list.html'},
+			{id: '5-2', name: '用户添加', url: 'sa-html/user/user-add.html'},
 			{
 				id: '5-3',
 				name: '用户统计',
@@ -90,16 +82,8 @@ var menuList =	[
 		icon: 'el-icon-document-copy',
 		info: '对文章的增删改查、维护',
 		childList: [
-			{
-				id: '6-1',
-				name: '文章列表',
-				url: 'sa-html/article/art-list.html'
-			},
-			{
-				id: '6-2',
-				name: '文章发表', 
-				url: 'sa-html/article/art-add.html' 
-			}
+			{id: '6-1', name: '文章列表', url: 'sa-html/article/art-list.html'},
+			{id: '6-2', name: '文章发表', url: 'sa-html/article/art-add.html'}
 		]
 	},
 	{
@@ -121,36 +105,12 @@ var menuList =	[
 		icon: 'el-icon-link',
 		info: '示例：外部链接',
 		childList: [
-			{
-				id: '8-1',
-				name: '百度一下',
-				url: 'https://www.baidu.com/',
-				is_blank: true
-			},
-			{
-				id: '8-2',
-				name: 'uni-app',
-				url: 'https://uniapp.dcloud.io/',
-				is_blank: true
-			},
-			{
-				id: '8-3',
-				name: 'SqlFly',
-				url: 'https://sqlfly.dev33.cn/',
-				is_blank: true
-			},
-			{
-				id: '8-6',
-				name: '颜值排行榜',
-				url: 'http://yanzhi21.com/',
-				is_blank: true
-			},
-			{
-				id: '8-7',
-				name: 'jq22插件库',
-				url: 'http://www.jq22.com/',
-				is_blank: true
-			}
+			{id: '8-1', name: '百度一下', url: 'https://www.baidu.com/', is_blank: true},
+			{id: '8-3', name: 'sa-token', url: 'http://sa-token.dev33.cn/', is_blank: true},
+			{id: '8-4', name: 'SqlFly', url: 'https://sqlfly.dev33.cn/', is_blank: true},
+			{id: '8-6', name: '颜值排行榜', url: 'http://yanzhi21.com/', is_blank: true},
+			{id: '8-7', name: 'jq22插件库', url: 'http://www.jq22.com/', is_blank: true},
+			{id: '8-2', name: 'uni-app', url: 'https://uniapp.dcloud.io/', is_blank: true},
 		]
 	},
 	//  ========= 示例 隐藏的菜单，最终将不会显示在菜单栏里 ================

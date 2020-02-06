@@ -157,7 +157,16 @@
 					},
 					// 修改
 					update: function (data) {
-						sa.msg('你点击了id=' + data.id + '的修改按钮');
+						// sa.msg('你点击了id=' + data.id + '的修改按钮');
+						sa.prompt('修改库存', function(pass, index){
+							if(isNaN(pass)) {
+								return sa.error('请输入一个数字')
+							}
+							sa.ajax2('/data/update', {id: data.id, count: data.count}, function(res){
+								data.count = pass;
+								sa.ok('修改成功');
+							})
+						}, 0, data.count);
 					},
 					// 删除
 					del: function (data) {
