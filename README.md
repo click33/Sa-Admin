@@ -1,16 +1,20 @@
 
 # sa-admin   
 
-一个基于iframe的多窗口后台模板，演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
+一个多窗口后台模板，流畅、易上手、提高生产力，演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
 
 :kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes:  :blush:  :blush:  :blush:  :heart:  :heart:  :heart: 
 
+## 优点
+- 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
+- 示例全面：提供大量常见增删改查示例，提高你的生产力
+
 ## 框架选型
-+ JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
-+ UI框架：[Element-UI @2.13.0](https://element.eleme.cn/#/zh-CN)
-+ web弹层：[layer @3.1.1](http://layer.layui.com/)
-+ 切页动画：[Swiper @4.5.0](https://www.swiper.com.cn/)
-+ 即使以上几个框架你都没接触过，只要你认真阅读一遍文档说明，也可以快速上手本模板
+- JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
+- UI框架：[Element-UI @2.13.0](https://element.eleme.cn/#/zh-CN)
+- web弹层：[layer @3.1.1](http://layer.layui.com/)
+- 切页动画：[Swiper @4.5.0](https://www.swiper.com.cn/)
+- 即使以上几个框架你都没接触过，只要你认真阅读一遍文档说明，也可以快速上手本模板
 
 ## 功能
 - 架构：基于iframe，无后台代码，纯html模板，可方便的适配任何后端语言
@@ -50,6 +54,19 @@
 2. 不使用webpack、gulp等构建工具也可以写代码，不必再费尽心机搭建一个代码编译环境
 3. 网站头部底部等公共部分代码的复用是我们使用构建工具的主要目的，但是我们借助iframe标签，轻松巧妙的化解了这个难题，借助iframe， 让网站成为一个真正意义上的多窗口应用 （大多数服务器渲染方式每次切换窗口会造成窗口刷新，SPA将代码都塞到了一个页面中的方式使得我们写代码时变得瞻前顾后）
 4. 返璞归真，像写静态站一样来写后台，一个html编辑器就可以强Lu所有代码，尝试一下，相信我，你会爱上这种开发模式的
+
+
+## 贡献代码
+1. 在github上fork一份到自己的仓库
+2. clone自己的仓库到本地电脑
+3. 在本地电脑修改、commit、push
+4. 提交pr（点击：New Pull Request）（提交pr前请保证自己fork的仓库是最新版本，如若不是先强制更新一下）
+5. 等待合并
+
+## 建议贡献的地方
+- 修复源码现有bug，或增加新的实用功能（比如：流程的tab左右拖拽排序）
+- 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
+- 如果更新实用功能，可在文档友情链接处留下自己的推广链接
 
 ## QQ群
 QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
