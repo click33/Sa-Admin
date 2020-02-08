@@ -26,12 +26,13 @@
 					<el-form-item style="min-width: 0px;">
 						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
 						<el-button type="primary" icon="el-icon-plus" @click="add()">添加</el-button>
+						<el-button type="primary" icon="el-icon-plus" @click="add2()">添加(底部按钮式)</el-button>
 					</el-form-item>
 				</el-form>
 				<!-- 数据列表 -->
 				<div class="c-title">数据列表</div>
 				<el-table :data="dataList" size="mini">
-					<el-table-column label="id" prop="id"></el-table-column>
+					<el-table-column label="id" prop="id" width="70px"></el-table-column>
 					<el-table-column label="显示文本" prop="name"></el-table-column>
 					<el-table-column label="显示头像">
 						<template slot-scope="s">
@@ -68,14 +69,15 @@
 							<span style="color: #999;" v-else>禁用</span>
 						</template>
 					</el-table-column>
-					<el-table-column label="显示日期" width="180px">
+					<el-table-column label="显示日期" width="150px">
 						<template slot-scope="s">{{sa.forDate(s.row.create_time, 2)}}</span></template>
 					</el-table-column>
-					<el-table-column label="文字按钮" width="200px">
+					<el-table-column label="文字按钮" width="250px">
 						<template slot-scope="s">
 							<el-button type="text" size="mini" @click="get(s.row)">查看</el-button>
 							<el-button type="text" size="mini" @click="update(s.row)">修改</el-button>
 							<el-button type="text" size="mini" @click="del(s.row)">删除</el-button>
+							<el-button type="text" size="mini" @click="update2(s.row)">修改(底部按钮式)</el-button>
 						</template>
 					</el-table-column>
 					<el-table-column label="正常按钮" width="240px">
@@ -136,10 +138,18 @@
 					add: function () {
 						sa.showIframe('添加一个', 'query-table-case-add.html', '500px', '400px');
 					},
+					// 添加 - 底部按钮式
+					add2: function(data) {
+						sa.showIframe2('添加一个(底部按钮式)', 'query-table-case-add2.html', 'app.ok()', '450px', '350px');
+					},
 					// 修改
 					update: function (data) {
 						// sa.msg('你点击了id=' + data.id + '的修改按钮');
 						sa.showIframe('修改数据', 'query-table-case-add.html?id=' + data.id, '500px', '400px');
+					},
+					// 修改 - 底部按钮式
+					update2: function(data) {
+						sa.showIframe2('修改数据(底部按钮式)', 'query-table-case-add2.html?id=' + data.id, 'app.ok()', '450px', '350px');
 					},
 					// 删除
 					del: function (data) {

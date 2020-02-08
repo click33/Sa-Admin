@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>表格显示示例-修改</title>
+		<title>表格显示示例-修改2</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<!-- 所有的 css & js 资源 -->
@@ -13,23 +13,18 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
-			/* 使其整个背景变白 */
-			body{background-color: #FFF;}
-			.c-panel{box-shadow: 0 0 0;}
-			/* 调整一下表单元素尺寸 */
-			.c-panel .el-form-item__label{width: 120px;}
-			.c-panel .el-form .el-input{width: 250px;}
+			
 		</style>
 	</head>
 	<body>
 		<!-- 防止margin向下击穿 -->
-		<div style="margin-top: -1em;" title="防止margin向下击穿"><br></div>
-		<div class="vue-box" style="display: none;" :style="'display: block;'">
+		<!-- <div style="margin-top: -1em;" title="防止margin向下击穿"><br></div> -->
+		<div class="vue-box cj-form" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
 				<!-- 参数栏 -->
-				<div class="c-title" v-if="id == 0">数据添加</div>
-				<div class="c-title" v-else>数据修改</div>
-				<el-form size="mini" v-if="m">
+				<!-- <div class="c-title" v-if="id == 0">数据添加</div>
+				<div class="c-title" v-else>数据修改</div> -->
+				<el-form size="mini" v-if="m" label-width="70px">
 					<el-form-item label="编号：">
 						<el-input v-model="m.id" disabled></el-input>
 					</el-form-item>
@@ -45,9 +40,9 @@
 							<el-radio :label="2">禁用</el-radio>
 						</el-radio-group>
 					</el-form-item>
-					<el-form-item label="&emsp;">
+					<!-- <el-form-item label="&emsp;">
 						<el-button type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
-					</el-form-item>
+					</el-form-item> -->
 				</el-form>
 			</div>
 		</div>
@@ -67,7 +62,7 @@
 		</script>
 		<script src="mock-data-list.js"></script>
 		<script type="text/javascript">
-			new Vue({
+			var app = new Vue({
 				el: '.vue-box',
 				data: {
 					id: sa.p('id', 0),	// 获取传递的参数 

@@ -83,7 +83,10 @@ input::-webkit-inner-spin-button {
 /* 分页盒子调整一下间距 */
 .page-box{padding: 2em 0 1em 0; }
 
-
+/* 流体表单 */
+.cj-form.vue-box{padding-bottom: 0px; height: 100vh; background-color: #FFF;}
+.cj-form .c-panel{box-shadow: 0 0 0; margin-top: 0px; margin-bottom: 0px; padding-top: 2.5em; padding-bottom: 0px;}
+.cj-form .c-panel .el-form .el-input{width: 100%;}
 
 
 /* ===================== 表单相关 - 旧方案 ===================== */

@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
 	version: '2.0',
-	update_time: '2020-1-17',
-	info: '全面整改一下, 取消了$fast模块, 因为它代码可读性太差了'
+	update_time: '2020-2-9',
+	info: '增加showIframe2方法'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -313,7 +313,7 @@ var sa = {
 		h = h || '95%'; 
 		shadeClose = (shadeClose === undefined ? false : shadeClose);
 		// 弹出面板 
-		layer.open({
+		var index = layer.open({
 			type: 2,	
 			title: title,	// 标题 
 			shadeClose: shadeClose,	// 是否点击遮罩关闭
@@ -325,31 +325,49 @@ var sa = {
 		  	content: url,	// 传值 
 			// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
 			resizing: function(layero) {
-				//console.log($('.layui-layer.layui-layer-iframe').length);
-				$('.layui-layer-iframe').each(function() {
-					var height = $(this).height();
-					var title_height = $(this).find('.layui-layer-title').height();
-					$(this).find('iframe').css('height', (height - title_height) + 'px');
-				})
+				solveLayerBug(index);
 			}
 		}); 
 		// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
-		if(window.is_set_d456sa4da4sda == true) {
-			return;
-		}
-		window.is_set_d456sa4da4sda = true;
-		$('.layui-layer-iframe .layui-layer-max').click(function() {
-			// console.log('调整');
+		$('#layui-layer' + index + ' .layui-layer-max').click(function() {
 			setTimeout(function() {
-				$('.layui-layer-iframe').each(function() {
-					var height = $(this).height();
-					var title_height = $(this).find('.layui-layer-title').height();
-					$(this).find('iframe').css('height', (height - title_height) + 'px');
-				})
-			}.bind(this), 200)
+				solveLayerBug(index);
+			}, 200)
 		})
 	}
 	me.showView = me.showIframe;
+	
+	// 显示一个iframe, 底部按钮方式
+	// 参数: 标题，地址，点击确定按钮执行的代码(在子窗口执行)，宽，高 
+	me.showIframe2 = function(title, url, evalStr, w, h) {
+		// 参数修正
+		w = w || '95%'; 
+		h = h || '95%'; 
+		// 弹出面板 
+		var index = layer.open({
+			type: 2,	
+			title: title,	// 标题 
+			closeBtn: (title ? 1 : 0),	// 是否显示关闭按钮
+			btn: ['确定', '取消'],
+			shadeClose: false,	// 是否点击遮罩关闭
+			maxmin: true, // 显示最大化按钮
+		  	shade: 0.8,		// 遮罩透明度 
+			scrollbar: false,	// 屏蔽掉外层的滚动条
+			moveOut: true,		// 是否可拖动到外面
+		  	area: [w, h],	// 大小 
+		  	content: url,	// 传值 
+			// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
+			resizing: function(layero) {
+				
+			},
+			yes: function(index, layero) {
+				var iframe = document.getElementById('layui-layer-iframe' + index);
+				var iframeWindow = iframe.contentWindow;
+				iframeWindow.eval(evalStr);
+			}
+		}); 
+	}
+	
 	
 	// 当前iframe关闭自身  (在iframe中调用)
 	me.closeCurrIframe = function() {
@@ -361,6 +379,15 @@ var sa = {
 		}
 	}
 	me.closeCurrView = me.closeCurrIframe;
+	
+	
+	//执行一个函数, 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
+	function solveLayerBug(index) {
+		var selected = '#layui-layer' + index;
+		var height = $(selected).height();
+		var title_height = $(selected).find('.layui-layer-title').height();
+		$(selected).find('iframe').css('height', (height - title_height) + 'px');
+	}
 	
 	
 })();
