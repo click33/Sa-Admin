@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.2.3',		// 当前版本
-		update_time: '2020-02-09',		// 更新日期 
+		version: 'v2.2.4',		// 当前版本
+		update_time: '2020-02-13',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -337,7 +337,7 @@ var sa_admin = new Vue({
 				this.f5_breMenuList();
 			}.bind(this));   
 			// 再打开  
-			layer.open({
+			var index = layer.open({
 				type: 2,
 				title: this.rightTab.name,
 				moveOut: true, // 是否可拖动到外面
@@ -345,34 +345,23 @@ var sa_admin = new Vue({
 				shadeClose: false,
 				shade: 0,
 				area: ['80%', '80%'],
+				zIndex: layer.zIndex,
 				content: this.getTabUrl(this.rightTab),
 				// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
                 resizing: function (layero) {
-                    //console.log($('.layui-layer.layui-layer-iframe').length);
-                    $('.layui-layer-iframe').each(function () {
-                        var height = $(this).height();
-                        var title_height = $(this).find('.layui-layer-title').height();
-                        $(this).find('iframe').css('height', (height - title_height) + 'px');
-                    })
-                }
+                    solveLayerBug(index);
+                },
+				// 操作这个layer的时候置顶它 
+				success: function(layero){
+				    layer.setTop(layero); 
+				}
             });
-			
-			// 解决layer的一个bug: 拉伸或者最大化的时候，iframe高度不能自适应的问题
-            if (window.is_set_12345 == true) {
-                return;
-            }
-            window.is_set_12345 = true;
-            $('body').on('click', '.layui-layer-iframe .layui-layer-max', function () {
-                console.log('调整');
-                setTimeout(function () {
-                    $('.layui-layer-iframe').each(function () {
-                        var height = $(this).height();
-                        var title_height = $(this).find('.layui-layer-title').height();
-                        $(this).find('iframe').css('height', (height - title_height) +
-                            'px');
-                    })
-                }.bind(this), 200)
-            });
+			// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
+			$('#layui-layer' + index + ' .layui-layer-max').click(function() {
+				setTimeout(function() {
+					solveLayerBug(index);
+				}, 200)
+			})
 		},
 		// 右键 - 关闭
 		right_close: function() {

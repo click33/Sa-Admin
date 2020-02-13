@@ -77,10 +77,12 @@ sa_admin.dropList = [		// 头像点击处可操作的选项
 		click: function() {
 			// sa_admin.$message('点击了退出登录，你可以参照文档重写此函数');
 			// location="login.html";
-			layer.confirm('退出登录？', function(res) {
-				layer.alert('注销成功', function() {
-					location.href = "login.html";
-				})
+			sa.confirm('退出登录？', function(res) {
+				sa.ajax2('/acc/exit', function(res) {
+					sa.alert('注销成功', function() {
+						location.href = "login.html";
+					})
+				}, {msg: '正在注销'})
 			});
 		}
 	}

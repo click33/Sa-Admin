@@ -33,6 +33,15 @@ function urlAppendArg(url, arg_str) {
 	}
 }
 
+
+//执行一个函数, 解决layer拉伸或者最大化的时候，iframe高度不能自适应的问题
+function solveLayerBug(index) {
+	var selected = '#layui-layer' + index;
+	var height = $(selected).height();
+	var title_height = $(selected).find('.layui-layer-title').height();
+	$(selected).find('iframe').css('height', (height - title_height) + 'px');
+}
+
 // 全屏 
 function fullScreen(){
 	if(document.documentElement.RequestFullScreen){

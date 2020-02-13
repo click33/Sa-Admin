@@ -20,7 +20,11 @@ input::-webkit-inner-spin-button {
 .cover-img{object-fit: cover; object-position: 50% 30%;}
 
 /* ajax2加载时的转圈圈样式 */
-.ajax-layer-load{background-color: rgba(0,0,0,0.7) !important; color: #FFF !important;}
+.ajax-layer-load.layui-layer-dialog{min-width: 0px !important; background-color: rgba(0,0,0,0.85);}
+.ajax-layer-load.layui-layer-dialog .layui-layer-content{padding: 10px 20px 10px 40px; color: #FFF;}
+.ajax-layer-load.layui-layer-dialog .layui-layer-content .layui-layer-ico{width: 20px; height: 20px; background-size: 20px 20px; top: 12px; }
+
+
 /* layer图片预览时, 左右键永远显示 */
 .layui-layer-imgbar, .layui-layer-imguide{display: block !important;}
 .layui-layer-iconext.layui-layer-imgprev{position: fixed; left: 50;}

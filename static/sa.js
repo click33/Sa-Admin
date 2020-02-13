@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
-	version: '2.0',
-	update_time: '2020-2-9',
-	info: '增加showIframe2方法'
+	version: '2.1',
+	update_time: '2020-2-13',
+	info: '改了loading框的样式'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -99,9 +99,8 @@ var sa = {
 		console.log("请求参数：" + JSON.stringify(data));
 		
 		// 开始显示loading图标 
-		var load = 0;
 		if(cfg.msg != null){
-			load = sa.loading(cfg.msg);
+			sa.loading(cfg.msg);
 		}
 		
 		// 开始请求ajax 
@@ -155,7 +154,7 @@ var sa = {
 		}
 		// 默认延时函数 
 		if(cfg.sleep == undefined || cfg.sleep == null || cfg.sleep == '' || cfg.sleep == 0) {
-			cfg.sleep = 500;
+			cfg.sleep = 600;
 		}
 		// 默认的模拟数据
 		cfg.res = cfg.res || {
@@ -164,10 +163,10 @@ var sa = {
 			data: []
 		}
 		// 开始loding 
-		var load = layer.msg(cfg.msg, {icon: 16, shade: 0.01, time: 1000 * 20, skin: 'ajax-layer-load' });
+		sa.loading(cfg.msg);
 		// 模拟ajax的延时 
 		setTimeout(function() {
-			layer.close(load);	// 隐藏掉转圈圈 
+			sa.hideLoading();	// 隐藏掉转圈圈 
 			success200(cfg.res);
 		}, cfg.sleep)
 	};
@@ -192,11 +191,19 @@ var sa = {
 		msg = msg || '操作成功';
 		layer.msg(msg, {anim: 0, icon: 1 }); 
 	}
+	me.ok2 = function(msg) {
+		msg = msg || '操作成功';
+		layer.msg(msg, {anim: 0, icon: 6 }); 
+	}
 	
 	// 操作失败的提示  
 	me.error = function(msg) {
 		msg = msg || '操作失败';
 		layer.msg(msg, {anim: 6, icon: 2 }); 
+	}
+	me.error2 = function(msg) {
+		msg = msg || '操作失败';
+		layer.msg(msg, {anim: 6, icon: 5 }); 
 	}
 	
 	// alert弹窗 [text=提示文字, cfg=配置(可省略), okFn=点击确定之后的回调函数]
@@ -236,14 +243,18 @@ var sa = {
 	
 	// 打开loading
 	me.loading = function(msg) {
-		// 开始前先把所有弹窗关了  
-		layer.closeAll();	
-		return layer.msg(msg, {icon: 16, shade: 0.01, time: 1000 * 20, skin: 'ajax-layer-load' });
+		// 此写法: 防止某些时候页面刚刚打开就开始加载导致的弹窗变的很长 
+		layer.ready(function(){
+			layer.closeAll();	// 开始前先把所有弹窗关了
+			return layer.msg(msg, {icon: 16, shade: 0.3, time: 1000 * 20, skin: 'ajax-layer-load' });
+		});
 	};
 	
 	// 隐藏loading
 	me.hideLoading = function() {
-		layer.closeAll();
+		layer.ready(function(){
+			layer.closeAll();
+		});
 	};
 	
 	// ============== 一些常用弹窗 ===================== 
@@ -381,7 +392,7 @@ var sa = {
 	me.closeCurrView = me.closeCurrIframe;
 	
 	
-	//执行一个函数, 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
+	//执行一个函数, 解决layer拉伸或者最大化的时候，iframe高度不能自适应的问题
 	function solveLayerBug(index) {
 		var selected = '#layui-layer' + index;
 		var height = $(selected).height();

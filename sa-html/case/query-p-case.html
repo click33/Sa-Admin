@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="../../static/sa.css"> 
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
-		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 	</head>
@@ -20,6 +20,7 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
+				<i class="layui-layer-ico layui-layer-ico16"></i>
 				<el-form size="mini" :inline="true">
 					<el-form-item label="普通参数：">
 					    <el-input v-model="p.name"></el-input>
@@ -132,10 +133,10 @@
 						{id: 104, name: '西瓜', count: 34223},
 						{id: 105, name: '菠萝', count: 53272},
 						{id: 106, name: '辣椒', count: 20000},
-						{id: 107, name: '冬瓜', count: 100000},
+						{id: 107, name: '冬瓜', count: 50000},
 						{id: 108, name: '西红柿', count: 99999},
 						{id: 109, name: '火龙果', count: 58989},
-						{id: 110, name: '红烧鸡脖子', count: 12345},
+						{id: 110, name: '红烧鸡脖子', count: 22345},
 					],	
 				},
 				methods: {

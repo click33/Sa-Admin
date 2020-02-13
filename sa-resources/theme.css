@@ -36,10 +36,13 @@
 	background-color: #000;
 }
 
-/* 所有菜单悬浮样式时, 以及选中时 */
+/* 所有菜单悬浮样式*/
 .theme-0 .nav-left .el-submenu__title:hover,
 .theme-0 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-0 .nav-left .el-menu-item:hover,
+.theme-0 .nav-left .el-menu-item:hover{
+	background-color: #4E5465;
+}
+/* 所有菜单选中时 */
 .theme-0 .nav-left .el-menu-item.is-active {
 	background-color: #2D8CF0;
 	color: #FFF;
@@ -69,10 +72,7 @@
 /* ========================== 主题-2 绿色 ==========================  */
 .theme-2 {}
 
-/* 所有菜单悬浮样式时, 以及选中时 */
-.theme-2 .nav-left .el-submenu__title:hover,
-.theme-2 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-2 .nav-left .el-menu-item:hover,
+/* 所有菜单选中时 */
 .theme-2 .nav-left .el-menu-item.is-active {
 	background-color: #009688;
 }
@@ -138,12 +138,16 @@
 	background-color: #DDD;
 }
 
-/* 所有菜单悬浮样式时, 以及选中时 */
+/* 所有菜单悬浮样式时 */
 .theme-4 .nav-left .el-submenu__title:hover,
 .theme-4 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-4 .nav-left .el-menu-item:hover,
+.theme-4 .nav-left .el-menu-item:hover{
+	background-color: #ECF5FF;
+}
+/* 所有菜单选中时 */
 .theme-4 .nav-left .el-menu-item.is-active {
 	background-color: #009688;
+	color: #FFF;
 }
 
 /* 卡片栏悬浮颜色和选中颜色 */
@@ -208,10 +212,7 @@
 /* ========================== 主题-6 钛合金 (仿 iview admin pro) ==========================  */
 .theme-6 {}
 
-/* 所有菜单悬浮样式时, 以及选中时 */
-.theme-6 .nav-left .el-submenu__title:hover,
-.theme-6 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-6 .nav-left .el-menu-item:hover,
+/* 所有菜单选中时 */
 .theme-6 .nav-left .el-menu-item.is-active {
 	background-color: #805322;
 	color: #FFF;
