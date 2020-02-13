@@ -22,7 +22,9 @@ var menuList =	[
 		info: 'sa-admin使用文档',
 		childList: [
 			{id: '1-1', name: '集成步骤', url: 'sa-html/sa-doc/sa-doc.html?way=start-up'},
-			{id: '1-2', name: '鉴权操作', url: 'sa-html/sa-doc/sa-doc.html?way=check-per'}
+			{id: '1-2', name: '鉴权操作', url: 'sa-html/sa-doc/sa-doc.html?way=check-per'},
+			{id: '1-11', name: '在线论坛', url: 'http://applist.dev33.cn/applist-admin/html/ser-comment/w-list.html?sid=kcafzieb2tcw'},
+			
 		]
 	},
 	{
