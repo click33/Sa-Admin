@@ -80,7 +80,7 @@ html,body{height: 100%; background-color: #EEE;}
 
 .towards-middle{width: 10000px; overflow: auto;/* calc(100% - 50px) */ left: 25px;background-color: #EEE;}
 .tab-title-box{display: inline-block; position: absolute; left: 0px;}
-.tab-title{font-size: 13px; cursor: pointer; float: left; transition: all 0.15s;white-space: nowrap;overflow: hidden;text-decoration: none; color: #606266;}
+.tab-title{font-size: 13px; cursor: pointer; float: left; transition: all 0.15s;white-space: nowrap;overflow: hidden;text-decoration: none; color: #333;}
 .tab-title-2{padding: 0px 10px; height: 35px; margin-right: 1px; background-color: #FFF; line-height: 35px; }
 .tab-title-2{transition: padding 0.1s, margin 0.1s;}
 .tab-title-2 *{transition: all 0.0s;}
