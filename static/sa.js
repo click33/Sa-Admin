@@ -179,6 +179,7 @@ var sa = {
 	
 	// ============== 小提示 ===================== 
 	var me = sa;
+	layer.ready(function(){});
 	
 	// tips提示文字  
 	me.msg = function(msg, cfg) {
@@ -243,18 +244,13 @@ var sa = {
 	
 	// 打开loading
 	me.loading = function(msg) {
-		// 此写法: 防止某些时候页面刚刚打开就开始加载导致的弹窗变的很长 
-		layer.ready(function(){
-			layer.closeAll();	// 开始前先把所有弹窗关了
-			return layer.msg(msg, {icon: 16, shade: 0.3, time: 1000 * 20, skin: 'ajax-layer-load' });
-		});
+		layer.closeAll();	// 开始前先把所有弹窗关了
+		return layer.msg(msg, {icon: 16, shade: 0.3, time: 1000 * 20, skin: 'ajax-layer-load' });
 	};
 	
 	// 隐藏loading
 	me.hideLoading = function() {
-		layer.ready(function(){
-			layer.closeAll();
-		});
+		layer.closeAll();
 	};
 	
 	// ============== 一些常用弹窗 ===================== 
