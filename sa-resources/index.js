@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.2.5',		// 当前版本
-		update_time: '2020-02-14',		// 更新日期 
+		version: 'v2.2.6',		// 当前版本
+		update_time: '2020-02-17',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -59,6 +59,7 @@ var sa_admin = new Vue({
 			{name: '灰色-展开', value: '5', show_all: true},
 			{name: 'pro钛合金', value: '6', show_all: false},
 			{name: '沉淀式黑蓝', value: '7', show_all: false},
+			{name: '简约式灰蓝', value: '8', show_all: false},
 		],
 		themeToggling: false,	// 主题是否正在切换 
 		dropList: [],	// 头像处下拉列表菜单 

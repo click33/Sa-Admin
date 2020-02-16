@@ -229,9 +229,17 @@
 .theme-6 .tool-fox:hover {background-color: #444;}
 
 
-/* ========================== 主题-7 黑蓝 ==========================  */
+/* ========================== 主题-7 沉淀式黑蓝 ==========================  */
 .theme-7 {}
 /* 工具栏背景色颜色, 前景色 */
 .theme-7 .nav-right-1 {color: #EEE;background-color: #222;}
 /* 工具栏悬浮颜色 */
 .theme-7 .tool-fox:hover {background-color: #444;}
+
+/* ========================== 主题-8 简约式灰蓝 ==========================  */
+.theme-8 {}
+
+/* 菜单悬浮着色 */
+.theme-8 .nav-left .el-menu-item.is-active {
+	background-color: #4E5465;
+}
