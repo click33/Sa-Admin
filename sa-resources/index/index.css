@@ -1,7 +1,8 @@
 *{margin: 0; padding: 0; }
 html,body{height: 100%; background-color: #EEE;} 
-.app{height: 100%;}
-.app *{transition: all 0.2s; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+.app{height: 100%; font-size: 16px; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+.app *{transition: all 0.2s; }
+
 
 /* 左边 */
 .nav-left{
@@ -126,7 +127,7 @@ html,body{height: 100%; background-color: #EEE;}
 /* .app .is_fold_right.nav-right{width: calc(100% - 64px); left: 64px; } */
 
 /* .nav-right-3 包裹了太多iframe，不能让它参与动画，因为实在太TM卡了 */
-.nav-right-3{transition: none;}
+.nav-right-3,.nav-right-3 *{transition: none;}
 .nav-right-3{ /* 修改为fixed布局 */ width: calc(100% - 200px); left: 200px; position: fixed;} 
 .is_fold_right .nav-right-3{width: calc(100% - 64px); left: 64px;}
 
@@ -142,14 +143,8 @@ html,body{height: 100%; background-color: #EEE;}
 .el-menu--vertical .el-menu--popup{background-color: #FFF !important; color: red !important;}
 
 /* 最高层级 */
-.z-index-max{
-	z-index: 2147483647;
-}
+.z-index-max{z-index: 2147483647;}
 
-/* ajax2加载时的转圈圈样式 */
-.ajax-layer-load.layui-layer-dialog{min-width: 0px !important; background-color: rgba(0,0,0,0.85);}
-.ajax-layer-load.layui-layer-dialog .layui-layer-content{padding: 10px 20px 10px 40px; color: #FFF;}
-.ajax-layer-load.layui-layer-dialog .layui-layer-content .layui-layer-ico{width: 20px; height: 20px; background-size: 20px 20px; top: 12px; }
 
 /* 遮罩样式 */
 .shade-fox{position: absolute; z-index: 1000000; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: #FFF; top: 0px;}
@@ -165,3 +160,4 @@ html,body{height: 100%; background-color: #EEE;}
 
 /* 去除掉便签的大边框 */
 .layui-layer-input{outline: 0; box-shadow: none !important; padding: 0.5em !important; font-family: 'Times New Roman', Times, serif;}
+

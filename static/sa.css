@@ -48,19 +48,19 @@ input::-webkit-inner-spin-button {
 .c-remark{color: #888; margin-left: 0.5em; font-size: 0.9em;}
 
 /* 标签 */
-.c-tag{padding: 0px 15px; height: 22px; line-height: 22px; border-radius: 0px; border: 0px;}
+.c-panel .c-tag{padding: 0px 15px; height: 22px; line-height: 22px; border-radius: 0px; border: 0px;}
 /* 复选框 */
 .c-panel .el-checkbox,.c-panel .el-radio{margin-right: 20px;}
 /* 禁用input的样式 */
 .c-panel .el-input.is-disabled .el-input__inner{color: #999;}
 
 /* 表格的表头颜色深一点 */
-.el-table__header tr th{background-color: #F5F5F5;}
+.c-panel .el-table__header tr th{background-color: #F5F5F5;}
 
 /* 调整圆角大小: 输入框、文本域、按钮、 */
-.vue-box .el-input__inner,
-.vue-box .el-textarea__inner,
-.vue-box .el-button{border-radius: 2px !important;}
+.c-panel .el-input__inner,
+.c-panel .el-textarea__inner,
+.c-panel .el-button{border-radius: 2px !important;}
 
 
 /* 单选button,圆角限制2px */

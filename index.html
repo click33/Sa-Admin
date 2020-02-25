@@ -7,8 +7,9 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="https://unpkg.com/swiper@4.5.0/dist/css/swiper.min.css">
-		<link rel="stylesheet" href="sa-resources/index.css">
-		<link rel="stylesheet" href="sa-resources/theme.css">
+		<link rel="stylesheet" href="sa-resources/index/index.css">
+		<link rel="stylesheet" href="sa-resources/index/theme.css">
+		<link rel="stylesheet" href="static/sa.css">
 	</head>
 	<body>
 		<!-- style="display: none;" 防止 初始花屏 -->
@@ -17,19 +18,16 @@
 			style="display: none;" :style="'display: block;'">
 			<!-- 左 -->
 			<div class="nav-left">
-					
 				<!-- 左上 -->
 				<div class="nav-left-top" :title="title" @click="showTab(homeTab)">
 					<img :src="logo_url" class="admin-logo" v-if="logo_url != null && logo_url != ''">
 					<span v-else style="margin-right: 25px;" title="无logo时的占位">&emsp;</span>
 					<span class="nav-title" style="font-size: 1.05em;">{{title}}</span> 
 				</div>
-
 				<!-- 左下 -->
 				<div class="nav-left-bottom">
 					<div class="menu-box-1">
 						<div class="menu-box-2">
-
 							<!-- 菜单 -->
 							<el-menu default-active="2" 
 								class="el-menu-style-1" 
@@ -39,29 +37,24 @@
 								:collapse="is_fold"
 								@select="selectMenu" 
 								>
-								
 								<div v-for="(menu, index) in menuList" :key="index">
-									
 									<!-- 1 子菜单 -->
 									<el-menu-item v-if="menu.childList == null" :index="menu.id + '' ">
 										<i :class="menu.icon" :title="menu.name"></i>
 										<span class="menu-name">{{menu.name}}</span>
 									</el-menu-item>
-									
 									<!-- 1 父菜单 -->
 									<el-submenu v-else :index="menu.id + '' ">
 										<template slot="title">
 											<i :class="menu.icon" :title="menu.name"></i>
 											<span class="menu-name">{{menu.name}}</span>
 										</template>
-										
 										<!-- 遍历其子项 -->
 										<div v-for="(menu2, index) in menu.childList" :key="index">
 											<!-- 2 如果是子菜单 -->
 											<el-menu-item v-if="menu2.childList == null" :index="menu2.id + '' ">
 												{{menu2.name}}
 											</el-menu-item>
-											
 											<!-- 2 如果是父菜单 -->
 											<el-submenu v-else :index="menu2.id + '' ">
 												<template slot="title">
@@ -78,18 +71,13 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- tab左拖拽：关闭 -->
 				<div class="shade-fox" v-if="is_drag" 
 					@dragover="$event.preventDefault();" 
 					@drop="rightTab = dragTab; right_close();">
 					<span style="font-size: 16px;">关闭</span>
 				</div>
-				
-				
-				
 			</div>
-			
 			<!-- 添加新tab弹出的dom -->
 			<div class="at-form-fox" style="width: 0px; height: 0px; overflow: hidden; ">
 				<div class="at-form-dom" style="width: 300px; padding: 20px 0 10px 0; background-color: #FFF;">
@@ -110,7 +98,6 @@
 			
 			<!-- 右边 -->
 			<div class="nav-right" :class="(is_fold_right ? 'is_fold_right' : '')">
-				
 				<!-- 右边，第一行 -->
 				<div class="nav-right-1">
 					<div class="tools-left">
@@ -188,7 +175,6 @@
 					</div>
 				</div>
 				
-				
 				<!-- 右边，第二行 -->
 				<div class="nav-right-2">
 					<div class="towards-left" @click="scrollToLeft" title="向左滑">
@@ -208,7 +194,6 @@
 								draggable="true"
 								@dragstart="is_drag = true; dragTab = tab"
 								@dragend="is_drag = false;"
-								
 								>
 								<div class="tab-title-2">
 									<!-- <i class="el-icon-caret-right"></i> -->
@@ -217,13 +202,11 @@
 								</div>
 							</div>
 						</div>
-						
 					</div>
 					<div class="towards-right" @click="scrollToRight" title="向右滑">
 						<i class="el-icon-arrow-right"></i>
 					</div>
 				</div>
-				
 				<!-- 面包屑导航栏 -->
 				<div 
 					class="nav-right-bre" 
@@ -241,8 +224,6 @@
 						<el-breadcrumb-item v-for="(menu, index) in breMenuList" :key="menu.id">{{menu.name}}</el-breadcrumb-item>
 					</el-breadcrumb>
 				</div>
-				
-				
 				<!-- 右边，第三行 -->
 				<!-- swiper滑动 （弃用v-for，因为用v-for实现会非常卡顿） -->
 				<div class="nav-right-3">
@@ -261,11 +242,7 @@
 						<span style="font-size: 24px;">拖拽至此：悬浮打开</span>
 					</div>
 				</div>
-				
-				
 			</div>
-				
-			
 			<!-- 鼠标右键弹出的盒子 -->
 			<!-- 【向下展开动画，坐标平移动画】二者只可得其一 -->
 			<div class="right-box" :style="rightStyle" v-show="rightShow" tabindex="-1" @blur="right_closeMenu2()">
@@ -280,11 +257,8 @@
 					<div @click="right_closeMenu2();"><i class="el-icon-caret-right"></i>取消</div>
 				</div>
 			</div>
-			
-			
-
 		</div>
-
+		
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script type="text/javascript">
 			Vue.config.productionTip = false;
@@ -294,13 +268,11 @@
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		
-		<script src="sa-resources/admin-util.js"></script>
+		<script src="sa-resources/index/admin-util.js"></script>
+		<script src="sa-resources/index/index.js"></script>
 		<script src="sa-resources/menu-list.js"></script>
-		<script src="sa-resources/index.js"></script>
 		<script src="static/sa.js"></script>
 		<script src="sa-resources/my-code.js"></script>
-
-
 
 	</body>
 </html>

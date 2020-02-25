@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<script src="../../sa-resources/menu-list.js"></script>
-		<script src="../../sa-resources/admin-util.js"></script>
+		<script src="../../sa-resources/index/admin-util.js"></script>
         <script>
 			var app = new Vue({
 				el: '.vue-box',
@@ -51,8 +51,8 @@
 				created: function(){
 					// 全部
 					sa.ajax2('/SysMenu/getList', function(res){
-						menuList = arrayToTree(menuList);	// 一维转tree 
-						menuList = refMenuList(menuList);	// 属性处理 
+						menuList = sa_admin_code_util.arrayToTree(menuList);	// 一维转tree 
+						menuList = sa_admin_code_util.refMenuList(menuList);	// 属性处理 
 						this.dataList = menuList;	// 数据  
 					}.bind(this));
 				}

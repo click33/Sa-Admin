@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.2.6',		// 当前版本
-		update_time: '2020-02-17',		// 更新日期 
+		version: 'v2.3.0',		// 当前版本
+		update_time: '2020-02-25',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -72,9 +72,9 @@ var sa_admin = new Vue({
 		// 监听全屏动作 
 		is_full_screen: function(newValue, oldValue) {
 			if(newValue) {
-				fullScreen();
+				sa_admin_code_util.fullScreen();
 			} else {
-				fullScreenNormal();
+				sa_admin_code_util.fullScreenNormal();
 			}
 		},
 		// 监听title改变时, 页面title也跟着切换 
@@ -156,13 +156,13 @@ var sa_admin = new Vue({
 				menu.parent_id = menu.parent_id || parent_id || 0;
 				// 隐藏的给去掉 
 				if(menu.is_show === false) {
-					arrayDelete(menu_list, menu);
+					sa_admin_code_util.arrayDelete(menu_list, menu);
 					i--;
 					continue;
 				}
 				// 如果指定了 show_list，并且 menu.id 不在 show_list 里，划掉
 				if(show_list && show_list.indexOf(menu.id) == -1) {
-					arrayDelete(menu_list, menu);
+					sa_admin_code_util.arrayDelete(menu_list, menu);
 					i--;
 					continue;
 				}
@@ -350,19 +350,19 @@ var sa_admin = new Vue({
 				content: this.getTabUrl(this.rightTab),
 				// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
                 resizing: function (layero) {
-                    solveLayerBug(index);
+                    sa_admin_code_util.solveLayerBug(index);
                 },
 				// 操作这个layer的时候置顶它 
 				success: function(layero){
 				    layer.setTop(layero); 
 				}
             });
-			// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题
-			$('#layui-layer' + index + ' .layui-layer-max').click(function() {
+			// 解决拉伸或者最大化的时候，iframe高度不能自适应的问题 
+			document.querySelector('#layui-layer' + index + ' .layui-layer-max').onclick = function() {
 				setTimeout(function() {
-					solveLayerBug(index);
+					sa_admin_code_util.solveLayerBug(index);
 				}, 200)
-			})
+			}
 		},
 		// 右键 - 关闭
 		right_close: function() {
@@ -504,7 +504,7 @@ var sa_admin = new Vue({
 					this.showTab(preTab); 
 				}
 				// 开始从集合中移除 
-				arrayDelete(this.tabList, tab);
+				sa_admin_code_util.arrayDelete(this.tabList, tab);
 				this.deleteSlide(tab.id);
 				// 如果有回调 
 				if(callFn) {
@@ -777,7 +777,7 @@ var sa_admin = new Vue({
 			var h = (document.body.clientHeight * 0.6) + 'px';
 			var default_content = '一个简单的小便签, 关闭浏览器后再次打开仍然可以加载到上一次的记录, 你可以用它来记录一些临时资料';
 			var value = localStorage.getItem('sa_admin_note') || default_content;
-			layer.prompt({
+			var index = layer.prompt({
 				title: '一个小便签', 
 				value: value,
 				formType: 2,
@@ -787,14 +787,11 @@ var sa_admin = new Vue({
 			}, function(pass, index){
 				layer.close(index)					
 			});
-			// 监听 input 变动存储到本地
-			if (window.is_set_21312312312 == true) {
-			    return;
+			var se = '#layui-layer' + index + ' .layui-layer-input';
+			var d = document.querySelector(se);
+			d.oninput = function() {
+				localStorage.setItem('sa_admin_note', this.value);
 			}
-			window.is_set_21312312312 = true;
-			$('body').on('input', '.layui-layer-input', function () {
-				localStorage.setItem('sa_admin_note', $(this).val());
-			})
 		},
 		// 弹窗
 		msg: function(msg) {
@@ -820,7 +817,7 @@ var sa_admin = new Vue({
 		
 	}
 });
-var sp = sa_admin;	// 兼容原有方案 
+// var sp = sa_admin;	// 兼容原有方案 
 
 
 
