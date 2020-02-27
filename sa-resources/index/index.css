@@ -127,7 +127,7 @@ html,body{height: 100%; background-color: #EEE;}
 /* .app .is_fold_right.nav-right{width: calc(100% - 64px); left: 64px; } */
 
 /* .nav-right-3 包裹了太多iframe，不能让它参与动画，因为实在太TM卡了 */
-.nav-right-3,.nav-right-3 *{transition: none;}
+.nav-right-3{transition: none;}
 .nav-right-3{ /* 修改为fixed布局 */ width: calc(100% - 200px); left: 200px; position: fixed;} 
 .is_fold_right .nav-right-3{width: calc(100% - 64px); left: 64px;}
 
