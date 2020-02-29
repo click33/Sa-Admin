@@ -1,5 +1,6 @@
 *{margin: 0; padding: 0; }
 html,body{height: 100%; background-color: #EEE;} 
+body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gif);background-repeat: no-repeat;background-position: 50% 50%;}
 .app{height: 100%; font-size: 16px; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
 .app *{transition: all 0.2s; }
 
