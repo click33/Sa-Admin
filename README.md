@@ -3,9 +3,9 @@
 
 一个多窗口后台模板，流畅、易上手、提高生产力，演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
 
-:kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes:  :blush:  :blush:  :blush:  :heart:  :heart:  :heart: 
-
 如果比较熟悉vue单页应用，[点我访问vue单页版](https://github.com/click33/sa-vue-admin)
+
+:kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes:  :blush:  :blush:  :blush:  :heart:  :heart:  :heart: 
 
 ## 优点
 - 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
