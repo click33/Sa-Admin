@@ -1,6 +1,6 @@
 // 首页 
 var homeTab = {
-	id: '-1',	// 唯一标识 
+	id: 'home',	// 唯一标识 
 	name: '首页',
 	url: 'main.html',	// 页面地址 
 	hide_close: true	// 隐藏关闭键 
