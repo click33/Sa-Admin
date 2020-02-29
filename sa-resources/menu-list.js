@@ -10,7 +10,8 @@
 // 	is_blank: false,		// 是否属于外部链接, 如果为true, 则点击菜单时从新窗口打开 
 // 	childList: [			// 指定这个菜单所有的子菜单, 子菜单可以继续指定子菜单, 至多支持三级菜单
 // 		// .... 
-// 	]
+// 	],
+//	click: function(){}		// 点击菜单执行一个函数 
 // }
 
 // 定义菜单列表 
@@ -97,7 +98,8 @@ var menuList =	[
 			{id: '7-8', name: '403无权限', url: 'sa-html/error-page/403.html'},
 			{id: '7-9', name: '404未找到', url: 'sa-html/error-page/404.html'},
 			{id: '7-10', name: '500有错误', url: 'sa-html/error-page/500.html'},
-			{id: '7-11', name: '服务器设置', url: 'sa-html/cfg/system-cfg.html', info: '对服务器参数的设置'}
+			{id: '7-11', name: '服务器设置', url: 'sa-html/cfg/system-cfg.html', info: '对服务器参数的设置'},
+			{id: '7-12', name: '函数菜单', click: function(){sa.alert('点击菜单执行一个函数')}}
 		]
 	},
 	//  ========= 示例 外部链接 点击从新窗口打开 ================

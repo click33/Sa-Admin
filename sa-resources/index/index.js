@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.3.1',		// 当前版本
-		update_time: '2020-02-29',		// 更新日期 
+		version: 'v2.3.2',		// 当前版本
+		update_time: '2020-03-1',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -532,6 +532,10 @@ var sa_admin = new Vue({
 			// 如果是外部链接
 			if(tab.is_blank) {
 				return open(tab.url); 
+			}
+			// 如果是click函数 
+			if(tab.click) {
+				return tab.click();
 			}
 			// 如果是当前正在显示的tab , 则直接 返回  
 			if(tab == this.nativeTab) {
