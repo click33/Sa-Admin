@@ -5,6 +5,8 @@
 
 :kissing_closed_eyes:  :kissing_closed_eyes:  :kissing_closed_eyes:  :blush:  :blush:  :blush:  :heart:  :heart:  :heart: 
 
+如果比较熟悉vue单页应用，[点我访问vue单页版](https://github.com/click33/sa-vue-admin)
+
 ## 优点
 - 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
 - 示例全面：提供大量常见增删改查示例，提高你的生产力
