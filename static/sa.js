@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
-	version: '2.1',
-	update_time: '2020-2-13',
-	info: '改了loading框的样式'
+	version: '2.2',
+	update_time: '2020-2-29',
+	info: '改了鉴权api的函数名称'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -863,7 +863,7 @@ var sa = {
 	var pcode_key = 'permission_code';
 	
 	// 写入当前会话的权限码集合
-	sa.setPcode = function(codeList) {
+	sa.setAuth = function(codeList) {
 		sa.keyListSet(pcode_key, codeList);	
 	}
 	
@@ -873,13 +873,13 @@ var sa = {
 	}
 	
 	// 检查当前会话是否拥有一个权限码, 返回true和false 
-	sa.hasPcode = function(pcode) {
+	sa.isAuth = function(pcode) {
 		return sa.keyListHas(pcode_key, pcode);
 	}
 	
 	// 检查当前会话是否拥有一个权限码, 如果没有, 则跳转到无权限页面 
 	// 注意: 非二级目录页面请注意调整路径问题 
-	sa.checkPcode = function(pcode, not_pcode_url) {
+	sa.checkAuth = function(pcode, not_pcode_url) {
 		var is_have = sa.keyListHas(pcode_key, pcode);	
 		if(is_have == false) {
 			location.href= not_pcode_url || '../../sa-html/error-page/403.html';
@@ -887,7 +887,7 @@ var sa = {
 		}
 	}
 	// 同上, 只不过是以弹窗的形式显示出来无权限来 
-	sa.checkPcodeTs = function(pcode, not_pcode_url) {
+	sa.checkAuthTs = function(pcode, not_pcode_url) {
 		var is_have = sa.keyListHas(pcode_key, pcode);	
 		if(is_have == false) {
 			var url = not_pcode_url || '../../sa-html/error-page/403.html';
