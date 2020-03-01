@@ -1,5 +1,5 @@
 
-# sa-admin   
+# sa-admin (iframe版) 
 
 一个多窗口后台模板，流畅、易上手、提高生产力，演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
 
@@ -51,7 +51,7 @@
 + 前后端分离：脱离后端语言，只写html，就像是在写一个静态站，与服务器的交互全部走ajax
 + SPA：在前后端分离的基础上更进一步，借助gulp、webpack等构件工具将项目打包成单页应用的一种方式
 
-**本模板** 正是采用的第2种方式（so：本模板可能无法满足重度SPA患者）
+**本模板** 正是采用的第2种方式（so：本模板可能无法满足重度SPA患者）(喜欢vue单页的同学可以点击上方的vue单页版)
 1. 前后端分离，让我们脱离了后端语言的@include指令，不用为了代码的模块化再到处搜索xx技术如何热更新代码
 2. 不使用webpack、gulp等构建工具也可以写代码，不必再费尽心机搭建一个代码编译环境
 3. 网站头部底部等公共部分代码的复用是我们使用构建工具的主要目的，但是我们借助iframe标签，轻松巧妙的化解了这个难题，借助iframe， 让网站成为一个真正意义上的多窗口应用 （大多数服务器渲染方式每次切换窗口会造成窗口刷新，SPA将代码都塞到了一个页面中的方式使得我们写代码时变得瞻前顾后）
@@ -76,10 +76,9 @@ QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
 ## 截图
 
-![截图](https://images.gitee.com/uploads/images/2019/0625/125144_cbbb1062_1766140.gif)
-![截图](https://images.gitee.com/uploads/images/2020/0120/181456_fcb0bdb8_1766140.jpeg)
-![截图](https://images.gitee.com/uploads/images/2020/0120/181529_25e33d4c_1766140.jpeg)
-![截图](https://images.gitee.com/uploads/images/2020/0120/181558_5c219ceb_1766140.jpeg)
+![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-admin/s-1.jpg)
+![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-admin/s-2.jpg)
+![截图](https://color-test.oss-cn-qingdao.aliyuncs.com/sa-admin/s-3.jpg)
 
 见演示说明地址
 
