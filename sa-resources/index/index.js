@@ -119,6 +119,10 @@ var sa_admin = new Vue({
 			window.onresize();		// 手动触发一下窗口变动监听
 		},
 		// ------------------- 对外预留接口 --------------------
+		// show_list 为指定显示的id集合(注意是id的集合)，为空时代表显示所有
+		initMenu: function(show_list) {
+			this.setMenuList(window.menuList, show_list);
+		},
 		// 写入菜单，可以是一个一维数组(指定好parent_id)，也可以是一个已经渲染好的tree数组	
 		// show_list 为指定显示的id集合(注意是id的集合)，为空时代表显示所有	
 		setMenuList: function(menu_list, show_list) {
@@ -153,18 +157,20 @@ var sa_admin = new Vue({
 		refMenuList: function(menu_list, show_list, parent_id) {
 			for (var i = 0; i < menu_list.length; i++) {
 				var menu = menu_list[i];
+				menu.is_show = (menu.is_show === false ? false : true);
 				menu.parent_id = menu.parent_id || parent_id || 0;
 				// 隐藏的给去掉 
-				if(menu.is_show === false) {
-					sa_admin_code_util.arrayDelete(menu_list, menu);
-					i--;
-					continue;
-				}
+				// if(menu.is_show === false) {
+				// 	sa_admin_code_util.arrayDelete(menu_list, menu);
+				// 	i--;
+				// 	continue;
+				// }
 				// 如果指定了 show_list，并且 menu.id 不在 show_list 里，划掉
 				if(show_list && show_list.indexOf(menu.id) == -1) {
-					sa_admin_code_util.arrayDelete(menu_list, menu);
-					i--;
-					continue;
+					menu.is_show = false;
+					// sa_admin_code_util.arrayDelete(menu_list, menu);
+					// i--;
+					// continue;
 				}
 				// 有子项的递归处理 
 				if(menu.childList && menu.childList.length > 0){

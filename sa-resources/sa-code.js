@@ -16,6 +16,7 @@ sa_admin.icon_url = 'sa-resources/admin-logo.png';    // 设置icon图标地址 
 var myMenuList = window.menuList;		// window.menuList 在 menu-list.js 中定义 
 sa_admin.setMenuList(myMenuList);	// 写入菜单  
 // sa_admin.setMenuList(myMenuList, [11, 1, '1-1']);	// 写入菜单，并设置应该显示哪些id的菜单（第二个参数为空时，代表默认显示所有） 
+// sa_admin.initMenu();	// 更简单的写法，相当于setMenuList省略第一个参数 
 
 // 如果需要获得更多操作能力，如：动态添加菜单、删除菜单等
 // 可直接 sa_admin.menuList 获得菜单引用，直接操作对象 

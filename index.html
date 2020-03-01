@@ -39,12 +39,12 @@
 								>
 								<div v-for="(menu, index) in menuList" :key="index">
 									<!-- 1 子菜单 -->
-									<el-menu-item v-if="menu.childList == null" :index="menu.id + '' ">
+									<el-menu-item v-if="!menu.childList && menu.is_show" :index="menu.id + '' ">
 										<i :class="menu.icon" :title="menu.name"></i>
 										<span class="menu-name">{{menu.name}}</span>
 									</el-menu-item>
 									<!-- 1 父菜单 -->
-									<el-submenu v-else :index="menu.id + '' ">
+									<el-submenu v-if="menu.childList && menu.is_show" :index="menu.id + '' ">
 										<template slot="title">
 											<i :class="menu.icon" :title="menu.name"></i>
 											<span class="menu-name">{{menu.name}}</span>
@@ -52,17 +52,19 @@
 										<!-- 遍历其子项 -->
 										<div v-for="(menu2, index) in menu.childList" :key="index">
 											<!-- 2 如果是子菜单 -->
-											<el-menu-item v-if="menu2.childList == null" :index="menu2.id + '' ">
+											<el-menu-item v-if="!menu2.childList && menu2.is_show" :index="menu2.id + '' ">
 												{{menu2.name}}
 											</el-menu-item>
 											<!-- 2 如果是父菜单 -->
-											<el-submenu v-else :index="menu2.id + '' ">
+											<el-submenu v-if="menu2.childList && menu2.is_show" :index="menu2.id + '' ">
 												<template slot="title">
 													{{menu2.name}}
 												</template>
-												<el-menu-item v-for="(menu3, index3) in menu2.childList" :index="menu3.id + '' " :key="index3" >
-													{{menu3.name}}
-												</el-menu-item>
+												<div v-for="(menu3, index3) in menu2.childList" :key="index3">
+													<el-menu-item v-if="menu3.is_show" :index="menu3.id + '' ">
+														{{menu3.name}}
+													</el-menu-item>
+												</div>
 											</el-submenu>
 										</div>
 									</el-submenu>
