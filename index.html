@@ -192,7 +192,6 @@
 								class="tab-title" 
 								:class=" (tab == nativeTab ? 'tab-native' : '') " 
 								@click="showTab(tab)"
-								@dblclick="rightTab = tab; right_f5()"
 								@contextmenu.prevent="right_showMenu(tab, $event)"
 								draggable="true"
 								@dragstart="is_drag = true; dragTab = tab"
