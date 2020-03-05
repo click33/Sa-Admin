@@ -868,7 +868,7 @@ var sa = {
 	}
 	
 	// 清除当前会话的权限码集合 
-	sa.clearAllPcode = function() {
+	sa.clearAuth = function() {
 		sa.keyListSet(pcode_key, []);	
 	}
 	
