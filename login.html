@@ -17,14 +17,16 @@
 			
 			/* 样式调整 */
 			.login-box{display: flex; justify-content: center; align-items: center; position: fixed; width: inherit; height: 100%; pointer-events: none;}
-			.login{height: auto; padding: 50px 30px; position: static; margin: 0 auto !important; pointer-events: all;}
+			.login{height: auto; padding: 50px 50px; position: static; margin: 0 auto !important; pointer-events: all;}
 			.login-top{margin-top: 0px; margin-bottom: 30px;}
 			.logo-img{width: 50px; height: 50px; vertical-align: middle; position: relative; top: -3px; border-radius: 50%; margin-left: -10px; margin-right: 10px;}
 			.logo-img{display: none;}
 			.login-button{width: 270px;}
 			/* .page-title{line-height: 50px;} */
-			
 			.sk-rotating-plane{}
+			/* 动画相关 */
+			/* .login{background-color: rgba(0,0,0,0); } */
+			.login{opacity: 0;}
 			
 		</style>
 	</head>
@@ -116,7 +118,12 @@
 					$('.login-button').click();
 				}
 			});
-			// 
+			// 去掉透明
+			setTimeout(function() {
+				// document.querySelector('.login').style.backgroundColor = 'rgba(256,256,256,1)';
+				document.querySelector('.login').style.opacity = '1';
+			}, 0)
+			
 			console.log('本页面参考于jq22，原作者：http://www.jq22.com/jquery-info20074');
 		</script>
 	</body>

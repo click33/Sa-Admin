@@ -118,7 +118,7 @@
 				methods: {
 					// 刷新
 					f5: function(){
-						sa.ajax2('/goods/getList', {}, function(res){
+						sa.ajax2('/goods/getList', this.p, function(res){
 							this.dataList = res.data;	// 数据
 							this.dataCount = res.dataCount;	// 分页
 						}.bind(this), {res: mockDataList});

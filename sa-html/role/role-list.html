@@ -142,7 +142,7 @@
 				methods: {
 					// 刷新
 					f5: function(){
-						sa.ajax2('/role/getList', {}, function(res){
+						sa.ajax2('/role/getList', this.p, function(res){
 							this.dataList = sa.listAU(res.data);	// 数据
 						}.bind(this), {res: mockData});
 					},

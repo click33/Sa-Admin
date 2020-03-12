@@ -143,7 +143,7 @@
 					// 刷新
 					f5: function(){
 						//this.$message(JSON.stringify(this.p))
-						sa.ajax2('/goods/getList', {}, function(res){
+						sa.ajax2('/goods/getList', this.p, function(res){
 							// this.dataList = res.data;	// 数据
 						}.bind(this));
 					},
