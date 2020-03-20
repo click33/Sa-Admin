@@ -13,37 +13,39 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
-			
+			/* 流体input */
+			.c-panel .el-form .el-input{width: calc(100% - 40px);}
 		</style>
 	</head>
 	<body>
 		<!-- 防止margin向下击穿 -->
-		<!-- <div style="margin-top: -1em;" title="防止margin向下击穿"><br></div> -->
-		<div class="vue-box cj-form" style="display: none;" :style="'display: block;'">
-			<div class="c-panel">
-				<!-- 参数栏 -->
-				<!-- <div class="c-title" v-if="id == 0">数据添加</div>
-				<div class="c-title" v-else>数据修改</div> -->
-				<el-form size="mini" v-if="m" label-width="70px">
-					<el-form-item label="编号：">
-						<el-input v-model="m.id" disabled></el-input>
-					</el-form-item>
-					<el-form-item label="名称：">
-						<el-input v-model="m.name"></el-input>
-					</el-form-item>
-					<el-form-item label="图标：">
-						<el-input v-model="m.icon"></el-input>
-					</el-form-item>
-					<el-form-item label="状态：">
-						<el-radio-group v-model="m.status">
-							<el-radio :label="1">正常</el-radio>
-							<el-radio :label="2">禁用</el-radio>
-						</el-radio-group>
-					</el-form-item>
-					<!-- <el-form-item label="&emsp;">
-						<el-button type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
-					</el-form-item> -->
-				</el-form>
+		<div class="vue-box s-bot-btn" style="display: none;" :style="'display: block;'">
+			<!-- ------- 内容部分 ------- -->
+			<div class="s-body">
+				<div class="c-panel">
+					<el-form size="mini" v-if="m" label-width="70px">
+						<el-form-item label="编号：">
+							<el-input v-model="m.id" disabled></el-input>
+						</el-form-item>
+						<el-form-item label="名称：">
+							<el-input v-model="m.name"></el-input>
+						</el-form-item>
+						<el-form-item label="图标：">
+							<el-input v-model="m.icon"></el-input>
+						</el-form-item>
+						<el-form-item label="状态：">
+							<el-radio-group v-model="m.status">
+								<el-radio :label="1">正常</el-radio>
+								<el-radio :label="2">禁用</el-radio>
+							</el-radio-group>
+						</el-form-item>
+					</el-form>
+				</div>
+			</div>
+			<!-- ------- 底部按钮 ------- -->
+			<div class="s-foot">
+				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
+				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script type="text/javascript">

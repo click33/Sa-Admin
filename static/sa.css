@@ -1,3 +1,7 @@
+/* 
+	更新于2020-3-20 新增底部按钮式风格 
+ */
+
 /** 公共css */
 *{margin: 0px;padding: 0px;}
 html{font-size: 10px; height: 100%;}
@@ -36,7 +40,7 @@ input::-webkit-inner-spin-button {
 .vue-box{padding-bottom: 20px; font-size: 14px;}
 
 /* 内容-面板 */
-.c-panel{margin: 0.7em 1em; padding: 1em 1.5em; background-color: #fff; color: #333; box-shadow: 0 0 5px #eee;}
+.c-panel{margin: 0.7em 1em; padding: 1em 1.5em; background-color: #fff; color: #333; /* box-shadow: 0 0 5px #eee; */}
 .c-title{font-size: 14px; font-weight: bold; line-height: 2em; margin-bottom: 3px;}
 .c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
@@ -92,6 +96,13 @@ input::-webkit-inner-spin-button {
 .cj-form .c-panel{box-shadow: 0 0 0; margin-top: 0px; margin-bottom: 0px; padding-top: 2.5em; padding-bottom: 0px;}
 .cj-form .c-panel .el-form .el-input{width: 100%;}
 
+
+/* 底部按钮式风格 */
+.s-bot-btn{padding-bottom: 0px; background-color: #FFF;}
+.s-body{height: calc(100vh - 60px); overflow: auto;}
+.s-foot{height: 60px; line-height: 60px; text-align: right;}
+.s-foot .el-button{margin-left: -10px; margin-right: 15px; padding: 7px 18px;}
+.s-bot-btn .s-body .c-panel{margin-top: 0px; margin-bottom: 0px; padding-top: 2.5em; padding-bottom: 0px;}
 
 /* ===================== 表单相关 - 旧方案 ===================== */
 

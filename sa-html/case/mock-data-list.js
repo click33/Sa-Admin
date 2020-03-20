@@ -9,6 +9,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 1999,
 			status: 1,
+			day: '135',
 			create_time: new Date()
 		},
 		{
@@ -18,6 +19,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 2555,
 			status: 1,
+			day: '135',
 			create_time: new Date()
 		},
 		{
@@ -27,6 +29,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 4999,
 			status: 1,
+			day: '135',
 			create_time: new Date()
 		},
 		{
@@ -36,6 +39,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 5555,
 			status: 1,
+			day: '135',
 			create_time: new Date()
 		},
 		{
@@ -45,6 +49,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 10000,
 			status: 1,
+			day: '246',
 			create_time: new Date()
 		},
 		{
@@ -54,6 +59,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 10000,
 			status: 1,
+			day: '246',
 			create_time: new Date()
 		},
 		{
@@ -63,6 +69,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 99999,
 			status: 2,
+			day: '246',
 			create_time: new Date()
 		},
 		{
@@ -72,6 +79,7 @@ var mockDataList = {
 			avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
 			money: 23333,
 			status: 2,
+			day: '567',
 			create_time: new Date()
 		},
 	],

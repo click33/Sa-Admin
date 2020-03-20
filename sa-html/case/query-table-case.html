@@ -50,6 +50,17 @@
 							<b style="color: red; ">￥{{s.row.money / 100}}</b>
 						</template>
 					</el-table-column>
+					<el-table-column label="显示标签" width="190px" >
+						<template slot-scope="s">
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('1') > -1">周一</el-tag>
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('2') > -1">周二</el-tag>
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('3') > -1">周三</el-tag>
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('4') > -1">周四</el-tag>
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('5') > -1">周五</el-tag>
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('6') > -1">周六</el-tag>
+							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('7') > -1">周日</el-tag>
+						</template>
+					</el-table-column>
 					<el-table-column label="显示状态">
 						<template slot-scope="s">
 							<b style="color: green;" v-if="s.row.status==1">正常</b>
@@ -140,16 +151,15 @@
 					},
 					// 添加 - 底部按钮式
 					add2: function(data) {
-						sa.showIframe2('添加一个(底部按钮式)', 'query-table-case-add2.html', 'app.ok()', '450px', '350px');
+						sa.showIframe('添加一个(底部按钮式)', 'query-table-case-add2.html', '450px', '350px');
 					},
 					// 修改
 					update: function (data) {
-						// sa.msg('你点击了id=' + data.id + '的修改按钮');
 						sa.showIframe('修改数据', 'query-table-case-add.html?id=' + data.id, '500px', '400px');
 					},
 					// 修改 - 底部按钮式
 					update2: function(data) {
-						sa.showIframe2('修改数据(底部按钮式)', 'query-table-case-add2.html?id=' + data.id, 'app.ok()', '450px', '350px');
+						sa.showIframe('修改数据(底部按钮式)', 'query-table-case-add2.html?id=' + data.id, '450px', '350px');
 					},
 					// 删除
 					del: function (data) {
