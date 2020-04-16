@@ -10,8 +10,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.3.4',		// 当前版本
-		update_time: '2020-03-05',		// 更新日期 
+		version: 'v2.3.5',		// 当前版本
+		update_time: '2020-04-17',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -809,7 +809,7 @@ var sa_admin = new Vue({
 		},
 		// 打印版本
 		printVesion: function() {
-			console.log('欢迎使用sa-admin，当前版本：' + this.version + "，更新于：" + this.update_time + "，GitHub地址：" + this.github_url);
+			console.log('欢迎使用sa-admin(iframe版)，当前版本：' + this.version + "，更新于：" + this.update_time + "，GitHub地址：" + this.github_url);
 			console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
 		},
 		// 获取指定tab栏的window对象, 用于多窗口通信 

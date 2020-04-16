@@ -13,7 +13,7 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
-			.c-panel .el-form-item__label{width: 10em;}
+			.c-panel .c-label{width: 10em;}
 		</style>
 	</head>
 	<body>
@@ -23,30 +23,36 @@
 			<!-- 参数栏 -->
 			<div class="c-panel">
 				<div class="c-title">服务器所有设置</div>
-				<el-form size="mini" v-if="m">
-					<el-form-item label="系统名称：">
-						<el-input v-model="m.app_name"></el-input>
-					</el-form-item>
-					<el-form-item label="当前版本：">
-						<el-input v-model="m.app_version_no"></el-input>
-					</el-form-item>
-					<el-form-item label="联系Q群：">
-						<el-input v-model="m.qq_group"></el-input>
-					</el-form-item>
-					<el-form-item label="开放注册：">
+				<el-form v-if="m">
+					<div class="c-item br">
+						<label class="c-label">系统名称：</label>
+						<el-input size="mini" v-model="m.app_name"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">当前版本：</label>
+						<el-input size="mini" v-model="m.app_version_no"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">联系Q群：</label>
+						<el-input size="mini" v-model="m.qq_group"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">开放注册：</label>
 						<el-switch v-model="m.xcx_share_btn" :active-value="1" :inactive-value="2"></el-switch>
 						<span class="c-remark" v-if="m.open_reg==1">开启</span>
 						<span class="c-remark" v-else>关闭</span>
-					</el-form-item>
-					<el-form-item label="显示分享按钮：">
+					</div>
+					<div class="c-item br">
+						<label class="c-label">显示分享按钮：</label>
 						<el-switch v-model="m.gzhxc" :active-value="1" :inactive-value="2"></el-switch>
 						<span class="ps" v-if="m.show_share==1">开启</span>
 						<span class="ps" v-else>关闭</span>
-					</el-form-item>
-					<el-form-item label="&emsp;">
-						<el-button type="primary" size="mini" icon="el-icon-check" @click="ok">保存修改</el-button>
-						<el-button type="primary" size="mini" icon="el-icon-close" @click="f5">重置</el-button>
-					</el-form-item>
+					</div>
+					<div class="c-item br">
+						<label class="c-label"></label>
+						<el-button size="mini" type="primary" size="mini" icon="el-icon-check" @click="ok">保存修改</el-button>
+						<el-button size="mini" type="primary" size="mini" icon="el-icon-close" @click="f5">重置</el-button>
+					</div>
 				</el-form>
 			</div>
 		</div>

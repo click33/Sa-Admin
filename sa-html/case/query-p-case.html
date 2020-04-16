@@ -18,50 +18,57 @@
 		<div style="margin-top: -1em;"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
-				<!-- 参数栏 -->
+				<!--------------- 参数栏 --------------->
 				<div class="c-title">检索参数</div>
-				<i class="layui-layer-ico layui-layer-ico16"></i>
-				<el-form size="mini" :inline="true">
-					<el-form-item label="普通参数：">
-					    <el-input v-model="p.name"></el-input>
-					</el-form-item>
-					<el-form-item label="数值参数：">
-					    <el-input v-model="p.count" type="number"></el-input>
-					</el-form-item>
-					<el-form-item label="下拉参数：">
+				<el-form>
+					<div class="c-item">
+						<label class="c-label">普通参数：</label>
+						<el-input size="mini" v-model="p.name" ></el-input>
+					</div>
+					<div class="c-item">
+						<label class="c-label">普通参数：</label>
+						<el-input size="mini" v-model="p.count" type="number"></el-input>
+					</div>
+					<div class="c-item">
+						<label class="c-label">下拉参数：</label>
 						<el-select size="mini" v-model="p.type_id">
 							<el-option label="不限" :value="0"></el-option>
 							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
 						</el-select>
-					</el-form-item>
-					<el-form-item style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
-					</el-form-item>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+					</div>
 					<br>
-					<el-form-item label="日期参数：">
-						<el-date-picker v-model="p.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
-					</el-form-item>
-					<el-form-item label="时间区间：">
-						<el-date-picker v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
-						<el-date-picker v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
-					</el-form-item>
+					<div class="c-item">
+						<label class="c-label">日期参数：</label>
+						<el-date-picker size="mini" v-model="p.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
+					</div>
+					<div class="c-item">
+						<label class="c-label">时间区间：</label>
+						<el-date-picker size="mini" v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
+						<el-date-picker size="mini" v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
+					</div>
 					<br>
-					<el-form-item label="单选参数：">
+					<div class="c-item">
+						<label class="c-label">单选参数：</label>
 						<el-radio-group v-model="p.single">
 							<el-radio :label="1">参数1</el-radio>
 							<el-radio :label="2">参数2</el-radio>
 						</el-radio-group>
-					</el-form-item>
-					<el-form-item label="单选按钮：">
-						<el-radio-group v-model="p.single2">
+					</div>
+					<div class="c-item">
+						<label class="c-label">单选按钮：</label>
+						<el-radio-group size="mini" v-model="p.single2">
 							<el-radio-button :label="1">参数1</el-radio-button>
 							<el-radio-button :label="2">参数2</el-radio-button>
 							<el-radio-button :label="3">参数3</el-radio-button>
 							<el-radio-button :label="4">参数4</el-radio-button>
 						</el-radio-group>
-					</el-form-item>
+					</div>
 					<br>
-					<el-form-item label="单选文字：" class="s-radio-text">
+					<div class="c-item" class="s-radio-text">
+						<label class="c-label">单选文字：</label>
 						<el-radio-group v-model="p.status">
 							<el-radio :label="0">全部</el-radio>
 							<el-radio :label="1">新下单</el-radio>
@@ -72,18 +79,19 @@
 							<el-radio :label="11">取消中</el-radio>
 							<el-radio :label="21">退款中</el-radio>
 						</el-radio-group>
-					</el-form-item>
+					</div>
 					<br>
-					<el-form-item label="多选参数：">
+					<div class="c-item">
+						<label class="c-label">多选参数：</label>
 						<el-checkbox v-model="p.checkbox_1">已上架</el-checkbox>
 						<el-checkbox v-model="p.checkbox_2">已推荐</el-checkbox>
 						<el-checkbox v-model="p.checkbox_3">热卖中</el-checkbox>
 						<el-checkbox v-model="p.checkbox_4">高点击</el-checkbox>
 						<el-checkbox v-model="p.checkbox_5">高转化</el-checkbox>
 						<el-checkbox v-model="p.checkbox_6">高复买</el-checkbox>
-					</el-form-item>
+					</div>
 				</el-form>
-				<!-- 数据列表 -->
+				<!--------------- 数据列表 --------------->
 				<div class="c-title">数据列表</div>
 				<el-table :data="dataList" size="mini">
 					<el-table-column label="编号" prop="id"></el-table-column>

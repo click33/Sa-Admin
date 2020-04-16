@@ -20,25 +20,28 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
-				<el-form :inline="true" size="mini">
-					<el-form-item label="文章编号：">
-						<el-input v-model="p.id" type="number"></el-input>
-					</el-form-item>
-					<el-form-item label="标题：">
-						<el-input v-model="p.title" placeholder="模糊查询"></el-input>
-					</el-form-item>
-					<el-form-item style="min-width: 10px;">
-						<el-button type="primary" icon="el-icon-search" @click="f5">查询</el-button>
-					</el-form-item>
+				<el-form>
+					<div class="c-item">
+						<label class="c-label">文章编号：</label>
+						<el-input size="mini" v-model="p.id" type="number"></el-input>
+					</div>
+					<div class="c-item">
+						<label class="c-label">标题：</label>
+						<el-input size="mini" v-model="p.title" placeholder="模糊查询"></el-input>
+					</div>
+					<div class="c-item" style="min-width: 10px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5">查询</el-button>
+					</div>
 					<br>
-					<el-form-item label="综合排序：">
-						<el-radio-group v-model="p.sort_type">
+					<div class="c-item" style="min-width: 10px;">
+						<label class="c-label">综合排序：</label>
+						<el-radio-group size="mini" v-model="p.sort_type">
 							<el-radio :label="0">发表时间</el-radio>
 							<el-radio :label="1">喜欢数</el-radio>
 							<el-radio :label="2">点击数</el-radio>
 							<el-radio :label="3">分享数</el-radio>
 						</el-radio-group>
-					</el-form-item>
+					</div>
 				</el-form>
 				<!-- 数据列表 -->
 				<!-- <h4 class="c-title">列表</h4> -->

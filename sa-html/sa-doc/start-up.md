@@ -37,15 +37,15 @@ sa_admin.closeTabById('1-1');	// 关闭一个选项卡，根据 id （ 第二个
 sa_admin.showMenuById('1-1');	// 打开一个 菜单，根据 id
 
 // 新增一个选项卡
-// sa_admin.addTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+// sa_admin.addTab({id: 12345, name: '新页面', url: 'http://sa-token.dev33.cn/'});	// id不要和已有的菜单id冲突，其它属性均可参照菜单项 
 
 // 新增一个选项卡、并立即显示  
 // sa_admin.showTab({id: 12345, name: '新页面', url: 'http://web.yanzhi21.com'});	// 参数同上 
 ```
 测试：
 <button onclick="top.sa_admin.showHome()">显示首页</button>
-<button onclick="top.sa_admin.addTab({id: Math.round(Math.random()*9999999999999), name: '新窗口', url: 'http://web.yanzhi21.com'})">新增选项卡</button>
-<button onclick="top.sa_admin.showTab({id: Math.round(Math.random()*9999999999999), name: '新窗口', url: 'https://sqlfly.dev33.cn/'})">新增选项卡并显示</button>
+<button onclick="top.sa_admin.addTab({id: Math.round(Math.random()*9999999999999), name: '新窗口', url: 'http://sa-token.dev33.cn/'})">新增选项卡</button>
+<button onclick="top.sa_admin.showTab({id: Math.round(Math.random()*9999999999999), name: '新窗口', url: 'http://web.yanzhi21.com'})">新增选项卡并显示</button>
 <button onclick="top.sa_admin.atOpen()">打开弹窗添加</button>
 
 #### 6、如何设置登录后右上角显示的user信息

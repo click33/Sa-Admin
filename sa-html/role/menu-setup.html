@@ -13,48 +13,47 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
         <style>
-			body,.el-tree{background-color: #F5F5F5;}
+			body,.el-tree{background-color: #FFF;}
 			.el-tree-node{margin: 0.15em 0 !important;}
 			/* 悬浮时颜色更深一点 */
 			.el-tree-node__content:hover{background-color: #CFE8FC !important;}
         </style>
 	</head>
 	<body>
-		<div style="margin-top: -1em;" title="防止margin向下击穿"><br></div>
-		<div class="vue-box" style="display: none;" :style="'display: block;'">
-			<!-- 表格 -->
-			<div style="padding: 1em 2em;">
-				<el-form>
-					<div class="c-title">所有权限</div>
-					<!-- 此扩展能递归渲染一个权限树，点击深层次节点，父级节点中没有被选中的节点会被自动选中，单独点击父节点，子节点会全部 选中/去选中 -->
-					<el-tree
-						ref="tree"
-						:data="dataList"
-						show-checkbox 
-						node-key="id"
-						:default-expand-all="true"
-						:default-checked-keys="select_list" 
-						:expand-on-click-node="false"
-						:check-on-click-node="true"
-						:check-strictly="true"
-						@node-click="node_click"
-						@check="node_click"
-						>
-						<span class="custom-tree-node" slot-scope="s">
-							<span style="color: #2D8CF0;" v-if="s.data.is_show == undefined || s.data.is_show == true">{{ s.data.name }}</span>
-							<span style="color: #999;" v-if="s.data.is_show == false">{{ s.data.name }} (隐藏)</span>
-							<span style="color: #999;" v-if="s.data.info">&emsp;———— {{s.data.info}} </span>
-						</span>
-					</el-tree>
-					<!-- 
-						default-expand-all  展开所有
-						default-checked-keys  默认选中
-					 -->
-					<br>
-					<el-form-item label="&emsp;">
-						<el-button type="primary" icon="el-icon-plus" size="mini" @click="ok">确定</el-button>
-					</el-form-item>
-				</el-form>
+		<div class="vue-box s-bot-btn" style="display: none;" :style="'display: block;'">
+			<!-- ------- 内容部分 ------- -->
+			<div class="s-body">
+				<!-- 表格 -->
+				<div style="padding: 1em 2em;">
+					<el-form>
+						<div class="c-title">所有权限</div>
+						<!-- 此扩展能递归渲染一个权限树，点击深层次节点，父级节点中没有被选中的节点会被自动选中，单独点击父节点，子节点会全部 选中/去选中 -->
+						<el-tree
+							ref="tree"
+							:data="dataList"
+							show-checkbox 
+							node-key="id"
+							:default-expand-all="true"
+							:default-checked-keys="select_list" 
+							:expand-on-click-node="false"
+							:check-on-click-node="true"
+							:check-strictly="true"
+							@node-click="node_click"
+							@check="node_click"
+							>
+							<span class="custom-tree-node" slot-scope="s">
+								<span style="color: #2D8CF0;" v-if="s.data.is_show == undefined || s.data.is_show == true">{{ s.data.name }}</span>
+								<span style="color: #999;" v-if="s.data.is_show == false">{{ s.data.name }} (隐藏)</span>
+								<span style="color: #999;" v-if="s.data.info">&emsp;———— {{s.data.info}} </span>
+							</span>
+						</el-tree>
+					</el-form>
+				</div>
+			</div>
+			<!-- ------- 底部按钮 ------- -->
+			<div class="s-foot">
+				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
+				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script src="../../sa-resources/menu-list.js"></script> 

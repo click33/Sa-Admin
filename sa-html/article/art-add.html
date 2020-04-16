@@ -34,22 +34,27 @@
 			<!-- 参数栏 -->
 			<div class="c-panel">
 				<div class="c-title">文章编辑</div>
-				<el-form size="mini" v-if="m">
-					<el-form-item label="文章标题：">
+				<el-form v-if="m">
+					<div class="c-item br">
+						<label class="c-label">文章标题：</label>
 						<el-input size="mini" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
-					</el-form-item>
-					<el-form-item label="文章标题：" class="editor-item">
+					</div>
+					<div class="c-item br editor-item">
+						<label class="c-label">文章内容：</label>
 						<div class="editor-box">
 							<div id="editor"></div>
 						</div>
-					</el-form-item>
-					<el-form-item label="是否公开：">
+						<div style="clear: both;"></div>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">是否公开：</label>
 						<el-switch v-model="m.is_public" :active-value="1" :inactive-value="2"></el-switch>
 						<span class="c-remark">关闭后，别人将不能看到你的发表</span>
-					</el-form-item>
-					<el-form-item label="&emsp;">
+					</div>
+					<div class="c-item br">
+						<label class="c-label"></label>
 						<el-button type="primary" icon="el-icon-plus" size="mini" @click="ok">确定</el-button>
-					</el-form-item>
+					</div>
 					<div style="margin-top: 10px;"></div>
 				</el-form>
 			</div>
@@ -98,6 +103,8 @@
 				methods: {
 					// 提交 
 					ok: function() {
+						// 获取值
+						this.m.content = editor.txt.html();	
 						// 开始增加或修改
 						if(this.id == 0) {
 							sa.ajax2('/url/api', this.m, function(res) {

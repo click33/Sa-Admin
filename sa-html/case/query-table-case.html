@@ -19,15 +19,16 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
-				<el-form size="mini" :inline="true" @submit.native.prevent >
-					<el-form-item label="名称查询：">
-						<el-input v-model="p.name" placeholder="模糊查询"></el-input>
-					</el-form-item>
-					<el-form-item style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
-						<el-button type="primary" icon="el-icon-plus" @click="add()">添加</el-button>
-						<el-button type="primary" icon="el-icon-plus" @click="add2()">添加(底部按钮式)</el-button>
-					</el-form-item>
+				<el-form @submit.native.prevent >
+					<div class="c-item">
+						<label class="c-label">名称查询：</label>
+						<el-input size="mini" v-model="p.name" placeholder="模糊查询"></el-input>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">添加</el-button>
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="add2()">添加(底部按钮式)</el-button>
+					</div>
 				</el-form>
 				<!-- 数据列表 -->
 				<div class="c-title">数据列表</div>

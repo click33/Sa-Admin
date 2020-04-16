@@ -23,59 +23,71 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">表单提交</div>
-				<el-form size="mini" v-if="m">
-					<el-form-item label="普通参数：">
-						<el-input v-model="m.name"></el-input>
-					</el-form-item>
-					<el-form-item label="数值输入：">
-						<el-input v-model="m.count" type="number"></el-input>
-					</el-form-item>
-					<el-form-item label="下拉输入：">
+				<el-form v-if="m">
+					<div class="c-item br">
+						<label class="c-label">普通参数：</label>
+						<el-input size="mini" v-model="m.name"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">数值输入：</label>
+						<el-input size="mini" v-model="m.count" type="number"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">下拉输入：</label>
 						<el-select size="mini" v-model="m.type_id">
 							<el-option label="请选择" :value="0" disabled></el-option>
 							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
 						</el-select>
-					</el-form-item>
-					<el-form-item label="级联选择：">
+					</div>
+					<div class="c-item br">
+						<label class="c-label">级联选择：</label>
 						<el-cascader
+							size="mini"
 						    v-model="m.jvalue"
 						    :options="joptions"
 						    :props="{ expandTrigger: 'hover' }" >
 						</el-cascader>
-					</el-form-item>
-					<el-form-item label="选择时间：">
-						<el-date-picker v-model="m.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
-					</el-form-item>
-					<el-form-item label="滑块参数：">
+					</div>
+					<div class="c-item br">
+						<label class="c-label">选择时间：</label>
+						<el-date-picker size="mini" v-model="m.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">滑块参数：</label>
 						<div style="display: inline-block; height: 0px; vertical-align: top; width: 250px;">
-							<el-slider v-model="m.hValue" style="position: relative; top: -5px;"></el-slider>
+							<el-slider size="mini" v-model="m.hValue" style="position: relative; top: -5px;"></el-slider>
 						</div>
-					</el-form-item>
-					<el-form-item label="单选参数：">
-						<el-radio-group v-model="m.single">
+					</div>
+					<div class="c-item br">
+						<label class="c-label">单选参数：</label>
+						<el-radio-group size="mini" v-model="m.single">
 							<el-radio :label="1">参数1</el-radio>
 							<el-radio :label="2">参数2</el-radio>
 							<el-radio :label="3">参数3</el-radio>
 						</el-radio-group>
-					</el-form-item>
-					<el-form-item label="多选参数：">
+					</div>
+					<div class="c-item br">
+						<label class="c-label">多选参数：</label>
 						<el-checkbox v-model="m.checkbox_1">苹果</el-checkbox>
 						<el-checkbox v-model="m.checkbox_2">鸭梨</el-checkbox>
 						<el-checkbox v-model="m.checkbox_3">香蕉</el-checkbox>
 						<el-checkbox v-model="m.checkbox_4">葡萄</el-checkbox>
-					</el-form-item>
-					<el-form-item label="开关参数：">
+					</div>
+					<div class="c-item br">
+						<label class="c-label">开关参数：</label>
 						<el-switch v-model="m.status" :active-value="1" :inactive-value="2" inactive-color="#ff4949"></el-switch>
 						<span style="color: #999;" v-if="m.status==1">正常</span>
 						<span style="color: #999;" v-else>禁用</span>
-					</el-form-item>
-					<el-form-item label="颜色选择：">
+					</div>
+					<div class="c-item br">
+						<label class="c-label" style="vertical-align: top;">颜色选择：</label>
 						<el-color-picker v-model="m.color" size="mini"></el-color-picker>
 						<span class="c-remark" style="vertical-align: top;">{{m.color}}</span>
-					</el-form-item>
-					<el-form-item label="&emsp;">
-						<el-button type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
-					</el-form-item>
+					</div>
+					<div class="c-item br">
+						<label class="c-label"></label>
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
+					</div>
 				</el-form>
 			</div>
 		</div>

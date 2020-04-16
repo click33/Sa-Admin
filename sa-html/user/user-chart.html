@@ -23,8 +23,9 @@
 			<!-- 参数栏 -->
 			<div style="padding: 2em;">
 				<div class="c-title">检索参数</div>
-				<el-form size="mini" :inline="true">
-					<el-form-item label="选择年份：">
+				<el-form>
+					<div class="c-item">
+						<label class="c-label">选择年份：</label>
 						<el-select size="mini" v-model="p.year" @change="f5()">
 							<el-option label="不限年份" :value="0"></el-option>
 							<el-option label="2016年" :value="2016"></el-option>
@@ -34,10 +35,10 @@
 							<el-option label="2020年" :value="2020"></el-option>
 							<el-option label="2021年" :value="2021"></el-option>
 						</el-select>
-					</el-form-item>
-					<el-form-item style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
-					</el-form-item>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+					</div>
 				</el-form>
 			</div>
 			<!-- 数据栏 -->

@@ -14,7 +14,7 @@
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
 			/* 流体input */
-			.c-panel .el-form .el-input{width: calc(100% - 40px);}
+			.c-panel .el-form .el-input{width: calc(100% - 120px);}
 		</style>
 	</head>
 	<body>
@@ -23,22 +23,26 @@
 			<!-- ------- 内容部分 ------- -->
 			<div class="s-body">
 				<div class="c-panel">
-					<el-form size="mini" v-if="m" label-width="70px">
-						<el-form-item label="编号：">
-							<el-input v-model="m.id" disabled></el-input>
-						</el-form-item>
-						<el-form-item label="名称：">
-							<el-input v-model="m.name"></el-input>
-						</el-form-item>
-						<el-form-item label="图标：">
-							<el-input v-model="m.icon"></el-input>
-						</el-form-item>
-						<el-form-item label="状态：">
-							<el-radio-group v-model="m.status">
+					<el-form v-if="m">
+						<div class="c-item br">
+							<label class="c-label">编号：</label>
+							<el-input size="mini" v-model="m.id" disabled></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">名称：</label>
+							<el-input size="mini" v-model="m.name"></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">图标：</label>
+							<el-input size="mini" v-model="m.icon"></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">状态：</label>
+							<el-radio-group size="mini" v-model="m.status">
 								<el-radio :label="1">正常</el-radio>
 								<el-radio :label="2">禁用</el-radio>
 							</el-radio-group>
-						</el-form-item>
+						</div>
 					</el-form>
 				</div>
 			</div>

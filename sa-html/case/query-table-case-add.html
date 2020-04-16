@@ -17,8 +17,8 @@
 			body{background-color: #FFF;}
 			.c-panel{box-shadow: 0 0 0;}
 			/* 调整一下表单元素尺寸 */
-			.c-panel .el-form-item__label{width: 120px;}
-			.c-panel .el-form .el-input{width: 250px;}
+			/* .c-panel .el-form-item__label{width: 120px;}
+			.c-panel .el-form .el-input{width: 250px;} */
 		</style>
 	</head>
 	<body>
@@ -29,25 +29,30 @@
 				<!-- 参数栏 -->
 				<div class="c-title" v-if="id == 0">数据添加</div>
 				<div class="c-title" v-else>数据修改</div>
-				<el-form size="mini" v-if="m">
-					<el-form-item label="编号：">
-						<el-input v-model="m.id" disabled></el-input>
-					</el-form-item>
-					<el-form-item label="名称：">
-						<el-input v-model="m.name"></el-input>
-					</el-form-item>
-					<el-form-item label="图标：">
-						<el-input v-model="m.icon"></el-input>
-					</el-form-item>
-					<el-form-item label="状态：">
-						<el-radio-group v-model="m.status">
+				<el-form v-if="m">
+					<div class="c-item br">
+						<label class="c-label">编号：</label>
+						<el-input size="mini" v-model="m.id" disabled></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">名称：</label>
+						<el-input size="mini" v-model="m.name"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">图标：</label>
+						<el-input size="mini" v-model="m.icon"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">状态：</label>
+						<el-radio-group size="mini" v-model="m.status">
 							<el-radio :label="1">正常</el-radio>
 							<el-radio :label="2">禁用</el-radio>
 						</el-radio-group>
-					</el-form-item>
-					<el-form-item label="&emsp;">
-						<el-button type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
-					</el-form-item>
+					</div>
+					<div class="c-item br">
+						<label class="c-label"></label>
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
+					</div>
 				</el-form>
 			</div>
 		</div>

@@ -17,18 +17,20 @@
 		<!-- 防止margin向下击穿 -->
 		<div style="margin-top: -1em;"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
-			<!-- 参数栏 -->
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
 				<el-form :inline="true" size="mini" @submit.native.prevent>
-					<el-form-item label="角色名称：">
-						<el-input v-model="p.role_name"></el-input>
-					</el-form-item>
-					<el-form-item style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
-					</el-form-item>
+					<div class="c-item">
+						<label class="c-label">角色名称：</label>
+						<el-input size="mini" v-model="p.role_name"></el-input>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+					</div>
 				</el-form>
+				
+				
 				<!-- 数据列表 -->
 				<el-table :data="dataList" size="mini" >
 					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
@@ -179,7 +181,7 @@
 					// 修改菜单
 					menu_setup: function(data){
 						var title = '为 ['+data.role_name+'] 分配权限';
-						sa.showIframe(title, 'menu-setup.html?role_id=' + data.id, '70%', '100%');
+						sa.showIframe(title, 'menu-setup.html?role_id=' + data.id, '700px', '600px');
 					}
 				},
 				created: function(){

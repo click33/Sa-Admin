@@ -25,21 +25,23 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
-				<el-form size="mini" :inline="true" @submit.native.prevent >
-					<el-form-item label="标题：">
-						<el-input v-model="p.title"></el-input>
-					</el-form-item>
-					<el-form-item style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
-					</el-form-item>
+				<el-form size="mini" @submit.native.prevent >
+					<div class="c-item">
+						<label class="c-label">标题：</label>
+						<el-input size="mini" v-model="p.title"></el-input>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+					</div>
 					<br>
-					<el-form-item label="排序：">
-						<el-radio-group v-model="p.sort_type">
+					<div class="c-item">
+						<label class="c-label">排序：</label>
+						<el-radio-group size="mini" v-model="p.sort_type">
 							<el-radio :label="0">排序值</el-radio>
 							<el-radio :label="1">创建时间</el-radio>
 							<el-radio :label="2">点击量</el-radio>
 						</el-radio-group>
-					</el-form-item>
+					</div>
 				</el-form>
 				<!-- 数据栏 -->
 				<div class="c-title">数据列表</div>
@@ -99,25 +101,24 @@
 			<!-- 添加一个 -->
 			<div class="c-panel c-panel-add">
 				<h4 class="c-title">添加一个</h4>	
-				<el-form size="mini" v-if="m">
-					<el-form-item label="图片：">
+				<el-form v-if="m">
+					<div class="c-item br">
+						<label class="c-label">图片：</label>
 						<img :src="m.img_src" class="td-img" @click="sa.showImage(m.img_src, '70%', '80%')" >
 						<span class="c-remark"> 点击图片预览</span>
-					</el-form-item>
-					<el-form-item label="标题：">
-						<el-input v-model="m.title"></el-input>
-					</el-form-item>
-					<el-form-item label="排序：">
-						<el-input v-model="m.sort" type="number"></el-input>
-					</el-form-item>
-					<!-- <el-form-item label="状态：">
-						<el-switch v-model="m.status" :active-value="1" :inactive-value="2"></el-switch>
-						<span style="color: #999;" v-if="m.status==1">显示</span>
-						<span style="color: #999;" v-else>隐藏</span>
-					</el-form-item> -->
-					<el-form-item label="&emsp;">
-						<el-button type="primary" size="mini" icon="el-icon-plus" @click="add" >添加</el-button>
-					</el-form-item>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">标题：</label>
+						<el-input size="mini" v-model="m.title"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label">排序：</label>
+						<el-input size="mini" v-model="m.sort" type="number"></el-input>
+					</div>
+					<div class="c-item br">
+						<label class="c-label"></label>
+						<el-button size="mini" type="primary" size="mini" icon="el-icon-plus" @click="add" >添加</el-button>
+					</div>
 				</el-form>
 			</div>
 		</div>

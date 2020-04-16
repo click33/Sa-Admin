@@ -45,7 +45,7 @@ input::-webkit-inner-spin-button {
 .c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
 /* ===================== 表单相关 ===================== */
-.c-panel .el-form{padding-top: 10px; padding-bottom: 5px;}
+.c-panel .el-form{/* padding-top: 10px; */ padding-bottom: 15px;}
 .c-panel .el-form-item{min-width: 278px;}
 .c-panel .el-form-item__label{width: 100px;}
 .c-panel .el-form .el-input{width: 178px;}
@@ -107,12 +107,12 @@ input::-webkit-inner-spin-button {
 /* ===================== 表单相关 - 旧方案 ===================== */
 
 /* 内容-item */
-.c-item {min-width: 280px; min-height: 32px; line-height: 32px; padding-right: 20px; display: inline-block; margin: 0.5em 0;}
-.c-item.br{display: block;}
+.c-item {min-width: 260px; min-height: 32px; line-height: 32px; padding-right: 15px; display: inline-block; margin: 0.5em 0;}
+.c-item.br{display: block; margin: 14px 0;}
 /* label样式 */
-.c-item .c-label{width: 5em; color: #333; display: inline-block; text-align: right;}
+.c-item .c-label{width: 6em; color: #333; padding-right: 4px; display: inline-block; text-align: right;}
 /* input宽度等样式调整 */
-.c-item .el-input{width: 200px;}
+.c-item .el-input{width: 178px;}
 /* 禁用input的样式 */
 .c-item .el-input.is-disabled .el-input__inner{color: #999;}
 /* 链接 行高设置 */

@@ -20,27 +20,30 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">用户列表</div>
-				<el-form :inline="true" size="mini">
-					<el-form-item label="用户昵称：">
-						<el-input v-model="p.username" placeholder="模糊查询"></el-input>
-					</el-form-item>
-					<el-form-item label="注册日期：">
-						<el-date-picker v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
-						<el-date-picker v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
-					</el-form-item>
-					<el-form-item style="min-width: 0px;">
-						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
-					</el-form-item>
+				<el-form>
+					<div class="c-item">
+						<label class="c-label">用户昵称：</label>
+						<el-input size="mini" v-model="p.username" placeholder="模糊查询"></el-input>
+					</div>
+					<div class="c-item">
+						<label class="c-label">注册日期：</label>
+						<el-date-picker size="mini" v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
+						<el-date-picker size="mini" v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
+					</div>
+					<div class="c-item" style="min-width: 0px;">
+						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+					</div>
 					<br />
-					<el-form-item label="综合排序：" class="s-radio-text">
-						<el-radio-group v-model="p.sort_type">
+					<div class="c-item s-radio-text">
+						<label class="c-label">综合排序：</label>
+						<el-radio-group size="mini" v-model="p.sort_type">
 							<el-radio :label="1">注册时间</el-radio>
 							<el-radio :label="2">最近登录</el-radio>
 							<el-radio :label="3">登陆次数</el-radio>
 							<el-radio :label="4">最近签到</el-radio>
 							<el-radio :label="5">签到次数</el-radio>
 						</el-radio-group>
-					</el-form-item>
+					</div>
 				</el-form>
 				<!-- <div class="c-title">数据列表</div> -->
 				<el-table :data="dataList" size="mini">
