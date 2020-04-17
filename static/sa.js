@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
 	version: '2.2',
-	update_time: '2020-2-29',
-	info: '改了鉴权api的函数名称'
+	update_time: '2020-4-17',
+	info: '增加了sa_admin字段，方便调用'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -177,9 +177,12 @@ var sa = {
 // ===========================  封装弹窗相关函数   ======================================= 
 (function() {
 	
-	// ============== 小提示 ===================== 
 	var me = sa;
-	layer.ready(function(){});
+	if(window.layer) {
+		layer.ready(function(){});
+	}
+	 
+	
 	
 	// tips提示文字  
 	me.msg = function(msg, cfg) {
@@ -939,6 +942,9 @@ var sa = {
 if(window.Vue) {
 	Vue.prototype.sa = sa;
 }
+
+// 如果是sa_admin环境 
+window.sa_admin = window.sa_admin || parent.sa_admin || top.sa_admin;
 
 // 对外开放, 在模块化时解开此注释 
 // export default sa;
