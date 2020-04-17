@@ -15,7 +15,7 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 	overflow: hidden;
 }
 /* 左上 logo部分 */
-.nav-left-top{width: 100%; height: 85px; overflow: hidden; line-height: 85px; cursor: pointer; transform: none;}
+.nav-left-top{width: 100%; height: 85px; overflow: hidden; line-height: 85px; cursor: pointer; transform: none; position: relative; z-index: 100;}
 .admin-logo{width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin: 0.5em; margin-left: 1em;}
 /* ==== .nav-left-top:hover{color: #FFF;} */
 
@@ -160,5 +160,5 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 
 
 /* 去除掉便签的大边框 */
-.layui-layer-input{outline: 0; box-shadow: none !important; padding: 0.5em !important; font-family: 'Times New Roman', Times, serif;}
+.layer-note-class .layui-layer-input{outline: 0; box-shadow: none !important; border: 1px #ddd solid; margin: 1em; padding: 0.5em !important; font-family: 'Times New Roman', Times, serif;}
 

@@ -10,7 +10,7 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.3.5',		// 当前版本
+		version: 'v2.3.6',		// 当前版本
 		update_time: '2020-04-17',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
@@ -794,6 +794,7 @@ var sa_admin = new Vue({
 				area: [w, h],
 				btn: ['保存'],
 				maxlength: 99999999,
+				skin: 'layer-note-class' 
 			}, function(pass, index){
 				layer.close(index)					
 			});
