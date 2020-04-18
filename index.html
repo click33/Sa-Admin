@@ -234,7 +234,7 @@
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<iframe :src="homeTab.url" :id="'iframe-' + homeTab.id" class="iframe"></iframe>
+								<iframe :src="homeTab.url" :id="'iframe-' + homeTab.id" class="iframe" v-if="homeTab.is_load"></iframe>
 							</div>
 						</div>
 					</div>
@@ -263,9 +263,7 @@
 		</div>
 		
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
-		<script type="text/javascript">
-			Vue.config.productionTip = false;
-		</script>
+		<script type="text/javascript">Vue.config.productionTip = false;</script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/swiper@4.5.0/dist/js/swiper.min.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>

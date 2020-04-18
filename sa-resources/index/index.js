@@ -3,6 +3,7 @@ var homeTab = {
 	id: 'home',	// 唯一标识 
 	name: '首页',
 	url: 'main.html',	// 页面地址 
+	is_load: false,		// 标注：是否已经加载过了 
 	hide_close: true	// 隐藏关闭键 
 }
 
@@ -10,8 +11,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.3.6',		// 当前版本
-		update_time: '2020-04-17',		// 更新日期 
+		version: 'v2.3.7',		// 当前版本
+		update_time: '2020-04-18',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -116,6 +117,9 @@ var sa_admin = new Vue({
 			
 			// 开始一些初始化动作
 			this.showTabByHash();	// 打开上次最后的一个窗口 
+			if(this.nativeTab.id == this.homeTab.id) {
+				this.showHome();
+			}
 			window.onresize();		// 手动触发一下窗口变动监听
 		},
 		// ------------------- 对外预留接口 --------------------
@@ -535,6 +539,8 @@ var sa_admin = new Vue({
 		},
 		// 显示某个页面  (如果不存在, 则先添加)
 		showTab: function(tab) {
+			// 标注：已经加载过了;
+			tab.is_load = true;	
 			// 如果是外部链接
 			if(tab.is_blank) {
 				return open(tab.url); 
@@ -564,6 +570,7 @@ var sa_admin = new Vue({
 			})
 			
 			this.nativeTab = tab;
+			// this.nativeTab.is_load = true;	// 标注：已经加载过了 
 			this.default_active = tab.id + '';	// 左边自动关联, 如果左边没有，则无效果 
 			
 			// 归位一下
