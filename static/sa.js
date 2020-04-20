@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
-	version: '2.2',
-	update_time: '2020-4-17',
-	info: '增加了sa_admin字段，方便调用'
+	version: '2.3',
+	update_time: '2020-4-20',
+	info: '增加代码：console.log("返回数据：", res);'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -117,6 +117,7 @@ var sa = {
 				xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
 			},
 			success: function(res){
+				console.log('返回数据：', res);
 				setTimeout(function() {
 					sa.hideLoading();
 					// 如果相应的处理函数存在
@@ -148,6 +149,7 @@ var sa = {
 		}
 		// 几个默认配置 
 		cfg = cfg || {};
+		cfg.baseUrl = (url.indexOf('http') === 0 ? '' : sa.cfg.api_url);	// 父url，拼接在url前面
 		// 设定一个默认的提示文字 
 		if(cfg.msg == undefined || cfg.msg == null || cfg.msg == '') {
 			cfg.msg = '正在努力加载...';
@@ -164,9 +166,16 @@ var sa = {
 		}
 		// 开始loding 
 		sa.loading(cfg.msg);
+		
+		// 打印请求地址和参数, 以便调试 
+		console.log("======= 模拟ajax =======");
+		console.log("请求地址：" + cfg.baseUrl + url);
+		console.log("请求参数：" + JSON.stringify(data));
+		
 		// 模拟ajax的延时 
 		setTimeout(function() {
 			sa.hideLoading();	// 隐藏掉转圈圈 
+			console.log('返回数据：', cfg.res);
 			success200(cfg.res);
 		}, cfg.sleep)
 	};
