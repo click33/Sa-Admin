@@ -465,6 +465,7 @@ var sa = {
 			var second = date.getSeconds();
 			minute = minute < 10 ? ('0' + minute) : minute;  
 			second = second < 10 ? ('0' + second) : second; 
+			var ms = date.getMilliseconds();
 			
 			way = way || 1;
 			// way == 1  年月日
@@ -477,7 +478,7 @@ var sa = {
 			}
 			// way == 具体格式   标准格式: yyyy-MM-dd HH:mm:ss
 			if(typeof way == 'string') {
-				return way.replace("yyyy", y).replace("MM", m).replace("dd", d).replace("HH", h).replace("mm", minute).replace("ss", second);
+				return way.replace("yyyy", y).replace("MM", m).replace("dd", d).replace("HH", h).replace("mm", minute).replace("ss", second).replace("ms", ms);
 			}
 			return y + '-' + m + '-' + d;  
 		};

@@ -545,13 +545,15 @@ var sa_admin = new Vue({
 			if(tab.is_blank) {
 				return open(tab.url); 
 			}
-			// 如果是click函数 
-			if(tab.click) {
-				return tab.click();
-			}
 			// 如果是当前正在显示的tab , 则直接 返回  
 			if(tab == this.nativeTab) {
 				return;
+			}
+			// 如果是click函数 
+			if(tab.click) {
+				if(tab.click() !== true) {
+					return;
+				}
 			}
 			// 如果没有先添加
 			if(this.getTabById(tab.id) == null){
