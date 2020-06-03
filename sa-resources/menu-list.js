@@ -105,11 +105,13 @@ var menuList =	[
 	//  ========= 示例 外部链接 点击从新窗口打开 ================
 	{
 		id: '8',
-		name: '外部链接',
+		name: '友情链接',
 		icon: 'el-icon-link',
 		info: '示例：外部链接',
 		childList: [
+			{id: '8-21', name: '极品蓝图', url: 'http://un.jipinlantu.com/', is_blank: true},
 			{id: '8-11', name: '河浪前端笔记', url: 'https://mydarling.gitee.io/resource/', is_blank: true},
+			
 			// {id: '8-1', name: '百度一下', url: 'https://www.baidu.com/', is_blank: true},
 			{id: '8-3', name: 'sa-token', url: 'http://sa-token.dev33.cn/', is_blank: true},
 			{id: '8-12', name: 'sa-doc', url: 'http://sa-doc.dev33.cn/', is_blank: true},
