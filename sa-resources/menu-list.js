@@ -25,7 +25,7 @@ var menuList =	[
 			{id: '1-1', name: '集成步骤', url: 'sa-html/sa-doc/sa-doc.html?way=start-up'},
 			{id: '1-2', name: '鉴权操作', url: 'sa-html/sa-doc/sa-doc.html?way=check-per'},
 			{id: '1-11', name: '在线论坛', url: 'http://applist.dev33.cn/applist-admin/html/ser-comment/w-list.html?sid=kcafzieb2tcw'},
-			
+			{id: '1-12', name: '在线需求墙', url: 'http://sa-app.dev33.cn/wall.html?name=sa-admin'},
 		]
 	},
 	{
@@ -136,161 +136,23 @@ var menuList =	[
 		icon: 'el-icon-link',
 		info: '示例：外部链接',
 		childList: [
-			{
-				id: '111-1', 
-				name: '图片切换', 
-				url: 'http://www.jq22.com/demo/jQueryTpqh201804012309/', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info18534');
-					return true;
-				}
-			},
-			{
-				id: '111-2', 
-				name: '3D旋转特效', 
-				url: 'http://www.jq22.com/demo/jQueryCss3D201710241004/', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info16495');
-					return true;
-				}
-			},
-			{
-				id: '111-3', 
-				name: 'canvas炫酷星空', 
-				url: 'http://www.jq22.com/demo/warpDrive201712211120/index.html', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info17456');
-					return true;
-				}
-			},
-			{
-				id: '111-4', 
-				name: 'H5碰撞小球', 
-				url: 'http://www.jq22.com/demo/html5Pzxq201712242209/', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info17482');
-					return true;
-				}
-			},
-			{
-				id: '111-5', 
-				name: '网页画板', 
-				url: 'http://www.jq22.com/demo/Mapping201802252341/', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info18172');
-					return true;
-				}
-			},
-			{
-				id: '111-6', 
-				name: '简约富文本编辑器', 
-				url: 'http://www.jq22.com/demo/jquery-notebook-master/', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info345');
-					return true;
-				}
-			},
-			{
-				id: '111-7', 
-				name: '水滴特效', 
-				url: 'http://www.jq22.com/demo/jquery-shuidi20151123/', 
-				click: function() {
-					console.log('源作者：', 'https://www.jq22.com/jquery-info4835');
-					return true;
-				}
-			},
-			{
-				id: '111-8', 
-				name: '图片放大', 
-				url: 'http://www.jq22.com/demo/jQueryJpg201708110048/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info15264');
-					return true;
-				}
-			},
-			{
-				id: '111-9', 
-				name: '3D云', 
-				url: 'http://www.jq22.com/demo/jquery-cloud-141217202931/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info1325');
-					return true;
-				}
-			},
-			{
-				id: '111-10', 
-				name: '3D选择图片', 
-				url: 'http://www.jq22.com/demo/jquery-3d20150831/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info4000');
-					return true;
-				}
-			},
-			{
-				id: '111-11', 
-				name: '蜘蛛纸牌', 
-				url: 'http://www.jq22.com/demo/jqueryspider201809140137/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info20047');
-					return true;
-				}
-			},
-			{
-				id: '111-12', 
-				name: '大转盘', 
-				url: 'http://www.jq22.com/demo/jquerylocal201912122316/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info22646');
-					return true;
-				}
-			},
-			{
-				id: '111-13', 
-				name: '旋转地球', 
-				url: 'http://www.jq22.com/demo/earth201810300101/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info20328');
-					return true;
-				}
-			},
-			{
-				id: '111-14', 
-				name: '下雨动画', 
-				url: 'http://www.jq22.com/demo/html5-canvas-rain201710252014/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info16518');
-					return true;
-				}
-			},
-			{
-				id: '111-15', 
-				name: '绚丽星空', 
-				url: 'http://www.jq22.com/demo/jQuery3dxk201710142249/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info16294');
-					return true;
-				}
-			},
-			{
-				id: '111-16', 
-				name: '3d波浪墙', 
-				url: 'http://www.jq22.com/demo/voxels-liquid201704112355/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info13400');
-					return true;
-				}
-			},
-			{
-				id: '111-17', 
-				name: '元素周期表', 
-				url: 'http://www.jq22.com/demo/jquery-3D20151113/', 
-				click: function() {
-					console.log('源作者：', 'http://www.jq22.com/jquery-info4710');
-					return true;
-				}
-			},
-			
-			
+			{id: '111-1', name: '图片切换', url: 'http://www.jq22.com/demo/jQueryTpqh201804012309/'},	// 原作者：https://www.jq22.com/jquery-info18534
+			{id: '111-2', name: '3D旋转特效', url: 'http://www.jq22.com/demo/jQueryCss3D201710241004/'},	// 原作者：https://www.jq22.com/jquery-info16495
+			{id: '111-3', name: 'canvas炫酷星空', url: 'http://www.jq22.com/demo/warpDrive201712211120/index.html'},	// 原作者：https://www.jq22.com/jquery-info17456
+			{id: '111-4', name: 'H5碰撞小球', url: 'http://www.jq22.com/demo/html5Pzxq201712242209/'},	// 原作者：https://www.jq22.com/jquery-info17482
+			{id: '111-5', name: '网页画板', url: 'http://www.jq22.com/demo/Mapping201802252341/'},	// 原作者：https://www.jq22.com/jquery-info18172
+			{id: '111-6', name: '简约富文本编辑器', url: 'http://www.jq22.com/demo/jquery-notebook-master/'},	// 原作者：https://www.jq22.com/jquery-info345
+			{id: '111-7', name: '水滴特效', url: 'http://www.jq22.com/demo/jquery-shuidi20151123/'},	// 原作者：https://www.jq22.com/jquery-info4835
+			{id: '111-8', name: '图片放大', url: 'http://www.jq22.com/demo/jQueryJpg201708110048/'},	// 原作者：http://www.jq22.com/jquery-info15264
+			{id: '111-9', name: '3D云', url: 'http://www.jq22.com/demo/jquery-cloud-141217202931/'},	// 原作者：http://www.jq22.com/jquery-info1325
+			{id: '111-10', name: '3D选择图片', url: 'http://www.jq22.com/demo/jquery-3d20150831/'},	// 原作者：http://www.jq22.com/jquery-info4000
+			{id: '111-11', name: '蜘蛛纸牌', url: 'http://www.jq22.com/demo/jqueryspider201809140137/'},	// 原作者：http://www.jq22.com/jquery-info20047
+			{id: '111-12', name: '大转盘', url: 'http://www.jq22.com/demo/jquerylocal201912122316/'},	// 原作者：http://www.jq22.com/jquery-info22646
+			{id: '111-13', name: '旋转地球', url: 'http://www.jq22.com/demo/earth201810300101/'},	// 原作者：http://www.jq22.com/jquery-info20328
+			{id: '111-14', name: '下雨动画', url: 'http://www.jq22.com/demo/html5-canvas-rain201710252014/'},	// 原作者：http://www.jq22.com/jquery-info16518
+			{id: '111-15', name: '绚丽星空', url: 'http://www.jq22.com/demo/jQuery3dxk201710142249/'},	// 原作者：http://www.jq22.com/jquery-info16294
+			{id: '111-16', name: '3d波浪墙', url: 'http://www.jq22.com/demo/voxels-liquid201704112355/'},	// 原作者：http://www.jq22.com/jquery-info13400
+			{id: '111-17', name: '元素周期表', url: 'http://www.jq22.com/demo/jquery-3D20151113/'},	// 原作者：http://www.jq22.com/jquery-info4710
 			
 		]
 	},

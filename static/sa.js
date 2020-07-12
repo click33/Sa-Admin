@@ -862,6 +862,25 @@ var sa = {
 		// == if 结束
 	}
 	
+	
+	// ===========================  对sa-admin的优化   ======================================= 
+	if (true) {
+		
+		// 刷新表格高度
+		me.f5TableHeight = function() {
+			Vue.nextTick(function() {
+				var height = $('.el-table .el-table__body-wrapper table').height();
+				height = height == 0 ? 60 : height;
+				$('.el-table .el-table__body-wrapper').css('min-height', height);
+				$('.el-table .el-table__body-wrapper').css('max-height', height);
+			})
+		}
+		// == if 结束
+	}
+	
+	
+	
+	
 })();
 
 

@@ -11,6 +11,9 @@
 - 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
 - 示例全面：提供大量常见增删改查示例，提高你的生产力
 
+## 需求提交
+- 一个优秀的项目需要海纳百川，[点我在线提交需求](http://sa-app.dev33.cn/wall.html?name=sa-admin)
+
 ## 框架选型
 - JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
 - UI框架：[Element-UI @2.13.0](https://element.eleme.cn/#/zh-CN)

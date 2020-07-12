@@ -12,6 +12,10 @@
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
+		<style type="text/css">
+			.el-table .el-table__body-wrapper{min-height: 0px; max-height: 0px;}
+			.el-table .el-table__body-wrapper{transition: all 0.3s;}
+		</style>
 	</head>
 	<body>
 		<!-- 防止margin向下击穿 -->
@@ -97,6 +101,7 @@
 						sa.ajax2('/VocArticle/getList', this.p, function(res){
 							this.dataList = res.data;	// 数据
 							this.dataCount = res.dataCount;		// 分页 
+							sa.f5TableHeight();		// 刷新表格高度 
 						}.bind(this), {res: mockData});
 					},
 					// 修改
@@ -109,6 +114,7 @@
 							sa.ajax2('/acticle/delete?id=' + data.id, function(res) {
 								sa.arrayDelete(this.dataList, data);
 								sa.ok('删除成功');
+								sa.f5TableHeight();		// 刷新表格高度 
 							}.bind(this))
 						}.bind(this));
 					}
