@@ -12,7 +12,7 @@
 - 示例全面：提供大量常见增删改查示例，提高你的生产力
 
 ## 需求提交
-- 一个优秀的项目需要海纳百川，[点我在线提交需求](http://sa-app.dev33.cn/wall.html?name=sa-admin)
+- 我们深知一个优秀的项目需要海纳百川，[点我在线提交需求](http://sa-app.dev33.cn/wall.html?name=sa-admin)
 
 ## 框架选型
 - JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
