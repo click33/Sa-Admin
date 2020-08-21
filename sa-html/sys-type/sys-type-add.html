@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>商品分类表-添加/修改</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css"> 
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
+		<script src="../../static/sa.js"></script>
+		<style type="text/css">
+			.c-panel .el-form .c-label{width: 6em !important;}
+			.c-panel .el-form .el-input{width: 250px;}
+		</style>
+	</head>
+	<body>
+		<div class="vue-box" :class="{sbot: id}" style="display: none;" :style="'display: block;'">
+			<!-- ------- 内容部分 ------- -->
+			<div class="s-body">
+				<div class="c-panel">
+					<div class="c-title">数据添加</div>
+					<el-form size="mini" v-if="m">
+						<!-- no字段： m.id - id -->
+						<div class="c-item br">
+							<label class="c-label">分类名字：</label>
+							<el-input size="mini" v-model="m.name"></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">分类图标：</label>
+							<el-input size="mini" v-model="m.icon"></el-input>
+						</div>
+						<!-- <div class="c-item br">
+							<label class="c-label" style="vertical-align: top;">分类图标：</label>
+							<img :src="m.icon" style="width: 3em; height: 3em; cursor: pointer;" 
+								@click="sa.showImage(m.icon, '400px', '400px')" v-if="!sa.isNull(m.icon)">
+							<el-link type="primary" @click="sa.uploadImage(src => {m.icon = src; sa.ok2('上传成功');})">上传</el-link>
+						</div> -->
+						<div class="c-item br">
+							<label class="c-label">排序索引：</label>
+							<el-input size="mini" v-model="m.sort" type="number"></el-input>
+						</div>
+						<div class="c-item br s-ok">
+							<label class="c-label"></label>
+							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+						</div>
+					</el-form>
+				</div>
+			</div>
+			<!-- ------- 底部按钮 ------- -->
+			<div class="s-foot">
+				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
+				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+			</div>
+		</div>
+		<script src="./moke-data.js"></script>
+        <script>
+			
+			var app = new Vue({
+				el: '.vue-box',
+				data: {
+					id: sa.p('id', 0),		// 获取超链接中的id参数（0=添加，非0=修改） 
+					m: null,		// 实体对象 
+				},
+				methods: {
+					// 创建一个 默认Model 
+					createModel: function() {
+						return {
+							// id: '',		// id  
+							name: '',		// 分类名字  
+							icon: '',		// 分类图标  
+							sort: '',		// 排序值  
+							// create_time: '',		// 创建日期  
+						}
+					},
+					// 表单验证
+					submitCheck: function() {
+						try{
+							var m = this.m;		// 获取 m对象 
+							// sa.checkNull(m.id, '请输入id');
+							sa.checkNull(m.name, '请输入分类名字');
+							sa.checkNull(m.icon, '请输入分类图标');
+							sa.checkNull(m.sort, '请输入排序值');
+							return 'ok';	// 全部通过验证，返回ok 表示正确 
+						} catch(e) {
+							sa.error(e);
+						}
+					},
+					// 提交数据 
+					ok: function(){
+						// 验证 
+						if(this.submitCheck() != 'ok') {
+							return;
+						}
+						// 开始增加或修改
+						this.m.create_time = undefined;		// 不提交属性：创建日期
+						if(this.id <= 0) {	// 添加
+							sa.ajax2('/SysType/add', this.m, function(res){
+								sa.alert('增加成功', this.clean); 
+							}.bind(this));
+						} else {	// 修改
+							sa.ajax2('/SysType/update', this.m, function(res){
+								sa.alert('修改成功', this.clean);
+							}.bind(this));
+						}
+					},
+					// 添加/修改 完成后的动作
+					clean: function() {
+						if(this.id == 0) {
+							this.m = this.createModel();
+						} else {
+							parent.app.f5();		// 刷新父页面列表
+							sa.closeCurrIframe();	// 关闭本页 
+						}
+					}
+				},
+				mounted: function(){
+					// 初始化数据 
+					if(this.id <= 0) {	
+						this.m = this.createModel();
+					} else {	
+						sa.ajax2('/SysType/getById?id=' + this.id, function(res) {
+							this.m = res.data;
+						}.bind(this), {res: getById(this.id)})
+					}
+				}
+			})
+			
+			// 获取对应的data 
+			function getById(id) {
+				var res = {
+					code: 200,
+					msg: 'ok',
+					data: null
+				};
+				getMockData().data.forEach(function(item) {
+					if(item.id == id) {
+						res.data = item;
+					}
+				})
+				return res;
+			}
+		</script>
+	</body>
+</html>

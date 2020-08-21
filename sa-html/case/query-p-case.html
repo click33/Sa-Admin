@@ -14,11 +14,9 @@
 		<script src="../../static/sa.js"></script>
 	</head>
 	<body>
-		<!-- 防止margin向下击穿 -->
-		<div style="margin-top: -1em;"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
-				<!--------------- 参数栏 --------------->
+				<!-- ------------- 参数栏 ------------- -->
 				<div class="c-title">检索参数</div>
 				<el-form>
 					<div class="c-item">
@@ -26,7 +24,7 @@
 						<el-input size="mini" v-model="p.name" ></el-input>
 					</div>
 					<div class="c-item">
-						<label class="c-label">普通参数：</label>
+						<label class="c-label">数值参数：</label>
 						<el-input size="mini" v-model="p.count" type="number"></el-input>
 					</div>
 					<div class="c-item">
@@ -91,8 +89,7 @@
 						<el-checkbox v-model="p.checkbox_6">高复买</el-checkbox>
 					</div>
 				</el-form>
-				<!--------------- 数据列表 --------------->
-				<div class="c-title">数据列表</div>
+				<!-- ------------- 数据列表 ------------- -->
 				<el-table :data="dataList" size="mini">
 					<el-table-column label="编号" prop="id"></el-table-column>
 					<el-table-column label="名称" prop="name"></el-table-column>
@@ -105,6 +102,18 @@
 						</template>
 					</el-table-column>
 				</el-table>
+				<!-- ------------- 分页 ------------- -->
+				<div class="page-box">
+					<el-pagination background
+						layout="total, prev, pager, next, sizes, jumper" 
+						:current-page.sync="p.pageNo" 
+						:page-size.sync="p.pageSize" 
+						:total="dataList.length" 
+						:page-sizes="[1000]" 
+						@current-change="f5()" 
+						@size-change="f5()">
+					</el-pagination>
+				</div>
 			</div>
 		</div>
         <script>
@@ -127,6 +136,8 @@
 						checkbox_4: false,
 						checkbox_5: false,
 						checkbox_6: false,
+						pageNo: 1,
+						pageSize: 1000,
 					},
 					typeList: [		// 类型数组  
 						{id: 1, name: '类型1'},

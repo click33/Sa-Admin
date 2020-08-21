@@ -89,6 +89,7 @@
 /* 非标准附加样式 */
 .theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC; width: 199px; border-right: 1px #DDD solid;}
 .theme-3 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
+.theme-3.fold .nav-left-top{width: 63px;}
 .theme-3.fold .nav-left-bottom{width: 63px;}
 /* .theme-3 .nav-right-1,.theme-3 .nav-right-2{border-left: 1px #eee solid;} */
 
@@ -118,8 +119,8 @@
 .theme-4 {}
 
 /* 非标准附加样式 */
-.theme-4 .nav-left-top{height: 49px; line-height: 49px; text-indent: 2em; background-color: #222; color: #EEE;}
-.theme-4 .nav-left-top .admin-logo{display: none;}
+.theme-4 .nav-left-top{height: 49px; line-height: 49px; text-indent: 0.3em; background-color: #222; color: #FFF;}
+.theme-4 .nav-left-top .admin-logo{/* display: none; */ width: 28px; height: 28px; position: relative; top: -2px;}
 
 .theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
 .theme-4.fold .nav-left-bottom{width: 63px;}
@@ -169,7 +170,7 @@
 
 
 
-/* ========================== 主题-5 灰色站看 (仿微信公众平台)0分 ==========================  */
+/* ========================== 主题-5 灰色展开 (仿微信公众平台)0分 ==========================  */
 
 .theme-5 {}
 

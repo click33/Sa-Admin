@@ -113,9 +113,27 @@ var sa_admin_code_util = {
 			}
 		}
 		return null;
-	}
+	},
 	
 	
+	
+	// 将 Tree 菜单 转换为 一维平面数组 
+	treeToArray: function(menu_list) {
+		var arr = [];
+		function fn(menu_list) {
+			menu_list = menu_list || [];
+			for (var i = 0; i < menu_list.length; i++) {
+				var menu = menu_list[i];
+				arr.push(menu);
+				// 如果有子菜单 
+				if(menu.childList) {
+					fn(menu.childList);
+				}
+			}
+		}
+		fn(menu_list);
+		return arr;
+	},
 	
 	
 }

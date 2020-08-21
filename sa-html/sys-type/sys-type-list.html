@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <title>各种查询参数示例</title>
-	    <meta charset="utf-8">
+		<title>商品分类-列表</title>
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
-		<link rel="stylesheet" href="../../static/sa.css"> 
+		<link rel="stylesheet" href="../../static/sa.css">
 		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
-		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
-        <style>
-			.td-img{width: 180px; height: 90px; cursor: pointer; vertical-align: middle;}
-			.c-panel-add .td-img{width: 200px;}
-			.c-panel-add .el-form .el-input{width: 200px;}
-        </style>
 	</head>
 	<body>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
 				<!-- ------------- 检索参数 ------------- -->
 				<div class="c-title">检索参数</div>
-				<el-form size="mini" @submit.native.prevent >
+				<el-form ref="form" :model='p' @submit.native.prevent>
+					<!-- <div class="c-item">
+						<label class="c-label">记录id：</label>
+						<el-input size="mini" v-model="p.id"></el-input>
+					</div> -->
 					<div class="c-item">
-						<label class="c-label">标题搜索：</label>
-						<el-input size="mini" v-model="p.title"></el-input>
+						<label class="c-label">分类名字：</label>
+						<el-input size="mini" v-model="p.name"></el-input>
 					</div>
 					<div class="c-item" style="min-width: 0px;">
 						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
@@ -45,28 +44,22 @@
 				<!-- ------------- 数据列表 ------------- -->
 				<el-table class="data-table" ref="data-table" :data="dataList" size="small">
 					<el-table-column type="selection" width="45px"></el-table-column>
-					<el-table-column prop="id" label="编号" width="70px" > </el-table-column>
-					<el-table-column label="图片" width="400px">
+					<el-table-column label="id" prop="id" ></el-table-column>
+					<el-table-column label="分类名字" prop="name" ></el-table-column>
+					<el-table-column label="分类图标">
 						<template slot-scope="s">
-							<img :src="s.row.img_src" class="td-img" title="点击预览" @click="sa.showImage(s.row.img_src)">
-							<span style="color: #666; padding-left: 0.5em;"> 点击预览</span>
+							<img :src="s.row.icon" @click="sa.showImage(s.row.icon, '400px', '400px')" v-if="s.row.icon" 
+								style="width: 3em; height: 3em; border-radius: 3px; cursor: pointer;" />
+							<div v-else>无</div>
 						</template>
 					</el-table-column>
-					<el-table-column label="标题" prop="title"></el-table-column>
-					<el-table-column label="排序" prop="sort"></el-table-column>
-					<el-table-column label="点击量" prop="click_count"> </el-table-column>
-					<el-table-column label="状态" >
-						<template slot-scope="s">
-							<el-switch v-model="s.row.status" :active-value="1" :inactive-value="2"></el-switch>
-							<span style="color: #999;" v-if="s.row.status==1">显示</span>
-							<span style="color: #999;" v-else>隐藏</span>
-						</template>
+					<el-table-column label="排序值" prop="sort" ></el-table-column>
+					<el-table-column label="创建日期">
+						<template slot-scope="s"><span>{{sa.forDate(s.row.create_time, 2)}}</span></template>
 					</el-table-column>
-					<el-table-column label="创建时间">
-						<template slot-scope="s">{{sa.forDate(s.row.create_time, 2)}}</template>
-					</el-table-column>
-					<el-table-column label="操作" width="180px">
+					<el-table-column label="操作" width="240px">
 						<template slot-scope="s">
+							<el-button class="c-btn" type="success" icon="el-icon-view" @click="get(s.row)">查看</el-button>
 							<el-button class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改</el-button>
 							<el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
 						</template>
@@ -79,55 +72,61 @@
 						:current-page.sync="p.pageNo" 
 						:page-size.sync="p.pageSize" 
 						:total="dataCount" 
-						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
+						:page-sizes="[1, 10, 20, 30, 40, 50, 100, 1000]" 
 						@current-change="f5()" 
 						@size-change="f5()">
 					</el-pagination>
 				</div>
-			</div>		
+			</div>
 		</div>
-		<!-- 模拟数据 -->
-		<script src="mock-data-list.js"></script>
-        <script>
+		<script src="./moke-data.js"></script>
+		<script>
 			var app = new Vue({
 				el: '.vue-box',
 				data: {
-					sa: sa, 	// 超级对象
-					p: {		// 查询参数
-						pageNo: 1,
-						pageSize: 10,
-						title: '',
-						sort_type: 0
+					p: { // 查询参数  
+						id: '',		// id  
+						name: '',		// 分类名字  
+						icon: '',		// 分类图标  
+						sort: '',		// 排序值  
+						create_time: '',		// 创建日期  
+						pageNo: 1,		// 当前页 
+						pageSize: 10,	// 页大小 
+						sort_type: 0	// 排序方式 
 					},
 					dataCount: 0,
-					dataList: [],	// 数据集合
+					dataList: [], // 数据集合 
 				},
 				methods: {
 					// 刷新
-					f5: function(){
-						sa.ajax2('/SysSwiper/getList', this.p, function(res){
-							this.dataList = res.data;	// 数据
-							this.dataCount = res.dataCount;			// 分页 
+					f5: function() {
+						sa.ajax2('/SysType/getList', sa.removeNull(this.p), function(res) {
+							this.dataList = res.data; // 数据
+							this.dataCount = res.dataCount; // 数据总数 
 							sa.f5TableHeight();		// 刷新表格高度 
-						}.bind(this), {res: mockDataList});
+						}.bind(this), {res: getMockData(this.p.name)});
 					},
-					// 保存
-					add: function(){
-						sa.showIframe('新增数据', 'swiper-add.html?id=-1', '580px', '450px');
+					// 查看
+					get: function(data) {
+						sa.showIframe('数据详情', 'sys-type-info.html?id=' + data.id, '600px', '500px');
 					},
 					// 修改
-					update: function(data){
-						sa.showIframe('修改数据', 'swiper-add.html?id=' + data.id, '580px', '450px');
+					update: function(data) {
+						sa.showIframe('修改数据', 'sys-type-add.html?id=' + data.id, '420px', '280px');
+					},
+					// 新增
+					add: function(data) {
+						sa.showIframe('新增数据', 'sys-type-add.html?id=-1', '420px', '280px');
 					},
 					// 删除
-					del: function(data){
-						sa.confirm('是否删除，此操作不可撤销', function(){
-							sa.ajax2('/SysSwiper/delete?id=' + data.id, function(res){
-								sa.ok('删除成功');
+					del: function(data) {
+						sa.confirm('是否删除？此操作不可撤销', function() {
+							sa.ajax2('/SysType/delete?id=' + data.id, function(res) {
 								sa.arrayDelete(this.dataList, data);
+								sa.ok('删除成功');
 								sa.f5TableHeight();		// 刷新表格高度 
 							}.bind(this))
-						}.bind(this))
+						}.bind(this));
 					},
 					// 批量删除
 					deleteByIds: function() {
@@ -144,10 +143,11 @@
 						}.bind(this));
 					},
 				},
-				created: function(){
+				created: function() {
 					this.f5();
+					sa.onInputEnter();
 				}
 			})
-			
 		</script>
+	</body>
 </html>

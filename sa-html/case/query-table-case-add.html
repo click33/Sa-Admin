@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>表格显示示例-修改</title>
+		<title>表格显示示例-修改2</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<!-- 所有的 css & js 资源 -->
@@ -13,114 +13,113 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
-			/* 使其整个背景变白 */
-			body{background-color: #FFF;}
-			.c-panel{box-shadow: 0 0 0;}
-			/* 调整一下表单元素尺寸 */
-			/* .c-panel .el-form-item__label{width: 120px;}
-			.c-panel .el-form .el-input{width: 250px;} */
+			/* 流体input */
+			.c-panel .el-form .el-input{width: calc(100% - 120px);}
 		</style>
 	</head>
 	<body>
-		<!-- 防止margin向下击穿 -->
-		<div style="margin-top: -1em;" title="防止margin向下击穿"><br></div>
-		<div class="vue-box" style="display: none;" :style="'display: block;'">
-			<div class="c-panel">
-				<!-- 参数栏 -->
-				<div class="c-title" v-if="id == 0">数据添加</div>
-				<div class="c-title" v-else>数据修改</div>
-				<el-form v-if="m">
-					<div class="c-item br">
-						<label class="c-label">编号：</label>
-						<el-input size="mini" v-model="m.id" disabled></el-input>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">名称：</label>
-						<el-input size="mini" v-model="m.name"></el-input>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">图标：</label>
-						<el-input size="mini" v-model="m.icon"></el-input>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">状态：</label>
-						<el-radio-group size="mini" v-model="m.status">
-							<el-radio :label="1">正常</el-radio>
-							<el-radio :label="2">禁用</el-radio>
-						</el-radio-group>
-					</div>
-					<div class="c-item br">
-						<label class="c-label"></label>
-						<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
-					</div>
-				</el-form>
+		<div class="vue-box" :class="{sbot: id}" style="display: none;" :style="'display: block;'">
+			<!-- ------- 内容部分 ------- -->
+			<div class="s-body">
+				<div class="c-panel">
+					<el-form v-if="m">
+						<div class="c-item br">
+							<label class="c-label">编号：</label>
+							<el-input size="mini" v-model="m.id" disabled></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">名称：</label>
+							<el-input size="mini" v-model="m.name"></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">图标：</label>
+							<el-input size="mini" v-model="m.icon"></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">状态：</label>
+							<el-radio-group size="mini" v-model="m.status">
+								<el-radio :label="1">正常</el-radio>
+								<el-radio :label="2">禁用</el-radio>
+							</el-radio-group>
+						</div>
+						<div class="c-item br s-ok">
+							<label class="c-label"></label>
+							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+						</div>
+					</el-form>
+				</div>
+			</div>
+			<!-- ------- 底部按钮 ------- -->
+			<div class="s-foot">
+				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
+				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
-		<script type="text/javascript">
-			// 创建一个空的 model
-			function create_m() {
-				return {
-					id: 0, 
-					name: '', 
-					icon: '',
-					avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
-					money: 99.99,
-					status: 1,
-					create_time: new Date()
-				}
-			}
-		</script>
 		<script src="mock-data-list.js"></script>
 		<script type="text/javascript">
-			new Vue({
+			var app = new Vue({
 				el: '.vue-box',
 				data: {
 					id: sa.p('id', 0),	// 获取传递的参数 
 					m: null
 				},
 				methods: {
+					// 创建一个 默认Model 
+					createModel: function() {
+						return {
+							id: 0, 
+							name: '', 
+							icon: '',
+							avatar: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/19/15794196587511189314194.png', 
+							money: 99.99,
+							status: 1,
+							create_time: new Date()
+						}
+					},
 					// 表单验证  
-					submit_check: function() {
-						var m = this.m;
-						if(sa.isNull(m.name)) {
-							return sa.error('请输入名称');
+					submitCheck: function() {
+						try{
+							var m = this.m;		// 获取 m对象 
+							sa.checkNull(m.name, '请输入名称');
+							sa.checkNull(m.icon, '请输入图标');
+							return 'ok';	// 全部通过验证，返回ok 表示正确 
+						} catch(e) {
+							sa.error(e);
 						}
-						if(sa.isNull(m.icon)) {
-							return sa.error('请输入图标');
-						}
-						return 'ok';
 					},
 					// 提交 
 					ok: function() {
 						// 表单验证 
-						if(this.submit_check() != 'ok') {
+						if(this.submitCheck() != 'ok') {
 							return;
 						}
 						// 开始增加或修改
-						if(this.id == 0) {
+						if(this.id <= 0) {
 							// id == 0 为增加        
 							sa.ajax2('/data/add', this.m, function(res) {
-								sa.alert('增加成功', function() {
-									// this.m = create_m();
-									parent.app.f5();		// 刷新父页面列表 
-									sa.closeCurrIframe();	// 关闭本页 
-								}); 
-							});
+								sa.alert('增加成功', app.clean);
+							}.bind(this));
 						} else {
 							// id != 0 为修改  
 							sa.ajax2('/data/update', this.m, function(res){
-								sa.alert('修改成功', function(){
-									parent.app.f5();		// 刷新父页面列表 
-									sa.closeCurrIframe();	// 关闭本页 
-								}); 
-							});
+								sa.alert('修改成功', app.clean);
+							}.bind(this));
 						}
 					},
+					// 添加/修改 完成后的动作
+					clean: function() {
+						if(this.id == 0) {
+							this.m = this.createModel();	// 初始化model 
+						} else {
+							parent.app.f5();		// 刷新父页面列表
+							sa.closeCurrIframe();	// 关闭本页 
+						}
+					}
 				},
 				created: function(){
 					// 如果是添加
-					if(this.id == 0){
-						this.m = create_m();
+					if(this.id <= 0){
+						this.m = this.createModel();
 					} else {
 						// id 非 0 代表 是要修改 先查询一下，把旧值显示在input中  
 						sa.ajax2('/data/getById', {id: this.id}, function(res) {

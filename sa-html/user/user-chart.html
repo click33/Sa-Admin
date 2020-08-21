@@ -13,15 +13,13 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
-			.echarts-div {height: 70vh;}
+			.echarts-div {height:70vh;}
 		</style>
 	</head>
 	<body>
-		<!-- 防止margin向下击穿 -->
-		<div style="margin-top: -1em;"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 参数栏 -->
-			<div style="padding: 2em;">
+			<div style="padding: 1em;">
 				<div class="c-title">检索参数</div>
 				<el-form>
 					<div class="c-item">
@@ -53,11 +51,11 @@
 				</div>
 			</div>
 			<div style="clear: both;"></div>
-			<div style="padding: 2em;">
+			<!-- <div style="padding: 2em;">
 				ECharts：<el-link type="primary" href="https://echarts.baidu.com/" target="_blank">
 					一个使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器
 				</el-link>
-			</div>
+			</div> -->
 		</div>
 		<script src="https://unpkg.com/echarts@4.6.0/dist/echarts-en.min.js"></script>
 		<script type="text/javascript">

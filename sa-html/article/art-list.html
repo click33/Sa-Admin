@@ -13,16 +13,14 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
-			.el-table .el-table__body-wrapper{min-height: 0px; max-height: 0px;}
-			.el-table .el-table__body-wrapper{transition: all 0.3s;}
+			/* .data-table .el-table__body-wrapper{min-height: 0px; max-height: 0px;}
+			.data-table .el-table__body-wrapper{transition: all 0.3s;} */
 		</style>
 	</head>
 	<body>
-		<!-- 防止margin向下击穿 -->
-		<div style="margin-top: -1em;"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
-				<!-- 参数栏 -->
+				<!-- ------------- 检索参数 ------------- -->
 				<div class="c-title">检索参数</div>
 				<el-form>
 					<div class="c-item">
@@ -47,9 +45,19 @@
 						</el-radio-group>
 					</div>
 				</el-form>
-				<!-- 数据列表 -->
-				<!-- <h4 class="c-title">列表</h4> -->
-				<el-table class="data-table" :data="dataList" size="mini">
+				<!-- ------------- 快捷按钮 ------------- -->
+				<div class="fast-btn">
+					<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
+					<!-- <el-button size="mini" type="success" icon="el-icon-edit" @click="update($refs['data-table'].selection[0])"
+						:disabled="!$refs['data-table'] || $refs['data-table'].selection.length != 1">修改</el-button> -->
+					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()"
+						:disabled="!$refs['data-table'] || $refs['data-table'].selection.length < 1">删除</el-button>
+					<el-button size="mini" type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
+					<el-button size="mini" type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
+				</div>
+				<!-- ------------- 数据列表 ------------- -->
+				<el-table class="data-table" ref="data-table" :data="dataList" size="small">
+					<el-table-column type="selection" width="45px"></el-table-column>
 					<el-table-column label="编号" prop="id" width="70px"> </el-table-column>
 					<el-table-column label="文章标题" prop="title"></el-table-column>
 					<el-table-column label="文章内容" prop="content" width="400px"></el-table-column>
@@ -58,14 +66,14 @@
 					<el-table-column label="点击量" prop="see_count"></el-table-column>
 					<el-table-column label="喜欢" prop="like_count"></el-table-column>
 					<el-table-column label="分享" prop="share_count"></el-table-column>
-					<el-table-column prop="address" label="操作" width="150px">
+					<el-table-column prop="address" label="操作" width="180px">
 						<template slot-scope="s">
 							<el-button class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改</el-button>
 							<el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
-				<!-- 分页 -->
+				<!-- ------------- 分页 ------------- -->
 				<div class="page-box">
 					<el-pagination background
 						layout="total, prev, pager, next, sizes, jumper" 
@@ -106,18 +114,36 @@
 					},
 					// 修改
 					update: function(data) {
-						sa.showIframe('文章修改', 'art-add.html?id=' + data.id, '900px');
+						sa.showIframe('文章修改', 'art-add.html?id=' + data.id, '870px', '600px');
+					},
+					// 新增
+					add: function(data) {
+						sa.showIframe('文章添加', 'art-add.html?id=-1', '870px', '600px');
 					},
 					// 删除
 					del: function(data) {
 						sa.confirm('是否删除，此操作不可撤销', function() {
 							sa.ajax2('/acticle/delete?id=' + data.id, function(res) {
-								sa.arrayDelete(this.dataList, data);
+								sa.arrayDelete(app.dataList, data);
+								sa.ok('删除成功');
+								sa.f5TableHeight();		// 刷新表格高度 
+							})
+						});
+					},
+					// 批量删除
+					deleteByIds: function() {
+						// 获取选中元素的id列表
+						let selection = this.$refs['data-table'].selection;
+						let ids = sa.getArrayField(selection, 'id');
+						// 提交删除 
+						sa.confirm('是否批量删除选中数据？此操作不可撤销', function() {
+							sa.ajax2('/SysType/deleteByIds', {ids: ids.join(',')}, function(res) {
+								sa.arrayDelete(this.dataList, selection);
 								sa.ok('删除成功');
 								sa.f5TableHeight();		// 刷新表格高度 
 							}.bind(this))
 						}.bind(this));
-					}
+					},
 				},
 				created: function() {
 					this.f5();

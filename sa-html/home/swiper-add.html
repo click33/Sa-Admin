@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>文章-添加/修改</title>
+		<title>商品分类表-添加/修改</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<!-- 所有的 css js 资源 -->
@@ -12,17 +12,10 @@
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
-		<script src="../../static/kj/wangEditor.up.js"></script>
 		<style type="text/css">
-			/* wang富文本编辑器 */
-			.editor-item{width: 100%; height: auto;}
-			.editor-item .c-label{float: left;}
-			.editor-item .editor-box{float: left; width: 80%; margin-top: 0px; margin-left: 0px;} 
-            .editor-item #editor{min-height: 300px; background-color: #FFF;}
-            .editor-item .w-e-toolbar{padding-top: 5px !important;}
-			/* 尽量小点 */
-			.editor-item .editor-box{float: left; width: 700px;} 
-			.editor-item .editor-box img{max-width: 200px !important;}
+			.td-img{width: 400px; height: 200px; cursor: pointer; vertical-align: middle;}
+			.c-panel .el-form .c-label{width: 5em !important;}
+			.c-panel .el-form .el-input{width: 400px;}
 		</style>
 	</head>
 	<body>
@@ -31,28 +24,24 @@
 			<div class="s-body">
 				<div class="c-panel">
 					<div class="c-title">数据添加</div>
-					<el-form v-if="m">
+					<el-form size="mini" v-if="m">
 						<div class="c-item br">
-							<label class="c-label">文章标题：
-							</label><el-input size="mini" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
-						</div>
-						<div class="c-item br editor-item">
-							<label class="c-label">文章内容：</label>
-							<div class="editor-box">
-								<div id="editor"></div>
-							</div>
-							<div style="clear: both;"></div>
+							<label class="c-label">图片：</label>
+							<img :src="m.img_src" class="td-img" @click="sa.showImage(m.img_src, '70%', '80%')" >
+							<!-- <span class="c-remark"> 点击图片预览</span> -->
 						</div>
 						<div class="c-item br">
-							<label class="c-label">是否公开：</label>
-							<el-switch v-model="m.is_public" :active-value="1" :inactive-value="2"></el-switch>
-							<span class="c-remark">关闭后，别人将不能看到你的发表</span>
+							<label class="c-label">标题：</label>
+							<el-input size="mini" v-model="m.title"></el-input>
+						</div>
+						<div class="c-item br">
+							<label class="c-label">排序：</label>
+							<el-input size="mini" v-model="m.sort" type="number"></el-input>
 						</div>
 						<div class="c-item br s-ok">
 							<label class="c-label"></label>
 							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
 						</div>
-						<div style="margin-top: 10px;"></div>
 					</el-form>
 				</div>
 			</div>
@@ -61,32 +50,8 @@
 				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
 				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
-			<!-- 给wangEditor打一波广告 -->
-			<!-- <div class="c-panel" style="background-color: rgba(0,0,0,0);">
-				wangEditor：<el-link type="primary" href="http://www.wangeditor.com/" target="_blank">
-					基于javascript和css开发的 Web富文本编辑器， 轻量、简洁、易用、开源免费
-				</el-link>
-			</div> -->
 		</div>
-		<script src="./data-list.js"></script>
-		<script type="text/javascript">
-			// 创建编辑器
-			function create_editor(content) {
-				var E = window.wangEditor
-				window.editor = new E('#editor');
-
-				editor.customConfig.menus = [
-					'head', 'fontSize', 'fontName', 'italic', 'underline', 'strikeThrough', 'foreColor', 'backColor', 'link', 'list',
-					'justify', 'quote', 'emoticon', 'image', 'table', 'code', 'undo', 'redo' // 重复
-				]
-				editor.customConfig.debug = true; // debug模式
-				editor.customConfig.uploadFileName = 'file'; // 图片流name
-				editor.customConfig.withCredentials = true; // 跨域携带cookie
-				editor.customConfig.uploadImgShowBase64 = true   	// 使用 base64 保存图片
-				editor.create(); // 创建
-				editor.txt.html(content);	// 为编辑器赋值
-			}
-		</script>
+		<script src="./mock-data-list.js"></script>
         <script>
 			
 			var app = new Vue({
@@ -99,23 +64,23 @@
 					// 创建一个 默认Model 
 					createModel: function() {
 						return {
-							id: '101',
-							title: '江雪',
-							content: '<p>千山鸟飞绝，万径人踪灭。</p><p>孤舟蓑笠翁，独钓寒江雪。</p>',
-							is_public: 1,
-							see_count: 356,
-							like_count: 55,
-							share_count: 13,
-							create_username: '省长',
-							is_public: 1,
-							create_time: "2019-05-12"
+							id: 11, 
+							title: '标题',
+							type: 1, 
+							sort: 0,
+							status:1, 
+							img_src: 'http://color-test.oss-cn-qingdao.aliyuncs.com/dyc/img/2020/01/20/1579506071035455989950.jpeg',
+							create_time: new Date(),
+							click_count: 42,
+							is_update: false,
 						}
 					},
 					// 表单验证
 					submitCheck: function() {
 						try{
 							var m = this.m;		// 获取 m对象 
-							sa.checkNull(m.title, '请输入分类名字');
+							sa.checkNull(m.title, '请输入标题');
+							sa.checkNull(m.sort, '请输入排序值');
 							return 'ok';	// 全部通过验证，返回ok 表示正确 
 						} catch(e) {
 							sa.error(e);
@@ -130,21 +95,20 @@
 						// 开始增加或修改
 						// this.m.create_time = undefined;		// 不提交属性：创建日期
 						if(this.id <= 0) {	// 添加
-							sa.ajax2('/SysType/add', this.m, function(res){
-								sa.alert('增加成功', function(res) {
+							sa.ajax2('/SysSwiper/add', this.m, function(res){
+								sa.alert('增加成功', function() {
 									if(parent.app) {
 										var m2 = sa.copyJSON(this.m);
 										parent.app.dataList.push(m2);
 										parent.sa.f5TableHeight();		// 刷新表格高度 
 										sa.closeCurrIframe();	// 关闭本页 
 									} else {
-										this.m = this.createModel();
-										editor.txt.html("");	// 清除图文介绍  
+										app.m = this.createModel();
 									}
 								}.bind(this)); 
 							}.bind(this));
 						} else {	// 修改
-							sa.ajax2('/SysType/update', this.m, function(res){
+							sa.ajax2('/SysSwiper/update', this.m, function(res){
 								sa.alert('修改成功', this.clean);
 							}.bind(this));
 						}
@@ -153,7 +117,6 @@
 					clean: function() {
 						if(this.id == 0) {
 							this.m = this.createModel();
-							editor.txt.html("");	// 清除图文介绍  
 						} else {
 							parent.app.f5();		// 刷新父页面列表
 							sa.closeCurrIframe();	// 关闭本页 
@@ -164,15 +127,9 @@
 					// 初始化数据 
 					if(this.id <= 0) {	
 						this.m = this.createModel();
-						this.$nextTick(function() {
-							create_editor(this.m.content);
-						})
 					} else {	
-						sa.ajax2('/SysType/getById?id=' + this.id, function(res) {
+						sa.ajax2('/SysSwiper/getById?id=' + this.id, function(res) {
 							this.m = res.data;
-							this.$nextTick(function() {
-								create_editor(this.m.content);
-							})
 						}.bind(this), {res: getById(this.id)})
 					}
 				}
@@ -185,7 +142,7 @@
 					msg: 'ok',
 					data: null
 				};
-				mockData.data.forEach(function(item) {
+				mockDataList.data.forEach(function(item) {
 					if(item.id == id) {
 						res.data = item;
 					}

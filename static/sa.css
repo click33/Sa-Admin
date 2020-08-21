@@ -1,11 +1,11 @@
 /* 
-	更新于2020-3-20 新增底部按钮式风格 
+	更新于2020-8-22 全面优化
  */
 
 /** 公共css */
 *{margin: 0px;padding: 0px;}
 html{font-size: 10px; height: 100%;}
-body{font-size: 1.4rem; height: 100%; background-color: #eeeeee;  color: #333;} 
+body{font-size: 1.4rem; height: 100%;/* background-color: #eeeeee; */  color: #333;} 
 body{font-family: "Helvetica Neue", Helvetica, "PingFang SC", Tahoma, Arial, sans-serif;}
 a{text-decoration: none;}
 a:hover{}
@@ -37,15 +37,15 @@ input::-webkit-inner-spin-button {
 
 /* ===================== 整体面板 ===================== */
 /* vue盒子 */
-.vue-box{padding-bottom: 20px; font-size: 14px;}
+.vue-box{padding: 14px; height: calc(100vh - 28px); overflow: auto; font-size: 14px; background-color: #eeeeee;}
 
 /* 内容-面板 */
-.c-panel{margin: 0.7em 1em; padding: 1em 1.5em; background-color: #fff; color: #333; /* box-shadow: 0 0 5px #eee; */}
+.c-panel{/* margin: 0.7em 1em; */ margin-bottom: 10px; padding: 1em 1.5em; padding-bottom: 5px; background-color: #fff; color: #333; /* box-shadow: 0 0 5px #eee; */}
 .c-title{font-size: 14px; font-weight: bold; line-height: 2em; margin-bottom: 3px;}
 .c-title span{font-weight: 400; font-size: 0.85em; padding-left: 1em; color: #888;}
 
 /* ===================== 表单相关 ===================== */
-.c-panel .el-form{/* padding-top: 10px; */ padding-bottom: 15px;}
+.c-panel .el-form{/* padding-top: 10px; */ /* padding-bottom: 15px; */}
 .c-panel .el-form-item{min-width: 278px;}
 .c-panel .el-form-item__label{width: 100px;}
 .c-panel .el-form .el-input{width: 178px;}
@@ -59,13 +59,18 @@ input::-webkit-inner-spin-button {
 .c-panel .el-input.is-disabled .el-input__inner{color: #999;}
 
 /* 表格的表头颜色深一点 */
-.c-panel .el-table__header tr th{background-color: #F5F5F5;}
+.c-panel .el-table__header tr th{background-color: #F5F5F5; color: #555; padding: 8px 0;}
 
 /* 调整圆角大小: 输入框、文本域、按钮、 */
-.c-panel .el-input__inner,
-.c-panel .el-textarea__inner,
-.c-panel .el-button{border-radius: 2px !important;}
+.vue-box .el-input__inner,
+.vue-box .el-textarea__inner,
+.vue-box .el-button,
+.s-foot .el-button{border-radius: 2px !important;}
+.vue-box .el-alert{padding: 1em 0.5em; border-radius: 0px !important;}
 
+/* 多个按钮并列时的距离 */
+.vue-box .el-button+.el-button{margin-left: 2px;}
+.vue-box .el-button+.el-button.el-button--text{margin-left: 10px;}
 
 /* 单选button,圆角限制2px */
 .el-radio-button:first-child .el-radio-button__inner{border-radius: 2px 0 0 2px !important;}
@@ -80,34 +85,53 @@ input::-webkit-inner-spin-button {
 .s-radio-text .hover-line:hover{text-decoration: underline; cursor: pointer;}
 .s-radio-text .el-form-item__content{position: relative; top: -2px;}
 
-/* 表格里操作按钮的样式调整 */
-.c-btn{padding: 4px 6px; font-size: 12px !important; border-radius: 1px;}
-.c-btn.el-button--primary{background-color: #3296FA;}
-.c-btn.el-button--primary:hover{background-color: #067CF3; border-color: #067CF3;}
-.c-btn.el-button--danger{background-color: #CA4242;}
+
+/* 按钮的样式调整 */
+.el-button--primary{background-color: #1890ff;}
+.el-button--success{background-color: #57C22A;}
+.el-button--danger{background-color: #ee4949; border-color: #de4949;}
+.el-button--warning{background-color: #FF8a10; border-color: #FF8a10; color: #FFF;}
+.el-button--primary:hover,.el-button--primary:focus{background-color: #066CF3; border-color: #066CF3;}
+.el-button--success:hover,.el-button--success:focus{background-color: #2B9939; border-color: #2B9939;}
+.el-button--danger:hover,.el-button--danger:focus{background-color: #d02C2C; border-color: #d02C2C;}
+.el-button--warning:hover,.el-button--warning:focus{background-color: #dd6300; border-color: #dd6300;}
+
+.el-button--info:hover,.el-button--info:focus{background-color: #707379; border-color: #707379;}
+
+/* .c-btn 加强 */
+.el-table .c-btn{padding: 4px 6px; font-size: 12px !important; border-radius: 1px;}
+.c-btn.el-button--danger{background-color: #ca4242; border-color: #ca4242;}
 .c-btn.el-button--danger:hover{background-color: #A00C0C; border-color: #A00C0C;}
-.c-btn.el-button--success:hover{background-color: #2B9939; border-color: #2B9939;}
+
+/* 表格上面的按钮 */
+.fast-btn{padding-top: 15px; padding-bottom: 10px;} 
+/* .el-table{padding-top: 10px;} */
 
 /* 分页盒子调整一下间距 */
-.page-box{padding: 2em 0 1em 0; }
+.page-box{padding: 2em 0 25px 0; }
 
 /* 流体表单 */
-.cj-form.vue-box{padding-bottom: 0px; height: 100vh; background-color: #FFF;}
+.cj-form.vue-box{padding-bottom: 0px; background-color: #FFF;}
 .cj-form .c-panel{box-shadow: 0 0 0; margin-top: 0px; margin-bottom: 0px; padding-top: 2.5em; padding-bottom: 0px;}
 .cj-form .c-panel .el-form .el-input{width: 100%;}
 
 
 /* 底部按钮式风格 */
-.s-bot-btn{padding-bottom: 0px; background-color: #FFF;}
-.s-body{height: calc(100vh - 60px); overflow: auto;}
-.s-foot{height: 60px; line-height: 60px; text-align: right;}
+.sbot{padding: 0px; height: 100vh; background-color: rgba(0,0,0,0); display: flex !important; flex-direction: column;}
+.s-body{/* height: calc(100vh - 50px); */ flex: 1; overflow: auto; /* background-color: #009688s; */ }
+.s-foot{height: 49px !important; line-height: 49px; text-align: right; background-color: #f5f5f5; border-top: 1px #e5e5e5 solid;}
 .s-foot .el-button{margin-left: -10px; margin-right: 15px; padding: 7px 18px;}
-.s-bot-btn .s-body .c-panel{margin-top: 0px; margin-bottom: 0px; padding-top: 2.5em; padding-bottom: 0px;}
+.sbot .s-body .c-panel{margin-bottom: 0px; padding-top: 14px; padding-bottom: 0px;}
 
-/* ===================== 表单相关 - 旧方案 ===================== */
+.vue-box .s-foot{display: none;}
+.sbot .s-ok{display: none !important;}
+.sbot .s-foot{display: block;}
+.sbot .c-title{display: none;}
+
+/* ===================== 表单相关 ===================== */
 
 /* 内容-item */
-.c-item {min-width: 260px; min-height: 32px; line-height: 32px; padding-right: 15px; display: inline-block; margin: 0.5em 0;}
+.c-item {min-width: 260px; min-height: 32px; line-height: 32px; padding-right: 10px; display: inline-block; margin: 0.5em 0;}
 .c-item.br{display: block; margin: 14px 0;}
 /* label样式 */
 .c-item .c-label{width: 6em; color: #333; padding-right: 4px; display: inline-block; text-align: right;}
@@ -117,3 +141,7 @@ input::-webkit-inner-spin-button {
 .c-item .el-input.is-disabled .el-input__inner{color: #999;}
 /* 链接 行高设置 */
 .c-item .el-link{line-height: 1.6em;}
+
+/* 表格动画相关 */
+.data-table .el-table__body-wrapper{min-height: 0px; max-height: 60px;}
+.data-table .el-table__body-wrapper{transition: all 0.3s;}

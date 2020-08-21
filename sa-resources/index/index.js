@@ -11,8 +11,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.3.7',		// 当前版本
-		update_time: '2020-04-18',		// 更新日期 
+		version: 'v2.4.0',		// 当前版本
+		update_time: '2020-08-22',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -21,6 +21,7 @@ var sa_admin = new Vue({
 		default_openeds: [],	// 默认的打开数组 
 		unique_opened: true,		// 是否保持只打开一个
 		menuList: [],		// 菜单集合 
+		showList: [],		// 显示的集合 
 		homeTab: homeTab,		// 主页tab
 		nativeTab: homeTab,	// 当前正显示的Tab 
 		tabList: [homeTab],	// 页面集合
@@ -68,6 +69,12 @@ var sa_admin = new Vue({
 		is_show_tabbar: true,		// 是否显示tab栏 
 		breMenuList: [homeTab],			// 面包屑导航栏的tab数据 
 		is_reme_open: true,			// 是否记住上一次最后打开的窗口 
+		searchList: [],			// 待选列表 
+		// ywList: [],		// 菜单一维数组 
+		isSearch: false,	// 当前是否处于搜索模式 
+		isShowOpen: true,	// 是否显示打开搜索图标 
+		searchText: '',		// 搜索框已经输入的字符 
+		just_close_search: false,	// 是否刚刚关闭搜索框
 	},
 	watch: {
 		// 监听全屏动作 
@@ -123,22 +130,28 @@ var sa_admin = new Vue({
 			window.onresize();		// 手动触发一下窗口变动监听
 		},
 		// ------------------- 对外预留接口 --------------------
-		// show_list 为指定显示的id集合(注意是id的集合)，为空时代表显示所有
-		initMenu: function(show_list) {
-			this.setMenuList(window.menuList, show_list);
+		// showList 为指定显示的id集合(注意是id的集合)，为空时代表显示所有
+		initMenu: function(showList) {
+			this.setMenuList(window.menuList, showList);
 		},
 		// 写入菜单，可以是一个一维数组(指定好parent_id)，也可以是一个已经渲染好的tree数组	
-		// show_list 为指定显示的id集合(注意是id的集合)，为空时代表显示所有	
-		setMenuList: function(menu_list, show_list) {
-			// 转化为string 便于比较
-			if(show_list) {
-				for (var i = 0; i < show_list.length; i++) {
-					show_list[i] = show_list[i] + '';
-				} 
-			}
+		// showList 为指定显示的id集合(注意是id的集合)，为空时代表显示所有	
+		setMenuList: function(menu_list, showList) {
+			// 设置菜单
 			menu_list = this.arrayToTree(menu_list);
-			menu_list = this.refMenuList(menu_list, show_list);
+			menu_list = this.refMenuList(menu_list);
 			this.menuList = menu_list;
+			// 设置显示项
+			if(!showList) {
+				showList = this.getAllId(this.menuList);
+			}
+			for (var i = 0; i < showList.length; i++) {
+				showList[i] = showList[i] + '';
+			} 
+			// console.log(showList);
+			this.showList = showList;
+			// 存一份一维数组
+			this.f5SearchList();
 		},
 		// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
 		arrayToTree: function(menu_list) {
@@ -148,6 +161,7 @@ var sa_admin = new Vue({
 				if(menu.parent_id) {
 					var parent_menu = this.getMenuById(menu_list, menu.parent_id);
 					if(parent_menu) {
+						menu.parent_menu = parent_menu;
 						parent_menu.childList = parent_menu.childList || [];
 						parent_menu.childList.push(menu);
 						menu_list.splice(i, 1);	// 从一维中删除 
@@ -158,7 +172,7 @@ var sa_admin = new Vue({
 			return menu_list;
 		},
 		// 将 menu_list 处理一下 
-		refMenuList: function(menu_list, show_list, parent_id) {
+		refMenuList: function(menu_list, parent_id) {
 			for (var i = 0; i < menu_list.length; i++) {
 				var menu = menu_list[i];
 				menu.is_show = (menu.is_show === false ? false : true);
@@ -170,18 +184,35 @@ var sa_admin = new Vue({
 				// 	continue;
 				// }
 				// 如果指定了 show_list，并且 menu.id 不在 show_list 里，划掉
-				if(show_list && show_list.indexOf(menu.id) == -1) {
-					menu.is_show = false;
-					// sa_admin_code_util.arrayDelete(menu_list, menu);
-					// i--;
-					// continue;
-				}
+				// if(show_list && show_list.indexOf(menu.id) == -1) {
+				// 	menu.is_show = false;
+				// 	// sa_admin_code_util.arrayDelete(menu_list, menu);
+				// 	// i--;
+				// 	// continue;
+				// }
 				// 有子项的递归处理 
 				if(menu.childList && menu.childList.length > 0){
-					this.refMenuList(menu.childList, show_list, menu.id);	// 递归处理 
+					this.refMenuList(menu.childList, menu.id);	// 递归处理 
 				}
 			}
 			return menu_list;
+		},
+		// 获取菜单所有id 
+		getAllId: function(menuList) {
+			var arr = [];
+			function fn(menu_list) {
+				menu_list = menu_list || [];
+				for (var i = 0; i < menu_list.length; i++) {
+					var menu = menu_list[i];
+					arr.push(menu.id);
+					// 如果有子菜单 
+					if(menu.childList) {
+						fn(menu.childList);
+					}
+				}
+			}
+			fn(menuList);
+			return arr;
 		},
 		// ------------------- 对外预留 end --------------------
 		// 打开所有菜单的折叠
@@ -536,6 +567,9 @@ var sa_admin = new Vue({
 			tab.is_have_en = this.is_have_en(tab.name);	// 有英文字母的不能加字体加粗动画, 因为会影响tab选项卡的width尺寸, 造成动画混乱 
 			this.tabList.push(tab);
 			this.addSlide(tab);
+			if(this.tabList.length > 20 && this.tabList.length < 30) {
+				sa_admin.$message({message: '选项卡过多会造成窗口卡顿，建议您关闭不使用的窗口', type: 'warning'});
+			}
 		},
 		// 显示某个页面  (如果不存在, 则先添加)
 		showTab: function(tab) {
@@ -789,6 +823,68 @@ var sa_admin = new Vue({
 				this.mySwiper.update();	// swipre重新计算大小  
 			}.bind(this), ms);
 		},
+		// ------------------- 查找菜单相关 --------------------
+		// 打开选择菜单
+		changeSearch: function() {
+			// if(this.just_close_search) {
+			// 	return;
+			// }
+			// if(this.isSearch == true) {
+			// 	this.closeSearch();
+			// } else {
+			// 	this.startSearch();
+			// }
+		},
+		// 开启搜索
+		startSearch: function() {
+			this.searchText = '';
+			this.isSearch = true;
+			setTimeout(function() {
+				this.isShowOpen = false;
+				this.$refs['search'].focus();
+			}.bind(this), 200);
+		},
+		// 关闭搜索
+		closeSearch: function() {
+			this.searchText = '';
+			this.isSearch = false;
+			setTimeout(function() {
+				try{
+					this.isShowOpen = true;
+					document.querySelector('.el-select-dropdown.el-popper').style.display = 'none';
+				}catch(e){throw e}
+			}.bind(this), 200);
+		},
+		// 查找菜单 
+		findMenuBySearch: function(id) {
+			this.showMenuById(id);
+			this.closeSearch();
+		},
+		// 刷新待选列表 
+		f5SearchList: function() {
+			var searchList = [];
+			var ywList = sa_admin_code_util.treeToArray(this.menuList);
+			let index = 1;
+			for (var i = 0; i < ywList.length; i++) {
+				let menu = ywList[i];
+				if(!menu.is_show || this.showList.indexOf(menu.id) == -1 || (menu.childList && menu.childList.length > 0)) {
+					continue;
+				}
+				// 计算待选列表 
+				let str = menu.name;
+				if(menu.parent_id != 0) {
+					let parent_menu = this.getMenuById(ywList, menu.parent_id);
+					str = parent_menu.name + ' > ' + str;
+					if(parent_menu.parent_id != 0) {
+						let parent_parent_menu = this.getMenuById(ywList, parent_menu.parent_id);
+						str = parent_parent_menu.name + ' > ' + str;
+					}
+				}
+				searchList.push({id: menu.id, text: (index++) + ". " + str});
+			}
+			this.searchList = searchList;
+		},
+		
 		// ------------------- 杂七杂八 -------------------- 
 		// 打开便签 
 		openNote: function() {

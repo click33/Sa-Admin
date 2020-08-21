@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>通用</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 所有的 css & js 资源 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="../../static/sa.css">
+		<link rel="stylesheet" href="./console-main.css">
+	</head>
+	<body>
+		<div class="vue-box" style="display: none;" :style="'display: block;'">
+			
+			<!-- 第一栏 -->
+			<div class="s-row s-row-1">
+				<el-row :gutter="14">
+					<el-col :lg="4" :sm="8" :xs="24">
+						<div class="sa-wnk">
+							<img src="../../static/icon/icon-user.png" >
+							<div class="sa-wnk-tv">
+								<p class="sa-wnk-title">用户</p>
+								<p class="sa-wnk-value">{{sta.userCount}}</p>
+							</div>
+						</div>
+					</el-col>
+					<el-col :lg="4" :sm="8" :xs="24">
+						<div class="sa-wnk">
+							<img src="../../static/icon/icon-goods.png" >
+							<div class="sa-wnk-tv">
+								<p class="sa-wnk-title">商品</p>
+								<p class="sa-wnk-value">{{sta.goodsCount}}</p>
+							</div>
+						</div>
+					</el-col>
+					<el-col :lg="4" :sm="8" :xs="24">
+						<div class="sa-wnk">
+							<img src="../../static/icon/icon-order.png" >
+							<div class="sa-wnk-tv">
+								<p class="sa-wnk-title">订单</p>
+								<p class="sa-wnk-value">{{sta.orderCount}}</p>
+							</div>
+						</div>
+					</el-col>
+					<el-col :lg="4" :sm="8" :xs="24">
+						<div class="sa-wnk">
+							<img src="../../static/icon/icon-article.png" >
+							<div class="sa-wnk-tv">
+								<p class="sa-wnk-title">文章</p>
+								<p class="sa-wnk-value">{{sta.articleCount}}</p>
+							</div>
+						</div>
+					</el-col>
+					<el-col :lg="4" :sm="8" :xs="24">
+						<div class="sa-wnk">
+							<img src="../../static/icon/icon-comment.png" >
+							<div class="sa-wnk-tv">
+								<p class="sa-wnk-title">评论</p>
+								<p class="sa-wnk-value">{{sta.commentCount}}</p>
+							</div>
+						</div>
+					</el-col>
+					<el-col :lg="4" :sm="8" :xs="24">
+						<div class="sa-wnk">
+							<img src="../../static/icon/icon-money.png" >
+							<div class="sa-wnk-tv">
+								<p class="sa-wnk-title">余额</p>
+								<p class="sa-wnk-value">{{sta.moneyCount}}</p>
+							</div>
+						</div>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<!-- 第二栏 -->
+			<div class="s-row s-row-2">
+				<el-row :gutter="14">
+					<el-col :lg="8" :xs="24">
+						<el-card shadow="never" header="柱状图">
+							<div class="echarts-div" id='bar-chart'></div>
+						</el-card>
+					</el-col>
+					<el-col :lg="8" :xs="24">
+						<el-card shadow="never" header="饼图">
+							<div class="echarts-div" id='pic-chart'></div>
+						</el-card>
+					</el-col>
+					<el-col :lg="8" :xs="24">
+						<el-card shadow="never" header="折线图">
+							<div class="echarts-div" id='line-chart'></div>
+						</el-card>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<!-- 第三栏 -->
+			<div class="s-row s-row-3">
+				<el-row :gutter="14" type="flex" style="flex-wrap: wrap-reverse;">
+					<!-- 左边 -->
+					<el-col :lg="12" :xs="24">
+						<!-- 技术选型 -->
+						<el-card shadow="never" header="技术选型">
+							<div class="btn-box">
+								<el-popover placement="top-start" trigger="hover">
+								    <el-button slot="reference" type="primary" size="small" @click="sa.open('https://jq.qq.com/?_wv=1027&k=5DHN5Ib')">QQ群(782974737)</el-button>
+									<div style="text-align: center;">
+										<img src="http://dev33-yxzj.oss-cn-beijing.aliyuncs.com/dyc/img/2020/01/17/157924554064970545739.png" style="width: 150px; height: 150px;" >
+									</div>
+								</el-popover>
+								<!-- <el-button type="primary" size="small" @click="sa.open('https://jq.qq.com/?_wv=1027&k=5DHN5Ib')">QQ群(782974737)</el-button> -->
+								<el-button type="success" size="small" @click="sa.open('https://github.com/click33/sa-admin')">GitHub 地址 (求star)</el-button>
+								<el-button type="danger" size="small" @click="sa.open('https://gitee.com/sz6/sa-admin')">Gitee 地址</el-button>
+								<el-button type="info" size="small" @click="sa_admin.showMenuById('1-11')">意见吐槽</el-button>
+								<el-button type="info" size="small" @click="sa_admin.showMenuById('1-12')">需求征集</el-button>
+								<el-popover placement="top-start" trigger="hover">
+								    <el-button slot="reference" type="warning" size="small">打赏</el-button>
+									<div style="text-align: center;">
+										<h3 style="margin-bottom: 14px;">我们并非行乞者，却并不拒绝赞赏</h3>
+										<img src="http://oss.dev33.cn/sa-admin/ds-zfb.jpg" style="width: 150px; height: 150px; cursor: pointer;" 
+											@click="sa.showImage('http://oss.dev33.cn/sa-admin/ds-zfb.jpg', '400px', '400px')" />
+										<img src="http://oss.dev33.cn/sa-admin/ds-wx.jpg" style="width: 150px; height: 150px; cursor: pointer;" 
+											@click="sa.showImage('http://oss.dev33.cn/sa-admin/ds-wx.jpg', '400px', '400px')" />
+									</div>
+								</el-popover>
+							</div>
+							<div>
+								<el-table ref="data-table" :data="frameList" size="small" border>
+									<el-table-column label="技术栈" prop="name"></el-table-column>
+									<el-table-column label="框架" prop="value"></el-table-column>
+									<el-table-column label="链接">
+										<template slot-scope="s">
+											<el-link type="primary" :href="s.row.link" target="_blank">{{s.row.link}}</el-link>
+										</template>
+									</el-table-column>
+								</el-table>
+							</div>
+						</el-card>
+						<!-- 更新日志 -->
+						<el-card shadow="never" header="更新日志">
+							<el-timeline>
+								<!-- ---------- 一个版本 第35个----------- -->
+								<el-timeline-item timestamp="v2.4.0 &emsp; 2020-08-22" placement="top" type="primary">
+									<li>新增：多行textarea文本域示例</li>
+									<li>新增：评分组件示例</li>
+									<li>新增：新增数据导出功能，纯前端实现，不借助后端也能导出Excel数据</li>
+									<li>新增：增加弹出式新增、页面重置、多选删除、页面重置等快捷操作按钮</li>
+									<li>新增：表格查询页面，在input里回车时提交查询操作</li>
+									<li>新增：新增jq22搜集</li>
+									<li>新增：权限设置页面，新增全选按钮 </li>
+									<li>新增：菜单搜索功能 </li>
+									<li>新增：sa.js新增一系列API，更强大的工具类 </li>
+									<li>升级：二三级菜单也可以添加图标了</li>
+									<li>优化：优化表格增删改查动画，更加流畅的操作</li>
+									<li>优化：全面优化页面布局，更舒服的配色及排版</li>
+									<li>优化：优化登录页面方框圆角尺寸</li>
+									<li>优化：优化阴影样式 </li>
+									<li>集成：集成form-generator，在线拖拉拽代码生成器</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.7 &emsp; 2020-04-18" placement="top" type="primary">
+									<li>新增：首页增加懒加载功能</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.6 &emsp; 2020-04-17" placement="top" type="primary">
+									<li>优化：部分样式</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.6 &emsp; 2020-04-17" placement="top" type="primary">
+									<li>优化：部分样式</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.5 &emsp; 2020-04-17" placement="top" type="primary">
+									<li>优化：部分模板页样式</li>
+									<li>更换：更换堆表单方式为c-item</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.4 &emsp; 2020-03-05" placement="top" type="primary">
+									<li>去除：tab双击刷新</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.3 &emsp; 2020-03-02" placement="top" type="primary">
+									<li>新增：tab双击刷新</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.2 &emsp; 2020-3-1" placement="top" type="primary">
+									<li>新增：初始加载loading图标</li>
+									<li>新增：函数菜单（点击菜单执行一个函数）</li>
+									<li>更新：my-code.js重命名为sa-code.js</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.1 &emsp; 2020-2-29" placement="top" type="primary">
+									<li>修复：部分bug</li>
+									<li>
+										上线：vue单页版上线，传送门：
+										<el-link type="primary" href="http://sa-vue-admin.dev33.cn/" target="_blank">http://sa-vue-admin.dev33.cn/</el-link>
+									</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.3.0 &emsp; 2020-2-25" placement="top" type="primary">
+									<li>优化：改变部分文件夹结构</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.6 &emsp; 2020-2-17" placement="top" type="primary">
+									<li>新增：新增主题：简约式灰蓝</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.5 &emsp; 2020-2-14" placement="top" type="primary">
+									<li>
+										新增：新增在线论坛：
+										<el-link type="primary" href="javascript:parent.sa_admin.showMenuById('1-11');">点击打开，在线提交意见反馈(新)</el-link>
+									</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.4 &emsp; 2020-2-13" placement="top" type="primary">
+									<li>优化：优化整体样式</li>
+									<li>优化：loading加载框的样式</li>
+									<li>增加：tab悬浮打开的z-index自动切换功能</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.3 &emsp; 2020-2-9" placement="top" type="primary">
+									<li>增加：增加底部按钮式的弹窗示例</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.2 &emsp; 2019-7-16" placement="top" type="primary">
+									<li>增加：增加弹出式修改的示例</li>
+									<li>增加：增加窗口之间通信的方法，详细请查看集成文档</li>
+									<li>完善：完善readme.md</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.1 &emsp; 2020-1-31" placement="top" type="primary">
+									<li>修复：替换掉所有bootcss的cdn，因为它太不稳定了，三天一小瘫，五天一大瘫</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.2.0 &emsp; 2020-1-20" placement="top" type="primary">
+									<li>集成：集成鉴权功能，详细请查看文档 </li>
+									<li>新增：新增大量模板示例，可帮助你快速增删改查 </li>
+									<li>修复：在边缘处右键菜单文字变形的bug </li>
+									<li>重构：改了一下首页样式 </li>
+									<li>优化：将element-ui版本更换至了 2.13.0 </li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.1.2 &emsp; 2020-1-18" placement="top" type="primary">
+									<li>修复：修复登录页鼠标不能与背景粒子交互的bug </li>
+									<li>优化：右键关闭其它和关闭全部时，首先滑到做左边，动画更直观 </li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.1.0 &emsp; 2020-1-17" placement="top" type="primary">
+									<li>新增：更换了登录页</li>
+									<li>新增：右键菜单新增复制按钮，可直接复制一个tab在新窗口打开 </li>
+									<li>新增：右键菜单新增折叠关闭动画，失去焦点时和点击取消时，菜单以折叠动画的方式关闭 </li>
+									<li>新增：右键菜单新增盒子阴影，更有立体感</li>
+									<li>新增：新增主题：pro钛合金、沉淀式黑蓝 </li>
+									<li>修复：切换tab时，不能自动滑动的bug</li>
+									<li>重构：重新设置了UI样式，详细参考模板示例</li>
+									<li>注意：表格内操作按钮类样式 .c-button 换成了 .c-btn  </li>
+									<li>重构：修改了sa.js，取消$util对象，所有有关$util的函数全部移到sa对象上，</li>
+									<li>注意：原调用方式sa.$util.getUrlArgs('id') 现改为：sa.p('id')</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.0.2 &emsp; 2020-1-15" placement="top" type="primary">
+									<li>修复bug：tab卡文字向上偏移了1px的问题</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.0.1 &emsp; 2020-1-14" placement="top" type="primary">
+									<li>修复bug：在方块、3D流、3D翻转切换效果下，tab切换错乱的bug</li>
+									<li>修复bug：iframe的url发生改变后，刷新按钮刷新为旧地址的bug</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v2.0.0 &emsp; 2020-1-13" placement="top" type="primary">
+									<li>新增：卡片右击菜单弹出动画 </li>
+									<li>新增：tab右键菜单动画</li>
+									<li>新增：新增tab关闭动画, 在关闭tab、右键关闭其它、关闭全部时有了更流畅的体验</li>
+									<li>新增：tab选项卡拖拽效果，上拽新窗口打开，下拽悬浮打开，左拽关闭，在tab处拖拽一下体验一下吧</li>
+									<li>新增：在tab栏空白处，双击：可以打开添加新tab操作弹窗 </li>
+									<li>新增：增加单窗口与多窗口切换功能（在初始化模板时，增加is_show_tabbar配置项）</li>
+									<li>新增：增加记住上一次最后打开的窗口功能，刷新也可以记住窗口（在初始化模板时，增加is_reme_open配置项）</li>
+									<li>新增: hash链接跳转功能，可灵活的用鼠标前后键切换tab窗口 </li>
+									<li>新增：便签功能，可以方便的保存一些临时数据 </li>
+									<li>修复：首页114行有个重复的class</li>
+									<li>修复：版本号打印不对 </li>
+									<li>修复：首页homePage的url配置无效</li>
+									<li>
+										因为项目紧迫，这个版本拖了三个月，积攒了不少更新点，也算是憋了一个大招，
+										大家有什么意见或者想要添加功能，可以加入qq群尽情提出来，我只要有时间，一定第一时间更新
+									</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.1.4 &emsp; 2019-10-17" placement="top" type="primary">
+									<li>重写了一下简介</li>
+									<li>优化主题样式</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.1.3 &emsp; 2019-9-3" placement="top" type="primary">
+									<li>更改初始化方式</li>
+									<li>优化UI样式</li>
+									<li>增加新主题：灰色-展开</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.1.2 &emsp; 2019-7-16" placement="top" type="primary">
+									<li>增加右键菜单的失去焦点事件，失去焦点自动消失</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.1 &emsp; 2019-6-26" placement="top" type="primary">
+									<li>优化卡片切换动画，更流畅了，并且添加loading图标，视觉上更加顺畅</li>
+									<li>新增悬浮窗口功能，在卡片标题处右击试试吧</li>
+									<li>更换登录模板页，更漂亮了</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.1.0 &emsp; 2019-6-24" placement="top" type="primary">
+									<li>修复bug：鼠标悬浮tab-title时，偶尔动画混乱的bug</li>
+									<li>修复bug：优化折叠动画，更流畅了</li>
+									<li>集成swiper，窗口切换，更加高大上了</li>
+								</el-timeline-item>
+								<el-timeline-item timestamp="v1.0.8 &emsp; 2019-5-28" placement="top" type="primary">
+									<li>修复bug：菜单折叠时，菜单项箭头仍然显示的问题</li>
+									<li>修复bug：在手机端菜单折叠时，右侧信息排版发生混乱的问题</li>
+									<li>调整了一下字体大小，看着更顺眼了</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.7 &emsp; 2019-5-25" placement="top" type="primary">
+									<li>优化一些动画效果</li>
+									<li>增加模板页：轮播图管理</li>
+									<li>一些样式优化</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.6 &emsp; 2019-5-22" placement="top" type="primary">
+									<li>添加了菜单预览模板(tree树)</li>
+									<li>修复bug：菜单分配权限时，父子级不关联的问题</li>
+									<li>一些样式优化</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.5 &emsp; 2019-5-18" placement="top" type="primary">
+									<li>添加了权限中心模板(tree权限树)</li>
+									<li>优化用户列表模板，弹出式的修改</li>
+									<li>一些其它样式优化</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.4 &emsp; 2019-5-15" placement="top" type="primary">
+									<li>优化折叠动画，避免文字闪动现象</li>
+									<li>sp.setMenuList();接口增加show_list参数，可灵活控制部分菜单的显示与隐藏</li>
+									<li>一些样式优化</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.3 &emsp; 2019-5-14" placement="top" type="primary">
+									<li>添加文章管理模板(wangEditor富文本编辑器)</li>
+									<li>改写了表格里按钮的样式，更鲜艳，增加点击感</li>
+									<li>菜单列表里可以指定is_show=false，使菜单成为隐藏菜单</li>
+									<li>重写了一些接口，可以更加方便的与你的系统集成</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.1 &emsp; 2019-5-5" placement="top" type="primary">
+									<li>修复：周日显示周0的bug</li>
+									<li>新增：增加三级菜单支持</li>
+									<li>新增：主题更换时高亮显示，方便区分</li>
+								</el-timeline-item>
+								<!-- ---------- 一个版本 ----------- -->
+								<el-timeline-item timestamp="v1.0.0 &emsp; 2019-5-2" placement="top" type="primary">
+									<li>第一个版本出炉</li>
+									<li>功能持续更新中...</li>
+								</el-timeline-item>
+							</el-timeline>
+						</el-card>
+					</el-col>
+					
+					<!-- 右边 -->
+					<el-col :lg="12" :xs="24">
+						<el-card shadow="never" header="sa-admin (iframe版)">
+							<el-alert type="success" :closable="false" title="缘起">
+								<p>虽然已经用过不少优秀的后台模板，但是一直都感觉不尽完美，于是在经过激烈的思想斗争后，我决定牺牲五一假期，
+								亲自做一个尝试一下， 一来正好以后自己的项目中使用，二来也算是为开源界做一点自己的贡献吧</p>
+								<p>开源不易，求鼓励，求star</p>
+							</el-alert>
+							
+							<el-alert type="warning" :closable="false" title="sa-admin的优点？">
+								<li>上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成</li>
+								<li>示例全面：提供大量常见增删改查示例，提高你的生产力</li>
+							</el-alert>
+							<el-alert type="info" :closable="false" title="vue、element-ui、layer我都没用过，可以用这个模板吗">
+								<li>首先你要明白，模板分为两部分（index.html框架与框架内的模板页）</li>
+								<li>如果你只使用index.html框架部分，可以不必掌握vue等技术，使用时甚至你都不用改动源码， 只重写几个属性函数就可以集成到你的项目中</li>
+								<li>如果你要使用框架内的模板页，则需要对vue等框架有一定的了解</li>
+							</el-alert>
+							<el-alert type="error" :closable="false" title="为什么是iframe，而不是SPA?">
+								<li>现在前端开发比较主流的三种方式：服务器渲染、前后端分离、SPA</li>
+								<li>服务器渲染：类似于jsp、asp、php等所有借助后端语言渲染视图的技术，这也是比较传统的一种方式</li>
+								<li>前后端分离：脱离后端语言，只写html，就像是在写一个静态站，与服务器的交互全部走ajax</li>
+								<li>SPA：在前后端分离的基础上更进一步，借助gulp、webpack等构件工具将项目打包成单页应用的一种方式</li>
+								<li>本模板 正是采用的第2种方式（so：本模板可能无法满足重度SPA患者）</li>
+								<ol style="padding-left: 2em;">
+									<li>前后端分离，让我们脱离了后端语言的@include指令，不用为了代码的模块化再到处搜索xx技术如何热更新代码</li>
+									<li>不使用webpack、gulp等构建工具也可以写代码，不必再费尽心机搭建一个代码编译环境，敏捷开发方式</li>
+									<li>网站头部底部等公共部分代码的复用是我们使用构建工具的主要目的，但是我们借助iframe标签，轻松巧妙的化解了这个难题，借助iframe， 让网站成为一个真正意义上的多窗口应用</li>
+									<li>返璞归真，像写静态站一样来写后台，一个html编辑器就可以强Lu所有代码，尝试一下，相信我，你会爱上这种开发模式的</li>
+								</ol>
+							</el-alert>
+						</el-card>
+						<!-- 功能优点 -->
+						<el-card shadow="never" header="功能说明">
+							
+							<el-alert type="success" :closable="false" title="基础">
+								架构：基于iframe，无后台代码，纯html模板，可方便的适配任何后端语言 <br/>
+								模板：提供大量常见示例，以及各种表单的书写方式，助你快速CRUD  <br/>
+								菜单：支持一、二、三级菜单，并开放一系列接口方便的使用js操作菜单 <br/>
+								折叠：折叠或收缩菜单，并且监听窗口大小变化，在拉伸窗口时自动折叠或收缩菜单，自动响应式 <br/>
+								搜索：智能索引，快捷搜索打开某个菜单 <br/>
+								切换：集成swiper动画，滑动、淡入、方块、3D流、3D翻转，五种高大上切换动画，任你选择！ <br/>
+								主题：目前保留八种主题：蓝色、绿色、白色、灰色、灰色-展开、pro钛合金、沉淀式黑蓝、简约式灰蓝（切换主题时，可自动保存你的喜好，下次打开时仍然有效） <br/>
+								便签：弹出窗口便签，一个临时小便签，可记录一些临时资料 <br/>
+								全屏：可以在全屏/非全屏之间自由切换 <br/>
+							</el-alert>
+							<el-alert type="warning" :closable="false" title="tabbar栏">	
+								卡片堆积：多卡片自动堆积，与菜单双向关联，切换tab卡时自动显示左侧菜单 <br/>
+								拖动手势：tab卡支持拖拽手势，上拖新窗口打开、下拽悬浮打开、左拽快速关闭 <br/>
+								右键菜单：在tab上右击，可以：刷新、复制、关闭、关闭其它、关闭所有、悬浮打开、新窗口打开、取消 <br/>
+								双击菜单：双击tabbar空白处，可以显示添加新tab窗口 <br/>
+								保留高度：切换卡片时，可自动保留上个卡片的滚动条高度 <br/>
+							</el-alert>
+							<el-alert type="info" :closable="false" title="开放接口">	
+								开放一系列api，助你方便的使用js操作tabbar栏，具体请查看集成文档 <br/>
+								锚链：tab切换自动更改hash锚链，同时监听锚链改变tab，可灵活的用鼠标前后键切换tab窗口 （如不需要此功能可在初始化时关闭） <br/>
+								窗口：可在初始化时，设置是否显示tabbar栏，来控制它是多窗口还是单窗口，具体见使用文档 <br/>
+								更新：功能不断更新中... 你有好的想法也可以告诉我，加群一起交流吧 <br/>
+								文档：使用说明，见文档 <br/>
+							</el-alert>
+						</el-card>
+					</el-col>
+					
+				</el-row>
+			</div>
+			
+		</div>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
+		<script src="https://unpkg.com/echarts@4.6.0/dist/echarts-en.min.js"></script>
+		<script src="../../static/sa.js"></script>
+		<script src="console-main.js"></script>
+	</body>
+</html>

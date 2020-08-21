@@ -39,30 +39,33 @@
 								>
 								<div v-for="(menu, index) in menuList" :key="index">
 									<!-- 1 子菜单 -->
-									<el-menu-item v-if="!menu.childList && menu.is_show" :index="menu.id + '' ">
-										<i :class="menu.icon" :title="menu.name"></i>
+									<el-menu-item v-if="!menu.childList && menu.is_show && showList.indexOf(menu.id) > -1" :index="menu.id + '' ">
+										<span class="menu-i"><i :class="menu.icon" :title="menu.name"></i></span>
 										<span class="menu-name">{{menu.name}}</span>
 									</el-menu-item>
 									<!-- 1 父菜单 -->
-									<el-submenu v-if="menu.childList && menu.is_show" :index="menu.id + '' ">
+									<el-submenu v-if="menu.childList && menu.is_show && showList.indexOf(menu.id) > -1" :index="menu.id + '' ">
 										<template slot="title">
-											<i :class="menu.icon" :title="menu.name"></i>
+											<span class="menu-i"><i :class="menu.icon" :title="menu.name"></i></span>
 											<span class="menu-name">{{menu.name}}</span>
 										</template>
 										<!-- 遍历其子项 -->
 										<div v-for="(menu2, index) in menu.childList" :key="index">
 											<!-- 2 如果是子菜单 -->
-											<el-menu-item v-if="!menu2.childList && menu2.is_show" :index="menu2.id + '' ">
-												{{menu2.name}}
+											<el-menu-item v-if="!menu2.childList && menu2.is_show && showList.indexOf(menu2.id) > -1" :index="menu2.id + '' ">
+												<span class="menu-i"><i :class="menu2.icon" :title="menu2.name"></i></span>
+												<span class="menu-name">{{menu2.name}}</span>
 											</el-menu-item>
 											<!-- 2 如果是父菜单 -->
-											<el-submenu v-if="menu2.childList && menu2.is_show" :index="menu2.id + '' ">
+											<el-submenu v-if="menu2.childList && menu2.is_show && showList.indexOf(menu2.id) > -1" :index="menu2.id + '' ">
 												<template slot="title">
-													{{menu2.name}}
+													<span class="menu-i"><i :class="menu2.icon" :title="menu2.name"></i></span>
+													<span class="menu-name">{{menu2.name}}</span>
 												</template>
 												<div v-for="(menu3, index3) in menu2.childList" :key="index3">
-													<el-menu-item v-if="menu3.is_show" :index="menu3.id + '' ">
-														{{menu3.name}}
+													<el-menu-item v-if="menu3.is_show && showList.indexOf(menu3.id) > -1" :index="menu3.id + '' ">
+														<span class="menu-i"><i :class="menu3.icon" :title="menu3.name"></i></span>
+														<span class="menu-name">{{menu3.name}}</span>
 													</el-menu-item>
 												</div>
 											</el-submenu>
@@ -109,6 +112,18 @@
 						</span>
 						<span title="展开菜单" class="tool-fox" v-if="is_fold == true" @click="fold_end()">
 							<i class="el-icon-s-unfold"></i>
+						</span>
+						<span title="搜索" class="tool-fox search-fox" :class=" isSearch ? 'search-fox-show' : '' ">
+							<el-select v-model="searchText" size="mini" filterable placeholder="请输入菜单关键字" ref="search" 
+								@change="findMenuBySearch" @blur="closeSearch" @keyup.esc.native="closeSearch">
+								<el-option v-for="item in searchList" :key="item.id" :label="item.text" :value="item.id"></el-option>
+							</el-select>
+						</span>
+						<span title="搜索菜单" class="tool-fox" @click="closeSearch()" v-if="!isShowOpen">
+							<i class="el-icon-search" style="font-weight: bold;"></i>
+						</span>
+						<span title="搜索菜单" class="tool-fox" @click="startSearch()" v-else>
+							<i class="el-icon-search" style="font-weight: bold;"></i>
 						</span>
 						<span title="刷新" class="tool-fox" @click="rightTab = nativeTab; right_f5();">
 							<i class="el-icon-refresh-right" style="font-weight: bold;"></i>

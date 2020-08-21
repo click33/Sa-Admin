@@ -1,6 +1,6 @@
 *{margin: 0; padding: 0; }
 html,body{height: 100%; background-color: #EEE;} 
-body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gif);background-repeat: no-repeat;background-position: 50% 50%;}
+body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gif); background-repeat: no-repeat;background-position: 50% 50%;}
 .app{height: 100%; font-size: 16px; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
 .app{background-color: #EEE;}
 .app *{transition: all 0.2s; }
@@ -18,6 +18,7 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 /* 左上 logo部分 */
 .nav-left-top{width: 100%; height: 85px; overflow: hidden; line-height: 85px; cursor: pointer; transform: none; position: relative; z-index: 100;}
 .admin-logo{width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin: 0.5em; margin-left: 1em;}
+/* .nav-title{font-weight: bold; font-size: 16px !important;} */
 /* ==== .nav-left-top:hover{color: #FFF;} */
 
 /* 左下 */
@@ -34,9 +35,11 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 
 /* 尺寸调整, 二级和三级的左内边距向右扩大 */
 .el-submenu__title,.el-menu-item{height: 45px !important; line-height: 45px !important;}
-.el-submenu .el-menu-item,.el-submenu .el-submenu  .el-submenu__title{height: 40px !important; line-height: 40px !important; padding-left: 4em !important;}
+.el-submenu .el-menu-item,.el-submenu .el-submenu  .el-submenu__title{height: 40px !important; line-height: 40px !important; padding-left: 2.5em !important;}
 
-.el-submenu .el-submenu .el-menu-item{padding-left: 5em !important;}
+.el-submenu .el-submenu .el-menu-item{padding-left: 3.6em !important;}
+.menu-box-2 .menu-i{display: inline-block; vertical-align: top; width: 29px;}
+/* .el-submenu__title:first-child{color: red;} */
 
 
 /* 隐藏右边框 */
@@ -62,6 +65,12 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 .user-avatar{width: 30px; height: 30px; border-radius: 50%; vertical-align: middle;}
 .user-info .user-name{font-size: 0.9em;} 
 
+/* 搜素框 */
+.search-fox{display: inline-block; vertical-align: middle; overflow: hidden; max-width: 0px; padding: 0em 0em; margin-left: -5px;transition: all 0.2s;}
+.search-fox-show{display: inline-block; max-width: 500px; margin-left: 0px; padding: 0 1em;}
+.search-fox:hover{background-color: rgba(0,0,0,0) !important;}
+.search-fox .el-input__inner{border-radius: 0px; border-width: 0px; border-bottom-width: 1px; background-color: rgba(0,0,0,0);}
+.search-fox .el-input__icon{display: none;}
 
 /*800之下*/
 @media(max-width: 800px) {
@@ -69,7 +78,7 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 }
 
 /* 第二行建筑物 */
-.nav-right-2,.nav-right-bre{height: 35px; position: relative; z-index: 110; box-shadow: 0 2px 2px #CCC;}
+.nav-right-2,.nav-right-bre{height: 35px; position: relative; z-index: 110; box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
 .nav-right-2>div{height: 100%; position: absolute;}
 
 .nav-right-bre{line-height: 35px; padding-left: 1em; background-color: #FFF; cursor: pointer; display: none;}
@@ -114,7 +123,7 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 	outline:none;
 	max-height: 0px;
 	overflow: hidden;
-	box-shadow: 3px 3px 3px #666;
+	box-shadow: 1px 1px 2px #000;
 }
 .right-box-2{font-size: 0.8em; padding: 0.5em 0; border: 1px #aaa solid; border-radius: 1px; background-color: #FFF;}
 .right-box-2>div {line-height: 2.2em; padding-left: 0.7em; padding-right: 1.8em; cursor: pointer; white-space: nowrap;}

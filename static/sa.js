@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
-	version: '2.3',
-	update_time: '2020-4-20',
-	info: '增加代码：console.log("返回数据：", res);'
+	version: '2.4',
+	update_time: '2020-8-22',
+	info: '新增一系列API'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -17,7 +17,7 @@ var sa = {
 		api_url: 'http://www.baidu.com',
 		web_url: 'http://www.baidu.com'
 	}
-	// 服务器测试环境
+	// 正式生产环境
 	var cfg_prod = {
 		api_url: 'http://www.baidu.com',
 		web_url: 'http://www.baidu.com'
@@ -190,7 +190,7 @@ var sa = {
 	if(window.layer) {
 		layer.ready(function(){});
 	}
-	 
+	
 	
 	
 	// tips提示文字  
@@ -431,6 +431,15 @@ var sa = {
 			}
 			return(defaultValue == undefined ? null : defaultValue);
 		}
+		me.q = function(name, defaultValue){
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == name){return pair[1];}
+			}
+			return(defaultValue == undefined ? null : defaultValue);
+		}
 		
 		// 判断一个变量是否为null
 		// 返回true或false，如果return_obj有值，则在true的情况下返回return_obj
@@ -651,6 +660,31 @@ var sa = {
 		　　return str;
 		}
 		
+		// 刷新页面
+		me.f5 = function() {
+			location.reload();
+		}
+		
+		// 动态加载js 
+		me.loadJS = function(src, onload) {
+			var script = document.createElement("script");
+			script.setAttribute("type", "text/javascript");
+			script.src = src;
+			script.onload = onload;
+			document.body.appendChild(script);
+		}
+		
+		// 产生随机数字 
+		me.randomNum = function(min, max) {
+			return parseInt(Math.random() * (max - min + 1) + min, 10);
+		}
+		
+		// 打开页面
+		me.open = function(url) {
+			window.open(url);
+		}
+		
+		
 		
 		// == if 结束
 	}
@@ -658,6 +692,14 @@ var sa = {
 	// ===========================  数组操作   ======================================= 
 	if (true) {
 		
+		// 从数组里获取数据,根据指定数据
+		me.getArrayField = function(arr, prop){
+			var propArr = [];
+			for (var i = 0; i < arr.length; i++) {
+				propArr.push(arr[i][prop]);
+			}
+			return propArr;
+		}
 		
 		// 从数组里获取数据,根据指定数据
 		me.arrayGet = function(arr, prop, value){
@@ -671,10 +713,20 @@ var sa = {
 		
 		// 从数组删除指定记录
 		me.arrayDelete = function(arr, item){
-			var index = arr.indexOf(item);
-		    if (index > -1) {
-		        arr.splice(index, 1);
-		    }
+			if(item instanceof Array) {
+				for (let i = 0; i < item.length; i++) {
+					let ite = item[i];
+					let index = arr.indexOf(ite);
+					if (index > -1) {
+						arr.splice(index, 1);
+					}
+				}
+			} else {
+				var index = arr.indexOf(item);
+				if (index > -1) {
+					arr.splice(index, 1);
+				}
+			}
 		}
 		
 		// 从数组删除指定id的记录
@@ -866,6 +918,40 @@ var sa = {
 	// ===========================  对sa-admin的优化   ======================================= 
 	if (true) {
 		
+		// 封装element-ui的导出表格
+		// 参数：选择器（默认.data-count），fileName=导出的文件名称
+		me.exportExcel = function(select, fileName) {
+			
+			// 声明函数 
+			let exportExcel_fn = function(select, fileName) {
+				// 赋默认值
+				select = '.data-table';
+				fileName = 'table.xlsx';
+				// 开始导出
+				let wb = XLSX.utils.table_to_book(document.querySelector(select));   // 这里就是表格
+				let wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'array' });
+				// 点击 
+				let blob = new Blob([wbout], { type: 'application/octet-stream'});
+				const a= document.createElement("a")
+				a.href = URL.createObjectURL(blob)
+				a.download = fileName // 这里填保存成的文件名
+				a.click()
+				URL.revokeObjectURL(a.href)
+				a.remove();
+				sa.hideLoading();
+			}
+			
+			// 判断是否首次加载 
+			if(window.XLSX) {
+				return exportExcel_fn(select, fileName);
+			} else {
+				me.loadJS('https://unpkg.com/xlsx@0.16.6/dist/xlsx.core.min.js', function() {
+					return exportExcel_fn(select, fileName);
+				});
+			}
+			
+		}
+		
 		// 刷新表格高度
 		me.f5TableHeight = function() {
 			Vue.nextTick(function() {
@@ -875,6 +961,50 @@ var sa = {
 				$('.el-table .el-table__body-wrapper').css('max-height', height);
 			})
 		}
+		
+		// 在表格查询的页面，监听input回车事件，提交查询
+		me.onInputEnter = function(app) {
+			Vue.nextTick(function() {
+				app = app || window.app;
+				document.querySelectorAll('.el-form input').forEach(function(item) {
+					item.onkeydown = function(e) {
+						var theEvent = e || window.event;
+						var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+						if (code == 13) {
+							app.p.pageNo = 1;
+							app.f5();
+						}    
+					}
+				})
+			})
+		}
+		
+		// 如果value为true，则抛出异常 
+		me.check = function(value, error_msg) {
+			if(value === true) {
+				throw error_msg;
+			}
+		}
+		
+		// 如果value为null，则抛出异常 
+		me.checkNull = function(value, error_msg) {
+			if(me.isNull(value)) {
+				throw error_msg;
+			}
+		}
+		
+		// 监听窗口变动
+		if(!window.onresize) {
+			window.onresize = function() {
+				try{
+					me.f5TableHeight();
+				}catch(e){
+					// console.log(e);
+				}
+			}
+		}
+			
+		
 		// == if 结束
 	}
 	
@@ -955,10 +1085,15 @@ var sa = {
 	me.openLogin = function(login_url) {
 		layer.open({
 			type: 2,
-			title: '登录',
+			// title: '登录',
+			title: false,
+			closeBtn: false,
 			shadeClose: true,
 			shade: 0.8,
-			area: ['90%', '90%'],
+			// area: ['90%', '100%'],
+			area: ['70%', '80%'],
+			// area: ['450px', '360px'],
+			resize: false,
 			content: login_url || '../../login.html'
 		}); 
 	}
@@ -967,13 +1102,15 @@ var sa = {
 })();
 
 
-// 如果当前是Vue环境, 则挂在到Vue示例
-if(window.Vue) {
-	Vue.prototype.sa = sa;
-}
 
 // 如果是sa_admin环境 
 window.sa_admin = window.sa_admin || parent.sa_admin || top.sa_admin;
+
+// 如果当前是Vue环境, 则挂在到Vue示例
+if(window.Vue) {
+	Vue.prototype.sa = window.sa;
+	Vue.prototype.sa_admin = window.sa_admin;
+}
 
 // 对外开放, 在模块化时解开此注释 
 // export default sa;

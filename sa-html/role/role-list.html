@@ -14,8 +14,6 @@
 		<script src="../../static/sa.js"></script>
 	</head>
 	<body>
-		<!-- 防止margin向下击穿 -->
-		<div style="margin-top: -1em;"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<div class="c-panel">
 				<!-- 参数栏 -->
@@ -27,21 +25,22 @@
 					</div>
 					<div class="c-item" style="min-width: 0px;">
 						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
 					</div>
 				</el-form>
-				
-				
 				<!-- 数据列表 -->
-				<el-table :data="dataList" size="mini" >
+				<el-table class="data-table" ref="data-table" :data="dataList" size="small">
 					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
 					<el-table-column label="角色名称">
 						<template slot-scope="s">
-							<el-input size="mini" v-model="s.row.role_name" @input="s.row.is_update = true"></el-input>
+							<el-input v-if="s.row.is_update" size="mini" v-model="s.row.role_name"></el-input>
+							<span v-else>{{s.row.role_name}}</span>
 						</template>
 					</el-table-column>
 					<el-table-column label="责任描述">
 						<template slot-scope="s">
-							<el-input size="mini" v-model="s.row.role_info" @input="s.row.is_update = true"></el-input>
+							<el-input v-if="s.row.is_update" size="mini" v-model="s.row.role_info"></el-input>
+							<span v-else>{{s.row.role_info}}</span>
 						</template>
 					</el-table-column>
 					<el-table-column label="是否锁定" title="锁定的角色为系统维持正常运行的重要角色，不可删除">
@@ -64,65 +63,21 @@
 						</template>
 					</el-table-column>
 				</el-table>
-			</div>
-			<!-- 添加 -->
-			<div class="c-panel">
-				<h4 class="c-title">添加一个</h4>
-				<el-table :data="[{}]" size="mini" >
-					<el-table-column label="编号" width="90px" >
-						<template slot-scope="scope">
-							<el-input size="mini" v-model="m.id"></el-input>
-						</template>
-					</el-table-column>
-					<el-table-column label="名称">
-						<template slot-scope="scope">
-							<el-input size="mini" v-model="m.role_name"></el-input>
-						</template>
-					</el-table-column>
-					<el-table-column label="责任描述">
-						<template slot-scope="scope">
-							<el-input size="mini" v-model="m.role_info"></el-input>
-						</template>
-					</el-table-column>
-					<el-table-column label="是否锁定" title="锁定的角色为系统维持正常运行的重要角色，不可删除">
-						<template slot-scope="scope">
-							{{m.is_lock == 1 ? '是' : '否'}}
-						</template>
-					</el-table-column>
-					<el-table-column prop="address" label="操作">
-						<template slot-scope="scope">
-							<el-button type="text" size="mini" @click="add">添加</el-button>
-						</template>
-					</el-table-column>
-				</el-table>
+				<!-- ------------- 分页 ------------- -->
+				<div class="page-box">
+					<el-pagination background
+						layout="total, prev, pager, next, sizes, jumper" 
+						:current-page.sync="p.pageNo" 
+						:page-size.sync="p.pageSize" 
+						:total="dataList.length" 
+						:page-sizes="[1000]" 
+						@current-change="f5()" 
+						@size-change="f5()">
+					</el-pagination>
+				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
-			// 模拟数据
-			var mockData = {
-				code: 200,
-				msg: 'ok',
-				data: [{
-					"id": 1,
-					"role_name": "普通用户",
-					"role_info": "普通用户",
-					"is_lock": 1,
-					"create_time": "2018-08-17T02:33:14.000+0000"
-				}, {
-					"id": 11,
-					"role_name": "顶级管理员",
-					"role_info": "最高权限",
-					"is_lock": 1,
-					"create_time": "2018-08-17T02:33:14.000+0000"
-				}, {
-					"id": 101,
-					"role_name": "超级管理员",
-					"role_info": "最高权限",
-					"is_lock": 2,
-					"create_time": "2018-08-17T03:24:01.000+0000"
-				}]
-			}
-		</script>
+		<script src="./mock-data.js"></script>
         <script>
 			var app = new Vue({
 				el: '.vue-box',
@@ -130,53 +85,50 @@
 					sa: sa, 	// 超级对象
 					p: {	// 查询参数 
 						role_name: '',
+						pageNo: 1,
+						pageSize: 1000,
 					},
 					dataList: [],	// 数据集合
-					m: {		// 添加信息
-						id: 0, 
-						role_name: '角色名称',
-						role_info: '责任描述',
-						is_lock: 2,
-						create_time: new Date(),
-						is_update: false,
-					}
 				},
 				methods: {
 					// 刷新
 					f5: function(){
 						sa.ajax2('/role/getList', this.p, function(res){
 							this.dataList = sa.listAU(res.data);	// 数据
+							sa.f5TableHeight();		// 刷新表格高度 
 						}.bind(this), {res: mockData});
 					},
 					// 修改
 					update: function (data) {
-						var data2 = sa.copyJSON(data);
-						data2.create_time = undefined;
-						sa.ajax2('/role/update', data2, function(res){
-							sa.ok('修改成功');
-							data.is_update = false;
-						})
+						if(data.is_update == false) {
+							data.is_update = true;
+						} else {
+							sa.confirm('是否修改数据？', function(){
+								var data2 = sa.copyJSON(data);
+								data2.create_time = undefined;
+								sa.ajax2('/role/update', data2, function(res){
+									sa.ok('修改成功');
+									data.is_update = false;
+								})
+							})
+						}
 					},
 					// 删除
 					del: function (data) {
 						if(data.is_lock == 1){
-							return sa.alert('此角色是维持系统正常运行的重要角色，已被锁定，不可删除');
+							return sa.alert('此角色是维持系统正常运行的重要角色<p style="color: red;">已被锁定，不可删除</p>');
 						}
 						sa.confirm('是否删除，此操作不可撤销', function(){
 							sa.ajax2('/role/delete',{id: data.id},function(res){
 								sa.arrayDelete(app.dataList, data);
 								sa.ok('删除成功');
+								sa.f5TableHeight();		// 刷新表格高度 
 							})
 						})
 					},
 					// 添加
 					add: function () {
-						var data = sa.copyJSON(this.m);
-						sa.ajax2('/role/add', data, function(res){
-							sa.alert('添加成功', function(){
-								app.dataList.push(data);
-							});
-						})
+						sa.showIframe('新增角色', 'role-add.html?id=-1', '420px', '280px');
 					}, 
 					// 修改菜单
 					menu_setup: function(data){
@@ -194,6 +146,5 @@
 			
 		
 		</script>
-	
 	</body>
 </html>

@@ -62,15 +62,17 @@ sa_admin.dropList = [		// 头像点击处可操作的选项
 	{
 		name: '切换账号',
 		click: function() {
-			layer.open({
-				type: 2,
-				title: '登录',
-				shadeClose: true,
-				shade: 0.8,
-				area: ['70%', '80%'],
-				resize: false,
-				content: 'login.html'
-			});
+			sa.$page.openLogin('login.html');
+			// layer.open({
+			// 	type: 2,
+			// 	title: false,
+			// 	closeBtn: false,
+			// 	shadeClose: true,
+			// 	shade: 0.8,
+			// 	area: ['70%', '80%'],
+			// 	resize: false,
+			// 	content: 'login.html'
+			// });
 		}
 	},
 	{

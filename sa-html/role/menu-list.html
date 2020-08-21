@@ -13,17 +13,16 @@
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
         <style>
-			body,.el-tree{background-color: #F5F5F5;}
+			body,.el-tree{background-color: #eee;}
 			.el-tree-node{margin: 0.15em 0 !important;}
 			/* 悬浮时颜色更深一点 */
 			.el-tree-node__content:hover{background-color: #CFE8FC !important;}
         </style>
 	</head>
 	<body>
-		<div style="margin-top: -1em;" title="防止margin向下击穿"><br></div>
 		<div class="vue-box" style="display: none;" :style="'display: block;'">
 			<!-- 表格 -->
-			<div style="padding: 2em;">
+			<div style="padding: 0 1em;">
 				<div class="c-title">菜单预览</div>
 		        <!-- 树插件 -->
 				<el-tree
@@ -38,6 +37,7 @@
 						<span style="color: #999;" v-if="s.data.info">&emsp;———— {{s.data.info}} </span>
 					</span>
 				</el-tree>
+				<br><br><br>
 			</div>
 		</div>
 		<script src="../../sa-resources/menu-list.js"></script>
