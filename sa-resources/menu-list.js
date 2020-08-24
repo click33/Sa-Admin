@@ -92,7 +92,7 @@ var menuList =	[
 		info: '对文章的增删改查、维护',
 		childList: [
 			{id: '6-1', name: '文章列表', url: 'sa-html/article/art-list.html'},
-			{id: '6-2', name: '文章发表', url: 'sa-html/article/art-add.html'}
+			{id: '6-2', name: '文章发布', url: 'sa-html/article/art-add.html'}
 		]
 	},
 	{

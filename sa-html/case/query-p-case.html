@@ -200,6 +200,7 @@
 				},
 				created: function(){
 					this.f5();
+					sa.onInputEnter();		// 监听输入框的回车事件，执行查询  
 					this.$notify.info({
 						title: '消息',
 						message: '本页面展示各种检索参数，以便完成强大的列表查询'
