@@ -37,7 +37,7 @@
 					<br>
 					<div class="c-item" style="min-width: 10px;">
 						<label class="c-label">综合排序：</label>
-						<el-radio-group size="mini" v-model="p.sort_type">
+						<el-radio-group size="mini" v-model="p.sortType">
 							<el-radio :label="0">发表时间</el-radio>
 							<el-radio :label="1">喜欢数</el-radio>
 							<el-radio :label="2">点击数</el-radio>
@@ -96,7 +96,7 @@
 					p: { // 查询参数
 						id: '',
 						title: '',
-						sort_type: 0,
+						sortType: 0,
 						pageNo: 1,
 						pageSize: 10,
 					},

@@ -34,7 +34,7 @@
 					<br />
 					<div class="c-item s-radio-text">
 						<label class="c-label">综合排序：</label>
-						<el-radio-group size="mini" v-model="p.sort_type">
+						<el-radio-group size="mini" v-model="p.sortType">
 							<el-radio :label="1">注册时间</el-radio>
 							<el-radio :label="2">最近登录</el-radio>
 							<el-radio :label="3">登陆次数</el-radio>
@@ -119,7 +119,7 @@
 					p: {	// 查询参数 
 						username: '',
 						create_type: 0,
-						sort_type: 1,
+						sortType: 1,
 						start_time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-1',	// 本月一号 
 						end_time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),	// 本月当日 
 						pageNo: 1,
