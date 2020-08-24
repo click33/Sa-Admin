@@ -286,14 +286,19 @@ var sa = {
 	}
 	
 	// 预览一组图片 
-	// srcList=图片路径数组, index=打开立即显示哪张(可填下标, 也可填写src路径)
+	// srcList=图片路径数组(可以是json样，也可以是逗号切割式), index=打开立即显示哪张(可填下标, 也可填写src路径)
 	me.showImageList = function(srcList, index) {
 		// 如果填的是个string 
+		srcList = srcList || [];
 		if(typeof srcList === 'string') {
 			try{
 				srcList = JSON.parse(srcList);
 			}catch(e){
-				srcList = [];
+				try{
+					srcList = srcList.split(',');	// 尝试字符串切割
+				}catch(e){
+					srcList = [];	
+				}
 			}
 		}
 		// 如果填的是路径 
