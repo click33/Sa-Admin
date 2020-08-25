@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
-	version: '2.4',
-	update_time: '2020-8-22',
-	info: '新增一系列API'
+	version: '2.4.1',
+	update_time: '2020-8-25',
+	info: '优化了表格导出'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -930,10 +930,33 @@ var sa = {
 			// 声明函数 
 			let exportExcel_fn = function(select, fileName) {
 				// 赋默认值
-				select = '.data-table';
-				fileName = 'table.xlsx';
+				select = select || '.data-table';
+				fileName = fileName || 'table.xlsx';
 				// 开始导出
 				let wb = XLSX.utils.table_to_book(document.querySelector(select));   // 这里就是表格
+				let sheet = wb.Sheets.Sheet1;	// 单元表 
+				try{
+					// 强改宽度 
+					sheet['!cols'] = sheet['!cols'] || [];
+					let thList = document.querySelector(select).querySelectorAll('.el-table__header-wrapper tr th');
+					for (var i = 0; i < thList.length; i++) {
+						// 如果是多选框
+						if(thList[i].querySelector('.el-checkbox')) {
+							sheet['!cols'].push({ wch: 5 });	// 强改宽度
+							continue;
+						}
+						sheet['!cols'].push({ wch: 15 });	// 强改宽度
+					}
+					// 强改高度 
+					sheet['!rows'] = sheet['!rows'] || [];
+					let trList = document.querySelector(select).querySelectorAll('.el-table__body-wrapper tbody tr');
+					for (var i = 0; i < trList.length + 1; i++) {
+						sheet['!rows'].push({ hpx: 20 });	// 强改高度 
+					}
+				} catch(e) {
+					console.err(e);
+				}
+				// 开始制作并输出
 				let wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'array' });
 				// 点击 
 				let blob = new Blob([wbout], { type: 'application/octet-stream'});
@@ -957,7 +980,7 @@ var sa = {
 			
 		}
 		
-		// 刷新表格高度
+		// 刷新表格高度, 请务必在所有表格高度发生变化的地方调用此方法
 		me.f5TableHeight = function() {
 			Vue.nextTick(function() {
 				var height = $('.el-table .el-table__body-wrapper table').height();
@@ -1026,6 +1049,46 @@ var sa = {
     var me = {};
     sa.$sys = me;
 	
+	// ======================= 登录相关 ============================
+	// 写入当前已登陆用户信息
+	me.setCurrUser = function(currUser){
+		localStorage.setItem('currUser', JSON.stringify(currUser));
+	}
+	
+	// 获得当前已登陆用户信息
+	me.getCurrUser = function(){
+		var user = localStorage.getItem("currUser");
+		if(user == undefined || user == null || user == 'null' || user == '' || user == '{}' || user.length < 10){
+			user = {
+				id: '0',
+				username: '未登录'
+			}
+		}else{
+			user = JSON.parse(user);
+		}
+		return user;
+	}
+	
+	// 如果未登录，则强制跳转到登录 
+	me.checkLogin = function(not_login_url){
+		console.log(me.getCurrUser());
+		if(me.getCurrUser().id == 0) {
+			location.href= not_login_url || '../../login.html';
+			throw '未登录，请先登录';
+		}
+	}
+	
+	// 同上, 只不过是以弹窗的形式显示未登录
+	me.checkLoginTs = function(not_login_url){
+		if(me.getCurrUser().id == 0) {
+			sa.$page.openLogin(not_login_url || '../../login.html');
+			throw '未登录，请先登录';
+		}
+	}
+	
+	
+	// ========================= 权限验证 ========================= 
+	
 	// 定义key
 	var pcode_key = 'permission_code';
 	
@@ -1072,6 +1135,22 @@ var sa = {
 		}
 	}
 	
+	
+	
+	// ======================= 配置相关 ============================
+	// 写入配置信息
+	me.setAppCfg = function(cfg) {
+		if(typeof cfg != 'string') {
+			cfg = JSON.stringify(cfg);
+		}
+		localStorage.setItem('app_cfg', cfg);
+	}
+	
+	// 获取配置信息
+	me.getAppCfg = function() {
+		var app_cfg = sa.JSONParse(localStorage.getItem('app_cfg'), {}) || {};
+		return app_cfg;
+	}
 	
 	
 	
