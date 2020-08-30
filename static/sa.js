@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
 	version: '2.4.1',
-	update_time: '2020-8-25',
-	info: '优化了表格导出'
+	update_time: '2020-8-31',
+	info: '刷新表格高度时判断了滚动条的情况'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -983,10 +983,21 @@ var sa = {
 		// 刷新表格高度, 请务必在所有表格高度发生变化的地方调用此方法
 		me.f5TableHeight = function() {
 			Vue.nextTick(function() {
-				var height = $('.el-table .el-table__body-wrapper table').height();
-				height = height == 0 ? 60 : height;
-				$('.el-table .el-table__body-wrapper').css('min-height', height);
-				$('.el-table .el-table__body-wrapper').css('max-height', height);
+				if($('.el-table .el-table__body-wrapper table') == null) {
+					return;
+				}
+				setTimeout(function() {
+					var height = $('.el-table .el-table__body-wrapper table').height();
+					height = height == 0 ? 60 : height;
+					// 判断是否有滚动条
+					var tw = $('.el-table .el-table__body-wrapper').get(0);
+					if(tw.scrollWidth > tw.clientWidth) {
+						height = height + 16;
+					}
+					// 设置高度
+					$('.el-table .el-table__body-wrapper').css('min-height', height);
+					$('.el-table .el-table__body-wrapper').css('max-height', height);
+				},0)
 			})
 		}
 		
