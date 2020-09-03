@@ -11,8 +11,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.4.1',		// 当前版本
-		update_time: '2020-08-25',		// 更新日期 
+		version: 'v2.4.2',		// 当前版本
+		update_time: '2020-09-3',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
