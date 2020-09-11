@@ -1,13 +1,21 @@
-
 <p align="center">
     <img alt="logo" src="http://oss.dev33.cn/sa-admin/admin-logo-150.png" width="150" height="150" style="margin-bottom: 10px;">
 </p>
-<h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">sa-admin (iframe版) v2.4.0</h2>
+<h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">sa-admin v2.4.2</h2>
 <h4 align="center">一个多窗口后台模板，流畅、易上手、提高生产力</h4>
+<h4 align="center">
+	<a href="https://github.com/click33/sa-admin"><img src="https://img.shields.io/badge/sa--admin-v2.4.2-2B9939"></a>
+	<a href="https://github.com/click33/sa-admin"><img src="https://img.shields.io/badge/language-html-2B9939"></a>
+	<a href="https://github.com/click33/sa-admin/stargazers"><img src="https://img.shields.io/github/stars/click33/sa-admin"></a>
+	<a href="https://github.com/click33/sa-admin/watchers"><img src="https://img.shields.io/github/watchers/click33/sa-admin"></a>
+	<a href="https://github.com/click33/sa-admin/network/members"><img src="https://img.shields.io/github/forks/click33/sa-admin"></a>
+	<a href="https://github.com/click33/sa-admin/issues"><img src="https://img.shields.io/github/issues/click33/sa-admin.svg"></a>
+	<a href="https://github.com/click33/sa-admin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/click33/sa-admin.svg"></a>
+</h4>
 
 
 
-## 优点
+## 优点 😘
 - 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
 - 示例全面：提供大量常见增删改查示例，提高你的生产力
 - 演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
@@ -15,6 +23,7 @@
 
 ## 需求提交
 - 我们深知一个优秀的项目需要海纳百川，[点我在线提交需求](http://sa-app.dev33.cn/wall.html?name=sa-admin)
+- 开源不易，求鼓励，**点个`star`吧**
 
 ## 框架选型
 - JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
