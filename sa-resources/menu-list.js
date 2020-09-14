@@ -55,6 +55,7 @@ var menuList =	[
 			{id: '3-1-2', name: '分类添加', icon: 'el-icon-plus', url: 'sa-html/sys-type/sys-type-add.html'},
 			{id: '3-2-1', name: '轮播图列表', icon: 'el-icon-collection-tag', url: 'sa-html/home/swiper-list.html'},
 			{id: '3-2-2', name: '轮播图添加', icon: 'el-icon-plus', url: 'sa-html/home/swiper-add.html'},
+			{id: '3-3-1', name: '商品规格示例', icon: 'el-icon-plus', url: 'sa-html/ser-goods/ser-goods-add.html'},
 		]
 	},
 	{

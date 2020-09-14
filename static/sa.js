@@ -43,7 +43,7 @@ var sa = {
 		{
 			msg: '',		// 默认的提示文字 填null为不提示 
 			type: 'get',	// 设定请求类型 默认post
-			baseUrl: '',	// ajax请求拼接的父路径 默认取 sa.cfg.apu_url 
+			baseUrl: '',	// ajax请求拼接的父路径 默认取 sa.cfg.api_url 
 			sleep: 0,		// ajax模拟的延时毫秒数, 默认0 
 			success500: fn,	// code码等于500时的回调函数 (一般代表服务器错误)
 			success403: fn,	// code码等于403时的回调函数 (一般代表无权限)
@@ -993,7 +993,7 @@ var sa = {
 		// 刷新表格高度, 请务必在所有表格高度发生变化的地方调用此方法
 		me.f5TableHeight = function() {
 			Vue.nextTick(function() {
-				if($('.el-table .el-table__body-wrapper table').length == 0) {
+				if($('.el-table.data-table .el-table__body-wrapper table').length == 0) {
 					return;
 				}
 				setTimeout(function() {

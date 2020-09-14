@@ -1,0 +1,37 @@
+/* ===================== sa-plus新增 ===================== */
+
+/* ==== 图集照片样式 ==== */
+.c-item .image-box{max-width: 700px; padding-left: 0px;}
+.c-item .image-box-2{width: 90px; height: 125px; cursor: pointer; float: left;}
+.c-item .image-box-2 img{width: 90px; height: 90px; border-radius: 2px;}
+.c-item .image-box-2{display: inline-block; margin-right: 5px; margin-bottom: 5px;}
+.c-item .image-box-2 p{text-align: center; color: #999; margin-top: -10px;}
+.c-item .up_img{text-align: center; background-color: #f8f8f8; height: 90px;}
+.c-item .up_img img{width: 40px; height: 40px; margin-top: 25px;}
+.c-item .up_img{border: 1px #eee solid;}
+
+/* ==== wang富文本编辑器 ==== */
+.editor-item{width: 100%; height: auto;}
+.editor-item .c-label{float: left;}
+.editor-item .editor-box{float: left; width: 80%; margin-top: 0px; margin-left: 5px; transition: all 0.2s;} 
+.editor-item #editor{min-height: 300px; background-color: #FFF;}
+.editor-item .w-e-toolbar{padding-top: 5px !important;}
+/* 尽量小点 */
+.editor-item .editor-box{float: left; width: 700px;} 
+.editor-item .editor-box img{max-width: 200px !important;}
+/* .editor-box img{margin-left: -1em;}
+.editor-box img{margin-top: -5px;} */
+/* 仿移动端样式兼容 */
+/* .editor-item .editor-box{float: left; width: 400px;} 
+.editor-item .w-e-toolbar{width: 400px; flex-wrap: wrap; } */
+.c-item .fold{height: 100px !important; overflow: hidden;}
+.c-item .el-select-dropdown{z-index: 9999999 !important;}
+
+/* 多行内容的样式 */
+.c-item-mline{display: inline-block; width: calc(100% - 10em);}
+.del-rr{color: red !important; cursor: pointer; margin-left: 0.5em; vertical-align: middle;}
+/* .del-rr:hover{text-decoration: underline;} */
+
+
+
+
