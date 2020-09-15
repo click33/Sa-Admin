@@ -295,7 +295,7 @@
 						if(this.specKeyList.indexOf(text) > -1) {
 							return sa.error2('已经有这个规格了');
 						}
-						var sk = {name: text.replaceAll(' ', ''), specValueAddText: '', values: []};
+						var sk = {name: text.replace(/\s/g,""), specValueAddText: '', values: []};
 						this.specKeyList.push(sk); 
 						this.specKeyAddText='';
 						this.f5Spec();
@@ -309,7 +309,7 @@
 						if(sk.values.indexOf(text) > -1) {
 							return sa.error2('已经有这个规格值了');
 						}
-						var value = text.replaceAll(' ', '');
+						var value = text.replace(/\s/g,"");
 						sk.values.push(value); 
 						sk.specValueAddText='';
 						this.f5Spec();
