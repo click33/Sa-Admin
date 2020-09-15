@@ -440,8 +440,8 @@
 						var m = this.m;
 						m.image_list = m.image_list_arr.join(',');	// 图片 数组转字符串 
 						m.label_list = m.label_list_arr.join(',');	// 标签 数组转字符串 
-						m.spec_key_list_str = JSON.stringify(m.specKeyList);	// 规格key数据 对象转字符串 
-						m.spec_list_str = JSON.stringify(m.specList);	// 规格列表数据 对象转字符串 
+						m.spec_key_list_str = JSON.stringify(this.specKeyList);	// 规格key数据 对象转字符串 
+						m.spec_list_str = JSON.stringify(this.specList);	// 规格列表数据 对象转字符串 
 						m.content = editor.txt.html();	// 获取富文本值 
 						if(this.submitCheck() != 'ok') {
 							return;
