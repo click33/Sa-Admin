@@ -55,7 +55,7 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 }
 
 /* 第一行建筑物 */
-.nav-right-1{position: relative; height: 49px; line-height: 49px; border-bottom: 1px #DDD solid; }
+.nav-right-1{position: relative; height: 49px; line-height: 49px; border-bottom: 1px #DDD solid; overflow: hidden;}
 
 .tools-left{border: 0px #000 solid; float: left;}
 .tools-right{float: right;}

@@ -1,8 +1,8 @@
 // =========================== sa对象封装一系列工具方法 ===========================  
 var sa = {
-	version: '2.4.2',
-	update_time: '2020-9-3',
-	info: '添加了弹窗的回车事件'
+	version: '2.4.3',
+	update_time: '2020-10-2',
+	info: '新增双击layer标题处全屏'
 };
 
 // ===========================  当前环境配置  ======================================= 
@@ -1052,6 +1052,19 @@ var sa = {
 				}
 			}
 		}
+			
+		// 双击layer标题处全屏
+		$(document).on('mousedown', '.layui-layer-title', function(e) {
+			// console.log('单击中');
+			if(window.layer_title_last_click_time) {
+				var cz = new Date().getTime() - window.layer_title_last_click_time;
+				if(cz < 250) {
+					console.log('双击');
+					$(this).parent().find('.layui-layer-max').click();
+				}
+			}
+			window.layer_title_last_click_time = new Date().getTime();
+		})
 			
 		
 		// == if 结束

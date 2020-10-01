@@ -124,7 +124,7 @@ var menuList =	[
 			{id: '8-41', name: 'sa-admin单页版', url: 'http://sa-vue-admin.dev33.cn/', is_blank: true},
 			{id: '8-3', name: 'sa-token', url: 'http://sa-token.dev33.cn/', is_blank: true},
 			{id: '8-12', name: 'sa-doc', url: 'http://sa-doc.dev33.cn/', is_blank: true},
-			{id: '8-13', name: 'sa-fast', url: 'http://sa-fast.dev33.cn/', is_blank: true},
+			{id: '8-13', name: 'sa-plus', url: 'http://sa-plus.dev33.cn/', is_blank: true},
 			{id: '8-4', name: 'SqlFly', url: 'https://sqlfly.dev33.cn/', is_blank: true},
 			{id: '8-6', name: '颜值排行榜', url: 'http://yanzhi21.com/', is_blank: true},
 			{id: '8-7', name: 'jq22插件库', url: 'http://www.jq22.com/', is_blank: true},

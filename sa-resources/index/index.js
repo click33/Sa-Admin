@@ -11,8 +11,8 @@ var homeTab = {
 var sa_admin = new Vue({
 	el: '.app',
 	data: {
-		version: 'v2.4.2',		// 当前版本
-		update_time: '2020-09-3',		// 更新日期 
+		version: 'v2.4.3',		// 当前版本
+		update_time: '2020-10-02',		// 更新日期 
 		title: '',//'SA-后台模板',				// 页面标题  
 		logo_url: '',	// logo地址 
 		icon_url: '',	// icon地址 
@@ -175,6 +175,7 @@ var sa_admin = new Vue({
 		refMenuList: function(menu_list, parent_id) {
 			for (var i = 0; i < menu_list.length; i++) {
 				var menu = menu_list[i];
+				menu.id = menu.id + '';
 				menu.is_show = (menu.is_show === false ? false : true);
 				menu.parent_id = menu.parent_id || parent_id || 0;
 				// 隐藏的给去掉 
@@ -820,7 +821,9 @@ var sa_admin = new Vue({
 		updateSlideSize: function(ms) {
 			ms = ms || 1;
 			setTimeout(function() {
-				this.mySwiper.update();	// swipre重新计算大小  
+				if(this.mySwiper) {
+					this.mySwiper.update();	// swipre重新计算大小  
+				}
 			}.bind(this), ms);
 		},
 		// ------------------- 查找菜单相关 --------------------
@@ -986,6 +989,5 @@ setInterval(function() {
 	zong += Y + "-" + M + "-" + D + " " + sx + " " + h + ":" + m + ":" + s + " 周" + z;
 	sa_admin.now_time = zong;
 }, 1000)
-
 
 
