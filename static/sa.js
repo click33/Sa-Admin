@@ -415,12 +415,14 @@ var sa = {
 	
 	
 	// 监听回车事件，达到回车关闭弹窗的效果 
-	$(document).on('keydown', function() {
-		if(event.keyCode === 13 && $(".layui-layer-btn0").length == 1 && !window.is_not_watch_enter){
-			$(".layui-layer-btn0").click();
-			return false;
-		}
-	}); 
+	if(window.$) {
+		$(document).on('keydown', function() {
+			if(event.keyCode === 13 && $(".layui-layer-btn0").length == 1 && !window.is_not_watch_enter && $(this).find('.layui-layer-input').length == 0){
+				$(".layui-layer-btn0").click();
+				return false;
+			}
+		}); 
+	}
 	
 	
 	
@@ -1054,18 +1056,19 @@ var sa = {
 		}
 			
 		// 双击layer标题处全屏
-		$(document).on('mousedown', '.layui-layer-title', function(e) {
-			// console.log('单击中');
-			if(window.layer_title_last_click_time) {
-				var cz = new Date().getTime() - window.layer_title_last_click_time;
-				if(cz < 250) {
-					console.log('双击');
-					$(this).parent().find('.layui-layer-max').click();
+		if(window.$) {
+			$(document).on('mousedown', '.layui-layer-title', function(e) {
+				// console.log('单击中');
+				if(window.layer_title_last_click_time) {
+					var cz = new Date().getTime() - window.layer_title_last_click_time;
+					if(cz < 250) {
+						console.log('双击');
+						$(this).parent().find('.layui-layer-max').click();
+					}
 				}
-			}
-			window.layer_title_last_click_time = new Date().getTime();
-		})
-			
+				window.layer_title_last_click_time = new Date().getTime();
+			})
+		}
 		
 		// == if 结束
 	}

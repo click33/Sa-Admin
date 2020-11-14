@@ -47,10 +47,8 @@
 				<!-- ------------- 快捷按钮 ------------- -->
 				<div class="fast-btn">
 					<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
-					<!-- <el-button size="mini" type="success" icon="el-icon-edit" @click="update($refs['data-table'].selection[0])"
-						:disabled="!$refs['data-table'] || $refs['data-table'].selection.length != 1">修改</el-button> -->
-					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()"
-						:disabled="!$refs['data-table'] || $refs['data-table'].selection.length < 1">删除</el-button>
+					<el-button size="mini" type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button>
+					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
 					<el-button size="mini" type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
 					<el-button size="mini" type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
 				</div>
@@ -137,6 +135,26 @@
 							sa.f5TableHeight();		// 刷新表格高度 
 						}.bind(this), {res: mockData});
 					},
+					// 查看
+					get: function(data) {
+						var str = '<div>';
+						str += '<p>编号：' + data.id + '</p>';
+						str += '<p>昵称：' + data.username + '</p>';
+						str += '<p>性别：' + data.sex + '</p>';
+						str += '<p>当前状态：<b>' + (data.status == 1 ? '正常' : '禁用') + '</b></p>';
+						str += '<p>注册方式：' + data.create_type + '</p>';
+						str += '<p>注册时间：' + data.create_time + '</p>';
+						str += '</div>';
+						sa.alert(str);
+					},
+					// 查看 - 根据选中的
+					getBySelect: function(data) {
+						var selection = this.$refs['data-table'].selection;
+						if(selection.length == 0) {
+							return sa.msg('请选择一条数据')
+						}
+						this.get(selection[0]);
+					},
 					// 新增
 					add: function(data) {
 						// sa.showIframe('新增数据', 'user-add.html?id=-1', '420px', '280px');
@@ -157,6 +175,9 @@
 						// 获取选中元素的id列表
 						let selection = this.$refs['data-table'].selection;
 						let ids = sa.getArrayField(selection, 'id');
+						if(selection.length == 0) {
+							return sa.msg('请至少选择一条数据')
+						}
 						// 提交删除 
 						sa.confirm('是否批量删除选中数据？此操作不可撤销', function() {
 							sa.ajax2('/SysType/deleteByIds', {ids: ids.join(',')}, function(res) {
@@ -166,18 +187,6 @@
 							}.bind(this))
 						}.bind(this));
 					},
-					// 查看
-					get: function(data) {
-						var str = '<div>';
-						str += '<p>编号：' + data.id + '</p>';
-						str += '<p>昵称：' + data.username + '</p>';
-						str += '<p>性别：' + data.sex + '</p>';
-						str += '<p>当前状态：<b>' + (data.status == 1 ? '正常' : '禁用') + '</b></p>';
-						str += '<p>注册方式：' + data.create_type + '</p>';
-						str += '<p>注册时间：' + data.create_time + '</p>';
-						str += '</div>';
-						sa.alert(str);
-					}
 				},
 				created: function(){
 					this.f5()
