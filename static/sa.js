@@ -845,7 +845,7 @@ var sa = {
 			var newObj = {};
 			if(obj != undefined && obj != null) {
 				for(var key in obj) {
-					if(obj[key] === undefined || obj[key] === null || obj[key] == '') {
+					if(obj[key] === undefined || obj[key] === null || obj[key] === '') {
 						// 
 					} else {
 						newObj[key] = obj[key];
