@@ -129,7 +129,7 @@ var menuList =	[
 			{id: '8-6', name: '颜值排行榜', url: 'http://yanzhi21.com/', is_blank: true},
 			{id: '8-7', name: 'jq22插件库', url: 'http://www.jq22.com/', is_blank: true},
 			{id: '8-2', name: 'uni-app', url: 'https://uniapp.dcloud.io/', is_blank: true},
-			{id: '8-31', name: '秀恩爱专用', url: 'http://sz6.gitee.io/xixi/'},
+			{id: '8-31', name: '秀恩爱专用', url: 'http://click33.gitee.io/xixi/'},
 		]
 	},
 	//  ========= 示例 隐藏的菜单，最终将不会显示在菜单栏里 ================
