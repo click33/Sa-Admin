@@ -29,7 +29,6 @@
 - JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
 - UI框架：[Element-UI @2.13.0](https://element.eleme.cn/#/zh-CN)
 - web弹层：[layer @3.1.1](http://layer.layui.com/)
-- 切页动画：[Swiper @4.5.0](https://www.swiper.com.cn/)
 - 即使以上几个框架你都没接触过，只要你认真阅读一遍文档说明，也可以快速上手本模板
 
 ## 功能

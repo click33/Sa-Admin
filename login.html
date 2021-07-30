@@ -6,12 +6,12 @@
 		<meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
 		<meta name="author" content="Vincent Garreau" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" media="screen" href="sa-resources/login/style.css">
+		<link rel="stylesheet" media="screen" href="sa-frame/login/style.css">
 		<link rel="stylesheet" href="static/sa.css">
 		<style type="text/css">
 			/* 背景图片 */
 			#particles-js{
-				background-image: url(sa-resources/login/bg.jpg);
+				background-image: url(sa-frame/login/bg.jpg);
 			}
 			
 			/* 样式调整 */
@@ -39,14 +39,14 @@
 						<span class="page-title">登录</span>
 					</div>
 					<div class="login-center clearfix">
-						<div class="login-center-img"><img src="sa-resources/login/name.png" /></div>
+						<div class="login-center-img"><img src="sa-frame/login/name.png" /></div>
 						<div class="login-center-input">
 							<input type="text" name="key" value="" placeholder="请输入账号" />
 							<div class="login-center-input-text">账号</div>
 						</div>
 					</div>
 					<div class="login-center clearfix">
-						<div class="login-center-img"><img src="sa-resources/login/password.png" /></div>
+						<div class="login-center-img"><img src="sa-frame/login/password.png" /></div>
 						<div class="login-center-input">
 							<input type="password" name="password" value="" placeholder="请输入密码" />
 							<div class="login-center-input-text">密码</div>
@@ -59,8 +59,8 @@
 		</div>
 
 		<!-- scripts -->
-		<script src="sa-resources/login/particles.min.js"></script>
-		<script src="sa-resources/login/app.js"></script>
+		<script src="sa-frame/login/particles.min.js"></script>
+		<script src="sa-frame/login/app.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="static/sa.js"></script>
@@ -72,7 +72,7 @@
 			var page_title = 'SA-后台模板-登录';		// 页面标题 
 			var key = 'admin';						// 默认的key 
 			var password = 'admin';					// 默认的password  
-			var logo_url = 'sa-resources/admin-logo.png';	// logo地址，为空字符串则不显示 
+			var logo = 'sa-frame/admin-logo.png';	// logo地址，为空字符串则不显示 
 			
 			// 点击登录按钮 
 			document.querySelector(".login-button").onclick = function() {
@@ -107,8 +107,8 @@
 			$('title').html(page_title);
 			$('[name=key]').val(key);
 			$('[name=password]').val(password);
-			if(logo_url != null && logo_url != '') {
-				$('.logo-img').attr('src', logo_url);
+			if(logo != null && logo != '') {
+				$('.logo-img').attr('src', logo);
 				$('.logo-img').show();
 			}
 			// 绑定回车事件

@@ -1,0 +1,66 @@
+*{margin: 0; padding: 0; }
+html,body{height: 100%; background-color: #EEE;} 
+body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gif); background-repeat: no-repeat;background-position: 50% 50%;}
+.app{height: 100%; font-size: 16px; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+.app{background-color: #EEE;}
+
+/* 变量 */
+body{
+	--nav-left-width: 200px;
+	--nav-left-width-fold: 64px;
+	--nav-right-1-height: 49px;
+	--nav-right-2-height: 35px;
+}
+
+.nav-left, .nav-right {position: fixed; top: 0; height: 100%;}
+
+/* 左边 */
+.nav-left{width: var(--nav-left-width); left: 0px; z-index: 200; overflow: hidden;}
+.nav-left-top{width: 100%; height: 85px; line-height: 85px;/* z-index: 100; */ overflow: hidden;}
+.nav-left-bottom{width: 100%; height: calc(100% - 80px); overflow: hidden;}
+
+/* 右边 */
+.nav-right{width: calc(100% - var(--nav-left-width)); right: 0px; z-index: 100; }
+.nav-right-1{height: var(--nav-right-1-height); line-height: var(--nav-right-1-height); z-index: 200; position: relative; border-bottom: 1px #DDD solid; overflow: hidden;}
+.nav-right-2{height: var(--nav-right-2-height); position: relative; z-index: 200; box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
+.nav-right-3{width: 100%; height: calc(100vh - var(--nav-right-1-height) - var(--nav-right-2-height)); position: relative; overflow:}
+
+/* .fas{transition: all 0s;} */
+
+/* 所有带动画的元素 */
+.admin-logo,.nav-left, .nav-right, .nav-right-2 *{transition: all 0.2s; }
+
+
+.app-fold{
+	--nav-left-width: 64px;
+}
+
+/* 菜单折叠时 部分元素隐藏 */
+.app-fold .admin-title, .app-fold .menu-name, .app-fold-right .el-submenu__icon-arrow{display: none;}
+.app-fold .admin-logo{margin-left: 12px !important;}
+
+/* .nav-right-3 包裹了太多 View，不能让它参与动画，因为实在太TM卡了 */
+.nav-right-3{width: calc(100% - var(--nav-left-width)); position: fixed; transition: none;} 
+.app-fold-right .nav-right-3{width: calc(100% - 64px); left: 64px;}
+
+
+/* -------------- 其它 --------------- */
+
+
+/* 折叠时悬浮菜单样式，防止透明 */
+.el-menu--vertical .el-menu--popup{background-color: #FFF !important; color: red !important;}
+
+/* 最高层级 */
+.z-index-max{z-index: 2147483647;}
+
+
+/* 遮罩样式 */
+.shade-fox{position: absolute; z-index: 1000000; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: #FFF; top: 0px;}
+.shade-fox{display: flex; justify-content: center; align-items: center}
+.shade-text{}
+
+
+/* 去除掉便签的大边框 */
+.layer-note-class .layui-layer-input{outline: 0; box-shadow: none !important; border: 1px #ddd solid; margin: 1em; padding: 0.5em !important; font-family: 'Times New Roman', Times, serif;}
+
+

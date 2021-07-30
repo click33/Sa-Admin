@@ -48,9 +48,9 @@
 
 #### 6、需要注意的地方
 ```
-	`sa.checkAuth` 与 `sa.checkAuthTs` 方法为了调用方便，默认在无权限时打开的页面地址为：`../../sa-html/error-page/403.html`
+	`sa.checkAuth` 与 `sa.checkAuthTs` 方法为了调用方便，默认在无权限时打开的页面地址为：`../../sa-view/error-page/403.html`
 	此url只有在当前页面为二级子目录时才能打开成功，其它级别目录则会无法打开显示404，这时候你需要指定403无权限页面地址 
-	例如在首页index.html调用时，原调用方式：`sa.checkAuth('a')` ，改为：`sa.checkAuth('a', 'sa-html/error-page/403.html')`
+	例如在首页index.html调用时，原调用方式：`sa.checkAuth('a')` ，改为：`sa.checkAuth('a', 'sa-view/error-page/403.html')`
 ```
 
 最后请知晓一点：**最终的鉴权操作一定要在后端完成，前端只能是起到一个辅助作用**

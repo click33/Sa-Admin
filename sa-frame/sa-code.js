@@ -6,9 +6,9 @@
 // ================================= 示例：一些基本信息 ================================= 
 
 // 设置模板标题 
-sa_admin.title = "SA-后台模板";
-sa_admin.logo_url = 'sa-resources/admin-logo.png';    // 设置logo图标地址   默认值：sa-resources/admin-logo.png
-sa_admin.icon_url = 'sa-resources/admin-logo.png';    // 设置icon图标地址   默认值：sa-resources/admin-logo.png
+// sa_admin.title = "SA-后台模板";
+// sa_admin.logo = 'sa-frame/admin-logo.png';    // 设置logo图标地址   默认值：sa-frame/admin-logo.png
+// sa_admin.icon = 'sa-frame/admin-logo.png';    // 设置icon图标地址   默认值：sa-frame/admin-logo.png
 
 
 // ================================= 示例：自定义菜单 =================================
@@ -46,7 +46,7 @@ sa_admin.setMenuList(myMenuList);	// 写入菜单
 // 用户登录后，右上角可直接显示用户的头像和昵称
 sa_admin.user = {
 	username: 'root',	// 昵称 
-	avatar: 'sa-resources/admin-logo.png'	// 头像地址  
+	avatar: 'sa-frame/admin-logo.png'	// 头像地址  
 }
 
 
@@ -109,7 +109,6 @@ sa_admin.init();
 // sa_admin.init({
 // 	themeDefault: '1',	// 默认的主题，可选值：1、2、3、4、5、6、7 
 // 	switchDefault: 'fade',	// 默认的切换动画，可选值：fade、slide、cube、coverflow、flip
-// 	is_show_tabbar: true,	// 是否显示tabbar栏, 默认为true, 配置为false后将不再是一个多窗口tab, 取之显示的是一个面包屑导航栏
 // 	is_reme_open: true,		// 是否记住上一次最后打开的窗口, 默认为true, 配置为false后, 每次刷新不再自动打开上一次最后打开的窗口(也不再有锚链接智能tab调准)
 // });
 

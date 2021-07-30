@@ -1149,7 +1149,7 @@ var sa = {
 	sa.checkAuth = function(pcode, not_pcode_url) {
 		var is_have = sa.keyListHas(pcode_key, pcode);	
 		if(is_have == false) {
-			location.href= not_pcode_url || '../../sa-html/error-page/403.html';
+			location.href= not_pcode_url || '../../sa-view/error-page/403.html';
 			throw '暂无权限: ' + pcode;
 		}
 	}
@@ -1157,7 +1157,7 @@ var sa = {
 	sa.checkAuthTs = function(pcode, not_pcode_url) {
 		var is_have = sa.keyListHas(pcode_key, pcode);	
 		if(is_have == false) {
-			var url = not_pcode_url || '../../sa-html/error-page/403.html';
+			var url = not_pcode_url || '../../sa-view/error-page/403.html';
 			layer.open({
 				type: 2,	
 				title: false,	// 标题 
