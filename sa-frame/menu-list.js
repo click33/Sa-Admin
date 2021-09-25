@@ -8,7 +8,7 @@
 // 	parent_id: 1,			// 所属父菜单id, 如果指定了一个值, sa-admin在初始化时会将此菜单转移到指定菜单上 
 // 	is_show: true,			// 是否显示, 默认true
 // 	is_blank: false,		// 是否属于外部链接, 如果为true, 则点击菜单时从新窗口打开 
-// 	childList: [			// 指定这个菜单所有的子菜单, 子菜单可以继续指定子菜单, 至多支持三级菜单
+// 	childList: [			// 指定这个菜单所有的子菜单, 子菜单可以继续指定子菜单, 至多支持四级菜单
 // 		// .... 
 // 	],
 //	click: function(){}		// 点击菜单执行一个函数 
@@ -29,7 +29,7 @@ var menuList =	[
 		childList: [
 			{id: '1-1', name: '集成步骤', url: 'sa-view/sa-doc/sa-doc.html?way=start-up'},
 			{id: '1-2', name: '鉴权操作', url: 'sa-view/sa-doc/sa-doc.html?way=check-per'},
-			{id: '1-11', name: '意见吐槽', url: 'http://applist.dev33.cn/applist-admin/html/ser-comment/w-list.html?sid=kcafzieb2tcw'},
+			// {id: '1-11', name: '意见吐槽', url: 'http://applist.dev33.cn/applist-admin/html/ser-comment/w-list.html?sid=kcafzieb2tcw'},
 			{id: '1-12', name: '在线需求墙', url: 'http://sa-app.dev33.cn/wall.html?name=sa-admin'},
 		]
 	},
@@ -93,7 +93,7 @@ var menuList =	[
 		info: '对文章的增删改查、维护',
 		childList: [
 			{id: '6-1', name: '文章列表', url: 'sa-view/article/art-list.html'},
-			{id: '6-2', name: '文章发布', url: 'sa-view/article/art-add.html'}
+			{id: '6-2', name: '文章发布', url: 'sa-view/article/art-add.html'},
 		]
 	},
 	{
@@ -107,7 +107,8 @@ var menuList =	[
 			{id: '7-9', name: '404未找到', url: 'sa-view/error-page/404.html'},
 			{id: '7-10', name: '500有错误', url: 'sa-view/error-page/500.html'},
 			{id: '7-11', name: '服务器设置', url: 'sa-view/cfg/system-cfg.html', info: '对服务器参数的设置'},
-			{id: '7-12', name: '函数菜单', click: function(){sa.alert('点击菜单执行一个函数，你可以自定义任意代码')}}
+			{id: '7-12', name: '函数菜单', click: function(){sa.alert('点击菜单执行一个函数，你可以自定义任意代码')}},
+			{id: '6-3', name: 'vue组件', url: 'sa-view/cfg/xxx.vue'}
 		]
 	},
 	//  ========= 示例 外部链接 点击从新窗口打开 ================

@@ -508,6 +508,10 @@ var sa = {
 			}
 			return y + '-' + m + '-' + d;  
 		};
+		// 时间日期 
+		me.forDatetime = function(inputTime) {
+			return me.forDate(inputTime, 2);
+		}
 		
 		// 将时间转化为 个性化 如：3小时前, 
 		// d1 之于 d2 ，d2不填则默认取当前时间 
@@ -981,6 +985,7 @@ var sa = {
 				sa.hideLoading();
 			}
 			
+			sa.loading('正在导出...');
 			// 判断是否首次加载 
 			if(window.XLSX) {
 				return exportExcel_fn(select, fileName);
@@ -1017,30 +1022,43 @@ var sa = {
 		me.onInputEnter = function(app) {
 			Vue.nextTick(function() {
 				app = app || window.app;
-				document.querySelectorAll('.el-form input').forEach(function(item) {
+				// document.querySelectorAll('.el-form input').forEach(function(item) {
+				// 	item.onkeydown = function(e) {
+				// 		var theEvent = e || window.event;
+				// 		var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+				// 		if (code == 13) {
+				// 			app.p.pageNo = 1;
+				// 			app.f5();
+				// 		}    
+				// 	}
+				// })
+				document.querySelectorAll('.el-form').forEach(function(item) {
 					item.onkeydown = function(e) {
 						var theEvent = e || window.event;
 						var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
 						if (code == 13) {
-							app.p.pageNo = 1;
-							app.f5();
-						}    
+							var target = e.target||e.srcElement;
+							if(target.tagName.toLowerCase()=="input") {
+								app.p.pageNo = 1;
+								app.f5();
+							}
+						}
 					}
 				})
 			})
 		}
 		
 		// 如果value为true，则抛出异常 
-		me.check = function(value, error_msg) {
+		me.check = function(value, errorMsg) {
 			if(value === true) {
-				throw error_msg;
+				throw {type: 'sa-error', msg: errorMsg};
 			}
 		}
 		
 		// 如果value为null，则抛出异常 
-		me.checkNull = function(value, error_msg) {
+		me.checkNull = function(value, errorMsg) {
 			if(me.isNull(value)) {
-				throw error_msg;
+				throw {type: 'sa-error', msg: errorMsg};
 			}
 		}
 		
@@ -1223,14 +1241,34 @@ var sa = {
 })();
 
 
-
 // 如果是sa_admin环境 
 window.sa_admin = window.sa_admin || parent.sa_admin || top.sa_admin;
+window.saAdmin = window.sa_admin;
 
-// 如果当前是Vue环境, 则挂在到Vue示例
+// 如果当前是Vue环境, 则挂在到 Vue 示例
 if(window.Vue) {
+	// 全局的 sa 对象
 	Vue.prototype.sa = window.sa;
 	Vue.prototype.sa_admin = window.sa_admin;
+	Vue.prototype.saAdmin = window.saAdmin;
+	
+	// 表单校验异常捕获 
+	Vue.config.errorHandler = function(err, vm) {
+		if(err.type == 'sa-error') {
+			return sa.error(err.msg);
+		}
+		throw err;
+	}
+	
+	// Element-UI 全局组件样式  
+	Vue.prototype.$ELEMENT = { size: 'mini', zIndex: 3000 };
+	
+	// 加载全局组件 (注意路径问题)
+	// if(window.httpVueLoader && window.loadComponent !== false) {
+	// 	Vue.component("sa-item", httpVueLoader('../../sa-frame/com/sa-item.vue'));
+	// 	Vue.component("sa-td", httpVueLoader('../../sa-frame/com/sa-td.vue'));
+	// }
+	
 }
 
 // 对外开放, 在模块化时解开此注释 

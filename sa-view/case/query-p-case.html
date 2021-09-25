@@ -7,8 +7,9 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
@@ -19,54 +20,38 @@
 				<!-- ------------- 参数栏 ------------- -->
 				<div class="c-title">检索参数</div>
 				<el-form>
-					<div class="c-item">
-						<label class="c-label">普通参数：</label>
-						<el-input size="mini" v-model="p.name" ></el-input>
-					</div>
-					<div class="c-item">
-						<label class="c-label">数值参数：</label>
-						<el-input size="mini" v-model="p.count" type="number"></el-input>
-					</div>
-					<div class="c-item">
-						<label class="c-label">下拉参数：</label>
+					<sa-item type="text" name="普通参数" v-model="p.name"></sa-item>
+					<sa-item type="num" name="数值参数" v-model="p.count"></sa-item>
+					<sa-item name="下拉参数">
 						<el-select size="mini" v-model="p.type_id">
 							<el-option label="不限" :value="0"></el-option>
 							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
 						</el-select>
-					</div>
-					<div class="c-item" style="min-width: 0px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
-					</div>
+					</sa-item>
+					<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
 					<br>
-					<div class="c-item">
-						<label class="c-label">日期参数：</label>
-						<el-date-picker size="mini" v-model="p.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
-					</div>
-					<div class="c-item">
-						<label class="c-label">时间区间：</label>
+					<sa-item type="date" name="日期参数" v-model="p.create_time"></sa-item>
+					<sa-item name="时间区间">
 						<el-date-picker size="mini" v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
 						<el-date-picker size="mini" v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
-					</div>
+					</sa-item>
 					<br>
-					<div class="c-item">
-						<label class="c-label">单选参数：</label>
+					<sa-item name="单选参数">
 						<el-radio-group v-model="p.single">
 							<el-radio :label="1">参数1</el-radio>
 							<el-radio :label="2">参数2</el-radio>
 						</el-radio-group>
-					</div>
-					<div class="c-item">
-						<label class="c-label">单选按钮：</label>
+					</sa-item>
+					<sa-item name="单选按钮">
 						<el-radio-group size="mini" v-model="p.single2">
 							<el-radio-button :label="1">参数1</el-radio-button>
 							<el-radio-button :label="2">参数2</el-radio-button>
 							<el-radio-button :label="3">参数3</el-radio-button>
 							<el-radio-button :label="4">参数4</el-radio-button>
 						</el-radio-group>
-					</div>
+					</sa-item>
 					<br>
-					<div class="c-item">
-						<label class="c-label">单选文字：</label>
+					<sa-item name="单选文字">
 						<el-radio-group v-model="p.status" class="s-radio-text">
 							<el-radio :label="0">全部</el-radio>
 							<el-radio :label="1">新下单</el-radio>
@@ -77,47 +62,40 @@
 							<el-radio :label="11">取消中</el-radio>
 							<el-radio :label="21">退款中</el-radio>
 						</el-radio-group>
-					</div>
+					</sa-item>
 					<br>
-					<div class="c-item">
-						<label class="c-label">多选参数：</label>
+					<sa-item name="多选参数">
 						<el-checkbox v-model="p.checkbox_1">已上架</el-checkbox>
 						<el-checkbox v-model="p.checkbox_2">已推荐</el-checkbox>
 						<el-checkbox v-model="p.checkbox_3">热卖中</el-checkbox>
 						<el-checkbox v-model="p.checkbox_4">高点击</el-checkbox>
 						<el-checkbox v-model="p.checkbox_5">高转化</el-checkbox>
 						<el-checkbox v-model="p.checkbox_6">高复买</el-checkbox>
-					</div>
+					</sa-item>
 				</el-form>
 				<!-- ------------- 数据列表 ------------- -->
-				<el-table :data="dataList" size="mini">
+				<el-table :data="dataList">
 					<el-table-column label="编号" prop="id"></el-table-column>
 					<el-table-column label="名称" prop="name"></el-table-column>
 					<el-table-column label="库存" prop="count"></el-table-column>
 					<el-table-column label="操作" width="220px">
 						<template slot-scope="s">
-							<el-button type="text" size="mini" @click="get(s.row)">查看</el-button>
-							<el-button type="text" size="mini" @click="update(s.row)">修改</el-button>
-							<el-button type="text" size="mini" @click="del(s.row)">删除</el-button>
+							<el-button type="text" @click="get(s.row)">查看</el-button>
+							<el-button type="text" @click="update(s.row)">修改</el-button>
+							<el-button type="text" @click="del(s.row)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
 				<!-- ------------- 分页 ------------- -->
-				<div class="page-box">
-					<el-pagination background
-						layout="total, prev, pager, next, sizes, jumper" 
-						:current-page.sync="p.pageNo" 
-						:page-size.sync="p.pageSize" 
-						:total="dataList.length" 
-						:page-sizes="[1000]" 
-						@current-change="f5()" 
-						@size-change="f5()">
-					</el-pagination>
-				</div>
+				<sa-item type="page" :curr.sync="p.pageNo" :size.sync="p.pageSize" :total="dataList.length" @change="f5()"></sa-item>
 			</div>
 		</div>
         <script>
 			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),  
+					"sa-td": httpVueLoader('../../sa-frame/com/sa-td.vue'),		
+				},
 				el: '.vue-box',
 				data: {
 					p: {		// 查询参数  
@@ -137,7 +115,7 @@
 						checkbox_5: false,
 						checkbox_6: false,
 						pageNo: 1,
-						pageSize: 1000,
+						pageSize: 100,
 					},
 					typeList: [		// 类型数组  
 						{id: 1, name: '类型1'},

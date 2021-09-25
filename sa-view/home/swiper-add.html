@@ -7,11 +7,13 @@
 		<!-- 所有的 css js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
+		<script src="../../static/kj/upload-util.js"></script>
 		<style type="text/css">
 			.td-img{width: 400px; height: 200px; cursor: pointer; vertical-align: middle;}
 			.c-panel .el-form .c-label{width: 5em !important;}
@@ -24,24 +26,16 @@
 			<div class="s-body">
 				<div class="c-panel">
 					<div class="c-title">数据添加</div>
-					<el-form size="mini" v-if="m">
-						<div class="c-item br">
-							<label class="c-label">图片：</label>
+					<el-form v-if="m">
+						<sa-item name="图片" br>
 							<img :src="m.img_src" class="td-img" @click="sa.showImage(m.img_src, '70%', '80%')" >
-							<!-- <span class="c-remark"> 点击图片预览</span> -->
-						</div>
-						<div class="c-item br">
-							<label class="c-label">标题：</label>
-							<el-input size="mini" v-model="m.title"></el-input>
-						</div>
-						<div class="c-item br">
-							<label class="c-label">排序：</label>
-							<el-input size="mini" v-model="m.sort" type="number"></el-input>
-						</div>
-						<div class="c-item br s-ok">
-							<label class="c-label"></label>
-							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
-						</div>
+							<el-link type="primary" @click="sa.uploadImage(src => {m.img_src = src; sa.ok2('上传成功');})">上传</el-link>
+						</sa-item>
+						<sa-item name="标题" v-model="m.title" br></sa-item>
+						<sa-item name="排序" v-model="m.sort" type="num" br></sa-item>
+						<sa-item name="" class="s-ok" br>
+							<el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+						</sa-item>
 					</el-form>
 				</div>
 			</div>
@@ -55,6 +49,10 @@
         <script>
 			
 			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),		
+					"sa-info": httpVueLoader('../../sa-frame/com/sa-info.vue'),		
+				},
 				el: '.vue-box',
 				data: {
 					id: sa.p('id', 0),		// 获取超链接中的id参数（0=添加，非0=修改） 
@@ -77,21 +75,14 @@
 					},
 					// 表单验证
 					submitCheck: function() {
-						try{
-							var m = this.m;		// 获取 m对象 
-							sa.checkNull(m.title, '请输入标题');
-							sa.checkNull(m.sort, '请输入排序值');
-							return 'ok';	// 全部通过验证，返回ok 表示正确 
-						} catch(e) {
-							sa.error(e);
-						}
+						var m = this.m;		// 获取 m对象 
+						sa.checkNull(m.title, '请输入标题');
+						sa.checkNull(m.sort, '请输入排序值');
 					},
 					// 提交数据 
 					ok: function(){
 						// 验证 
-						if(this.submitCheck() != 'ok') {
-							return;
-						}
+						this.submitCheck();
 						// 开始增加或修改
 						// this.m.create_time = undefined;		// 不提交属性：创建日期
 						if(this.id <= 0) {	// 添加
@@ -130,7 +121,7 @@
 					} else {	
 						sa.ajax2('/SysSwiper/getById?id=' + this.id, function(res) {
 							this.m = res.data;
-						}.bind(this), {res: getById(this.id)})
+						}.bind(this), {res: getById(this.id)});
 					}
 				}
 			})

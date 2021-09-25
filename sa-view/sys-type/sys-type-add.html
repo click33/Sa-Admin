@@ -7,7 +7,8 @@
 		<!-- 所有的 css js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
@@ -25,28 +26,12 @@
 					<div class="c-title">数据添加</div>
 					<el-form size="mini" v-if="m">
 						<!-- no字段： m.id - id -->
-						<div class="c-item br">
-							<label class="c-label">分类名字：</label>
-							<el-input size="mini" v-model="m.name"></el-input>
-						</div>
-						<div class="c-item br">
-							<label class="c-label">分类图标：</label>
-							<el-input size="mini" v-model="m.icon"></el-input>
-						</div>
-						<!-- <div class="c-item br">
-							<label class="c-label" style="vertical-align: top;">分类图标：</label>
-							<img :src="m.icon" style="width: 3em; height: 3em; cursor: pointer;" 
-								@click="sa.showImage(m.icon, '400px', '400px')" v-if="!sa.isNull(m.icon)">
-							<el-link type="primary" @click="sa.uploadImage(src => {m.icon = src; sa.ok2('上传成功');})">上传</el-link>
-						</div> -->
-						<div class="c-item br">
-							<label class="c-label">排序索引：</label>
-							<el-input size="mini" v-model="m.sort" type="number"></el-input>
-						</div>
-						<div class="c-item br s-ok">
-							<label class="c-label"></label>
-							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
-						</div>
+						<sa-item name="分类名字" v-model="m.name" br></sa-item>
+						<sa-item name="分类图标" v-model="m.icon" br></sa-item>
+						<sa-item name="排序索引" v-model="m.sort" br type="num"></sa-item>
+						<sa-item name="" br class="s-ok">
+							<el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+						</sa-item>
 					</el-form>
 				</div>
 			</div>
@@ -60,6 +45,9 @@
         <script>
 			
 			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),		
+				},
 				el: '.vue-box',
 				data: {
 					id: sa.p('id', 0),		// 获取超链接中的id参数（0=添加，非0=修改） 
@@ -78,23 +66,16 @@
 					},
 					// 表单验证
 					submitCheck: function() {
-						try{
-							var m = this.m;		// 获取 m对象 
-							// sa.checkNull(m.id, '请输入id');
-							sa.checkNull(m.name, '请输入分类名字');
-							sa.checkNull(m.icon, '请输入分类图标');
-							sa.checkNull(m.sort, '请输入排序值');
-							return 'ok';	// 全部通过验证，返回ok 表示正确 
-						} catch(e) {
-							sa.error(e);
-						}
+						var m = this.m;		
+						// sa.checkNull(m.id, '请输入id');
+						sa.checkNull(m.name, '请输入分类名字');
+						sa.checkNull(m.icon, '请输入分类图标');
+						sa.checkNull(m.sort, '请输入排序值');
 					},
 					// 提交数据 
 					ok: function(){
 						// 验证 
-						if(this.submitCheck() != 'ok') {
-							return;
-						}
+						this.submitCheck();
 						// 开始增加或修改
 						this.m.create_time = undefined;		// 不提交属性：创建日期
 						if(this.id <= 0) {	// 添加

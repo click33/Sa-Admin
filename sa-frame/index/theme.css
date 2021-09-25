@@ -16,231 +16,210 @@
 	background-color: inherit;
 }
 
-/* 切换主题时，停止动画 */
-.themeToggling .nav-left,.themeToggling .nav-left *{transition: none !important;}
-.themeToggling .nav-left-top,.themeToggling .nav-left-top *{transition: all 0.2s !important;}
+.theme-0 .menu-name,.theme-0 .tab-title-2>span{transition: none !important;}
 
+
+/* 声明变量 */
+body{
+	--menu-bg-color: #222;		/* 菜单 - 背景色 */
+	--menu-color: #FFF;			/* 菜单 - 文字色 */
+	--menu-bg-color-2: #000;	/* 二级菜单 - 背景色 */
+	--menu-hover-bg-color: #4E5465;			/* 菜单悬浮 - 背景色 */
+	--menu-active-bg-color: #2D8CF0;		/* 菜单选中 - 背景色 */
+	--menu-active-color: #FFF;				/* 菜单选中 - 文字色 */
+	--tool-bg-color: #FFF;			/* 工具栏 - 背景色 */
+	--tool-color: #333;				/* 工具栏 - 文字色 */
+	--tool-hover-bg-color: #EEE;			/* 工具栏悬浮 - 背景色 */
+	
+	/* --tab-hover-bg-color: var(--menu-active-bg-color); */		/* Tab栏悬浮和选中 - 文字色 */
+	/* --tab-hover-color: var(--menu-active-color); */			/* Tab栏悬浮和选中 - 文字色 */
+	
+	--nav-left-top-border-color: 1px #222 solid;	/* 左上 - 右边框颜色 */
+	--nav-left-bottom-border-color: 1px #222 solid;	/* 左下 - 右边框颜色 */
+}
 
 /* ========================== 主题 - 0 默认样式 蓝色 ==========================  */
 .theme-0 {}
 
+/* 左上 - 右边框颜色 */
+.theme-0 .nav-left-top{
+	border-right: var(--nav-left-top-border-color);
+}
+/* 左下 - 右边框颜色 */
+.theme-0 .nav-left-bottom{
+	border-right: var(--nav-left-bottom-border-color);
+}
+
 /* 左边栏背景色，前景色 */
 .theme-0 .nav-left {
-	background-color: #222;
-	color: #FFF;
+	background-color: var(--menu-bg-color);
+	color: var(--menu-color);
 }
 
 /* 二级菜单背景色 */
 .theme-0 .el-submenu .el-menu-item,
 .theme-0 .nav-left .el-submenu .el-submenu .el-submenu__title{
-	background-color: #000;
+	background: var(--menu-bg-color-2);
 }
 
 /* 所有菜单悬浮样式*/
 .theme-0 .nav-left .el-submenu__title:hover,
 .theme-0 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
 .theme-0 .nav-left .el-menu-item:hover{
-	background-color: #4E5465;
+	background-color: var(--menu-hover-bg-color);
 }
 /* 所有菜单选中时 */
 .theme-0 .nav-left .el-menu-item.is-active {
-	background-color: #2D8CF0;
-	color: #FFF;
+	/* background-color: var(--menu-active-bg-color); */
+	background: var(--menu-active-bg-color);
+	color: var(--menu-active-color);
 }
 
 /* 工具栏背景色颜色, 前景色 */
 .theme-0 .nav-right-1 {
-	color: #333;
-	background-color: #FFF;
+	color: var(--tool-color);
+	background-color: var(--tool-bg-color);
 }
 
 /* 工具栏悬浮颜色 */
 .theme-0 .tool-fox:hover {
-	background-color: #EEE;
+	background-color: var(--tool-hover-bg-color);
 }
 
-/* 卡片栏悬浮颜色和选中颜色 */
-.theme-0 .tab-title:hover,
-.theme-0 .tab-native.tab-title {
-	color: #2D8CF0;
+/* tab卡片栏 - 悬浮颜色 */
+.theme-0 .tab-title:hover{
+	color: var(--menu-active-bg-color);
+	border: 1px var(--menu-active-bg-color) solid;
 }
+/* tab卡片栏 - 选中颜色 */
+.theme-0 .tab-native.tab-title {
+	background-color: var(--menu-active-bg-color);
+	color: var(--menu-active-color);
+	border: 1px var(--menu-active-bg-color) solid;
+}
+
+/* 以下的主题 logo栏变小 */
+.theme-3 .nav-left-top,
+.theme-4 .nav-left-top,
+.theme-10 .nav-left-top{height: 50px; line-height: 50px; text-indent: 0.3em;}
+
+.theme-3 .nav-left-top .admin-logo,
+.theme-4 .nav-left-top .admin-logo,
+.theme-10 .nav-left-top .admin-logo{width: 28px; height: 28px; position: relative; top: -2px;}
+
+.theme-3 .nav-left-bottom,
+.theme-4 .nav-left-bottom,
+.theme-10 .nav-left-bottom{height: calc(100% - 85px + 36px);}
+
+
 
 
 /* ========================== 主题-1 什么也不覆盖 即：全部取默认样式 ==========================  */
 .theme-1 {}
 
 /* ========================== 主题-2 绿色 ==========================  */
-.theme-2 {}
-
-/* 所有菜单选中时 */
-.theme-2 .nav-left .el-menu-item.is-active {
-	background-color: #009688;
-}
-
-/* 卡片栏悬浮颜色和选中颜色 */
-.theme-2 .tab-title:hover,
-.theme-2 .tab-native.tab-title {
-	color: #009688;
+.theme-2 {
+	--menu-active-bg-color: #009688;	/* 菜单选中 - 背景色 */
 }
 
 /* ========================== 主题-3 白色 清爽 ==========================  */
-.theme-3 {}
-
-/* 非标准附加样式 */
-.theme-3 .nav-left-top{box-shadow: 0 2px 2px #CCC; width: 199px; border-right: 1px #DDD solid;}
-.theme-3 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
-.theme-3.fold .nav-left-top{width: 63px;}
-.theme-3.fold .nav-left-bottom{width: 63px;}
-/* .theme-3 .nav-right-1,.theme-3 .nav-right-2{border-left: 1px #eee solid;} */
-
-/* 左边栏背景色，前景色 */
-.theme-3 .nav-left {
-	background-color: #FFF;
-	color: #333;
+.theme-3 {
+	--menu-bg-color: #FFF;		/* 菜单 - 背景色 */
+	--menu-color: #333;			/* 菜单 - 文字色 */
+	--menu-bg-color-2: #fafafa;	/* 二级菜单 - 背景色 */
+	--menu-hover-bg-color: #ECF5FF;			/* 菜单悬浮 - 背景色 */
+	--menu-active-bg-color: #ECF5FF;		/* 菜单选中 - 背景色 */
+	--menu-active-color: #409EFF;				/* 菜单选中 - 文字色 */
+	
+	--nav-left-top-border-color: 1px #ddd solid;	/* 左上 - 右边框颜色 */
+	--nav-left-bottom-border-color: 1px #ddd solid;	/* 左下 - 右边框颜色 */
 }
-
-/* 二级菜单背景色 */
-.theme-3 .el-submenu .el-menu-item,
-.theme-3 .nav-left .el-submenu .el-submenu .el-submenu__title{
-	background-color: #fafafa;
+/* ----- 附加样式 ----- */
+/* logo下面的边框 */
+.theme-3 .nav-left-top{border-bottom: 1px #eee solid;}
+/* tab卡片栏 - 悬浮颜色 */
+.theme-3 .tab-title:hover{
+	color: var(--menu-active-color);
+	border: 1px var(--menu-active-color) solid;
 }
-
-/* 所有菜单悬浮样式时, 以及选中时 */
-.theme-3 .nav-left .el-submenu__title:hover,
-.theme-3 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-3 .nav-left .el-menu-item:hover,
-.theme-3 .nav-left .el-menu-item.is-active {
-	background-color: #ECF5FF;
-	color: #409EFF;
+/* tab卡片栏 - 选中颜色 */
+.theme-3 .tab-native.tab-title {
+	background-color: var(--menu-active-bg-color);
+	color: var(--menu-active-color);
+	border: 1px var(--menu-active-color) solid;
 }
 
 
-/* ========================== 主题-4 上黑 下白 ==========================  */
-.theme-4 {}
+/* ========================== 主题-4 灰绿色 ==========================  */
+.theme-4 {
+	--menu-bg-color: #EEE;		/* 菜单 - 背景色 */
+	--menu-color: #333;			/* 菜单 - 文字色 */
+	--menu-bg-color-2: #DDD;	/* 二级菜单 - 背景色 */
+	--menu-hover-bg-color: #ECF5FF;			/* 菜单悬浮 - 背景色 */
+	--menu-active-bg-color: #009688;		/* 菜单选中 - 背景色 */
+	--menu-active-color: #FFF;				/* 菜单选中 - 文字色 */
+	--tool-bg-color: #222;			/* 工具栏 - 背景色 */
+	--tool-color: #EEE;				/* 工具栏 - 文字色 */
+	--tool-hover-bg-color: #444;			/* 工具栏悬浮 - 背景色 */
+	
+	--nav-left-bottom-border-color: 1px #ddd solid;	/* 左下 - 右边框颜色 */
+}
 
-/* 非标准附加样式 */
 .theme-4 .nav-left-top{height: 49px; line-height: 49px; text-indent: 0.3em; background-color: #222; color: #FFF;}
-.theme-4 .nav-left-top .admin-logo{/* display: none; */ width: 28px; height: 28px; position: relative; top: -2px;}
 
-.theme-4 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
-.theme-4.fold .nav-left-bottom{width: 63px;}
-.theme-4 .nav-left .el-submenu__title,
-.theme-4 .nav-left .el-menu-item{transition: background-color 0.1s;}
-
-/* 左边栏背景色，前景色 */
-.theme-4 .nav-left {
-	background-color: #EEE;
-	color: #333;
+/* ========================== 主题-5 红色 ==========================  */
+.theme-5 {
+	--menu-active-bg-color: #dd4949;	/* 菜单选中 - 背景色 */
 }
 
-/* 二级菜单背景色 */
-.theme-4 .el-submenu .el-menu-item,
-.theme-4 .nav-left .el-submenu .el-submenu .el-submenu__title{
-	background-color: #DDD;
+/* ========================== 主题-6 钛合金  ==========================  */
+.theme-6 {
+	--menu-active-bg-color: #805322;		/* 菜单选中 - 背景色 */
+	--tool-bg-color: #222;				/* 工具栏 - 背景色 */
+	--tool-color: #EEE;					/* 工具栏 - 文字色 */
+	--tool-hover-bg-color: #444;			/* 工具栏悬浮 - 背景色 */
 }
-
-/* 所有菜单悬浮样式时 */
-.theme-4 .nav-left .el-submenu__title:hover,
-.theme-4 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-4 .nav-left .el-menu-item:hover{
-	background-color: #ECF5FF;
-}
-/* 所有菜单选中时 */
-.theme-4 .nav-left .el-menu-item.is-active {
-	background-color: #009688;
-	color: #FFF;
-}
-
-/* 卡片栏悬浮颜色和选中颜色 */
-.theme-4 .tab-title:hover,
-.theme-4 .tab-native.tab-title {
-	color: #009688;
-}
-
-/* 工具栏背景色颜色, 前景色 */
-.theme-4 .nav-right-1 {
-	color: #EEE;
-	background-color: #222;
-}
-
-/* 工具栏悬浮颜色 */
-.theme-4 .tool-fox:hover {
-	background-color: #444;
-}
-
-
-
-/* ========================== 主题-5 灰色展开 (仿微信公众平台)0分 ==========================  */
-
-.theme-5 {}
-
-.theme-5 .nav-left-top{box-shadow: 0 2px 2px #CCC;}
-.theme-5 .nav-left-top,
-.theme-5 .nav-left-bottom{width: 199px; border-right: 1px #DDD solid;}
-.theme-5.fold .nav-left-bottom{width: 63px;}
-.theme-5 .el-submenu__icon-arrow.el-icon-arrow-down{display: none;}
-.theme-5 .nav-left-bottom .menu-box-2{padding-bottom: 200px;}
-
-/* 左边栏背景色，前景色 */
-.theme-5 .nav-left {
-	background-color: #EEE;
-	color: #000;
-}
-
-/* 二级菜单背景色 */
-.theme-5 .el-submenu .el-menu-item,
-.theme-5 .nav-left .el-submenu .el-submenu .el-submenu__title{
-	background-color: #EEE;
-}
-
-/* 所有菜单悬浮样式时, 以及选中时 */
-.theme-5 .nav-left .el-submenu__title:hover,
-.theme-5 .nav-left .el-submenu .el-submenu .el-submenu__title:hover,
-.theme-5 .nav-left .el-menu-item:hover,
-.theme-5 .nav-left .el-menu-item.is-active:hover {
-	background-color: #ddd;
-	color: #1AAD5E;
-}
-.theme-5 .nav-left .el-menu-item.is-active {background-color: #eee; color: #1AAD5E;}
-
-/* 卡片栏悬浮颜色和选中颜色 */
-.theme-5 .tab-title:hover,
-.theme-5 .tab-native.tab-title {
-	color: #1AAD5E;
-}
-
-
-/* ========================== 主题-6 钛合金 (仿 iview admin pro) ==========================  */
-.theme-6 {}
-
-/* 所有菜单选中时 */
-.theme-6 .nav-left .el-menu-item.is-active {
-	background-color: #805322;
-	color: #FFF;
-}
-
-/* 卡片栏悬浮颜色和选中颜色 */
-.theme-6 .tab-title:hover,
-.theme-6 .tab-native.tab-title {color: #805322;}
-
-/* 工具栏背景色颜色, 前景色 */
-.theme-6 .nav-right-1 {color: #EEE;background-color: #222;}
-
-/* 工具栏悬浮颜色 */
-.theme-6 .tool-fox:hover {background-color: #444;}
-
 
 /* ========================== 主题-7 沉淀式黑蓝 ==========================  */
-.theme-7 {}
-/* 工具栏背景色颜色, 前景色 */
-.theme-7 .nav-right-1 {color: #EEE;background-color: #222;}
-/* 工具栏悬浮颜色 */
-.theme-7 .tool-fox:hover {background-color: #444;}
+.theme-7 {
+	--tool-bg-color: #222;				/* 工具栏 - 背景色 */
+	--tool-color: #EEE;					/* 工具栏 - 文字色 */
+	--tool-hover-bg-color: #444;			/* 工具栏悬浮 - 背景色 */
+}
 
 /* ========================== 主题-8 简约式灰蓝 ==========================  */
-.theme-8 {}
+.theme-8 {
+	--menu-active-bg-color: #4E5465;		/* 菜单选中 - 背景色 */
+}
 
-/* 菜单悬浮着色 */
-.theme-8 .nav-left .el-menu-item.is-active {
-	background-color: #4E5465;
+/* ========================== 主题-9 紫色 ==========================  */
+.theme-9 {
+	--menu-active-bg-color: #A906B3;		/* 菜单选中 - 背景色 */
+}
+
+/* ========================== 主题-10 简约草绿 ==========================  */
+.theme-10 {
+	--menu-bg-color: #FFF;		/* 菜单 - 背景色 */
+	--menu-color: #333;			/* 菜单 - 文字色 */
+	--menu-bg-color-2: #fff;	/* 二级菜单 - 背景色 */
+	--menu-hover-bg-color: #ECF5FF;			/* 菜单悬浮 - 背景色 */
+	--menu-active-bg-color: #73D13D;		/* 菜单选中 - 背景色 */
+	
+	--nav-left-top-border-color: 1px #fff solid;	/* 左下 - 右边框颜色 */
+	--nav-left-bottom-border-color: 1px #ddd solid;	/* 左下 - 右边框颜色 */
+}
+
+/* logo下面的边框 */
+.theme-10 .nav-left-top{border-bottom: 1px #eee solid;}
+
+/* tab卡片栏 - 悬浮颜色 */
+.theme-10 .tab-title:hover{
+	color: var(--menu-active-bg-color);
+	border: 1px var(--menu-active-bg-color) solid;
+}
+/* tab卡片栏 - 选中颜色 */
+.theme-10 .tab-native.tab-title {
+	background-color: var(--menu-active-bg-color);
+	color: var(--menu-active-color);
+	border: 1px var(--menu-active-bg-color) solid;
 }

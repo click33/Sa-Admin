@@ -1,5 +1,5 @@
 /* 
-	更新于2020-9-11 全面优化
+	更新于2021-9-25 全面优化
  */
 
 /** 公共css */
@@ -106,6 +106,10 @@ input::-webkit-inner-spin-button {
 /* 表格上面的按钮 */
 .fast-btn{padding-top: 15px; padding-bottom: 10px;} 
 /* .el-table{padding-top: 10px;} */
+/* 表格里的img */
+.td-img{width: 3em; height: 3em; border-radius: 2px; cursor: pointer;}
+.info-img{width: 3em; height: 3em; cursor: pointer; margin-right: 5px; vertical-align: middle;}
+.c-price{color: red;}
 
 /* 分页盒子调整一下间距 */
 .page-box{padding: 2em 0 25px 0; }
@@ -134,7 +138,7 @@ input::-webkit-inner-spin-button {
 .c-item {min-width: 270px; min-height: 32px; line-height: 32px; padding-right: 10px; display: inline-block; margin: 0.5em 0;}
 .c-item.br{display: block; margin: 14px 0;}
 /* label样式 */
-.c-item .c-label{width: 6em; color: #333; padding-right: 4px; display: inline-block; text-align: right;}
+.c-item .c-label{width: 6em; color: #333; padding-right: 4px; display: inline-block; text-align: right; vertical-align: top;}
 /* input宽度等样式调整 */
 .c-item .el-input{width: 178px;}
 /* 禁用input的样式 */
@@ -148,3 +152,42 @@ input::-webkit-inner-spin-button {
 
 /* 防止下拉框被富文本覆盖 */
 .el-select-dropdown,.el-picker-panel{z-index: 99999 !important;}
+
+/* ===================== sp 新增 ===================== */
+
+/* ==== 图集照片样式 ==== */
+.c-item .image-box{max-width: 700px; padding-left: 0px;}
+.c-item .image-box-2{width: 90px; height: 125px; cursor: pointer; float: left;}
+.c-item .image-box-2 img{width: 90px; height: 90px; border-radius: 2px;}
+.c-item .image-box-info .image-box-2{height: 90px;}
+.c-item .image-box-2{display: inline-block; margin-right: 5px; margin-bottom: 5px;}
+.c-item .image-box-2 p{text-align: center; color: #999; margin-top: -10px;}
+.c-item .up_img{text-align: center; background-color: #f8f8f8; height: 90px;}
+.c-item .up_img img{width: 40px; height: 40px; margin-top: 25px;}
+.c-item .up_img{border: 1px #eee solid;}
+
+/* ==== wang富文本编辑器 ==== */
+.c-item .editor-box{width: 800px; margin-top: 0px; transition: all 0.2s;} 
+.c-item .content-box-info{border: 1px #ddd solid; padding: 1em; overflow: hidden; box-sizing: border-box;}
+.editor-box #editor{min-height: 300px; background-color: #FFF;}
+.editor-box .w-e-toolbar{padding-top: 5px !important;}
+/* 富文本内的编辑器尽量小点 */
+.editor-box img{max-width: 300px !important;}
+.content-box-info img{max-width: 100% !important;}
+
+/* 仿移动端样式兼容 */
+/* .editor-item .editor-box{float: left; width: 400px;} 
+.editor-item .w-e-toolbar{width: 400px; flex-wrap: wrap; } */
+.c-item .fold{height: 100px !important; overflow: hidden;}
+.c-item .el-select-dropdown{z-index: 9999999 !important;}
+
+/* 多行内容的样式 */
+.c-item-mline{display: inline-block; width: calc(100% - 10em);}
+.del-rr{color: red !important; cursor: pointer; margin-left: 0.5em; vertical-align: middle;}
+
+/* ---- 你可以在此处定制全局的字段风格 ---- */
+/* .tc-num{font-weight: bold;} */
+.tc-num{color: blue;}
+/* .tc-date{color: blue;} */
+.data-table .el-link--inner{font-weight: bold;}
+

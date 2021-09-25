@@ -7,8 +7,9 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
@@ -112,11 +113,11 @@
 					},
 					// 修改
 					update: function(data) {
-						sa.showIframe('文章修改', 'art-add.html?id=' + data.id, '870px', '600px');
+						sa.showIframe('文章修改', 'art-add.html?id=' + data.id, '970px', '600px');
 					},
 					// 新增
 					add: function(data) {
-						sa.showIframe('文章添加', 'art-add.html?id=-1', '870px', '600px');
+						sa.showIframe('文章添加', 'art-add.html?id=-1', '970px', '600px');
 					},
 					// 删除
 					del: function(data) {

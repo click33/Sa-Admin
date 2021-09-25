@@ -7,8 +7,9 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
@@ -19,14 +20,9 @@
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
 				<el-form :inline="true" size="mini" @submit.native.prevent>
-					<div class="c-item">
-						<label class="c-label">角色名称：</label>
-						<el-input size="mini" v-model="p.role_name"></el-input>
-					</div>
-					<div class="c-item" style="min-width: 0px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
-						<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
-					</div>
+					<sa-item name="角色名称" v-model="p.role_name"></sa-item>
+					<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+					<el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
 				</el-form>
 				<!-- 数据列表 -->
 				<el-table class="data-table" ref="data-table" :data="dataList" size="small">
@@ -44,9 +40,7 @@
 						</template>
 					</el-table-column>
 					<el-table-column label="是否锁定" title="锁定的角色为系统维持正常运行的重要角色，不可删除">
-						<template slot-scope="s">
-							{{s.row.is_lock == 1 ? '是' : '否'}}
-						</template>
+						<template slot-scope="s">{{s.row.is_lock == 1 ? '是' : '否'}}</template>
 					</el-table-column>
 					<el-table-column label="创建日期">
 						<template slot-scope="s">
@@ -64,22 +58,15 @@
 					</el-table-column>
 				</el-table>
 				<!-- ------------- 分页 ------------- -->
-				<div class="page-box">
-					<el-pagination background
-						layout="total, prev, pager, next, sizes, jumper" 
-						:current-page.sync="p.pageNo" 
-						:page-size.sync="p.pageSize" 
-						:total="dataList.length" 
-						:page-sizes="[1000]" 
-						@current-change="f5()" 
-						@size-change="f5()">
-					</el-pagination>
-				</div>
+				<sa-item type="page" :curr.sync="p.pageNo" :size.sync="p.pageSize" :total="dataList.length" :sizes="[1000]" @change="f5()"></sa-item>
 			</div>
 		</div>
 		<script src="./mock-data.js"></script>
         <script>
 			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),		
+				},
 				el: '.vue-box',
 				data: {
 					sa: sa, 	// 超级对象
@@ -141,11 +128,6 @@
 					sa.onInputEnter();		// 监听输入框的回车事件，执行查询  
 				}
 			})
-			
-			
-
-			
-		
 		</script>
 	</body>
 </html>

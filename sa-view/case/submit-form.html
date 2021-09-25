@@ -7,8 +7,9 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
@@ -23,108 +24,61 @@
 				<!-- 参数栏 -->
 				<div class="c-title">表单提交</div>
 				<el-form v-if="m">
-					<div class="c-item br">
-						<label class="c-label">普通参数：</label>
-						<el-input size="mini" v-model="m.name"></el-input>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">数值输入：</label>
-						<el-input size="mini" v-model="m.count" type="number"></el-input>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">下拉输入：</label>
+					<sa-item type="text" name="普通参数" v-model="m.name" br></sa-item>
+					<sa-item type="num" name="数值输入" v-model="m.count" br></sa-item>
+					<sa-item type="textarea" name="多行输入" v-model="m.textareaValue" br></sa-item>
+					<sa-item type="cascader" name="级联输入" v-model="m.jvalue" :options="joptions" br></sa-item>
+					<sa-item type="date" name="日期选择" v-model="m.create_time" br></sa-item>
+					<sa-item type="date-range" name="日期范围" :start.sync="m.startDate" :end.sync="m.endDate" br></sa-item>
+					<sa-item type="slider" name="滑块参数" v-model="m.hValue" br></sa-item>
+					
+					<sa-item name="下拉输入" br>
 						<el-select size="mini" v-model="m.type_id">
 							<el-option label="请选择" :value="0" disabled></el-option>
 							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
 						</el-select>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">级联选择：</label>
-						<el-cascader
-							size="mini"
-						    v-model="m.jvalue"
-						    :options="joptions"
-						    :props="{ expandTrigger: 'hover' }" >
-						</el-cascader>
-					</div>
-					<div class="c-item br">
-						<label class="c-label" style="vertical-align: top;">多行输入：</label>
-						<div style="display: inline-block;">
-							<el-input v-model="m.textareaValue" size="mini" type="textarea" :autosize="{ minRows: 3, maxRows: 10}"></el-input>
-						</div>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">选择时间：</label>
-						<el-date-picker size="mini" v-model="m.create_time" type="date" value-format="yyyy-MM-dd"></el-date-picker>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">时间范围：</label>
-						<el-date-picker
-							v-model="m.create_time2"
-							type="daterange"
-							size="mini"
-							range-separator="至"
-							start-placeholder="开始日期"
-							end-placeholder="结束日期">
-						</el-date-picker>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">滑块参数：</label>
-						<div style="display: inline-block; height: 0px; vertical-align: top; width: 250px;">
-							<el-slider size="mini" v-model="m.hValue" style="position: relative; top: -5px;"></el-slider>
-						</div>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">单选参数：</label>
+					</sa-item>
+					<sa-item name="单选参数" br>
 						<el-radio-group size="mini" v-model="m.single">
 							<el-radio :label="1">参数1</el-radio>
 							<el-radio :label="2">参数2</el-radio>
 							<el-radio :label="3">参数3</el-radio>
 						</el-radio-group>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">多选参数：</label>
+					</sa-item>
+					<sa-item name="多选参数" br>
 						<el-checkbox v-model="m.checkbox_1">苹果</el-checkbox>
 						<el-checkbox v-model="m.checkbox_2">鸭梨</el-checkbox>
 						<el-checkbox v-model="m.checkbox_3">香蕉</el-checkbox>
 						<el-checkbox v-model="m.checkbox_4">葡萄</el-checkbox>
-					</div>
-					<div class="c-item">
-						<label class="c-label">单选按钮：</label>
+					</sa-item>
+					<sa-item name="单选按钮" br>
 						<el-radio-group size="mini" v-model="m.single2">
 							<el-radio-button :label="1">参数1</el-radio-button>
 							<el-radio-button :label="2">参数2</el-radio-button>
 							<el-radio-button :label="3">参数3</el-radio-button>
 							<el-radio-button :label="4">参数4</el-radio-button>
 						</el-radio-group>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">开关参数：</label>
+					</sa-item>
+					<sa-item name="开关参数" br>
 						<el-switch v-model="m.status" :active-value="1" :inactive-value="2" inactive-color="#ff4949"></el-switch>
 						<span style="color: #999;" v-if="m.status==1">正常</span>
 						<span style="color: #999;" v-else>禁用</span>
-					</div>
-					<div class="c-item br" style="height: 0px;">
-						<label class="c-label" style="vertical-align: top;">颜色选择：</label>
-						<el-color-picker v-model="m.color" size="mini"></el-color-picker>
-						<span class="c-remark" style="vertical-align: top;">{{m.color}}</span>
-					</div>
-					<div class="c-item br">
-						<label class="c-label">评分组件：</label>
-						<div style="display: inline-block;">
-							<el-rate v-model="m.rateValue" show-text></el-rate>
-						</div>
-					</div>
-					<div class="c-item br">
-						<label class="c-label"></label>
+					</sa-item>
+					
+					<sa-item type="color" name="颜色选择" v-model="m.color" br></sa-item>
+					<sa-item type="rate" name="评分组件" v-model="m.rateValue" br></sa-item>
+					<sa-item name="" br>
 						<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
-					</div>
+					</sa-item>
 				</el-form>
 			</div>
 		</div>
 		<script src="mock-joptions.js"></script>
 		<script type="text/javascript">
-			new Vue({
+			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),				// logo 
+				},
 				el: '.vue-box',
 				data: {
 					m: {	// 查询参数 
@@ -132,6 +86,8 @@
 						count: '',
 						create_time: '',
 						create_time2: '',
+						startDate: '',
+						endDate: '',
 						textareaValue: '',
 						type_id: 0,
 						jvalue: [],
@@ -155,23 +111,16 @@
 					joptions: mockJoptions
 				},
 				methods: {
-					// 表单验证  
+					// 表单校验 
 					submitCheck: function() {
-						try{
-							var m = this.m;		// 获取 m对象 
-							sa.checkNull(m.name, '请输入普通参数');
-							sa.checkNull(m.count, '请输入数值参数');
-							sa.check(m.type_id == 0, '请选择下拉框');
-							return 'ok';	// 全部通过验证，返回ok 表示正确 
-						} catch(e) {
-							sa.error(e);
-						}
+						let m = this.m;	
+						sa.checkNull(m.name, '请输入普通参数');
+						sa.checkNull(m.count, '请输入数值参数');
+						sa.check(m.type_id == 0, '请选择下拉框');
 					},
 					// 提交 
 					ok: function() {
-						if(this.submitCheck() != 'ok') {
-							return;
-						}
+						this.submitCheck();
 						sa.alert('提交参数为：' + JSON.stringify(this.m));
 					},
 				},
@@ -184,11 +133,5 @@
 			})
 			
 		</script>
-		
-		
-		
-		
-		
-		
 	</body>
 </html>

@@ -7,15 +7,15 @@
 		<!-- 所有的 css js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
 		<style type="text/css">
 			.c-panel .c-label{width: 8em;}
-			
-			
+			.c-item .image-box-2{height: 90px;}
 		</style>
 	</head>
 	<body>
@@ -23,41 +23,27 @@
 			<!-- ------- 内容部分 ------- -->
 			<div class="s-body">
 				<div class="c-panel">
-					<el-form size="mini" v-if="m">
-						<div class="c-item br">
-							<label class="c-label">id：</label>
-							<span>{{m.id}}</span>
-						</div>
-						<div class="c-item br">
-							<label class="c-label">分类名字：</label>
-							<span>{{m.name}}</span>
-						</div>
-						<div class="c-item br">
-							<label class="c-label" style="vertical-align: top;">分类图标：</label>
-							<img :src="m.icon" style="width: 3em; height: 3em; cursor: pointer;" 
-								@click="sa.showImage(m.icon, '400px', '400px')" v-if="m.icon">
-							<span v-else>无</span>
-						</div>
-						<div class="c-item br">
-							<label class="c-label">排序值：</label>
-							<span>{{m.sort}}</span>
-						</div>
-						<div class="c-item br">
-							<label class="c-label">创建日期：</label>
-							<span>{{sa.forDate(m.create_time, 2)}}</span>
-						</div>
+					<el-form v-if="m">
+						<sa-info name="分类id" br>{{m.id}}</sa-info>
+						<sa-info name="分类名字" br>{{m.name}}</sa-info>
+						<sa-info name="分类图标" :value="m.icon" type="img" br></sa-info>
+						<sa-info name="排序索引" br>{{m.sort}}</sa-info>
+						<sa-info name="创建日期" br>{{sa.forDatetime(m.create_time)}}</sa-info>
 					</el-form>
 				</div>
 			</div>
 			<!-- ------- 底部按钮 ------- -->
 			<div class="s-foot">
-				<el-button size="mini" type="success" @click="sa.closeCurrIframe()">确定</el-button>
-				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+				<el-button @click="sa.closeCurrIframe()" type="success">确定</el-button>
+				<el-button @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script src="./moke-data.js"></script>
 		<script>
 			var app = new Vue({
+				components: {
+					"sa-info": httpVueLoader('../../sa-frame/com/sa-info.vue'),		
+				},
 				el: '.vue-box',
 				data: {
 					id: sa.p('id', 0),	// 获取数据ID 

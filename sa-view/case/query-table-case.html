@@ -7,8 +7,9 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
 		<script src="../../static/sa.js"></script>
@@ -19,43 +20,19 @@
 				<!-- ------------- 检索参数 ------------- -->
 				<div class="c-title">检索参数</div>
 				<el-form @submit.native.prevent >
-					<div class="c-item">
-						<label class="c-label">名称查询：</label>
-						<el-input size="mini" v-model="p.name" placeholder="模糊查询"></el-input>
-					</div>
-					<div class="c-item" style="min-width: 0px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
-					</div>
+					<sa-item name="名称查询" v-model="p.name" placeholder="模糊查询"></sa-item>
+					<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
 				</el-form>
-				<!-- ------------- 快捷按钮 ------------- -->
-				<div class="fast-btn">
-					<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
-					<el-button size="mini" type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button>
-					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
-					<el-button size="mini" type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
-					<el-button size="mini" type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
-				</div>
+				<!-- ------------- 快捷curd按钮 ------------- -->
+				<sa-item type="fast-btn" show="add,get,delete,export,reset"></sa-item>
 				<!-- ------------- 数据列表 ------------- -->
 				<el-table class="data-table" ref="data-table" :data="dataList" size="small">
-					<el-table-column type="selection" width="45px"></el-table-column>
-					<el-table-column label="id" prop="id" width="70px"></el-table-column>
-					<el-table-column label="显示文本" prop="name"></el-table-column>
-					<el-table-column label="显示头像">
-						<template slot-scope="s">
-							<img :src="s.row.avatar" style="width: 3em; height: 3em; border-radius: 4px; cursor: pointer;" 
-								@click="sa.showImage(s.row.avatar, '400px', '400px')" />
-						</template>
-					</el-table-column>
-					<el-table-column label="显示图标">
-						<template slot-scope="s">
-							<i :class="s.row.icon" style="font-size: 1.3em;"></i>
-						</template>
-					</el-table-column>
-					<el-table-column label="显示价格" >
-						<template slot-scope="s">
-							<b style="color: red; ">￥{{s.row.money / 100}}</b>
-						</template>
-					</el-table-column>
+					<sa-td type="selection"></sa-td>
+					<sa-td name="id" prop="id" width="70px"></sa-td>
+					<sa-td name="显示文本" prop="name"></sa-td>
+					<sa-td type="img" name="显示头像" prop="avatar"></sa-td>
+					<sa-td type="icon" name="显示图标" prop="icon"></sa-td>
+					<sa-td type="money-f" name="显示价格" prop="money"></sa-td>
 					<el-table-column label="显示标签" width="190px" >
 						<template slot-scope="s">
 							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('1') > -1">周一</el-tag>
@@ -67,28 +44,9 @@
 							<el-tag size="small" effect="plain" v-if="s.row.day.indexOf('7') > -1">周日</el-tag>
 						</template>
 					</el-table-column>
-					<el-table-column label="显示状态">
-						<template slot-scope="s">
-							<b style="color: green;" v-if="s.row.status==1">正常</b>
-							<b style="color: red;" v-if="s.row.status==2">禁用</b>
-						</template>
-					</el-table-column>
-					<!-- <el-table-column label="显示状态">
-						<template slot-scope="s">
-							<el-tag class="c-tag" effect="dark" size="mini" color="#282" v-if="s.row.status==1">正常</el-tag>
-							<el-tag class="c-tag" effect="dark" size="mini" color="#f22" v-if="s.row.status==2">禁用</el-tag>
-						</template>
-					</el-table-column> -->
-					<el-table-column label="显示开关">
-						<template slot-scope="s">
-							<el-switch v-model="s.row.status" :active-value="1" :inactive-value="2" inactive-color="#ff4949"></el-switch>
-							<span style="color: #999;" v-if="s.row.status==1">正常</span>
-							<span style="color: #999;" v-else>禁用</span>
-						</template>
-					</el-table-column>
-					<el-table-column label="显示日期" width="150px">
-						<template slot-scope="s"><span>{{sa.forDate(s.row.create_time, 2)}}</span></template>
-					</el-table-column>
+					<sa-td type="j" name="显示状态" prop="status" :jv="{1: '正常[green]', 2: '禁用[red]'}"></sa-td>
+					<sa-td type="switch" name="显示开关" prop="status" :jv="{1: '正常', 2: '禁用'}"></sa-td>
+					<sa-td type="datetime" name="显示日期" prop="create_time" width="150px"></sa-td>
 					<el-table-column label="文字按钮" width="160px">
 						<template slot-scope="s">
 							<el-button type="text" size="mini" @click="get(s.row)">查看</el-button>
@@ -105,22 +63,16 @@
 					</el-table-column>
 				</el-table>
 				<!-- ------------- 分页 ------------- -->
-				<div class="page-box">
-					<el-pagination background
-						layout="total, prev, pager, next, sizes, jumper" 
-						:current-page.sync="p.pageNo" 
-						:page-size.sync="p.pageSize" 
-						:total="dataCount" 
-						:page-sizes="[1, 10, 20, 30, 40, 50, 100]" 
-						@current-change="f5()" 
-						@size-change="f5()">
-					</el-pagination>
-				</div>
+				<sa-item type="page" :curr.sync="p.pageNo" :size.sync="p.pageSize" :total="dataCount" @change="f5()"></sa-item>
 			</div>
 		</div>
 		<script src="mock-data-list.js"></script>
         <script>
 			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),  
+					"sa-td": httpVueLoader('../../sa-frame/com/sa-td.vue')
+				},
 				el: '.vue-box',
 				data: {
 					p: {		// 查询参数  
@@ -128,7 +80,7 @@
 						pageNo: 1,
 						pageSize: 10,
 					},
-					dataCount: 0,
+					dataCount: 0,		// 数据总数 
 					dataList: [],		// 数据集合
 				},
 				methods: {

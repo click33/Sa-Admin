@@ -1,6 +1,6 @@
 <!-- 右边第一行，工具栏 -->
 <template>
-	<div>
+	<div class="tools-panel">
 		<div class="tools-left">
 			<span title="折叠菜单" class="tool-fox" v-if="$root.isOpen == true" @click="$root.endOpen()">
 				<i class="el-icon-s-fold"></i>
@@ -8,7 +8,7 @@
 			<span title="展开菜单" class="tool-fox" v-if="$root.isOpen == false" @click="$root.startOpen()">
 				<i class="el-icon-s-unfold"></i>
 			</span>
-			<span title="搜索" class="tool-fox search-fox" :class=" isSearch ? 'search-fox-show' : '' ">
+			<span title="搜索-input" class="tool-fox search-fox" :class=" isSearch ? 'search-fox-show' : '' ">
 				<el-select v-model="searchText" size="mini" filterable placeholder="请输入菜单关键字" ref="search" 
 					@change="findMenuBySearch" @blur="closeSearch" @keyup.esc.native="closeSearch">
 					<el-option v-for="item in searchList" :key="item.id" :label="item.text" :value="item.id"></el-option>
@@ -20,7 +20,7 @@
 			<span title="搜索菜单" class="tool-fox" @click="startSearch()" v-else>
 				<i class="el-icon-search" style="font-weight: bold;"></i>
 			</span>
-			<span title="刷新" class="tool-fox" @click="$root.rightTab = $root.nativeTab; $root.right_f5();">
+			<span title="刷新" class="tool-fox" @click="$root.f5Tab($root.nativeTab)">
 				<i class="el-icon-refresh-right" style="font-weight: bold;"></i>
 			</span>
 			<span title="当前时间" class="tool-fox">
@@ -32,10 +32,10 @@
 				<span style="font-size: 0.8em; font-weight: bold; position: relative; top: -2px;">未登录</span>
 			</span>
 			<span title="我的信息" class="tool-fox user-info" style="padding: 0;" v-if="$root.user != null">
-				<el-dropdown @command="$root.handleCommand" trigger="click" size="medium">
+				<el-dropdown @command="handleCommand" trigger="click" size="medium">
 					<span class="el-dropdown-link user-name" style="height: 100%; padding: 0 1em; display: inline-block;">
 						<img :src="$root.user.avatar" class="user-avatar">
-						{{$root.user.username}}
+						<span>{{$root.user.username}}</span>
 						<i class="el-icon-arrow-down el-icon--right"></i>
 					</span>
 					<el-dropdown-menu slot="dropdown">
@@ -43,33 +43,20 @@
 					</el-dropdown-menu>
 				</el-dropdown>
 			</span>
-			<!-- <span title="切换效果" class="tool-fox" style="padding: 0;">
-				<el-dropdown @command="$root.toggleSwitch" trigger="click" size="medium">
-					<span class="el-dropdown-link" style="height: 100%; padding: 0 1em; display: inline-block;">
-						<i class="el-icon-sort" style="font-weight: bold; transform: rotate(90deg)"></i> 
-						<span style="font-size: 0.9em;">切换</span>
-					</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item :command="s.value" v-for="s in $root.switchList" :key="s.name">
-							<span :style=" $root.switchV == s.value ? 'color: #44f' : '' ">{{s.name}} </span>
-						</el-dropdown-item>
-					</el-dropdown-menu>
-				</el-dropdown>
-			</span>-->
 			<span title="主题" class="tool-fox" style="padding: 0;">
-				<el-dropdown @command="$root.toggleTheme" trigger="click" size="medium">
+				<el-dropdown @command="toggleTheme" trigger="click" size="medium">
 					<span class="el-dropdown-link" style="height: 100%; padding: 0 1em; display: inline-block;">
 						<i class="el-icon-price-tag" style="font-weight: bold;"></i>
 						<span style="font-size: 0.9em;">主题</span>
 					</span>
 					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item :command="t.value" v-for="t in $root.themeList" :key="t.name">
+						<el-dropdown-item :command="t.value" v-for="t in themeList" :key="t.name">
 							<span :style=" $root.themeV == t.value ? 'color: #44f' : '' ">{{t.name}} </span>
 						</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</span> 
-			<span title="便签" class="tool-fox" @click="$root.openNote()">
+			<span title="便签" class="tool-fox" @click="openNote()">
 				<i class="el-icon-edit" style="font-weight: bold; font-size: 0.9em;"></i>
 				<span style="font-size: 0.9em;">便签</span>
 			</span>
@@ -80,10 +67,10 @@
 				<i class="el-icon-bottom-left" style="font-weight: bold; "></i>
 			</span>
 		</div>
-		<!--  tab上拖拽：新窗口打开 -->
+		<!-- tab被拖拽时的遮罩（tab上拖拽：新窗口打开） -->
 		<div class="shade-fox" v-if="$root.isDrag" 
 			@dragover="$event.preventDefault();" 
-			@drop="$root.rightTab = $root.dragTab; $root.right_window_open();">
+			@drop="$event.preventDefault(); $event.stopPropagation(); $root.newWinTab($root.dragTab);">
 			<span style="font-size: 16px;">新窗口打开</span>
 		</div>
 	</div>
@@ -101,7 +88,21 @@
 				isFullScreen: false,	// 是否处于全屏状态 
 				
 				nowTime: '加载中...'	,	// 当前时间 
-				currInterval: null		// 刷新当前时间的定时器 
+				currInterval: null,		// 刷新当前时间的定时器 
+				
+				themeList: [	// 主题数组
+					{name: '蓝色', value: '1'},
+					{name: '绿色', value: '2'},
+					{name: '白色', value: '3'},
+					{name: '灰色', value: '4'},
+					{name: '红色', value: '5'},
+					{name: '紫色', value: '9'},
+					{name: 'pro钛合金', value: '6'},
+					{name: '沉淀黑蓝', value: '7'},
+					{name: '简约灰色', value: '8'},
+					{name: '简约草绿', value: '10'},
+				],
+				
 			}
 		},
 		methods: {
@@ -135,26 +136,55 @@
 			// 刷新待选列表 
 			f5SearchList: function() {
 				var searchList = [];
-				var ywList = sa_admin_code_util.treeToArray(this.$root.menuList);
+				
 				let index = 1;
-				for (var i = 0; i < ywList.length; i++) {
-					let menu = ywList[i];
-					if(!menu.is_show || this.$root.showList.indexOf(menu.id) == -1 || (menu.childList && menu.childList.length > 0)) {
-						continue;
-					}
-					// 计算待选列表 
-					let str = menu.name;
-					if(menu.parent_id != 0) {
-						let parent_menu = this.$root.getMenuById(ywList, menu.parent_id);
-						str = parent_menu.name + ' > ' + str;
-						if(parent_menu.parent_id != 0) {
-							let parent_parent_menu = this.$root.getMenuById(ywList, parent_menu.parent_id);
-							str = parent_parent_menu.name + ' > ' + str;
-						}
-					}
-					searchList.push({id: menu.id, text: (index++) + ". " + str});
+				function push(id, str) {
+					searchList.push({id: id, text: (index++) + ". " + str});
 				}
+				
+				// 遍历菜单 
+				let childList = this.$root.menuList;
+				let showList = this.$root.showList;
+				for (let menu1 of childList) {
+					if(menu1.is_show === false || showList.indexOf(menu1.id + '') == -1) continue;
+					if(menu1.childList) {
+						for (let menu2 of menu1.childList) {
+							if(menu2.is_show === false || showList.indexOf(menu2.id + '') == -1) continue;
+							if(menu2.childList) {
+								for (let menu3 of menu2.childList) {
+									if(menu3.is_show === false || showList.indexOf(menu3.id + '') == -1) continue;
+									if(menu3.childList) {
+										for (let menu4 of menu3.childList) {
+											if(menu4.is_show === false || showList.indexOf(menu4.id + '') == -1) continue;
+											push(menu4.id, menu1.name + ' > ' + menu2.name + ' > ' + menu3.name + ' > ' + menu4.name);
+										}
+									} else {
+										push(menu3.id, menu1.name + ' > ' + menu2.name + ' > ' + menu3.name);
+									}
+								}
+							} else {
+								push(menu2.id, menu1.name + ' > ' + menu2.name);
+							}
+						}
+					} else {
+						push(menu1.id, menu1.name);
+					}
+				}
+				
 				this.searchList = searchList;
+			},
+			
+			// ------------------------------ 主题 ------------------------------
+			// 切换主题
+			toggleTheme: function(command) {
+				// 开始切换
+				this.$root.themeV = command + "";
+				localStorage.setItem('themeV', command);
+				for (var i = 0; i < this.themeList.length; i++) {
+					if(this.themeList[i].value + '' == command + '') {
+						this.$message('切换成功，' + this.themeList[i].name);
+					}
+				}
 			},
 			
 			// ------------------------------ 全屏 ------------------------------
@@ -196,7 +226,40 @@
 					document.msExitFullscreen()
 				}
 			},
+			
 			// ------------------------------ 其它 ------------------------------
+			// 处理userinfo的下拉点击
+			handleCommand: function(command) {
+				this.$root.dropList.forEach(function(drop) {
+					if(drop.name == command) {
+						drop.click();
+					}
+				})
+			},
+			// 打开便签
+			openNote: function() {
+				var w = (document.body.clientWidth * 0.4) + 'px';
+				var h = (document.body.clientHeight * 0.6) + 'px';
+				var default_content = '一个简单的小便签, 关闭浏览器后再次打开仍然可以加载到上一次的记录, 你可以用它来记录一些临时资料';
+				var value = localStorage.getItem('sa_admin_note') || default_content;
+				var index = layer.prompt({
+					title: '一个小便签', 
+					value: value,
+					formType: 2,
+					area: [w, h],
+					btn: ['保存'],
+					maxlength: 99999999,
+					skin: 'layer-note-class' 
+				}, function(pass, index){
+					layer.close(index)					
+				});
+				var se = '#layui-layer' + index + ' .layui-layer-input';
+				var d = document.querySelector(se);
+				d.oninput = function() {
+					localStorage.setItem('sa_admin_note', this.value);
+				}
+			},
+			
 			// 刷新时间
 			initInterval: function() {
 				if(this.currInterval) {
@@ -230,6 +293,7 @@
 					this.nowTime = zong;
 				}.bind(this), 1000);
 			}
+		
 		},
 		created() {
 			this.initInterval();
@@ -238,6 +302,7 @@
 </script>
 
 <style scoped>
+	
 	.tools-left{border: 0px #000 solid; float: left;}
 	.tools-right{float: right;}
 	.tool-fox{padding: 0 1em; display: inline-block; cursor: pointer;}

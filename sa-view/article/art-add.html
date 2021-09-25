@@ -7,12 +7,13 @@
 		<!-- 所有的 css js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
+		<script src="https://unpkg.com/wangeditor@4.7.8/dist/wangEditor.min.js"></script>
 		<script src="../../static/sa.js"></script>
-		<script src="../../static/kj/wangEditor.up.js"></script>
 		<style type="text/css">
 			/* wang富文本编辑器 */
 			.editor-item{width: 100%; height: auto;}
@@ -21,7 +22,7 @@
             .editor-item #editor{min-height: 300px; background-color: #FFF;}
             .editor-item .w-e-toolbar{padding-top: 5px !important;}
 			/* 尽量小点 */
-			.editor-item .editor-box{float: left; width: 700px;} 
+			.editor-item .editor-box{float: left; width: 800px;} 
 			.editor-item .editor-box img{max-width: 200px !important;}
 		</style>
 	</head>
@@ -34,7 +35,7 @@
 					<el-form v-if="m">
 						<div class="c-item br">
 							<label class="c-label">文章标题：
-							</label><el-input size="mini" v-model="m.title" style="width: 700px;" placeholder="例如：2002年的第一场雪"></el-input>
+							</label><el-input size="mini" v-model="m.title" style="width: 800px;" placeholder="例如：2002年的第一场雪"></el-input>
 						</div>
 						<div class="c-item br editor-item">
 							<label class="c-label">文章内容：</label>
@@ -75,14 +76,14 @@
 				var E = window.wangEditor
 				window.editor = new E('#editor');
 
-				editor.customConfig.menus = [
+				editor.config.menus = [
 					'head', 'fontSize', 'fontName', 'italic', 'underline', 'strikeThrough', 'foreColor', 'backColor', 'link', 'list',
 					'justify', 'quote', 'emoticon', 'image', 'table', 'code', 'undo', 'redo' // 重复
 				]
-				editor.customConfig.debug = true; // debug模式
-				editor.customConfig.uploadFileName = 'file'; // 图片流name
-				editor.customConfig.withCredentials = true; // 跨域携带cookie
-				editor.customConfig.uploadImgShowBase64 = true   	// 使用 base64 保存图片
+				editor.config.debug = true; // debug模式
+				editor.config.uploadFileName = 'file'; // 图片流name
+				editor.config.withCredentials = true; // 跨域携带cookie
+				editor.config.uploadImgShowBase64 = true   	// 使用 base64 保存图片
 				editor.create(); // 创建
 				editor.txt.html(content);	// 为编辑器赋值
 			}
@@ -111,22 +112,12 @@
 							create_time: "2019-05-12"
 						}
 					},
-					// 表单验证
-					submitCheck: function() {
-						try{
-							var m = this.m;		// 获取 m对象 
-							sa.checkNull(m.title, '请输入分类名字');
-							return 'ok';	// 全部通过验证，返回ok 表示正确 
-						} catch(e) {
-							sa.error(e);
-						}
-					},
 					// 提交数据 
 					ok: function(){
 						// 验证 
-						if(this.submitCheck() != 'ok') {
-							return;
-						}
+						var m = this.m;		// 获取 m对象 
+						sa.checkNull(m.title, '请输入文章标题');
+						
 						// 开始增加或修改
 						// this.m.create_time = undefined;		// 不提交属性：创建日期
 						if(this.id <= 0) {	// 添加

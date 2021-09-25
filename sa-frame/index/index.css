@@ -8,7 +8,7 @@ body{height: 100vh;background-color: #EEE;background-image: url(admin-loading.gi
 body{
 	--nav-left-width: 200px;
 	--nav-left-width-fold: 64px;
-	--nav-right-1-height: 49px;
+	--nav-right-1-height: 50px;
 	--nav-right-2-height: 35px;
 }
 
@@ -16,21 +16,22 @@ body{
 
 /* 左边 */
 .nav-left{width: var(--nav-left-width); left: 0px; z-index: 200; overflow: hidden;}
-.nav-left-top{width: 100%; height: 85px; line-height: 85px;/* z-index: 100; */ overflow: hidden;}
-.nav-left-bottom{width: 100%; height: calc(100% - 80px); overflow: hidden;}
+.nav-left-top{width: 100%; box-sizing: border-box; height: 85px; line-height: 85px;/* z-index: 100; */ overflow: hidden;}
+.nav-left-bottom{width: 100%; box-sizing: border-box; height: calc(100% - 85px); overflow: hidden;}
 
 /* 右边 */
 .nav-right{width: calc(100% - var(--nav-left-width)); right: 0px; z-index: 100; }
-.nav-right-1{height: var(--nav-right-1-height); line-height: var(--nav-right-1-height); z-index: 200; position: relative; border-bottom: 1px #DDD solid; overflow: hidden;}
-.nav-right-2{height: var(--nav-right-2-height); position: relative; z-index: 200; box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
-.nav-right-3{width: 100%; height: calc(100vh - var(--nav-right-1-height) - var(--nav-right-2-height)); position: relative; overflow:}
+.nav-right-1{height: var(--nav-right-1-height); line-height: var(--nav-right-1-height); z-index: 200; position: relative; border-bottom: 1px #F1F1F1 solid; box-sizing: border-box; overflow: hidden;}
+.nav-right-2{height: var(--nav-right-2-height); line-height: var(--nav-right-2-height); z-index: 200; position: relative; box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
+.nav-right-3{width: 100%; height: calc(100vh - var(--nav-right-1-height) - var(--nav-right-2-height)); position: relative; overflow: hidden;}
 
 /* .fas{transition: all 0s;} */
 
 /* 所有带动画的元素 */
-.admin-logo,.nav-left, .nav-right, .nav-right-2 *{transition: all 0.2s; }
+.admin-logo,.nav-left,.nav-left-top,.nav-left-bottom, .nav-right/* , .nav-right-2 * */{transition: all 0.2s; }
 
 
+/* 菜单折叠 */
 .app-fold{
 	--nav-left-width: 64px;
 }
@@ -46,7 +47,6 @@ body{
 
 /* -------------- 其它 --------------- */
 
-
 /* 折叠时悬浮菜单样式，防止透明 */
 .el-menu--vertical .el-menu--popup{background-color: #FFF !important; color: red !important;}
 
@@ -59,8 +59,7 @@ body{
 .shade-fox{display: flex; justify-content: center; align-items: center}
 .shade-text{}
 
-
 /* 去除掉便签的大边框 */
-.layer-note-class .layui-layer-input{outline: 0; box-shadow: none !important; border: 1px #ddd solid; margin: 1em; padding: 0.5em !important; font-family: 'Times New Roman', Times, serif;}
-
+.layer-note-class .layui-layer-input{outline: 0; box-shadow: none !important; padding: 0.8em !important; font-family: 'Times New Roman', Times, serif;}
+.layer-note-class .layui-layer-input{border: 0px #ddd solid; border-bottom: 1px #ddd solid;}
 

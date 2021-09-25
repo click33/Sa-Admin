@@ -8,21 +8,20 @@
 		<!-- 所有的 css js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css"> 
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
+		<script src="https://unpkg.com/wangeditor@4.7.8/dist/wangEditor.min.js"></script>
 		<script src="../../static/sa.js"></script>
 		<script src="../../static/kj/upload-util.js"></script>
-		<script src="../../static/kj/wangEditor.up.js"></script>
-		<!-- 为了抹平sa-admin和sa-plus之间差异的补充 -->
-		<link rel="stylesheet" href="./sa-plus-sa.css">
 		<style type="text/css">
 			.c-panel .el-form .c-label{width: 7em !important;}
 			.c-panel .el-form .el-input, .c-panel .el-form .el-textarea__inner{width: 250px;}
 			/*  普通文本和富文本一起变长  */
-			.c-panel .el-form .el-input, .c-panel .el-form .el-textarea__inner{width: 700px;}
-			.c-item-mline{width: 700px;}
+			.c-panel .el-form .el-input, .c-panel .el-form .el-textarea__inner{width: 800px;}
+			.c-item-mline{width: 800px;}
 			.el-table__body-wrapper{min-height: 0px;}
 			
 			
@@ -52,12 +51,12 @@
 						<!-- no字段： m.id - 记录id -->
 						<div class="c-item br">
 							<label class="c-label">商品名称：</label>
-							<el-input size="mini" v-model="m.name" placeholder="请输入商品名称"></el-input>
+							<el-input size="mini" v-model="m.name"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">所属分类：</label>
-							<el-select size="mini" v-model="m.type_id" placeholder="请选择一个分类">
-								<el-option label="请选择" :value="0" disabled></el-option>
+							<el-select size="mini" v-model="m.type_id">
+								<!-- <el-option label="请选择" :value="0" disabled></el-option> -->
 								<el-option v-for="item in sysTypeList" :label="item.name" :value="item.id" :key="item.id"></el-option>
 							</el-select>
 						</div>
@@ -94,22 +93,21 @@
 							    multiple
 							    filterable
 							    allow-create
-							    default-first-option
-							    placeholder="请选择商品标签">
+							    default-first-option>
 							    <el-option v-for="item in labelList" :key="item" :label="item" :value="item"></el-option>
 							  </el-select>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">商品价格：</label>
-							<el-input size="mini" v-model="m.price" type="number" placeholder="请输入商品价格"></el-input>
+							<el-input size="mini" v-model="m.price" type="number"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">商品运费：</label>
-							<el-input size="mini" v-model="m.freight" type="number" placeholder="请输入商品运费"></el-input>
+							<el-input size="mini" v-model="m.freight" type="number"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">商品库存：</label>
-							<el-input size="mini" v-model="m.stock_count" type="number" placeholder="请输入商品库存"></el-input>
+							<el-input size="mini" v-model="m.stock_count" type="number"></el-input>
 						</div>
 						<!-- ----------------- 规格值设置 ------------------- -->
 						<div class="c-item br sku-box">
@@ -135,7 +133,7 @@
 										<span v-for="sv in sk.values">
 											<el-tag size="medium" closable effect="plain" @close="sa.arrayDelete(sk.values, sv); f5Spec()">{{sv}}</el-tag>
 										</span>
-										<span class="not-values-tips" v-if="sk.values.length == 0">(请添加)</span>
+										<!-- <span class="not-values-tips" v-if="sk.values.length == 0">(请添加)</span> -->
 										<el-input size="mini" style="width: 150px;" v-model="sk.specValueAddText" 
 											@keyup.enter.native="specValueAdd(sk, sk.specValueAddText)">
 											<el-button slot="append" @click="specValueAdd(sk, sk.specValueAddText)">添加</el-button>
@@ -197,9 +195,9 @@
 							</div>
 						</div>
 						<!-- ----------------- 富文本 ------------------- -->
-						<div class="c-item br editor-item" style="margin-top: 10px;">
+						<div class="c-item br" style="margin-top: 10px;">
 							<label class="c-label">图文介绍：</label>
-							<div class="editor-box">
+							<div class="editor-box editor-item c-item-mline">
 								<div id="editor"></div>
 							</div>
 						</div>
@@ -232,17 +230,17 @@
 				var E = window.wangEditor;
 				window.editor = new E('#editor');
 
-				editor.customConfig.menus = [
+				editor.config.menus = [
 					'head', 'fontSize', 'fontName', 'italic', 'underline', 'strikeThrough', 'foreColor', 'backColor', 'link', 'list',
 					'justify', 'quote', 'emoticon', 'image', 'table', 'code', 'undo', 'redo' // 重复
 				]
-				editor.customConfig.debug = true; // debug模式
-				// editor.customConfig.uploadFileName = 'file'; // 图片流name
-				editor.customConfig.withCredentials = true; // 跨域携带cookie
-				editor.customConfig.uploadImgMaxSize = 100 * 1024 * 1024;	// 图片大小最大100M
-				// editor.customConfig.uploadImgShowBase64 = true   	// 使用 base64 保存图片
+				editor.config.debug = true; // debug模式
+				// editor.config.uploadFileName = 'file'; // 图片流name
+				editor.config.withCredentials = true; // 跨域携带cookie
+				editor.config.uploadImgMaxSize = 100 * 1024 * 1024;	// 图片大小最大100M
+				// editor.config.uploadImgShowBase64 = true   	// 使用 base64 保存图片
 				// 重写上传图片的函数到OSS 
-				editor.customConfig.customUploadImg = function(files, insert) {
+				editor.config.customUploadImg = function(files, insert) {
 					var file = files[0]; // 文件对象 
 					startUploadImage2(file, function(src) {
 						insert(src);
@@ -414,25 +412,20 @@
 					},
 					// 表单验证
 					submitCheck: function() {
-						try{
-							var m = this.m;		// 获取 m对象 
-							// sa.checkNull(m.id, '请输入记录id');
-							sa.checkNull(m.name, '请输入商品名称');
-							sa.checkNull(m.type_id, '请输入所属分类');
-							sa.checkNull(m.avatar, '请输入商品头像');
-							sa.checkNull(m.image_list, '请输入轮播图片');
-							sa.checkNull(m.price, '请输入商品价格');
-							sa.checkNull(m.freight, '请输入商品运费');
-							sa.checkNull(m.stock_count, '请输入剩余库存');
-							sa.checkNull(m.content, '请输入图文介绍');
-							sa.checkNull(m.status, '请输入商品状态');
-							sa.check(this.specList.length == 0, '请至少添加一个规格');
-							// sa.checkNull(m.create_time, '请输入创建日期');
-							// sa.checkNull(m.update_time, '请输入更新日期');
-							return 'ok';	// 全部通过验证，返回ok 表示正确 
-						} catch(e) {
-							sa.error(e);
-						}
+						var m = this.m;		// 获取 m对象 
+						// sa.checkNull(m.id, '请输入记录id');
+						sa.checkNull(m.name, '请输入商品名称');
+						sa.checkNull(m.type_id, '请输入所属分类');
+						sa.checkNull(m.avatar, '请输入商品头像');
+						sa.checkNull(m.image_list, '请输入轮播图片');
+						sa.checkNull(m.price, '请输入商品价格');
+						sa.checkNull(m.freight, '请输入商品运费');
+						sa.checkNull(m.stock_count, '请输入剩余库存');
+						sa.checkNull(m.content, '请输入图文介绍');
+						sa.checkNull(m.status, '请输入商品状态');
+						sa.check(this.specList.length == 0, '请至少添加一个规格');
+						// sa.checkNull(m.create_time, '请输入创建日期');
+						// sa.checkNull(m.update_time, '请输入更新日期');
 					},
 					// 提交数据 
 					ok: function(){
@@ -443,9 +436,8 @@
 						m.spec_key_list_str = JSON.stringify(this.specKeyList);	// 规格key数据 对象转字符串 
 						m.spec_list_str = JSON.stringify(this.specList);	// 规格列表数据 对象转字符串 
 						m.content = editor.txt.html();	// 获取富文本值 
-						if(this.submitCheck() != 'ok') {
-							return;
-						}
+						this.submitCheck();
+						
 						// 开始增加或修改
 						m.create_time = undefined;		// 不提交属性：创建日期
 						m.update_time = undefined;		// 不提交属性：更新日期

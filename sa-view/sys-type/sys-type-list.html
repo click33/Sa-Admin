@@ -7,7 +7,8 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css">
-		<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+		<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 		<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
 		<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
 		<script src="https://www.layuicdn.com/layer-v3.1.1/layer.js"></script>
@@ -19,42 +20,20 @@
 				<!-- ------------- 检索参数 ------------- -->
 				<div class="c-title">检索参数</div>
 				<el-form ref="form" :model='p' @submit.native.prevent>
-					<!-- <div class="c-item">
-						<label class="c-label">记录id：</label>
-						<el-input size="mini" v-model="p.id"></el-input>
-					</div> -->
-					<div class="c-item">
-						<label class="c-label">分类名字：</label>
-						<el-input size="mini" v-model="p.name"></el-input>
-					</div>
-					<div class="c-item" style="min-width: 0px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
-					</div>
+					<sa-item name="分类名字" v-model="p.name"></sa-item>
+					<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
 				</el-form>
-				<!-- ------------- 快捷按钮 ------------- -->
-				<div class="fast-btn">
-					<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
-					<el-button size="mini" type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button>
-					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
-					<el-button size="mini" type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
-					<el-button size="mini" type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
-				</div>
+				<!-- ------------- 快捷curd按钮 ------------- -->
+				<sa-item type="fast-btn" show="add,get,delete,export,reset"></sa-item>
 				<!-- ------------- 数据列表 ------------- -->
 				<el-table class="data-table" ref="data-table" :data="dataList" size="small">
-					<el-table-column type="selection" width="45px"></el-table-column>
-					<el-table-column label="id" prop="id" ></el-table-column>
-					<el-table-column label="分类名字" prop="name" ></el-table-column>
-					<el-table-column label="分类图标">
-						<template slot-scope="s">
-							<img :src="s.row.icon" @click="sa.showImage(s.row.icon, '400px', '400px')" v-if="s.row.icon" 
-								style="width: 3em; height: 3em; border-radius: 3px; cursor: pointer;" />
-							<div v-else>无</div>
-						</template>
-					</el-table-column>
-					<el-table-column label="排序值" prop="sort" ></el-table-column>
-					<el-table-column label="创建日期">
-						<template slot-scope="s"><span>{{sa.forDate(s.row.create_time, 2)}}</span></template>
-					</el-table-column>
+					<sa-td type="selection"></sa-td>
+					<sa-td name="id" prop="id"></sa-td>
+					<sa-td name="分类名字" prop="name"></sa-td>
+					<sa-td name="分类图标" prop="icon" type="textarea"></sa-td>
+					<sa-td name="分类图标" prop="icon" type="video-list"></sa-td>
+					<sa-td name="排序值" prop="sort"></sa-td>
+					<sa-td name="创建日期" prop="create_time" type="datetime"></sa-td>
 					<el-table-column label="操作" width="240px">
 						<template slot-scope="s">
 							<el-button class="c-btn" type="success" icon="el-icon-view" @click="get(s.row)">查看</el-button>
@@ -64,22 +43,16 @@
 					</el-table-column>
 				</el-table>
 				<!-- ------------- 分页 ------------- -->
-				<div class="page-box">
-					<el-pagination background
-						layout="total, prev, pager, next, sizes, jumper" 
-						:current-page.sync="p.pageNo" 
-						:page-size.sync="p.pageSize" 
-						:total="dataCount" 
-						:page-sizes="[1, 10, 20, 30, 40, 50, 100, 1000]" 
-						@current-change="f5()" 
-						@size-change="f5()">
-					</el-pagination>
-				</div>
+				<sa-item type="page" :curr.sync="p.pageNo" :size.sync="p.pageSize" :total="dataCount" @change="f5()"></sa-item>
 			</div>
 		</div>
 		<script src="./moke-data.js"></script>
 		<script>
 			var app = new Vue({
+				components: {
+					"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),		
+					"sa-td": httpVueLoader('../../sa-frame/com/sa-td.vue'),			
+				},
 				el: '.vue-box',
 				data: {
 					p: { // 查询参数  

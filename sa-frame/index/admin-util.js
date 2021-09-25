@@ -29,7 +29,7 @@ var sa_admin_code_util = {
 			var menu = menu_list[i];
 			// 添加到其指定的父菜单的childList
 			if(menu.parent_id) {
-				var parent_menu = this.getMenuById(menu_list, menu.parent_id);
+				var parent_menu = this.findMenuById(menu_list, menu.parent_id);
 				if(parent_menu) {
 					parent_menu.childList = parent_menu.childList || [];
 					parent_menu.childList.push(menu);
@@ -80,18 +80,18 @@ var sa_admin_code_util = {
 	// 将 Tree 菜单 转换为 一维平面数组 
 	treeToArray: function(menu_list) {
 		var arr = [];
-		function fn(menu_list) {
+		function _dg(menu_list) {
 			menu_list = menu_list || [];
 			for (var i = 0; i < menu_list.length; i++) {
 				var menu = menu_list[i];
 				arr.push(menu);
 				// 如果有子菜单 
 				if(menu.childList) {
-					fn(menu.childList);
+					_dg(menu.childList);
 				}
 			}
 		}
-		fn(menu_list);
+		_dg(menu_list);
 		return arr;
 	},
 	
