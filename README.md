@@ -304,6 +304,12 @@ sa-td 封装了各种表格单元格
 - 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
 
 
+## 🪒 访问旧版本
+Sa-Admin v1.40.0 之前的版本通过纯 html + iframe 方式构建，如果您需要访问旧版本：
+- 源码：[https://gitee.com/click33/sa-admin/tree/html/](https://gitee.com/click33/sa-admin/tree/html/)
+- 演示站：[http://sa-admin-html.dev33.cn/](http://sa-admin-html.dev33.cn/)
+
+
 ## 😎️ QQ群
 QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
