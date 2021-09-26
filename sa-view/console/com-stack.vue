@@ -12,7 +12,7 @@
 			<el-button type="success" size="small" @click="sa.open('https://github.com/click33/sa-admin')">GitHub 地址 (求star)</el-button>
 			<el-button type="danger" size="small" @click="sa.open('https://gitee.com/click33/sa-admin')">Gitee 地址</el-button>
 			<!-- <el-button type="info" size="small" @click="sa_admin.showMenuById('1-11')">意见吐槽</el-button> -->
-			<el-button type="info" size="small" @click="sa_admin.showMenuById('1-12')">需求征集</el-button>
+			<el-button type="info" size="small" @click="sa.open('http://sa-app.dev33.cn/wall.html?name=sa-admin')">需求征集</el-button>
 			<el-popover placement="top-start" trigger="hover">
 			    <el-button slot="reference" type="warning" size="small">打赏</el-button>
 				<div style="text-align: center;">
@@ -44,10 +44,9 @@
 			return {
 				// 技术栈集合
 				frameList: [
-					{name: 'JS引擎', value: 'Vue @2.6.10', link: 'https://cn.vuejs.org/'},
+					{name: '基础框架', value: 'Vue @2.6.10', link: 'https://cn.vuejs.org/'},
 					{name: 'UI框架', value: 'Element-UI @2.13.0', link: 'https://element.eleme.cn/#/zh-CN'},
 					{name: 'web弹层', value: 'layer @3.1.1', link: 'http://layer.layui.com/'},
-					{name: '切页动画', value: 'Swiper @4.5.0', link: 'https://www.swiper.com.cn/'},
 					{name: '图表引擎', value: 'ECharts @4.2.1', link: 'https://echarts.baidu.com/'},
 					{name: '富文本编辑器', value: 'wangEditor @3.1.1', link: 'http://www.wangeditor.com/'},
 				],

@@ -24,8 +24,8 @@ var sa_admin = new Vue({
 		title: 'Sa-Admin',			// 页面标题  
 		logo: 'sa-frame/admin-logo.png',	// logo地址 
 		icon: 'sa-frame/admin-logo.png',	// icon地址 
-		version: 'v2.4.4',					// 当前版本号
-		updateTime: '2020-11-14',			// 更新日期 
+		version: 'v1.40.0',					// 当前版本号
+		updateTime: '2021-9-26',			// 更新日期 
 		githubUrl: 'https://github.com/click33/sa-admin',	// github地址 
 		isRemeOpen: true,		// 是否记住上一次最后打开的窗口 
 		printInfo: true,		// 是否在控制台打印信息 
@@ -455,7 +455,7 @@ var sa_admin = new Vue({
 		},
 		// 打印版本
 		printVesion: function() {
-			console.log('欢迎使用sa-admin(iframe版)，当前版本：' + this.version + "，更新于：" + this.updateTime + "，GitHub地址：" + this.githubUrl);
+			console.log('欢迎使用Sa-Admin，当前版本：' + this.version + "，更新于：" + this.updateTime + "，GitHub地址：" + this.githubUrl);
 			console.log('如在使用中发现任何bug或者疑问，请加入QQ群交流：782974737，点击加入：' + 'https://jq.qq.com/?_wv=1027&k=5DHN5Ib');
 		},
 		

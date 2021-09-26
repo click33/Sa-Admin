@@ -42,8 +42,8 @@
 	.a-view{opacity: 0; transition: all 0.2s;}
 	.a-view-native{z-index: 100000; opacity: 1;}
 	
-	.a-view>iframe{width: 100%; height: 100%; border: 0px #000 solid; background-color: #EEE;}
-	.a-view>.vue-com-view{width: 100%; height: 100%; background-color: #EEE; overflow: auto;}
+	.a-view>iframe{width: 100%; height: 100%; border: 0px #000 solid;}
+	.a-view>.vue-com-view{width: 100%; height: 100%; overflow: auto; background-color: #EEE;}
 	
 	/* .iframe-no-scroll{width: calc(100% + 22px); } */
 	

@@ -16,11 +16,12 @@
 			
 			/* 样式调整 */
 			.login-box{display: flex; justify-content: center; align-items: center; position: fixed; width: inherit; height: 100%; pointer-events: none;}
-			.login{height: auto; padding: 50px 50px; position: static; margin: 0 auto !important; pointer-events: all;}
+			.login{height: auto; padding: 50px 50px; position: static; margin: 0 auto !important; pointer-events: all; border-radius: 0px;}
 			.login-top{margin-top: 0px; margin-bottom: 30px;}
 			.logo-img{width: 50px; height: 50px; vertical-align: middle; position: relative; top: -3px; border-radius: 50%; margin-left: -10px; margin-right: 10px;}
 			.logo-img{display: none;}
-			.login-button{width: 270px;}
+			.login-button{width: 270px; border-radius: 0px; transition: all 0.2s;}
+			.login-button:hover{background-color: #0E80eF;}
 			/* .page-title{line-height: 50px;} */
 			.sk-rotating-plane{}
 			/* 动画相关 */
@@ -52,7 +53,7 @@
 							<div class="login-center-input-text">密码</div>
 						</div>
 					</div>
-					<div class="login-button">登陆</div>
+					<div class="login-button">登录</div>
 				</div>
 			</div>
 			<div class="sk-rotating-plane"></div>
@@ -69,7 +70,7 @@
 			// 你所有要改的代码全在这里   ↓↓↓↓↓ 
 			
 			// 所有参考属性  
-			var page_title = 'SA-后台模板-登录';		// 页面标题 
+			var page_title = 'Sa-Admin 登录';		// 页面标题 
 			var key = 'admin';						// 默认的key 
 			var password = 'admin';					// 默认的password  
 			var logo = 'sa-frame/admin-logo.png';	// logo地址，为空字符串则不显示 

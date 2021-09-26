@@ -1,106 +1,311 @@
 <p align="center">
-    <img alt="logo" src="http://oss.dev33.cn/sa-admin/admin-logo-150.png" width="150" height="150" style="margin-bottom: 10px;">
+    <img alt="logo" src="https://oss.dev33.cn/sa-admin/admin-logo.png" width="150" height="150" style="margin-bottom: 10px;">
 </p>
-<h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">sa-admin v2.4.2</h2>
+<h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">Sa-Admin v1.40.0</h2>
 <h4 align="center">一个多窗口后台模板，流畅、易上手、提高生产力</h4>
-<h4 align="center">
-	<a href="https://github.com/click33/sa-admin"><img src="https://img.shields.io/badge/sa--admin-v2.4.2-2B9939"></a>
-	<a href="https://github.com/click33/sa-admin"><img src="https://img.shields.io/badge/language-html-2B9939"></a>
-	<a href="https://github.com/click33/sa-admin/stargazers"><img src="https://img.shields.io/github/stars/click33/sa-admin"></a>
-	<a href="https://github.com/click33/sa-admin/watchers"><img src="https://img.shields.io/github/watchers/click33/sa-admin"></a>
-	<a href="https://github.com/click33/sa-admin/network/members"><img src="https://img.shields.io/github/forks/click33/sa-admin"></a>
-	<a href="https://github.com/click33/sa-admin/issues"><img src="https://img.shields.io/github/issues/click33/sa-admin.svg"></a>
-	<a href="https://github.com/click33/sa-admin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/click33/sa-admin.svg"></a>
-</h4>
+<p align="center">
+	<a href="https://gitee.com/dromara/sa-token/stargazers"><img src="https://gitee.com/dromara/sa-token/badge/star.svg"></a>
+	<a href="https://gitee.com/dromara/sa-token/members"><img src="https://gitee.com/dromara/sa-token/badge/fork.svg"></a>
+	<a href="https://github.com/dromara/sa-token/stargazers"><img src="https://img.shields.io/github/stars/dromara/sa-token?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/dromara/sa-token/network/members"><img src="https://img.shields.io/github/forks/dromara/sa-token?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/dromara/sa-token/watchers"><img src="https://img.shields.io/github/watchers/dromara/sa-token?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/dromara/sa-token/issues"><img src="https://img.shields.io/github/issues/dromara/sa-token.svg?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/dromara/sa-token/blob/master/LICENSE"><img src="https://img.shields.io/github/license/dromara/sa-token.svg?style=flat-square"></a>			
+</p>
 
 
+## ⚡ 介绍
+Sa-Admin 是一个多窗口后台模板，纯 html 无后端代码，无需脚手架即可直接运行，流畅、易上手、提高生产力。核心技术栈：Vue + Element-UI + jquery + layer。
 
-## 优点 😘
-- 上手简单：提供完整彻底的封装，不用修改一行源代码即可轻松集成
-- 示例全面：提供大量常见增删改查示例，提高你的生产力
-- 演示地址：[http://sa-admin.dev33.cn](http://sa-admin.dev33.cn)
-- 演示地址2：[http://sa-admin.dev33.cn（http-vue-loader版本）](http://sa-admin-http.dev33.cn)
-- 如果比较熟悉vue单页应用，[点我访问vue单页版](https://github.com/click33/sa-vue-admin)
+废话不多说，具体效果可参见在线预览：[http://sa-admin.dev33.cn/](http://sa-admin.dev33.cn/)
 
-## 需求提交
-- 我们深知一个优秀的项目需要海纳百川，[点我在线提交需求](http://sa-app.dev33.cn/wall.html?name=sa-admin)
-- 开源不易，求鼓励，**点个`star`吧**
+## ⭐ 特点 
+Sa-Admin 最大的特点是无需搭建 vue-cli 脚手架，随便一个 html 预览工具（比如 [HBuilderX](https://www.dcloud.io/hbuilderx.html)）即可直接运行（采用 http-vue-loader 技术实现）。
 
-## 框架选型
-- JS引擎：[Vue @2.6.10](https://cn.vuejs.org/)
-- UI框架：[Element-UI @2.13.0](https://element.eleme.cn/#/zh-CN)
-- web弹层：[layer @3.1.1](http://layer.layui.com/)
-- 即使以上几个框架你都没接触过，只要你认真阅读一遍文档说明，也可以快速上手本模板
+目前最新版包括以下功能：
 
-## 功能
-- 基础
-	- 架构：基于iframe，无后台代码，纯html模板，可方便的适配任何后端语言
-	- 模板：提供大量常见示例，以及各种表单的书写方式，助你快速CRUD
-	- 菜单：支持一、二、三级菜单，并开放一系列接口方便的使用js操作菜单
-	- 折叠：折叠或收缩菜单，并且监听窗口大小变化，在拉伸窗口时自动折叠或收缩菜单，自动响应式
-	- 搜索：智能索引，快捷搜索打开某个菜单
-	- 切换：集成swiper动画，滑动、淡入、方块、3D流、3D翻转，五种高大上切换动画，任你选择！
-	- 主题：目前保留八种主题：蓝色、绿色、白色、灰色、灰色-展开、pro钛合金、沉淀式黑蓝、简约式灰蓝（切换主题时，可自动保存你的喜好，下次打开时仍然有效）
-	- 便签：弹出窗口便签，一个临时小便签，可记录一些临时资料
-	- 全屏：可以在全屏/非全屏之间自由切换
-- tabbar栏：
-	- 卡片堆积：多卡片自动堆积，与菜单双向关联，切换tab卡时自动显示左侧菜单
-	- 拖动手势：tab卡支持拖拽手势，上拖新窗口打开、下拽悬浮打开、左拽快速关闭
-	- 双击全屏：当卡片属于悬浮状态时，双击标题区域可以快速全屏，再次双击取消全屏
-	- 右键菜单：在tab上右击，可以：刷新、复制、关闭、关闭其它、关闭所有、悬浮打开、新窗口打开、取消
-	- 双击菜单：双击tabbar空白处，可以显示添加新tab窗口
-	- 保留高度：切换卡片时，可自动保留上个卡片的滚动条高度
-- 开放接口
-	- 开放一系列api，助你方便的使用js操作tabbar栏，具体请查看集成文档
-	- 锚链：tab切换自动更改hash锚链，同时监听锚链改变tab，可灵活的用鼠标前后键切换tab窗口 （如不需要此功能可在初始化时关闭）
-	- 窗口：可在初始化时，设置是否显示tabbar栏，来控制它是多窗口还是单窗口，具体见使用文档
-	- 更新：功能不断更新中... 你有好的想法也可以告诉我，加群一起交流吧
-	- 文档：使用说明，见文档
+- 视图：支持 iframe 和 .vue 两种视图方式，支持一、二、三、四级菜单。
+- 操作：工具栏提供常见操作按钮：折叠、搜索、刷新、账号、便签、主题切换、全屏切换。
+- 主题：内置十种主题，也可方便的扩展主题。
+- 切换：支持拖拽排序、切换视图自动记录hash，刷新页面自动打开上次的视图。
+- 右键：tabbar栏支持右键菜单：悬浮打开、新窗口打开、视图复制、快捷关闭等操作。
+- 接口：开放一系列api，可方便的用js新建、打开、切换视图等动作。
+- 示例：提供大量常见示例，以及各种表单组件的封装，助你快速CRUD。
+
+## ⭐ 截图  
+
+<table>
+    <tr>
+        <td><img src="https://oss.dev33.cn/sa-admin/pre/sa-admin-pre-1.png"/></td>
+        <td><img src="https://oss.dev33.cn/sa-admin/pre/sa-admin-pre-2.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://oss.dev33.cn/sa-admin/pre/sa-admin-pre-3.png"/></td>
+        <td><img src="https://oss.dev33.cn/sa-admin/pre/sa-admin-pre-4.png"/></td>
+    </tr>
+</table>
 
 
-## 疑问
-##### vue、element-ui、layer我都没用过，可以用这个模板吗 ?
+## ⭐ 使用
 
-首先你要明白，模板分为两部分（index.html框架与框架内的模板页）
-如果你只使用index.html框架部分，可以不必掌握vue等技术，使用时甚至你都不用改动源码， 只重写几个属性函数就可以集成到你的项目中，
-如果你要使用框架内的模板页，则需要对vue等框架有一定的了解
-	
-##### 为什么是iframe，而不是SPA ?
+### 1、下载项目
+直接在 Gitee 或 GitHub 下载代码
 
-现在前端开发比较主流的三种方式：服务器渲染、前后端分离、SPA
-+ 服务器渲染：类似于jsp、asp、php等所有借助后端语言渲染视图的技术，这也是比较传统的一种方式
-+ 前后端分离：脱离后端语言，只写html，就像是在写一个静态站，与服务器的交互全部走ajax
-+ SPA：在前后端分离的基础上更进一步，借助gulp、webpack等构件工具将项目打包成单页应用的一种方式
+### 2、初始化模板
+在使用时不建议你直接魔改模板的代码，以免在运行时出现意外bug。在文件夹 `\sa-frame` 下有个 `sa-code.js` 文件，
+这是为了方便你对接后端专门预留的文件，你可以在此文件中调用 Sa-Admin 提供的 API 来操作模板。
 
-**本模板** 正是采用的第2种方式（so：本模板可能无法满足重度SPA患者）(喜欢vue单页的同学可以点击上方的vue单页版)
-1. 前后端分离，让我们脱离了后端语言的@include指令，不用为了代码的模块化再到处搜索xx技术如何热更新代码
-2. 不使用webpack、gulp等构建工具也可以写代码，不必再费尽心机搭建一个代码编译环境
-3. 网站头部底部等公共部分代码的复用是我们使用构建工具的主要目的，但是我们借助iframe标签，轻松巧妙的化解了这个难题，借助iframe， 让网站成为一个真正意义上的多窗口应用 （大多数服务器渲染方式每次切换窗口会造成窗口刷新，SPA将代码都塞到了一个页面中的方式使得我们写代码时变得瞻前顾后）
-4. 返璞归真，像写静态站一样来写后台，一个html编辑器就可以强Lu所有代码，尝试一下，相信我，你会爱上这种开发模式的
+``` js
+// 设置基本信息 
+sa_admin.title="xxx";         // 设置模板标题 
+sa_admin.logo='xxx.png';      // 设置 logo 图标地址   默认值：sa-frame/admin-logo.png
+sa_admin.icon = 'xxx.ico';    // 设置 icon 图标地址   默认值：sa-frame/admin-logo.png
+
+// 初始化菜单
+var myMenuList = window.menuList;    // window.menuList 在 menu-list.js 中定义（内有格式详细说明）
+sa_admin.setMenuList(myMenuList);    // 方式一：写入菜单，这些菜单会全部显示 
+sa_admin.setMenuList(myMenuList, ['1', '1-1', '1-2']);    // 方式二：写入菜单，并在第二个参数决定哪些菜单会显示出来
+sa_admin.initMenu(['1', '1-1', '1-2']);    // 方式三：相当于方式二省略了第一个参数（框架会自动寻找 window.menuList）
+/*
+ * MenuList 菜单的格式在 menu-list.js 文件中有详细的示例和格式说明 
+ * 一般情况下我们的菜单最终都是一个 Tree 形格式，但我们从数据库查询出来时都是平面一维数组，
+ * 这时候你不需要手动做格式转换，调用 sa_admin.setMenuList 模板会自动为你进行格式转换，
+ * （前提是你的数组里每个 menu 对象指定了 parent_id 属性）
+ */
+
+// 设置右上角的 user 信息
+sa_admin.user = { 
+    username: 'root', 	// 昵称    
+    avatar: 'sa-frame/admin-logo.png' // 头像地址 
+}
+
+// 设置头像点击处可操作的选项    
+sa_admin.dropList = [    
+    {    
+        name: '我的资料',    
+        click: function() { /* balabala... */ }    
+    },    
+    {    
+        name: '退出登录',    
+        click: function() { /* balabala... */ }    
+    }    
+]    
+
+// 初始化模板（必须调用）
+sa_admin.init();
+```
+
+### 3、js操作模板
+你可以使用以下 API 来操作模板 
+``` js
+sa_admin.showHome();            // 显示主页选项卡 
+sa_admin.showTabById('1-1');    // 显示一个选项卡, 根据id
+sa_admin.closeTabById('1-1');    // 关闭一个选项卡，根据 id （ 第二个参数可填关闭后的回调函数 ）
+sa_admin.showMenuById('1-1');    // 打开一个 菜单，根据 id
+
+// 新增一个选项卡
+// sa_admin.addTab({name: '新页面', url: 'http://sa-token.dev33.cn/'});    // id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+
+// 新增一个选项卡、并立即显示  
+// sa_admin.showTab({name: '新页面', url: 'http://sa-plus.dev33.cn/'});    // 参数同上 
+```
+
+### 4、多视图通信
+怎么在一个选项卡页面调用另一个页面的代码
+``` js
+// 根据id获取其页面的window对象   （如果此页面未打开，则返回空）（跨域模式下无法获取其window对象）
+var win = sa_admin.getTabWindow('2-1');      
+if(win) {
+	win.app.f5();     // 然后调用这个对象上的方法 
+}
+
+// 根据iframe的子父通信原则，在子页面中调用父页面的方法，需要加上parent前缀，例如：
+parent.sa_admin.msg('啦啦啦');        // 调用父页面的弹窗方法 
+```
+
+### 5、鉴权相关
+``` js
+// 首先在登录时，写入当前会话所具有的权限码集合
+var arr = ['1', '2', '3', 'a', 'b', 'c'];        // 一般由后端提供接口返回当前会话所具有的权限码集合 
+sa.setAuth(arr);            // 写入本地缓存中 
+
+// 然后：我们就可以愉快的使用鉴权了
+// 如果一个页面需要某个权限码才能打开，在这个页面的 <script> 代码块第一句写上：
+sa.checkAuth('a');      // 必须具有权限码 `a` 才能打开这个页面，否则会被强制跳转到 403-无权限 页面 
+
+// 某段代码需要某个权限码才能继续往下执行，在需要鉴权的地方加上这段代码 
+sa.checkAuthTs('a');    // 含义同上，只不过如果鉴权失败，不是强制跳转，而是弹窗显示 403-无权限 页面 
+
+// 如果需要精细的根据权限来控制页面上某个按钮是否显示
+<!-- 可以利用vue的v-if指令来渲染 -->
+<button v-if="sa.isAuth('a')">删除这条记录(只有具有权限码a，才能看到这个按钮)</button>
+
+// 注销登录时，可以清除掉所有权限
+sa.clearAuth();        // 清除当前会话所有权限码 
+
+/*
+ * `sa.checkAuth` 与 `sa.checkAuthTs` 方法为了调用方便，默认在无权限时打开的页面地址为：`../../sa-view/error-page/403.html`
+ * 此url只有在当前页面为二级子目录时才能打开成功，其它级别目录则会无法打开显示404，这时候你需要指定403无权限页面地址 
+ * 例如在首页index.html调用时，原调用方式：`sa.checkAuth('a')` ，改为：`sa.checkAuth('a', 'sa-view/error-page/403.html')`
+ */
+```
+
+注：最后请知晓一点：**最终的鉴权操作一定要在后端完成，前端只能是起到一个辅助作用**
+
+## ⭐ 使用封装组件 
+你可以使用 Element-UI 原生写法构建表单，也可以使用 Sa-Admin 封装的组件，例如：
+``` html
+<!-- 原生写法： -->
+<div class="c-item">
+	<label class="c-label">商品名称：</label>
+	<el-input size="mini" v-model="m.name"></el-input>
+</div>
+
+<!-- Sa-Admin 封装写法 （type="text"时可省略不写） -->
+<sa-item type="text" name="商品名称" v-model="m.name"></sa-item>
+```
+两者完全等价 
+
+
+#### 1、首先引入这些组件 
+``` js
+var app = new Vue({
+	components: {
+		"sa-item": httpVueLoader('../../sa-frame/com/sa-item.vue'),		
+		"sa-info": httpVueLoader('../../sa-frame/com/sa-info.vue'),		
+		"sa-td": httpVueLoader('../../sa-frame/com/sa-td.vue'),			
+	},
+	// ... 其它代码 
+});
+```
+
+#### 2、使用 sa-item 组件 
+sa-item 封装了各种输入框 
+``` html
+<!-- 普通输入框 -->
+<sa-item type="text" name="商品名称" v-model="m.name"></sa-item>
+<!-- 数字输入框 -->
+<sa-item type="num" name="商品数量" v-model="m.count"></sa-item>
+<!-- 其它 -->
+<sa-item type="textarea" name="多行输入" v-model="m.name"></sa-item>
+<sa-item type="date" name="日期选择" v-model="m.create_time" br></sa-item>
+<sa-item type="datetime" name="日期时间选择" v-model="m.create_time" br></sa-item>
+<sa-item type="slider" name="滑块参数" v-model="m.hValue" br></sa-item>
+<sa-item type="money" name="钱(单位 元)" v-model="m.value" br></sa-item>
+<sa-item type="money-f" name="钱(单位 分)" v-model="m.value" br></sa-item>
+<sa-item type="img" name="图片上传" v-model="m.value" br></sa-item>
+<sa-item type="audio" name="音频上传" v-model="m.value" br></sa-item>
+<sa-item type="video" name="视频上传" v-model="m.value" br></sa-item>
+<sa-item type="file" name="文件上传" v-model="m.value" br></sa-item>
+<sa-item type="img-list" name="多图上传" v-model="m.value" br></sa-item>
+<sa-item type="audio-list" name="多音频上传" v-model="m.value" br></sa-item>
+<sa-item type="video-list" name="多视频上传" v-model="m.value" br></sa-item>
+<sa-item type="file-list" name="多文件上传" v-model="m.value" br></sa-item>
+<sa-item type="img-video-list" name="图片视屏结合" v-model="m.value" br></sa-item>
+<sa-item type="richtext" name="富文本编辑器" v-model="m.value" br></sa-item>
+<!-- 枚举类型，jtype为枚举表单类型（1=单选框，2=单选文字，3=单选按钮，4=单选下拉框）  -->
+<sa-item type="enum" name="枚举参数" v-model="m.value" :jv="{1: '正常', 2: '禁用'}" jtype="1" br></sa-item>
+<sa-item type="color" name="颜色选择" v-model="m.value" br></sa-item>
+<sa-item type="rate" name="评分组件" v-model="m.value" br></sa-item>
+
+<!-- ------- 复杂组件 ----- -->
+<!-- 表格上面的快捷‘增、删、改、查’按钮（可自定义slot） -->
+<sa-item type="fast-btn" show="add,get,delete,export,reset"></sa-item>
+<!-- 表格下面的分页组件 -->
+<sa-item type="page" :curr.sync="p.pageNo" :size.sync="p.pageSize" :total="dataCount" @change="f5()"></sa-item>
+
+<!-- 完全自定义 slot 内容 -->
+<sa-item name="自定义slot" br>xxx</sa-item>
+```
+
+
+#### 3、使用 sa-info 组件 
+sa-info 封装了各种展示框
+``` html
+<!-- 普通展示 -->
+<sa-info name="商品名称">{{m.name}}</sa-info>
+<!-- 数字展示 -->
+<sa-info name="商品名称" :value="m.count" type="num"></sa-info>
+<!-- 其它 -->
+<sa-info name="多行文本" :value="m.value" type="textarea" br></sa-info>
+<sa-info name="图片展示" :value="m.url" type="img" br></sa-info>
+<sa-info name="音频展示" :value="m.url" type="audio" br></sa-info>
+<sa-info name="视频展示" :value="m.url" type="video" br></sa-info>
+<sa-info name="文件展示" :value="m.url" type="file" br></sa-info>
+<!-- img-list -  value形如：url1,url2,url3 -->
+<sa-info name="多图展示" :value="m.url" type="img-list" br></sa-info>
+<sa-info name="多音频展示" :value="m.url" type="audio-list" br></sa-info>
+<sa-info name="多视频展示" :value="m.url" type="video-list" br></sa-info>
+<sa-info name="多文件展示" :value="m.url" type="file-list" br></sa-info>
+<sa-info name="图片视频结合" :value="m.url" type="img-video-list" br></sa-info>
+<sa-info name="钱(单位元)" :value="m.value" type="money" br></sa-info>
+<sa-info name="钱(单位分)" :value="m.value" type="money-f" br></sa-info>
+<!-- 枚举 jv={key值: 'value展示文字[颜色]'} -->
+<sa-info name="显示枚举" :value="m.value" :jv="{1: '正常[green]', 2: '禁用[red]'}" br></sa-info>
+<sa-info name="展示链接" :value="m.value" type="link" br></sa-info>
+<sa-info name="展示日期" :value="m.value" type="date" br></sa-info>
+<sa-info name="展示日期时间" :value="m.value" type="datetime" br></sa-info>
+<sa-info name="展示日期时间2">{{sa.forDate(m.create_time, 2)}}</sa-info>
+<sa-info name="展示评分组件" :value="m.value" type="rate" br></sa-info>
+```
+
+#### 4、使用 sa-td 组件 
+sa-td 封装了各种表格单元格 
+``` html
+<!-- ------------- 数据列表 ------------- -->
+<el-table :data="dataList" size="small">
+	<!-- 复选框 -->
+	<sa-td type="selection"></sa-td>
+	<!-- 普通文字单元格 -->
+	<sa-td name="商品名称" prop="name"></sa-td>
+	<!-- 其它单元格 -->
+	<sa-td name="展示数字" prop="value" type="num"></sa-td>
+	<sa-td name="展示多行文本域" prop="value" type="textarea"></sa-td>
+	<sa-td name="展示富文本" prop="value" type="richtext"></sa-td>
+	<sa-td name="展示钱(单位元)" prop="value" type="money"></sa-td>
+	<sa-td name="展示钱(单位分)" prop="value" type="money-f"></sa-td>
+	<!-- 枚举类型，jtype为枚举表单类型（1=单选框，2=单选文字，3=单选按钮，4=单选下拉框）  -->
+	<sa-td name="展示枚举" prop="value" type="enum" :jv="{1: '正常[green]', 2: '禁用[red]'}" jtype="1"></sa-td>
+	<sa-td name="展示开关" prop="value" type="switch" :jv="{1: '正常', 2: '禁用'}"></sa-td>
+	<sa-td name="展示icon" prop="value" type="icon"></sa-td>
+	<sa-td name="展示图片" prop="value" type="img"></sa-td>
+	<sa-td name="展示音频" prop="value" type="audio"></sa-td>
+	<sa-td name="展示视频" prop="value" type="video"></sa-td>
+	<sa-td name="展示文件" prop="value" type="file"></sa-td>
+	<!-- img-list -  value形如：url1,url2,url3 -->
+	<sa-td name="展示多图" prop="value" type="img-list"></sa-td>
+	<sa-td name="展示多音频" prop="value" type="audio-list"></sa-td>
+	<sa-td name="展示多视频" prop="value" type="video-list"></sa-td>
+	<sa-td name="展示多文件" prop="value" type="file-list"></sa-td>
+	<sa-td name="展示图片视频结合" prop="value" type="img-video-list"></sa-td>
+	<sa-td name="展示日期" prop="value" type="date"></sa-td>
+	<sa-td name="展示日期时间" prop="value" type="datetime"></sa-td>
+	<sa-td name="展示评分" prop="value" type="rate"></sa-td>
+	<el-table-column label="操作" width="240px">
+		<template slot-scope="s"> 自定义slot </template>
+	</el-table-column>
+</el-table>
+```
+
+
 
 
 ## 贡献代码
-1. 在github上fork一份到自己的仓库
+1. 在gitee上fork一份到自己的仓库
 2. clone自己的仓库到本地电脑
 3. 在本地电脑修改、commit、push
-4. 提交pr（点击：New Pull Request）
+4. 提交pr
 5. 等待合并
+
 
 ## 建议贡献的地方
 - 更多登录模板
-- 修复源码现有bug，或增加新的实用功能（比如：流畅的tab左右拖拽排序）
+- 修复源码现有bug，或增加新的实用功能
 - 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
-- 如果更新实用功能，可在文档友情链接处留下自己的推广链接
+
 
 ## QQ群
 QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
-## 截图
-
-![截图](http://oss.dev33.cn/sa-admin/xc/xc-1.png)
-![截图](http://oss.dev33.cn/sa-admin/xc/xc-2.png)
-![截图](http://oss.dev33.cn/sa-admin/xc/xc-3.png)
-
-见演示说明地址
 
 

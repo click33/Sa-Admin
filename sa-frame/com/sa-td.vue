@@ -86,6 +86,12 @@
 			<span v-for="j in jvList" :key="j.key" :style="{color: '#999'}" v-if="s.row[prop] == j.key">{{j.value}}</span>
 		</template>
 	</el-table-column>
+	<!-- rate 评分 -->
+	<el-table-column v-else-if="type == 'rate'" :label="name" :width="width">
+		<template slot-scope="s">
+			<el-rate :value="s.row[prop] <= 5 ? s.row[prop] : 5" show-text disabled></el-rate>
+		</template>
+	</el-table-column>
 	<!-- date 日期 -->
 	<el-table-column v-else-if="type == 'date'" :label="name" :width="width">
 		<template slot-scope="s"><span>{{sa.forDate(s.row.create_time)}}</span></template>

@@ -16,27 +16,10 @@
 
 // 定义菜单列表 
 var menuList =	[
-	// {
-	// 	id: '131231',
-	// 	name: '文档说明',
-	// 	info: 'sa-admin使用文档',
-	// },
-	{
-		id: '1',
-		name: '文档说明',
-		icon: 'el-icon-document-remove',
-		info: 'sa-admin使用文档',
-		childList: [
-			{id: '1-1', name: '集成步骤', url: 'sa-view/sa-doc/sa-doc.html?way=start-up'},
-			{id: '1-2', name: '鉴权操作', url: 'sa-view/sa-doc/sa-doc.html?way=check-per'},
-			// {id: '1-11', name: '意见吐槽', url: 'http://applist.dev33.cn/applist-admin/html/ser-comment/w-list.html?sid=kcafzieb2tcw'},
-			{id: '1-12', name: '在线需求墙', url: 'http://sa-app.dev33.cn/wall.html?name=sa-admin'},
-		]
-	},
 	{
 		id: '2',
 		name: '各种示例',
-		icon: 'el-icon-search',
+		icon: 'el-icon-document-remove',
 		info: '增删改查各种常用组件示例',
 		childList: [
 			{id: '2-1', name: '查询参数示例', url: 'sa-view/case/query-p-case.html'},
@@ -48,7 +31,7 @@ var menuList =	[
 	{
 		id: '3',
 		name: '首页设置',
-		icon: 'el-icon-table-lamp',
+		icon: 'el-icon-search',
 		info: '首页的一些设置',
 		childList: [
 			{id: '3-1-1', name: '分类列表', icon: 'el-icon-eleme', url: 'sa-view/sys-type/sys-type-list.html'},

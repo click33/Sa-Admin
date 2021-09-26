@@ -7,7 +7,6 @@
 		<!-- 所有的 css & js 资源 -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
 		<link rel="stylesheet" href="../../static/sa.css">
-		<link rel="stylesheet" href="./console-main.css">
 		<style type="text/css">
 			.vue-box{margin: 0; padding: 0; height: 100%;}
 			.el-card{border-radius: 0px; border: 1px #ddd solid ; margin-bottom: 14px;}
@@ -66,12 +65,8 @@
 					</el-col>
 					<!-- 右边 -->
 					<el-col :lg="12" :xs="24">
-						<el-card shadow="never" header="Sa-Admin （iframe版）">
+						<el-card shadow="never" header="Sa-Admin ">
 							<com-origin></com-origin>
-						</el-card>
-						<!-- 功能优点 -->
-						<el-card shadow="never" header="功能说明">
-							<com-intro></com-intro>
 						</el-card>
 					</el-col>
 				</el-row>
@@ -95,17 +90,14 @@
 					'com-stack': httpVueLoader('com-stack.vue'),
 					'com-update-log': httpVueLoader('com-update-log.vue'),
 					'com-origin': httpVueLoader('com-origin.vue'),
-					'com-intro': httpVueLoader('com-intro.vue'),
+					// 'com-intro': httpVueLoader('com-intro.vue'),
 				},
 				el: '.vue-box',
 				data: {
-					
 				},
 				methods: {
-					
 				},
 				mounted: function() {
-					
 				}
 			})
 			

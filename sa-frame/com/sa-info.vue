@@ -101,7 +101,7 @@
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'rate'">
 		<label class="c-label">{{name}}：</label> 
 		<div style="display: inline-block;">
-			<el-rate :value="value" show-text disabled></el-rate>
+			<el-rate :value="value <= 5 ? value : 5" show-text disabled></el-rate>
 		</div>
 	</div>
 	

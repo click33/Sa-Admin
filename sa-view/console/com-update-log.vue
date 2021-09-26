@@ -1,6 +1,10 @@
 <!-- 第一行统计数据 -->
 <template>
 	<el-timeline>
+		<!-- ---------- 一个版本 第40个----------- -->
+		<el-timeline-item timestamp="v1.40.0 &emsp; 2021-9-26" placement="top" type="primary">
+			<li>重构：使用 http-vue-loader 重构底层，脱胎换骨</li>
+		</el-timeline-item>
 		<!-- ---------- 一个版本 第39个----------- -->
 		<el-timeline-item timestamp="v2.4.4 &emsp; 2020-11-14" placement="top" type="primary">
 			<li>修复：当最后一个tab卡片有滑动条时，其它tab滚动条失效的bug</li>
