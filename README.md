@@ -32,7 +32,7 @@ Sa-Admin 最大的特点是无需搭建 vue-cli 脚手架，随便一个 html �
 - 接口：开放一系列api，可方便的用js新建、打开、切换视图等动作。
 - 示例：提供大量常见示例，以及各种表单组件的封装，助你快速CRUD。
 
-## ⭐ 截图  
+## 🖥 截图  
 
 <table>
     <tr>
@@ -46,7 +46,7 @@ Sa-Admin 最大的特点是无需搭建 vue-cli 脚手架，随便一个 html �
 </table>
 
 
-## ⭐ 使用
+## 🔍 开始使用
 
 ### 1、下载项目
 直接在 Gitee 或 GitHub 下载代码
@@ -104,10 +104,10 @@ sa_admin.closeTabById('1-1');    // 关闭一个选项卡，根据 id （ 第二
 sa_admin.showMenuById('1-1');    // 打开一个 菜单，根据 id
 
 // 新增一个选项卡
-// sa_admin.addTab({name: '新页面', url: 'http://sa-token.dev33.cn/'});    // id不要和已有的菜单id冲突，其它属性均可参照菜单项 
+sa_admin.addTab({name: '新页面', url: 'http://sa-token.dev33.cn/'});    // id不要和已有的菜单id冲突，其它属性均可参照菜单项 
 
 // 新增一个选项卡、并立即显示  
-// sa_admin.showTab({name: '新页面', url: 'http://sa-plus.dev33.cn/'});    // 参数同上 
+sa_admin.showTab({name: '新页面', url: 'http://sa-plus.dev33.cn/'});    // 参数同上 
 ```
 
 ### 4、多视图通信
@@ -152,7 +152,7 @@ sa.clearAuth();        // 清除当前会话所有权限码
 
 注：最后请知晓一点：**最终的鉴权操作一定要在后端完成，前端只能是起到一个辅助作用**
 
-## ⭐ 使用封装组件 
+## 📐️️️️ 使用封装组件 
 你可以使用 Element-UI 原生写法构建表单，也可以使用 Sa-Admin 封装的组件，例如：
 ``` html
 <!-- 原生写法： -->
@@ -290,7 +290,7 @@ sa-td 封装了各种表格单元格
 
 
 
-## 贡献代码
+## 🔨 贡献代码
 1. 在gitee上fork一份到自己的仓库
 2. clone自己的仓库到本地电脑
 3. 在本地电脑修改、commit、push
@@ -298,13 +298,13 @@ sa-td 封装了各种表格单元格
 5. 等待合并
 
 
-## 建议贡献的地方
+## 🌱 建议贡献的地方
 - 更多登录模板
 - 修复源码现有bug，或增加新的实用功能
 - 更多demo示例：比如针对element-ui一些复杂组件的示例，或者其它一些常见js库的集成使用
 
 
-## QQ群
+## 😎️ QQ群
 QQ交流群：[782974737 点击加入](https://jq.qq.com/?_wv=1027&k=5DHN5Ib)
 
 
