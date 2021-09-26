@@ -4,13 +4,13 @@
 <h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">Sa-Admin v1.40.0</h2>
 <h4 align="center">一个多窗口后台模板，流畅、易上手、提高生产力</h4>
 <p align="center">
-	<a href="https://gitee.com/dromara/sa-token/stargazers"><img src="https://gitee.com/dromara/sa-token/badge/star.svg"></a>
-	<a href="https://gitee.com/dromara/sa-token/members"><img src="https://gitee.com/dromara/sa-token/badge/fork.svg"></a>
-	<a href="https://github.com/dromara/sa-token/stargazers"><img src="https://img.shields.io/github/stars/dromara/sa-token?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/dromara/sa-token/network/members"><img src="https://img.shields.io/github/forks/dromara/sa-token?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/dromara/sa-token/watchers"><img src="https://img.shields.io/github/watchers/dromara/sa-token?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/dromara/sa-token/issues"><img src="https://img.shields.io/github/issues/dromara/sa-token.svg?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/dromara/sa-token/blob/master/LICENSE"><img src="https://img.shields.io/github/license/dromara/sa-token.svg?style=flat-square"></a>			
+	<a href="https://gitee.com/click33/sa-admin/stargazers"><img src="https://gitee.com/click33/sa-admin/badge/star.svg"></a>
+	<a href="https://gitee.com/click33/sa-admin/members"><img src="https://gitee.com/click33/sa-admin/badge/fork.svg"></a>
+	<a href="https://github.com/click33/sa-admin/stargazers"><img src="https://img.shields.io/github/stars/click33/sa-admin?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/click33/sa-admin/network/members"><img src="https://img.shields.io/github/forks/click33/sa-admin?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/click33/sa-admin/watchers"><img src="https://img.shields.io/github/watchers/click33/sa-admin?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/click33/sa-admin/issues"><img src="https://img.shields.io/github/issues/click33/sa-admin.svg?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/click33/sa-admin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/click33/sa-admin.svg?style=flat-square"></a>			
 </p>
 
 
