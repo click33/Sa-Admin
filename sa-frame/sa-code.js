@@ -6,9 +6,9 @@
 // ================================= 示例：一些基本信息 ================================= 
 
 // 设置模板标题 
-// sa_admin.title = "SA-后台模板";
-// sa_admin.logo = 'sa-frame/admin-logo.png';    // 设置logo图标地址   默认值：sa-frame/admin-logo.png
-// sa_admin.icon = 'sa-frame/admin-logo.png';    // 设置icon图标地址   默认值：sa-frame/admin-logo.png
+sa_admin.title = "Sa-Admin";
+sa_admin.logo = 'sa-frame/admin-logo.png';    // 设置logo图标地址   
+sa_admin.icon = 'sa-frame/admin-logo.png';    // 设置icon图标地址 
 
 
 // ================================= 示例：自定义菜单 =================================

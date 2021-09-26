@@ -21,9 +21,9 @@ var sa_admin = new Vue({
 	el: '.app',
 	data: {
 		// ------------------------------- 配置 -------------------------------
-		title: 'Sa-Admin',			// 页面标题  
-		logo: 'sa-frame/admin-logo.png',	// logo地址 
-		icon: 'sa-frame/admin-logo.png',	// icon地址 
+		title: '',		// 页面标题  -- Sa-Admin
+		logo: '',		// logo地址  -- sa-frame/admin-logo.png
+		icon: '',		// icon地址  -- sa-frame/admin-logo.png
 		version: 'v1.40.0',					// 当前版本号
 		updateTime: '2021-9-26',			// 更新日期 
 		githubUrl: 'https://github.com/click33/sa-admin',	// github地址 
@@ -56,7 +56,7 @@ var sa_admin = new Vue({
 			var icon = newValue;
 			var iconTarget = document.querySelector('.admin-icon');
 			if(iconTarget) {
-				icon_target.setAttribute('href', icon);
+				iconTarget.setAttribute('href', icon);
 			}
 		}
 	},

@@ -58,8 +58,8 @@ Sa-Admin 最大的特点是无需搭建 vue-cli 脚手架，随便一个 html �
 ``` js
 // 设置基本信息 
 sa_admin.title="xxx";         // 设置模板标题 
-sa_admin.logo='xxx.png';      // 设置 logo 图标地址   默认值：sa-frame/admin-logo.png
-sa_admin.icon = 'xxx.ico';    // 设置 icon 图标地址   默认值：sa-frame/admin-logo.png
+sa_admin.logo='xxx.png';      // 设置 logo 图标地址  
+sa_admin.icon = 'xxx.ico';    // 设置 icon 图标地址  
 
 // 初始化菜单
 var myMenuList = window.menuList;    // window.menuList 在 menu-list.js 中定义（内有格式详细说明）
