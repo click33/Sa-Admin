@@ -1,6 +1,6 @@
 <!-- 左上：logo部分 -->
 <template>
-	<div class="com-logo-box" :title="$root.title" @click="$root.showTab(homeTab)">
+	<div class="com-logo-box" :title="$root.title" @click="$root.showHome()">
 		<img :src="$root.logo" class="admin-logo" v-if="$root.logo">
 		<b class="admin-title">{{$root.title}}</b>
 	</div>
