@@ -7,7 +7,7 @@
 			</template>
 			<!-- iframe视图 -->
 			<template v-else>
-				<iframe :src="tab.url" :id=" 'iframe-' + tab.id " v-if="tab.isNeedLoad"></iframe>
+				<iframe :src="tab.url" :id=" 'iframe-' + tab.id " v-if="tab.isNeedLoad" @load="onloadIframe(tab.id)"></iframe>
 			</template>
 		</div>
 		<!-- tab被拖拽时的遮罩（下托拽：悬浮打开） -->
@@ -27,7 +27,14 @@
 			}
 		},
 		methods: {
-			
+			// iframe加载完毕后清除其背景 loading 图标
+			onloadIframe: function(iframeId) {
+				// console.log('iframeId', iframeId);
+				var iframe = document.querySelector('#iframe-' + iframeId);
+				if(iframe != null) {
+					iframe.parentElement.style.backgroundImage='none';
+				}
+			},
 		},
 		created() {
 			
