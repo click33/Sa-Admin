@@ -43,8 +43,8 @@
 							@check="node_click"
 							>
 							<span class="custom-tree-node" slot-scope="s">
-								<span style="color: #2D8CF0;" v-if="s.data.is_show == undefined || s.data.is_show == true">{{ s.data.name }}</span>
-								<span style="color: #999;" v-if="s.data.is_show == false">{{ s.data.name }} (隐藏)</span>
+								<span style="color: #2D8CF0;" v-if="s.data.isShow == undefined || s.data.isShow == true">{{ s.data.name }}</span>
+								<span style="color: #999;" v-if="s.data.isShow == false">{{ s.data.name }} (隐藏)</span>
 								<span style="color: #999;" v-if="s.data.info">&emsp;———— {{s.data.info}} </span>
 							</span>
 						</el-tree>

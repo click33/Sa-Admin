@@ -23,13 +23,13 @@ var sa_admin_code_util = {
 	
 	// ======================== 菜单集合相关 ======================== 
 	
-	// 将一维平面数组转换为 Tree 菜单 (根据其指定的parent_id添加到其父菜单的childList)
+	// 将一维平面数组转换为 Tree 菜单 (根据其指定的parentId添加到其父菜单的childList)
 	arrayToTree: function(menu_list) {
 		for (var i = 0; i < menu_list.length; i++) {
 			var menu = menu_list[i];
 			// 添加到其指定的父菜单的childList
-			if(menu.parent_id) {
-				var parent_menu = this.findMenuById(menu_list, menu.parent_id);
+			if(menu.parentId) {
+				var parent_menu = this.findMenuById(menu_list, menu.parentId);
 				if(parent_menu) {
 					parent_menu.childList = parent_menu.childList || [];
 					parent_menu.childList.push(menu);

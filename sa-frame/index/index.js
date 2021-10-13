@@ -87,7 +87,7 @@ var sa_admin = new Vue({
 			this.setMenuList(window.menuList, showList);
 		},
 		// 写入菜单: 
-		// 	menuList = 全部菜单  —— 可以是已经渲染好的 tree 数组，也可以是一个尚未渲染的一维数组（你只要指定好 parent_id，Sa-Admin内部会自动渲染）
+		// 	menuList = 全部菜单  —— 可以是已经渲染好的 tree 数组，也可以是一个尚未渲染的一维数组（你只要指定好 parentId，Sa-Admin内部会自动渲染）
 		// 	showList = 显示菜单id数组  —— （注意是id的数组），你填哪些id哪些菜单才会显示 ，为空时代表显示所有	
 		setMenuList: function(menuList, showList) {
 			// 设置 全部菜单 
@@ -195,7 +195,7 @@ var sa_admin = new Vue({
 			// tab.isNeedLoad = false;	
 			Vue.set(tab, 'isNeedLoad', true);
 			// 如果是外部链接
-			if(tab.is_blank) {
+			if(tab.isBlank) {
 				return open(tab.url); 
 			}
 			// 如果是当前正在显示的tab , 则直接返回，无需继续操作 
@@ -425,13 +425,13 @@ var sa_admin = new Vue({
 			var ext = url.substr(index + 1);
 			return ext;
 		},
-		// 将一维平面数组转换为 Tree 菜单 (根据其指定的 parent_id 添加到其父菜单的childList)
+		// 将一维平面数组转换为 Tree 菜单 (根据其指定的 parentId 添加到其父菜单的childList)
 		arrayToTree: function(menuList) {
 			for (var i = 0; i < menuList.length; i++) {
 				var menu = menuList[i];
-				// 如果这个 Menu 指定了 parent_id 属性，则将其转移到其指定的父 Menu 的 childList 属性上 
-				if(menu.parent_id) {
-					var parent_menu = this.findMenuById(menuList, menu.parent_id);
+				// 如果这个 Menu 指定了 parentId 属性，则将其转移到其指定的父 Menu 的 childList 属性上 
+				if(menu.parentId) {
+					var parent_menu = this.findMenuById(menuList, menu.parentId);
 					if(parent_menu) {
 						menu.parent_menu = parent_menu;
 						parent_menu.childList = parent_menu.childList || [];

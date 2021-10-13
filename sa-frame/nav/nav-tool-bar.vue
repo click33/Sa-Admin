@@ -146,16 +146,16 @@
 				let childList = this.$root.menuList;
 				let showList = this.$root.showList;
 				for (let menu1 of childList) {
-					if(menu1.is_show === false || showList.indexOf(menu1.id + '') == -1) continue;
+					if(menu1.isShow === false || showList.indexOf(menu1.id + '') == -1) continue;
 					if(menu1.childList) {
 						for (let menu2 of menu1.childList) {
-							if(menu2.is_show === false || showList.indexOf(menu2.id + '') == -1) continue;
+							if(menu2.isShow === false || showList.indexOf(menu2.id + '') == -1) continue;
 							if(menu2.childList) {
 								for (let menu3 of menu2.childList) {
-									if(menu3.is_show === false || showList.indexOf(menu3.id + '') == -1) continue;
+									if(menu3.isShow === false || showList.indexOf(menu3.id + '') == -1) continue;
 									if(menu3.childList) {
 										for (let menu4 of menu3.childList) {
-											if(menu4.is_show === false || showList.indexOf(menu4.id + '') == -1) continue;
+											if(menu4.isShow === false || showList.indexOf(menu4.id + '') == -1) continue;
 											push(menu4.id, menu1.name + ' > ' + menu2.name + ' > ' + menu3.name + ' > ' + menu4.name);
 										}
 									} else {

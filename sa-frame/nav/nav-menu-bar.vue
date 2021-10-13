@@ -18,12 +18,12 @@
 				>
 				<div v-for="(menu, index) in $root.menuList" :key="index">
 					<!-- 1 如果是子菜单 -->
-					<el-menu-item v-if="!menu.childList && menu.is_show !== false && $root.showList.indexOf(menu.id) > -1" :index="menu.id + '' ">
+					<el-menu-item v-if="!menu.childList && menu.isShow !== false && $root.showList.indexOf(menu.id) > -1" :index="menu.id + '' ">
 						<span class="menu-i"><i :class="menu.icon" :title="menu.name"></i></span>
 						<span class="menu-name">{{menu.name}}</span>
 					</el-menu-item>
 					<!-- 1 如果是父菜单 -->
-					<el-submenu v-if="menu.childList && menu.is_show !== false && $root.showList.indexOf(menu.id) > -1" :index="menu.id + '' ">
+					<el-submenu v-if="menu.childList && menu.isShow !== false && $root.showList.indexOf(menu.id) > -1" :index="menu.id + '' ">
 						<template slot="title">
 							<span class="menu-i"><i :class="menu.icon" :title="menu.name"></i></span>
 							<span class="menu-name">{{menu.name}}</span>
@@ -31,12 +31,12 @@
 						<!-- 遍历其子项 -->
 						<div v-for="(menu2, index) in menu.childList" :key="index">
 							<!-- 2 如果是子菜单 -->
-							<el-menu-item v-if="!menu2.childList && menu2.is_show !== false && $root.showList.indexOf(menu2.id) > -1" :index="menu2.id + '' ">
+							<el-menu-item v-if="!menu2.childList && menu2.isShow !== false && $root.showList.indexOf(menu2.id) > -1" :index="menu2.id + '' ">
 								<span class="menu-i"><i :class="menu2.icon" :title="menu2.name"></i></span>
 								<span class="menu-name">{{menu2.name}}</span>
 							</el-menu-item>
 							<!-- 2 如果是父菜单 -->
-							<el-submenu v-if="menu2.childList && menu2.is_show !== false && $root.showList.indexOf(menu2.id) > -1" :index="menu2.id + '' ">
+							<el-submenu v-if="menu2.childList && menu2.isShow !== false && $root.showList.indexOf(menu2.id) > -1" :index="menu2.id + '' ">
 								<template slot="title">
 									<span class="menu-i"><i :class="menu2.icon" :title="menu2.name"></i></span>
 									<span class="menu-name">{{menu2.name}}</span>
@@ -44,19 +44,19 @@
 								<!-- 遍历其子项 -->
 								<div v-for="(menu3, index) in menu2.childList" :key="index">
 									<!-- 3 如果是子菜单 -->
-									<el-menu-item v-if="!menu3.childList && menu3.is_show !== false && $root.showList.indexOf(menu3.id) > -1" :index="menu3.id + '' ">
+									<el-menu-item v-if="!menu3.childList && menu3.isShow !== false && $root.showList.indexOf(menu3.id) > -1" :index="menu3.id + '' ">
 										<span class="menu-i"><i :class="menu3.icon" :title="menu3.name"></i></span>
 										<span class="menu-name">{{menu3.name}}</span>
 									</el-menu-item>
 									<!-- 3 如果是父菜单 -->
-									<el-submenu v-if="menu3.childList && menu3.is_show !== false && $root.showList.indexOf(menu3.id) > -1" :index="menu3.id + '' ">
+									<el-submenu v-if="menu3.childList && menu3.isShow !== false && $root.showList.indexOf(menu3.id) > -1" :index="menu3.id + '' ">
 										<template slot="title">
 											<span class="menu-i"><i :class="menu3.icon" :title="menu3.name"></i></span>
 											<span class="menu-name">{{menu3.name}}</span>
 										</template>
 										<!-- 4 -->
 										<div v-for="(menu4, index) in menu3.childList" :key="index">
-											<el-menu-item v-if="menu4.is_show !== false && $root.showList.indexOf(menu4.id) > -1" :index="menu4.id + '' ">
+											<el-menu-item v-if="menu4.isShow !== false && $root.showList.indexOf(menu4.id) > -1" :index="menu4.id + '' ">
 												<span class="menu-i"><i :class="menu4.icon" :title="menu4.name"></i></span>
 												<span class="menu-name">{{menu4.name}}</span>
 											</el-menu-item>

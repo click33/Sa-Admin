@@ -5,9 +5,9 @@
 // 	icon: 'el-icon-user',	// 菜单图标, 参考地址:  https://element.eleme.cn/#/zh-CN/component/icon
 //	info: '管理所有用户',	// 菜单介绍, 在菜单预览和分配权限时会有显示 
 // 	url: 'sa-view/user/user-list.html',	// 菜单指向地址
-// 	parent_id: 1,			// 所属父菜单id, 如果指定了一个值, sa-admin在初始化时会将此菜单转移到指定菜单上 
-// 	is_show: true,			// 是否显示, 默认true
-// 	is_blank: false,		// 是否属于外部链接, 如果为true, 则点击菜单时从新窗口打开 
+// 	parentId: 1,			// 所属父菜单id, 如果指定了一个值, sa-admin在初始化时会将此菜单转移到指定菜单上 
+// 	isShow: true,			// 是否显示, 默认true
+// 	isBlank: false,		// 是否属于外部链接, 如果为true, 则点击菜单时从新窗口打开 
 // 	childList: [			// 指定这个菜单所有的子菜单, 子菜单可以继续指定子菜单, 至多支持四级菜单
 // 		// .... 
 // 	],
@@ -101,18 +101,18 @@ var menuList =	[
 		icon: 'el-icon-link',
 		info: '示例：外部链接',
 		childList: [
-			{id: '8-21', name: '极品蓝图', url: 'http://un.jipinlantu.com/', is_blank: true},
-			{id: '8-11', name: '河浪前端笔记', url: 'https://mydarling.gitee.io/resource/', is_blank: true},
+			{id: '8-21', name: '极品蓝图', url: 'http://un.jipinlantu.com/', isBlank: true},
+			{id: '8-11', name: '河浪前端笔记', url: 'https://mydarling.gitee.io/resource/', isBlank: true},
 			
-			// {id: '8-1', name: '百度一下', url: 'https://www.baidu.com/', is_blank: true},
-			{id: '8-41', name: 'sa-admin单页版', url: 'http://sa-vue-admin.dev33.cn/', is_blank: true},
-			{id: '8-3', name: 'sa-token', url: 'http://sa-token.dev33.cn/', is_blank: true},
-			{id: '8-12', name: 'sa-doc', url: 'http://sa-doc.dev33.cn/', is_blank: true},
-			{id: '8-13', name: 'sa-plus', url: 'http://sa-plus.dev33.cn/', is_blank: true},
-			{id: '8-4', name: 'SqlFly', url: 'https://sqlfly.dev33.cn/', is_blank: true},
-			{id: '8-6', name: '颜值排行榜', url: 'http://yanzhi21.com/', is_blank: true},
-			{id: '8-7', name: 'jq22插件库', url: 'http://www.jq22.com/', is_blank: true},
-			{id: '8-2', name: 'uni-app', url: 'https://uniapp.dcloud.io/', is_blank: true},
+			// {id: '8-1', name: '百度一下', url: 'https://www.baidu.com/', isBlank: true},
+			{id: '8-41', name: 'sa-admin单页版', url: 'http://sa-vue-admin.dev33.cn/', isBlank: true},
+			{id: '8-3', name: 'sa-token', url: 'http://sa-token.dev33.cn/', isBlank: true},
+			{id: '8-12', name: 'sa-doc', url: 'http://sa-doc.dev33.cn/', isBlank: true},
+			{id: '8-13', name: 'sa-plus', url: 'http://sa-plus.dev33.cn/', isBlank: true},
+			{id: '8-4', name: 'SqlFly', url: 'https://sqlfly.dev33.cn/', isBlank: true},
+			{id: '8-6', name: '颜值排行榜', url: 'http://yanzhi21.com/', isBlank: true},
+			{id: '8-7', name: 'jq22插件库', url: 'http://www.jq22.com/', isBlank: true},
+			{id: '8-2', name: 'uni-app', url: 'https://uniapp.dcloud.io/', isBlank: true},
 			{id: '8-31', name: '秀恩爱专用', url: 'http://click33.gitee.io/xixi/'},
 		]
 	},
@@ -121,8 +121,8 @@ var menuList =	[
 		id: '9',
 		name: '一个隐藏菜单',
 		url: 'https://www.baidu.com/',
-		is_blank: true,
-		is_show: false// 隐藏
+		isBlank: true,
+		isShow: false// 隐藏
 	},
 	//  ========= jq22搜集 ================
 	{
