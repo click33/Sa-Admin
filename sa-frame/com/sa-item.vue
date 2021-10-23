@@ -107,12 +107,15 @@
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'enum' || type == 'j' || type == 'switch'">
 		<label class="c-label">{{name}}：</label> 
 		<el-radio-group v-if="jtype == 1 || jtype == 2" :class="{'s-radio-text': jtype == 2}" :value="value" @input="onInput">
+			<el-radio label="" v-if="def">{{def}}</el-radio>
 			<el-radio v-for="j in jvList" :key="j.key" :label="j.key">{{j.value}}</el-radio>
 		</el-radio-group>
 		<el-radio-group v-if="jtype == 3" :value="value" @input="onInput">
+			<el-radio-button label="" v-if="def">{{def}}</el-radio-button>
 			<el-radio-button v-for="j in jvList" :key="j.key" :label="j.key">{{j.value}}</el-radio-button>
 		</el-radio-group>
 		<el-select v-if="jtype == 4" :value="value" @input="onInput">
+			<el-option label="" v-if="def" :value="def"></el-option>
 			<el-option v-for="j in jvList" :key="j.key" :label="j.value" :value="j.key"></el-option>
 		</el-select>
 	</div>
@@ -120,6 +123,16 @@
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'date'">
 		<label class="c-label">{{name}}：</label> 
 		<el-date-picker type="date" value-format="yyyy-MM-dd" :value="value" @input="onInput" :placeholder="placeholder" :disabled="disabled"></el-date-picker>
+	</div>
+	<!-- 日期时间选择器 -->
+	<div class="c-item" :class="{br: br}" v-else-if="type == 'datetime'">
+		<label class="c-label">{{name}}：</label> 
+		<el-date-picker type="datetime" value-format="yyyy-MM-dd HH:mm:ss" :value="value" @input="onInput" :placeholder="placeholder" :disabled="disabled"></el-date-picker>
+	</div>
+	<!-- 时间选择器 -->
+	<div class="c-item" :class="{br: br}" v-else-if="type == 'time'">
+		<label class="c-label">{{name}}：</label> 
+		<el-time-picker value-format="HH:mm:ss" :value="value" @input="onInput" :placeholder="placeholder" :disabled="disabled"></el-time-picker>
 	</div>
 	<!-- 日期范围选择 -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'date-range'">
@@ -214,6 +227,8 @@
 			jv: {default: ''},
 			// type=menu时，具体的枚举类型 -- 1=单选框，2=单选文字，3=单选按钮，4=单选下拉框
 			jtype: {default: 1},
+			// type=menu时，增加的默认项文字 
+			def: {},
 			// 级联选择的数据列表
 			options: {},
 			// 快捷按钮显示列表，形如：add,get,delete,export,reset 

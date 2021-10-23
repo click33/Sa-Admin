@@ -65,16 +65,11 @@
 							create_time: new Date()
 						}
 					},
-					// 表单验证  
-					submitCheck: function() {
-						var m = this.m;		// 获取 m对象 
-						sa.checkNull(m.name, '请输入名称');
-						sa.checkNull(m.icon, '请输入图标');
-					},
 					// 提交 
 					ok: function() {
 						// 表单验证 
-						this.submitCheck();
+						sa.checkNull(this.m.name, '请输入名称');
+						sa.checkNull(this.m.icon, '请输入图标');
 						// 开始增加或修改
 						if(this.id <= 0) {
 							// id == 0 为增加        

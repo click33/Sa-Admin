@@ -64,18 +64,12 @@
 							// create_time: '',		// 创建日期  
 						}
 					},
-					// 表单验证
-					submitCheck: function() {
-						var m = this.m;		
-						// sa.checkNull(m.id, '请输入id');
-						sa.checkNull(m.name, '请输入分类名字');
-						sa.checkNull(m.icon, '请输入分类图标');
-						sa.checkNull(m.sort, '请输入排序值');
-					},
 					// 提交数据 
 					ok: function(){
-						// 验证 
-						this.submitCheck();
+						// 表单校验  
+						sa.checkNull(this.m.name, '请输入分类名字');
+						sa.checkNull(this.m.icon, '请输入分类图标');
+						sa.checkNull(this.m.sort, '请输入排序值');
 						// 开始增加或修改
 						this.m.create_time = undefined;		// 不提交属性：创建日期
 						if(this.id <= 0) {	// 添加

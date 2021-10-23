@@ -75,7 +75,7 @@
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'enum' || type == 'j' || type == 'switch'">
 		<label class="c-label">{{name}}：</label> 
 		<span v-for="j in jvList" :key="j.key">
-			<b :style="{color: j.color || '#606266'}" v-if="value == j.key">{{j.value}}</b>
+			<b :style="{color: j.color || '#303236'}" v-if="value == j.key">{{j.value}}</b>
 		</span>
 	</div>
 	<!-- link -->
@@ -89,12 +89,17 @@
 	<!-- 日期 -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'date'">
 		<label class="c-label">{{name}}：</label> 
-		<span class="tc-date">{{sa.forDate(value, 2)}}</span>
+		<span class="tc-date">{{sa.forDate(value, 1)}}</span>
 	</div>
 	<!-- 日期时间 -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'datetime'">
 		<label class="c-label">{{name}}：</label> 
 		<span class="tc-date">{{sa.forDate(value, 2)}}</span>
+	</div>
+	<!-- 时间 -->
+	<div class="c-item" :class="{br: br}" v-else-if="type == 'time'">
+		<label class="c-label">{{name}}：</label> 
+		<span class="tc-date">{{value}}</span>
 	</div>
 	
 	<!-- 评分组件 -->

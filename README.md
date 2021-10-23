@@ -241,7 +241,7 @@ sa-info 封装了各种展示框
 <sa-info name="钱(单位元)" :value="m.value" type="money" br></sa-info>
 <sa-info name="钱(单位分)" :value="m.value" type="money-f" br></sa-info>
 <!-- 枚举 jv={key值: 'value展示文字[颜色]'} -->
-<sa-info name="显示枚举" :value="m.value" :jv="{1: '正常[green]', 2: '禁用[red]'}" br></sa-info>
+<sa-info name="显示枚举" :value="m.value" type="enum" :jv="{1: '正常[green]', 2: '禁用[red]'}" br></sa-info>
 <sa-info name="展示链接" :value="m.value" type="link" br></sa-info>
 <sa-info name="展示日期" :value="m.value" type="date" br></sa-info>
 <sa-info name="展示日期时间" :value="m.value" type="datetime" br></sa-info>
@@ -278,6 +278,8 @@ sa-td 封装了各种表格单元格
 	<sa-td name="展示多视频" prop="value" type="video-list"></sa-td>
 	<sa-td name="展示多文件" prop="value" type="file-list"></sa-td>
 	<sa-td name="展示图片视频结合" prop="value" type="img-video-list"></sa-td>
+	<sa-td name="展示链接" prop="value" type="link"></sa-td>
+	<sa-td name="展示链接按钮" prop="value" type="link-btn" @click="s => sa.msg('点击事件')"></sa-td>
 	<sa-td name="展示日期" prop="value" type="date"></sa-td>
 	<sa-td name="展示日期时间" prop="value" type="datetime"></sa-td>
 	<sa-td name="展示评分" prop="value" type="rate"></sa-td>

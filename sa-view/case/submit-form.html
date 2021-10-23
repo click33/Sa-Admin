@@ -68,7 +68,7 @@
 					<sa-item type="color" name="颜色选择" v-model="m.color" br></sa-item>
 					<sa-item type="rate" name="评分组件" v-model="m.rateValue" br></sa-item>
 					<sa-item name="" br>
-						<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
+						<el-button type="primary" icon="el-icon-plus" @click="ok()">确定</el-button>
 					</sa-item>
 				</el-form>
 			</div>
@@ -111,16 +111,13 @@
 					joptions: mockJoptions
 				},
 				methods: {
-					// 表单校验 
-					submitCheck: function() {
-						let m = this.m;	
-						sa.checkNull(m.name, '请输入普通参数');
-						sa.checkNull(m.count, '请输入数值参数');
-						sa.check(m.type_id == 0, '请选择下拉框');
-					},
 					// 提交 
 					ok: function() {
-						this.submitCheck();
+						// 表单校验 
+						sa.checkNull(this.m.name, '请输入普通参数');
+						sa.checkNull(this.m.count, '请输入数值参数');
+						sa.check(this.m.type_id == 0, '请选择下拉框');
+						// 提交 
 						sa.alert('提交参数为：' + JSON.stringify(this.m));
 					},
 				},

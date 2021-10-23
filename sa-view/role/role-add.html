@@ -72,23 +72,11 @@
 							is_update: false,
 						}
 					},
-					// 表单验证
-					submitCheck: function() {
-						try{
-							var m = this.m;		// 获取 m对象 
-							sa.checkNull(m.role_name, '请输入角色名字');
-							sa.checkNull(m.role_info, '请输入责任秘书');
-							return 'ok';	// 全部通过验证，返回ok 表示正确 
-						} catch(e) {
-							sa.error(e);
-						}
-					},
 					// 提交数据 
 					ok: function(){
 						// 验证 
-						if(this.submitCheck() != 'ok') {
-							return;
-						}
+						sa.checkNull(this.m.role_name, '请输入角色名字');
+						sa.checkNull(this.m.role_info, '请输入责任秘书');
 						// 开始增加或修改
 						sa.ajax2('/SysType/add', this.m, function(res){
 							sa.alert('增加成功', function() {

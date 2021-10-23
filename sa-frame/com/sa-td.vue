@@ -55,6 +55,19 @@
 			<span>{{sa.maxLength(sa.text(s.row[prop]), 100)}}</span>
 		</template>
 	</el-table-column>
+	<!-- link -->
+	<el-table-column v-else-if="type == 'link'" :label="name" :width="width">
+		<template slot-scope="s">
+			<el-link type="primary" :href="s.row[prop]" target="_blank" v-if="!sa.isNull(s.row[prop])">{{s.row[prop]}}</el-link>
+			<div v-else>无</div>
+		</template>
+	</el-table-column>
+	<!-- link-btn -->
+	<el-table-column v-else-if="type == 'link-btn'" :label="name" :width="width">
+		<template slot-scope="s">
+			<el-link type="primary" @click="$emit('click', s)">{{s.row[prop]}}</el-link>
+		</template>
+	</el-table-column>
 	
 	<!-- 钱 money (单位 元) -->
 	<el-table-column v-else-if="type == 'money'" :label="name" :width="width">
@@ -81,7 +94,7 @@
 				v-model="s.row[prop]" v-if='jvList.length >= 2' 
 				:active-value="jvList[0].key" :inactive-value="jvList[1].key" 
 				:active-color="jvList[0].color || '#409EFF'" :inactive-color="jvList[0].color || '#ccc'"
-				@change="$emit('change', s.row)">
+				@change="$emit('change', s)">
 			</el-switch>
 			<span v-for="j in jvList" :key="j.key" :style="{color: '#999'}" v-if="s.row[prop] == j.key">{{j.value}}</span>
 		</template>
@@ -93,12 +106,16 @@
 		</template>
 	</el-table-column>
 	<!-- date 日期 -->
-	<el-table-column v-else-if="type == 'date'" :label="name" :width="width">
-		<template slot-scope="s"><span>{{sa.forDate(s.row.create_time)}}</span></template>
+	<el-table-column v-else-if="type == 'date'" :label="name" :width="width" class-name="tc-date">
+		<template slot-scope="s"><span>{{sa.forDate(s.row[prop])}}</span></template>
 	</el-table-column>
 	<!-- datetime 日期时间 -->
-	<el-table-column v-else-if="type == 'datetime'" :label="name" :width="width">
-		<template slot-scope="s"><span>{{sa.forDate(s.row.create_time, 2)}}</span></template>
+	<el-table-column v-else-if="type == 'datetime'" :label="name" :width="width" class-name="tc-date">
+		<template slot-scope="s"><span>{{sa.forDate(s.row[prop], 2)}}</span></template>
+	</el-table-column>
+	<!-- time 时间 -->
+	<el-table-column v-else-if="type == 'time'" :label="name" :width="width" class-name="tc-date">
+		<template slot-scope="s"><span>{{s.row[prop]}}</span></template>
 	</el-table-column>
 </template>
 
