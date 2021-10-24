@@ -109,10 +109,10 @@ var sa = {
 			type: cfg.type, 
 			data: data,
 			dataType: 'json',
-			xhrFields: {
-				withCredentials: true // 携带跨域cookie
-			},
-			crossDomain: true,
+			// xhrFields: {
+			// 	withCredentials: true // 携带跨域cookie
+			// },
+			// crossDomain: true,
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
 			},
