@@ -1,6 +1,11 @@
 <!-- 第一行统计数据 -->
 <template>
 	<el-timeline>
+		<!-- ---------- 一个版本 第41个----------- -->
+		<el-timeline-item timestamp="v1.41.0 &emsp; 2021-10-24" placement="top" type="primary">
+			<li>新增：表单封装新增部分type</li>
+			<li>重构：删除掉不必要的size</li>
+		</el-timeline-item>
 		<!-- ---------- 一个版本 第40个----------- -->
 		<el-timeline-item timestamp="v1.40.0 &emsp; 2021-9-26" placement="top" type="primary">
 			<li>重构：使用 http-vue-loader 重构底层，脱胎换骨</li>

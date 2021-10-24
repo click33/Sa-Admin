@@ -24,7 +24,7 @@
 			<div class="s-body">
 				<div class="c-panel">
 					<div class="c-title">数据添加</div>
-					<el-form size="mini" v-if="m">
+					<el-form v-if="m">
 						<!-- no字段： m.id - id -->
 						<sa-item name="分类名字" v-model="m.name" br></sa-item>
 						<sa-item name="分类图标" v-model="m.icon" br></sa-item>
@@ -37,8 +37,8 @@
 			</div>
 			<!-- ------- 底部按钮 ------- -->
 			<div class="s-foot">
-				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
-				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+				<el-button type="primary" @click="ok()">确定</el-button>
+				<el-button @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script src="./moke-data.js"></script>

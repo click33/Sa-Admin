@@ -24,7 +24,7 @@
 			<div class="c-panel">
 				<!-- ------------- 检索参数 ------------- -->
 				<div class="c-title">检索参数</div>
-				<el-form size="mini" @submit.native.prevent >
+				<el-form @submit.native.prevent >
 					<sa-item name="标题搜索" v-model="p.title"></sa-item>
 					<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
 				</el-form>

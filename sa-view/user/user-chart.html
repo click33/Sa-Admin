@@ -25,7 +25,7 @@
 				<el-form>
 					<div class="c-item">
 						<label class="c-label">选择年份：</label>
-						<el-select size="mini" v-model="p.year" @change="f5()">
+						<el-select v-model="p.year" @change="f5()">
 							<el-option label="不限年份" :value="0"></el-option>
 							<el-option label="2016年" :value="2016"></el-option>
 							<el-option label="2017年" :value="2017"></el-option>
@@ -36,7 +36,7 @@
 						</el-select>
 					</div>
 					<div class="c-item" style="min-width: 0px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
 					</div>
 				</el-form>
 			</div>

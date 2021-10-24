@@ -49,9 +49,9 @@
 					<sa-td type="datetime" name="显示日期" prop="create_time" width="150px"></sa-td>
 					<el-table-column label="文字按钮" width="160px">
 						<template slot-scope="s">
-							<el-button type="text" size="mini" @click="get(s.row)">查看</el-button>
-							<el-button type="text" size="mini" @click="update(s.row)">修改</el-button>
-							<el-button type="text" size="mini" @click="del(s.row)">删除</el-button>
+							<el-button type="text" @click="get(s.row)">查看</el-button>
+							<el-button type="text" @click="update(s.row)">修改</el-button>
+							<el-button type="text" @click="del(s.row)">删除</el-button>
 						</template>
 					</el-table-column>
 					<el-table-column label="正常按钮" width="240px">

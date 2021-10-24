@@ -35,7 +35,7 @@
 					<el-form v-if="m">
 						<div class="c-item br">
 							<label class="c-label">文章标题：
-							</label><el-input size="mini" v-model="m.title" style="width: 800px;" placeholder="例如：2002年的第一场雪"></el-input>
+							</label><el-input v-model="m.title" style="width: 800px;" placeholder="例如：2002年的第一场雪"></el-input>
 						</div>
 						<div class="c-item br editor-item">
 							<label class="c-label">文章内容：</label>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="c-item br s-ok">
 							<label class="c-label"></label>
-							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+							<el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
 						</div>
 						<div style="margin-top: 10px;"></div>
 					</el-form>
@@ -59,8 +59,8 @@
 			</div>
 			<!-- ------- 底部按钮 ------- -->
 			<div class="s-foot">
-				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
-				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+				<el-button type="primary" @click="ok()">确定</el-button>
+				<el-button @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 			<!-- 给wangEditor打一波广告 -->
 			<!-- <div class="c-panel" style="background-color: rgba(0,0,0,0);">

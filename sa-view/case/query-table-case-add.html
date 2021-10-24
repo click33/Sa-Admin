@@ -30,15 +30,15 @@
 						<sa-item name="图标" v-model="m.icon" br></sa-item>
 						<sa-item name="状态" v-model="m.status" type="j" :jv="{1: '正常', 2: '禁用'}" jtype="3" br></sa-item>
 						<sa-item name="" class="s-ok" br>
-							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+							<el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
 						</sa-item>
 					</el-form>
 				</div>
 			</div>
 			<!-- ------- 底部按钮 ------- -->
 			<div class="s-foot">
-				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
-				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+				<el-button type="primary" @click="ok()">确定</el-button>
+				<el-button @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script src="mock-data-list.js"></script>

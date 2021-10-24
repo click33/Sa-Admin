@@ -25,15 +25,15 @@
 				<el-form v-if="m">
 					<div class="c-item br">
 						<label class="c-label">系统名称：</label>
-						<el-input size="mini" v-model="m.app_name"></el-input>
+						<el-input v-model="m.app_name"></el-input>
 					</div>
 					<div class="c-item br">
 						<label class="c-label">当前版本：</label>
-						<el-input size="mini" v-model="m.app_version_no"></el-input>
+						<el-input v-model="m.app_version_no"></el-input>
 					</div>
 					<div class="c-item br">
 						<label class="c-label">联系Q群：</label>
-						<el-input size="mini" v-model="m.qq_group"></el-input>
+						<el-input v-model="m.qq_group"></el-input>
 					</div>
 					<div class="c-item br">
 						<label class="c-label">开放注册：</label>
@@ -49,8 +49,8 @@
 					</div>
 					<div class="c-item br">
 						<label class="c-label"></label>
-						<el-button size="mini" type="primary" size="mini" icon="el-icon-check" @click="ok">保存修改</el-button>
-						<el-button size="mini" type="primary" size="mini" icon="el-icon-close" @click="f5">重置</el-button>
+						<el-button type="primary" icon="el-icon-check" @click="ok">保存修改</el-button>
+						<el-button type="primary" icon="el-icon-close" @click="f5">重置</el-button>
 					</div>
 				</el-form>
 			</div>

@@ -24,31 +24,31 @@
 			<div class="s-body">
 				<div class="c-panel">
 					<div class="c-title">数据添加</div>
-					<el-form size="mini" v-if="m">
+					<el-form v-if="m">
 						<!-- no字段： m.id - id -->
 						<div class="c-item br">
 							<label class="c-label">角色id：</label>
-							<el-input size="mini" v-model="m.id"></el-input>
+							<el-input v-model="m.id"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">角色昵称：</label>
-							<el-input size="mini" v-model="m.role_name"></el-input>
+							<el-input v-model="m.role_name"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">责任描述：</label>
-							<el-input size="mini" v-model="m.role_info"></el-input>
+							<el-input v-model="m.role_info"></el-input>
 						</div>
 						<div class="c-item br s-ok">
 							<label class="c-label"></label>
-							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+							<el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
 						</div>
 					</el-form>
 				</div>
 			</div>
 			<!-- ------- 底部按钮 ------- -->
 			<div class="s-foot">
-				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
-				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+				<el-button type="primary" @click="ok()">确定</el-button>
+				<el-button @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script src="./moke-data.js"></script>

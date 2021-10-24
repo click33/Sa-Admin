@@ -47,15 +47,15 @@
 			<div class="s-body">
 				<div class="c-panel">
 					<div class="c-title">商品添加</div>
-					<el-form size="mini" v-if="m">
+					<el-form v-if="m">
 						<!-- no字段： m.id - 记录id -->
 						<div class="c-item br">
 							<label class="c-label">商品名称：</label>
-							<el-input size="mini" v-model="m.name"></el-input>
+							<el-input v-model="m.name"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">所属分类：</label>
-							<el-select size="mini" v-model="m.type_id">
+							<el-select v-model="m.type_id">
 								<!-- <el-option label="请选择" :value="0" disabled></el-option> -->
 								<el-option v-for="item in sysTypeList" :label="item.name" :value="item.id" :key="item.id"></el-option>
 							</el-select>
@@ -99,26 +99,26 @@
 						</div>
 						<div class="c-item br">
 							<label class="c-label">商品价格：</label>
-							<el-input size="mini" v-model="m.price" type="number"></el-input>
+							<el-input v-model="m.price" type="number"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">商品运费：</label>
-							<el-input size="mini" v-model="m.freight" type="number"></el-input>
+							<el-input v-model="m.freight" type="number"></el-input>
 						</div>
 						<div class="c-item br">
 							<label class="c-label">商品库存：</label>
-							<el-input size="mini" v-model="m.stock_count" type="number"></el-input>
+							<el-input v-model="m.stock_count" type="number"></el-input>
 						</div>
 						<!-- ----------------- 规格值设置 ------------------- -->
 						<div class="c-item br sku-box">
 							<label class="c-label" style="vertical-align: top;">商品规格：</label>
 							<div class="c-item-mline">
 								<!-- 规格名称 -->
-								<el-input size="mini" v-model="specKeyAddText" style="width: 400px;" placeholder="例如: 颜色、大小" 
+								<el-input v-model="specKeyAddText" style="width: 400px;" placeholder="例如: 颜色、大小" 
 									@keyup.enter.native="specKeyAdd(specKeyAddText)">
 									<template slot="prepend">规格组：</template>
 								</el-input>
-								<el-button size="mini" type="primary" icon="el-icon-plus" @click="specKeyAdd(specKeyAddText)">添加</el-button>
+								<el-button type="primary" icon="el-icon-plus" @click="specKeyAdd(specKeyAddText)">添加</el-button>
 								<!-- 规格值 循环出来 -->
 								<div class="sk-fox" v-for="sk in specKeyList">
 									<div class="sk-name">
@@ -134,7 +134,7 @@
 											<el-tag size="medium" closable effect="plain" @close="sa.arrayDelete(sk.values, sv); f5Spec()">{{sv}}</el-tag>
 										</span>
 										<!-- <span class="not-values-tips" v-if="sk.values.length == 0">(请添加)</span> -->
-										<el-input size="mini" style="width: 150px;" v-model="sk.specValueAddText" 
+										<el-input style="width: 150px;" v-model="sk.specValueAddText" 
 											@keyup.enter.native="specValueAdd(sk, sk.specValueAddText)">
 											<el-button slot="append" @click="specValueAdd(sk, sk.specValueAddText)">添加</el-button>
 										</el-input>
@@ -168,13 +168,13 @@
 									</el-table-column>
 									<el-table-column label="库存" width="150px">
 										<template slot-scope="s">
-											<el-input class="small-input" size="mini" v-model="s.row.stock_count" type="number" :disabled="s.row.status==2"></el-input>
+											<el-input class="small-input" v-model="s.row.stock_count" type="number" :disabled="s.row.status==2"></el-input>
 											<span>件</span>
 										</template>
 									</el-table-column>
 									<el-table-column label="价格" width="150px" >
 										<template slot-scope="s">
-											<el-input class="small-input" size="mini" v-model="s.row.price" type="number" :disabled="s.row.status==2"></el-input>
+											<el-input class="small-input" v-model="s.row.price" type="number" :disabled="s.row.status==2"></el-input>
 											<span>元</span>
 										</template>
 									</el-table-column>
@@ -204,7 +204,7 @@
 						<div style="clear: both;"></div>
 						<div class="c-item br">
 							<label class="c-label">商品状态：</label>
-							<el-radio-group v-model="m.status" size="mini">
+							<el-radio-group v-model="m.status">
 								<el-radio-button :label="1">上架</el-radio-button>
 								<el-radio-button :label="2">下架</el-radio-button>
 							</el-radio-group>
@@ -213,15 +213,15 @@
 						<!-- date-update字段： m.update_time - 更新日期 -->
 						<div class="c-item br s-ok">
 							<label class="c-label"></label>
-							<el-button size="mini" type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
+							<el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
 						</div>
 					</el-form>
 				</div>
 			</div>
 			<!-- ------- 底部按钮 ------- -->
 			<div class="s-foot">
-				<el-button size="mini" type="primary" @click="ok()">确定</el-button>
-				<el-button size="mini" @click="sa.closeCurrIframe()">取消</el-button>
+				<el-button type="primary" @click="ok()">确定</el-button>
+				<el-button @click="sa.closeCurrIframe()">取消</el-button>
 			</div>
 		</div>
 		<script>

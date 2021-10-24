@@ -24,8 +24,8 @@ var sa_admin = new Vue({
 		title: '',		// 页面标题  -- Sa-Admin
 		logo: '',		// logo地址  -- sa-frame/admin-logo.png
 		icon: '',		// icon地址  -- sa-frame/admin-logo.png
-		version: 'v1.40.0',					// 当前版本号
-		updateTime: '2021-9-26',			// 更新日期 
+		version: 'v1.41.0',					// 当前版本号
+		updateTime: '2021-10-24',			// 更新日期 
 		githubUrl: 'https://github.com/click33/sa-admin',	// github地址 
 		isRemeOpen: true,		// 是否记住上一次最后打开的窗口 
 		printInfo: true,		// 是否在控制台打印信息 

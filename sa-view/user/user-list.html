@@ -22,20 +22,20 @@
 				<el-form>
 					<div class="c-item">
 						<label class="c-label">用户昵称：</label>
-						<el-input size="mini" v-model="p.username" placeholder="模糊查询"></el-input>
+						<el-input v-model="p.username" placeholder="模糊查询"></el-input>
 					</div>
 					<div class="c-item">
 						<label class="c-label">注册日期：</label>
-						<el-date-picker size="mini" v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
-						<el-date-picker size="mini" v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
+						<el-date-picker v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
+						<el-date-picker v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
 					</div>
 					<div class="c-item" style="min-width: 0px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
 					</div>
 					<br />
 					<div class="c-item s-radio-text">
 						<label class="c-label">综合排序：</label>
-						<el-radio-group size="mini" v-model="p.sortType">
+						<el-radio-group v-model="p.sortType">
 							<el-radio :label="1">注册时间</el-radio>
 							<el-radio :label="2">最近登录</el-radio>
 							<el-radio :label="3">登陆次数</el-radio>
@@ -47,11 +47,11 @@
 				<!-- <div class="c-title">数据列表</div> -->
 				<!-- ------------- 快捷按钮 ------------- -->
 				<div class="fast-btn">
-					<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
-					<el-button size="mini" type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button>
-					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
-					<el-button size="mini" type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
-					<el-button size="mini" type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
+					<el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
+					<el-button type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button>
+					<el-button type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
+					<el-button type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
+					<el-button type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
 				</div>
 				<!-- ------------- 数据列表 ------------- -->
 				<el-table class="data-table" ref="data-table" :data="dataList" size="small">

@@ -17,6 +17,11 @@
 		<label class="c-label">{{name}}：</label> 
 		<el-input type="number" :value="value" @input="onInput" :placeholder="placeholder" :disabled="disabled"></el-input>
 	</div>
+	<!-- 密码input -->
+	<div class="c-item" :class="{br: br}" v-else-if="type == 'password'">
+		<label class="c-label">{{name}}：</label> 
+		<el-input type="password" :value="value" @input="onInput" :placeholder="placeholder" :disabled="disabled"></el-input>
+	</div>
 	<!-- 多行文本域 -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'textarea'">
 		<label class="c-label">{{name}}：</label> 
@@ -139,7 +144,6 @@
 		<label class="c-label">{{name}}：</label> 
 		<el-date-picker
 			type="daterange"
-			size="mini"
 			range-separator="至"
 			start-placeholder="开始日期"
 			end-placeholder="结束日期"

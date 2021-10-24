@@ -11,16 +11,19 @@
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'text'">
 		<label class="c-label">{{name}}：</label> 
 		<span>{{value}}</span>
+		<span v-if="sa.isNull(value)">无</span>
 	</div>
 	<!-- num -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'num'">
 		<label class="c-label">{{name}}：</label> 
 		<span class="tc-num">{{value}}</span>
+		<span v-if="sa.isNull(value)">无</span>
 	</div>
 	<!-- textarea -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'textarea'">
 		<label class="c-label">{{name}}：</label> 
 		<span class="c-item-mline">{{value}}</span>
+		<span v-if="sa.isNull(value)">无</span>
 	</div>
 	<!-- img -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'img'">
@@ -90,16 +93,19 @@
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'date'">
 		<label class="c-label">{{name}}：</label> 
 		<span class="tc-date">{{sa.forDate(value, 1)}}</span>
+		<span v-if="sa.isNull(value)">无</span>
 	</div>
 	<!-- 日期时间 -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'datetime'">
 		<label class="c-label">{{name}}：</label> 
 		<span class="tc-date">{{sa.forDate(value, 2)}}</span>
+		<span v-if="sa.isNull(value)">无</span>
 	</div>
 	<!-- 时间 -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'time'">
 		<label class="c-label">{{name}}：</label> 
 		<span class="tc-date">{{value}}</span>
+		<span v-if="sa.isNull(value)">无</span>
 	</div>
 	
 	<!-- 评分组件 -->
@@ -107,6 +113,7 @@
 		<label class="c-label">{{name}}：</label> 
 		<div style="display: inline-block;">
 			<el-rate :value="value <= 5 ? value : 5" show-text disabled></el-rate>
+			<span v-if="sa.isNull(value)">无</span>
 		</div>
 	</div>
 	
@@ -145,7 +152,9 @@
 			// 快捷按钮显示列表，形如：add,get,delete,export,reset 
 			show: {},	
 			// 分页信息 
-			curr: {}, size: {}, total: {}, sizes: {}
+			curr: {}, size: {}, total: {}, sizes: {}, 
+			// 空值时显示的文字
+			not: {default: '无'}
 			
 		},
 		data() {

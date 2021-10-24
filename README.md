@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="logo" src="https://oss.dev33.cn/sa-admin/admin-logo.png" width="150" height="150" style="margin-bottom: 10px;">
 </p>
-<h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">Sa-Admin v1.40.0</h2>
+<h2 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">Sa-Admin v1.41.0</h2>
 <h4 align="center">一个多窗口后台模板，流畅、易上手、提高生产力</h4>
 <p align="center">
 	<a href="https://gitee.com/click33/sa-admin/stargazers"><img src="https://gitee.com/click33/sa-admin/badge/star.svg"></a>
@@ -158,7 +158,7 @@ sa.clearAuth();        // 清除当前会话所有权限码
 <!-- 原生写法： -->
 <div class="c-item">
 	<label class="c-label">商品名称：</label>
-	<el-input size="mini" v-model="m.name"></el-input>
+	<el-input v-model="m.name"></el-input>
 </div>
 
 <!-- Sa-Admin 封装写法 （type="text"时可省略不写） -->

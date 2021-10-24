@@ -33,13 +33,13 @@
 					<sa-item type="slider" name="滑块参数" v-model="m.hValue" br></sa-item>
 					
 					<sa-item name="下拉输入" br>
-						<el-select size="mini" v-model="m.type_id">
+						<el-select v-model="m.type_id">
 							<el-option label="请选择" :value="0" disabled></el-option>
 							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
 						</el-select>
 					</sa-item>
 					<sa-item name="单选参数" br>
-						<el-radio-group size="mini" v-model="m.single">
+						<el-radio-group v-model="m.single">
 							<el-radio :label="1">参数1</el-radio>
 							<el-radio :label="2">参数2</el-radio>
 							<el-radio :label="3">参数3</el-radio>
@@ -52,7 +52,7 @@
 						<el-checkbox v-model="m.checkbox_4">葡萄</el-checkbox>
 					</sa-item>
 					<sa-item name="单选按钮" br>
-						<el-radio-group size="mini" v-model="m.single2">
+						<el-radio-group v-model="m.single2">
 							<el-radio-button :label="1">参数1</el-radio-button>
 							<el-radio-button :label="2">参数2</el-radio-button>
 							<el-radio-button :label="3">参数3</el-radio-button>

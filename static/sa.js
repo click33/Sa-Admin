@@ -1003,7 +1003,7 @@ var sa = {
 				if($('.el-table.data-table .el-table__body-wrapper table').length == 0) {
 					return;
 				}
-				setTimeout(function() {
+				var _f5Height = function() {
 					var height = $('.el-table .el-table__body-wrapper table').height();
 					height = height == 0 ? 60 : height;
 					// 判断是否有滚动条
@@ -1011,10 +1011,16 @@ var sa = {
 					if(tw.scrollWidth > tw.clientWidth) {
 						height = height + 16;
 					}
+					if($('.el-table .el-table__body-wrapper table td').width() == 0) {
+						return;
+					}
 					// 设置高度
 					$('.el-table .el-table__body-wrapper').css('min-height', height);
 					$('.el-table .el-table__body-wrapper').css('max-height', height);
-				},0)
+				};
+				
+				setTimeout(_f5Height, 0)
+				setTimeout(_f5Height, 200)
 			})
 		}
 		

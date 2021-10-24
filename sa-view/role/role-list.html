@@ -19,7 +19,7 @@
 			<div class="c-panel">
 				<!-- 参数栏 -->
 				<div class="c-title">检索参数</div>
-				<el-form :inline="true" size="mini" @submit.native.prevent>
+				<el-form :inline="true" @submit.native.prevent>
 					<sa-item name="角色名称" v-model="p.role_name"></sa-item>
 					<el-button type="primary" icon="el-icon-search" @click="f5()">查询</el-button>
 					<el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
@@ -29,13 +29,13 @@
 					<el-table-column label="编号" prop="id" width="70px" > </el-table-column>
 					<el-table-column label="角色名称">
 						<template slot-scope="s">
-							<el-input v-if="s.row.is_update" size="mini" v-model="s.row.role_name"></el-input>
+							<el-input v-if="s.row.is_update" v-model="s.row.role_name"></el-input>
 							<span v-else>{{s.row.role_name}}</span>
 						</template>
 					</el-table-column>
 					<el-table-column label="责任描述">
 						<template slot-scope="s">
-							<el-input v-if="s.row.is_update" size="mini" v-model="s.row.role_info"></el-input>
+							<el-input v-if="s.row.is_update" v-model="s.row.role_info"></el-input>
 							<span v-else>{{s.row.role_info}}</span>
 						</template>
 					</el-table-column>
@@ -49,11 +49,11 @@
 					</el-table-column>
 					<el-table-column label="操作" width="220px">
 						<template slot-scope="s">
-							<el-button type="text" size="mini" @click="update(s.row)">
+							<el-button type="text" @click="update(s.row)">
 								<span :style="s.row.is_update ? 'color: red;' : ''">修改</span>
 							</el-button>
-							<el-button type="text" size="mini" @click="del(s.row)">删除</el-button>
-							<el-button type="text" size="mini" @click="menu_setup(s.row)">分配权限</el-button>
+							<el-button type="text" @click="del(s.row)">删除</el-button>
+							<el-button type="text" @click="menu_setup(s.row)">分配权限</el-button>
 						</template>
 					</el-table-column>
 				</el-table>

@@ -23,7 +23,7 @@
 					<sa-item type="text" name="普通参数" v-model="p.name"></sa-item>
 					<sa-item type="num" name="数值参数" v-model="p.count"></sa-item>
 					<sa-item name="下拉参数">
-						<el-select size="mini" v-model="p.type_id">
+						<el-select v-model="p.type_id">
 							<el-option label="不限" :value="0"></el-option>
 							<el-option v-for="type in typeList" :label="type.name" :value="type.id" :key="type.id"></el-option>
 						</el-select>
@@ -32,8 +32,8 @@
 					<br>
 					<sa-item type="date" name="日期参数" v-model="p.create_time"></sa-item>
 					<sa-item name="时间区间">
-						<el-date-picker size="mini" v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
-						<el-date-picker size="mini" v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
+						<el-date-picker v-model="p.start_time" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker> - 
+						<el-date-picker v-model="p.end_time" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
 					</sa-item>
 					<br>
 					<sa-item name="单选参数">
@@ -43,7 +43,7 @@
 						</el-radio-group>
 					</sa-item>
 					<sa-item name="单选按钮">
-						<el-radio-group size="mini" v-model="p.single2">
+						<el-radio-group v-model="p.single2">
 							<el-radio-button :label="1">参数1</el-radio-button>
 							<el-radio-button :label="2">参数2</el-radio-button>
 							<el-radio-button :label="3">参数3</el-radio-button>

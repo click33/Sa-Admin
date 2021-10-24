@@ -26,19 +26,19 @@
 				<el-form>
 					<div class="c-item">
 						<label class="c-label">文章编号：</label>
-						<el-input size="mini" v-model="p.id" type="number"></el-input>
+						<el-input v-model="p.id" type="number"></el-input>
 					</div>
 					<div class="c-item">
 						<label class="c-label">标题：</label>
-						<el-input size="mini" v-model="p.title" placeholder="模糊查询"></el-input>
+						<el-input v-model="p.title" placeholder="模糊查询"></el-input>
 					</div>
 					<div class="c-item" style="min-width: 10px;">
-						<el-button size="mini" type="primary" icon="el-icon-search" @click="f5">查询</el-button>
+						<el-button type="primary" icon="el-icon-search" @click="f5">查询</el-button>
 					</div>
 					<br>
 					<div class="c-item" style="min-width: 10px;">
 						<label class="c-label">综合排序：</label>
-						<el-radio-group size="mini" v-model="p.sortType">
+						<el-radio-group v-model="p.sortType">
 							<el-radio :label="0">发表时间</el-radio>
 							<el-radio :label="1">喜欢数</el-radio>
 							<el-radio :label="2">点击数</el-radio>
@@ -48,11 +48,11 @@
 				</el-form>
 				<!-- ------------- 快捷按钮 ------------- -->
 				<div class="fast-btn">
-					<el-button size="mini" type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
-					<!-- <el-button size="mini" type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button> -->
-					<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
-					<el-button size="mini" type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
-					<el-button size="mini" type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
+					<el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
+					<!-- <el-button type="success" icon="el-icon-view" @click="getBySelect()">查看</el-button> -->
+					<el-button type="danger" icon="el-icon-delete" @click="deleteByIds()">删除</el-button>
+					<el-button type="warning" icon="el-icon-download" @click="sa.exportExcel()">导出</el-button>
+					<el-button type="info"  icon="el-icon-refresh"  @click="sa.f5()">重置</el-button>
 				</div>
 				<!-- ------------- 数据列表 ------------- -->
 				<el-table class="data-table" ref="data-table" :data="dataList" size="small">

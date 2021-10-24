@@ -22,19 +22,19 @@
 				<el-form v-if="m">
 					<div class="c-item br">
 						<label class="c-label">昵称：</label>
-						<el-input size="mini" v-model="m.username"></el-input>
+						<el-input v-model="m.username"></el-input>
 					</div>
 					<div class="c-item br">
 						<label class="c-label">密码：</label>
-						<el-input size="mini" v-model="m.password"></el-input>
+						<el-input v-model="m.password"></el-input>
 					</div>
 					<div class="c-item br">
 						<label class="c-label">手机：</label>
-						<el-input size="mini" v-model="m.phone"></el-input>
+						<el-input v-model="m.phone"></el-input>
 					</div>
 					<div class="c-item br">
 						<label class="c-label">角色：</label>
-						<el-select size="mini" v-model="m.role_id">
+						<el-select v-model="m.role_id">
 							<el-option label="管理员" :value="1"></el-option>
 							<el-option label="公告管理员" :value="2"></el-option>
 							<el-option label="普通用户" :value="3"></el-option>
@@ -42,14 +42,14 @@
 					</div>
 					<div class="c-item br">
 						<label class="c-label">性别：</label>
-						<el-radio-group size="mini" v-model="m.sex" size="mini">
+						<el-radio-group v-model="m.sex">
 							<el-radio :label="1">男</el-radio>
 							<el-radio :label="2">女</el-radio>
 						</el-radio-group>
 					</div>
 					<div class="c-item br">
 						<label class="c-label"></label>
-						<el-button size="mini" type="primary" icon="el-icon-plus" size="mini" @click="ok">确定</el-button>
+						<el-button type="primary" icon="el-icon-plus" @click="ok">确定</el-button>
 					</div>
 				</el-form>
 			</div>

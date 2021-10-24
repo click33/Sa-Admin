@@ -149,6 +149,8 @@ input::-webkit-inner-spin-button {
 /* 表格动画相关 */
 .data-table .el-table__body-wrapper{min-height: 0px; max-height: 60px;}
 .data-table .el-table__body-wrapper{transition: all 0.3s;}
+.el-table .el-table__body-wrapper table td .cell{word-break: normal;}
+
 
 /* 防止下拉框被富文本覆盖 */
 .el-select-dropdown,.el-picker-panel{z-index: 99999 !important;}
