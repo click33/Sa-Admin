@@ -66,7 +66,7 @@ input::-webkit-inner-spin-button {
 .vue-box .el-textarea__inner,
 .vue-box .el-button,
 .s-foot .el-button{border-radius: 2px !important;}
-.vue-box .el-alert{padding: 1em 0.5em; border-radius: 0px !important;}
+.vue-box .el-alert{/* padding: 1em 0.5em; */border-radius: 0px !important;}
 
 /* 多个按钮并列时的距离 */
 .vue-box .el-button+.el-button{margin-left: 2px;}
@@ -99,7 +99,7 @@ input::-webkit-inner-spin-button {
 .el-button--info:hover,.el-button--info:focus{background-color: #707379; border-color: #707379;}
 
 /* .c-btn 加强 */
-.el-table .c-btn{padding: 4px 6px; font-size: 12px !important; border-radius: 1px;}
+.el-table .c-btn{padding: 4px 6px; font-size: 12px !important; border-radius: 0px !important;}
 .c-btn.el-button--danger{background-color: #ca4242; border-color: #ca4242;}
 .c-btn.el-button--danger:hover{background-color: #A00C0C; border-color: #A00C0C;}
 
@@ -131,6 +131,11 @@ input::-webkit-inner-spin-button {
 .sbot .s-ok{display: none !important;}
 .sbot .s-foot{display: block;}
 .sbot .c-title{display: none;}
+
+/* alert */
+.vue-box .el-alert--success.is-light{border: 1px #13ce66 solid;}
+.vue-box .el-alert--blue.is-light{border: 1px #28a0ff solid; color: #28a0ff; background-color: #e8f4ff;}
+.vue-box .el-alert.is-light .el-alert__closebtn{color: 666;}
 
 /* ===================== 表单相关 ===================== */
 

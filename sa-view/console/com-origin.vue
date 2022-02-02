@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-alert type="success" :closable="false" title="缘起">
+		<el-alert type="success" :closable="false" title="缘起" style="border-width: 0px;">
 			<p>虽然已经用过不少优秀的后台模板，但是一直都感觉不尽完美，于是在经过激烈的思想斗争后，我决定牺牲五一假期，
 			亲自做一个尝试一下， 一来正好以后自己的项目中使用，二来也算是为开源界做一点自己的贡献吧</p>
 			<p>开源不易，求鼓励，求star</p>

@@ -7,6 +7,8 @@
 	</el-table-column>
 	<!-- selection框 -->
 	<el-table-column v-else-if="type == 'selection'" type="selection" :width="width || '45px'" :min-width="minWidth"></el-table-column>
+	<!-- index -->
+	<el-table-column v-else-if="type == 'index'" type="index" :label="name" :width="width || '80px'" :min-width="minWidth"></el-table-column>
 	<!-- 普通td -->
 	<el-table-column v-else-if="type == 'text'" :label="name" :width="width" :min-width="minWidth">
 		<template slot-scope="s">
@@ -26,6 +28,17 @@
 		<template slot-scope="s">
 			<i v-if="s.row[prop]" :class="s.row[prop]" style="font-size: 1.3em;"></i>
 			<span v-else>{{not}}</span>
+		</template>
+	</el-table-column>
+	<!-- text-list -->
+	<el-table-column v-else-if="type == 'text-list'" :label="name" :width="width" :min-width="minWidth || '120px'">
+		<template slot-scope="s">
+			<div v-if="s.row[prop]">
+				<p v-for="item in value_to_arr(s.row[prop])" class="s-text-list-p" style="white-space: nowrap; word-break:keep-all;">
+					{{item}}
+				</p>
+			</div>
+			<div v-else>{{not}}</div>
 		</template>
 	</el-table-column>
 	<!-- img -->
@@ -142,10 +155,14 @@
 	<!-- 用户头像 -->
 	<el-table-column v-else-if="type == 'user-avatar'" :label="name" :width="width" :min-width="minWidth">
 		<template slot-scope="s">
-			<img :src="s.row[prop.split(',')[1]]" class="td-img"
-				style="vertical-align: middle; margin-right: 5px;"
-				@click="sa.showImage(s.row[prop.split(',')[1]], '400px', '400px')" />
-			<b>{{s.row[prop.split(',')[0]]}}</b>
+			<!-- 无数据的时候显示的 -->
+			<p v-if="sa.isNull(s.row[prop.split(',')[0]]) && sa.isNull(s.row[prop.split(',')[1]])">暂无</p>
+			<p v-else>
+				<img :src="s.row[prop.split(',')[1]]" class="td-img"
+					style="vertical-align: middle; margin-right: 5px;"
+					@click="sa.showImage(s.row[prop.split(',')[1]], '400px', '400px')" />
+				<b>{{s.row[prop.split(',')[0]]}}</b>
+			</p>
 		</template>
 	</el-table-column>
 </template>

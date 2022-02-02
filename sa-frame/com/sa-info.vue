@@ -22,8 +22,18 @@
 	<!-- textarea -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'textarea'">
 		<label class="c-label">{{name}}：</label> 
-		<span class="c-item-mline">{{value}}</span>
+		<span class="c-item-mline" v-if="sa.isNull(value) == false">{{value}}</span>
 		<span v-if="sa.isNull(value)">无</span>
+	</div>
+	<!-- text-list -->
+	<div class="c-item" :class="{br: br}" v-else-if="type == 'text-list'">
+		<label class="c-label">{{name}}：</label> 
+		<div class="c-item-mline" v-if="value_arr.length > 0">
+			<div v-for="item in value_arr">
+				<p class="s-text-list-p">{{item}}</p>
+			</div>
+		</div>
+		<span v-else>无</span>
 	</div>
 	<!-- img -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'img'">
@@ -173,7 +183,8 @@
 			// 监听一些类型的 value 变动 
 			value: function(oldValue, newValue) {
 				// img-list、audio-list、video-list、file-list、img-video-list
-				if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list' || this.type == 'img-video-list') {
+				if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list'
+					|| this.type == 'img-video-list' || this.type == 'text-list') {
 					this.value_to_arr(this.value); 
 				}
 			},
@@ -212,7 +223,6 @@
 						i--;
 					}
 				}
-				console.log('长度：' + this.value_arr.length);
 			},
 			
 		},
@@ -227,10 +237,11 @@
 			// 如果是枚举
 			if(this.type == 'enum' || this.type == 'j' || this.type == 'switch') {	
 				this.parseJv();
-				console.log(this.jvList);
+				// console.log(this.jvList);
 			}
 			// 如果是 img-list 等 
-			if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list' || this.type == 'img-video-list') {
+			if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list'
+				|| this.type == 'img-video-list' || this.type == 'text-list') {
 				this.value_to_arr(this.value);
 			}
 		}

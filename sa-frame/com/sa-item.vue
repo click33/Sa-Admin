@@ -29,6 +29,21 @@
 			<el-input type="textarea" :autosize="{ minRows: 3, maxRows: 10}" :value="value" @input="onInput" :placeholder="placeholder" :disabled="disabled"></el-input>
 		</div>
 	</div>
+	<!-- 普通input - 列表 -->
+	<div class="c-item" :class="{br: br}" v-else-if="type == 'text-list'">
+		<label class="c-label">{{name}}：</label> 
+		<div class="c-item-mline">
+			<div v-for="item in value_arr">
+				<el-input v-model="item.value" @input="value_arr_change"></el-input>
+				<el-link type="danger" class="del-rr" @click="value_arr_delete(item)">
+					<i class="el-icon-close"></i>
+					<small style="vertical-align: top;">删除</small>
+				</el-link>
+			</div>
+			<el-link type="primary" @click="value_arr_push({value: ''})">[ + 添加 ]</el-link>
+			<span class="c-remark" style="vertical-align: -5%;" v-if="remark">{{remark}}</span>
+		</div>
+	</div>
 	<!-- 钱 money (单位 元) -->
 	<div class="c-item" :class="{br: br}" v-else-if="type == 'money'">
 		<label class="c-label">{{name}}：</label> 
@@ -70,14 +85,16 @@
 		<label class="c-label">{{name}}：</label> 
 		<div class="c-item-mline image-box">
 			<div class="image-box-2" v-for="item in value_arr">
-				<img :src="item" @click="sa.showImage(item, '500px', '400px')" />
+				<img :src="item.value" @click="sa.showImage(item.value, '500px', '400px')" />
 				<p>
-					<i class="el-icon-close" style="position: relative; top: 2px;"></i>
-					<el-link @click="value_arr_delete(item)" style="color: #999;">删除这张 </el-link>
+					<el-link @click="value_arr_delete(item)" style="color: #999;">
+						<i class="el-icon-close" style="position: relative; top: 2px;"></i>
+						移除 
+					</el-link>
 				</p>
 			</div>
 			<!-- 上传图集 -->
-			<div class="image-box-2 up_img" @click="sa.uploadImageList(src => value_arr_push(src))">
+			<div class="image-box-2 up_img" @click="sa.uploadImageList(src => value_arr_push({value: src}))">
 				<img src="../../static/img/up-icon.png">
 			</div>
 		</div>
@@ -87,17 +104,17 @@
 		<label class="c-label">{{name}}：</label> 
 		<div class="c-item-mline">
 			<div v-for="item in value_arr">
-				<el-link type="info" :href="item" target="_blank">{{item}}</el-link>
+				<el-link type="info" :href="item.value" target="_blank">{{item.value}}</el-link>
 				<el-link type="danger" class="del-rr" @click="value_arr_delete(item)">
 					<i class="el-icon-close"></i>
 					<small style="vertical-align: top;">删除</small>
 				</el-link>
 			</div>
-			<el-link type="primary" @click="sa.uploadAudioList(src => value_arr_push(src))" v-if="type == 'audio-list'">上传</el-link>
-			<el-link type="primary" @click="sa.uploadVideoList(src => value_arr_push(src))" v-if="type == 'video-list'">上传</el-link>
-			<el-link type="primary" @click="sa.uploadFileList(src => value_arr_push(src))" v-if="type == 'file-list'">上传</el-link>
-			<el-link type="primary" @click="sa.uploadImageList(src => value_arr_push(src))" v-if="type == 'img-video-list'">上传图片</el-link>
-			<el-link type="primary" @click="sa.uploadVideoList(src => value_arr_push(src))" v-if="type == 'img-video-list'" style="margin-left: 7px;">上传视频</el-link>
+			<el-link type="primary" @click="sa.uploadAudioList(src => value_arr_push({value: src}))" v-if="type == 'audio-list'">上传</el-link>
+			<el-link type="primary" @click="sa.uploadVideoList(src => value_arr_push({value: src}))" v-if="type == 'video-list'">上传</el-link>
+			<el-link type="primary" @click="sa.uploadFileList(src => value_arr_push({value: src}))" v-if="type == 'file-list'">上传</el-link>
+			<el-link type="primary" @click="sa.uploadImageList(src => value_arr_push({value: src}))" v-if="type == 'img-video-list'">上传图片</el-link>
+			<el-link type="primary" @click="sa.uploadVideoList(src => value_arr_push({value: src}))" v-if="type == 'img-video-list'" style="margin-left: 7px;">上传视频</el-link>
 		</div>
 	</div>
 	<!-- 富文本 richtext f -->
@@ -216,6 +233,8 @@
 			},
 			// 绑定的值 
 			value: {},
+			// 备注
+			remark: '',
 			// 提示文字
 			placeholder: {},
 			// 是否禁用
@@ -263,7 +282,11 @@
 			// 监听一些类型的 value 变动 
 			value: function(oldValue, newValue) {
 				// img-list、audio-list、video-list、file-list、img-video-list
-				if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list' || this.type == 'img-video-list') {
+				if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list'
+					|| this.type == 'img-video-list') {
+					this.value_to_arr(this.value); 
+				}
+				if(this.type == 'text-list' && this.value_arr.length == 0) {
 					this.value_to_arr(this.value); 
 				}
 				// 如果是富文本
@@ -321,25 +344,30 @@
 			},
 			// 解析 value 为 value_arr
 			value_to_arr: function(value) {
-				this.value_arr = sa.isNull(value) ? [] : value.split(',');		
-				for (var i = 0; i < this.value_arr.length; i++) {
-					if(this.value_arr[i] == '' || this.value_arr[i].trim() == '') {
-						sa.arrayDelete(this.value_arr, this.value_arr[i]);
-						i--;
+				let arr = sa.isNull(value) ? [] : value.split(',');		
+				let value_arr = [];		
+				for (var i = 0; i < arr.length; i++) {
+					if(arr[i] != '' && arr[i].trim() != '') {
+						value_arr.push({value: arr[i]});
 					}
 				}
+				this.value_arr = value_arr;
 			},
 			// value_arr 数组增加值
 			value_arr_push: function(item) {
 				this.value_arr.push(item);
 				// this.value = this.value_arr.join(',');	
-				this.$emit('input', this.value_arr.join(','));
+				this.$emit('input', sa.getArrayField(this.value_arr, 'value').join(','));
 			},
 			// value_arr 数组删除值 
 			value_arr_delete: function(item) {
 				sa.arrayDelete(this.value_arr, item);
 				// this.value = this.value_arr.join(',');	
-				this.$emit('input', this.value_arr.join(','));
+				this.$emit('input', sa.getArrayField(this.value_arr, 'value').join(','));
+			},
+			// value_arr 更改值时触发 
+			value_arr_change: function() {
+				this.$emit('input', sa.getArrayField(this.value_arr, 'value').join(','));
 			},
 			// 创建富文本编辑器
 			create_editor: function(content) {
@@ -396,7 +424,8 @@
 				this.parseJv();
 			}
 			// 如果是 img-list 等 
-			if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list' || this.type == 'img-video-list') {
+			if(this.type == 'img-list' || this.type == 'audio-list' || this.type == 'video-list' || this.type == 'file-list' 
+				|| this.type == 'img-video-list' || this.type == 'text-list') {
 				this.value_to_arr(this.value);
 			}
 			// 如果是富文本
